@@ -9,7 +9,24 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 
         public string Code { get; set; }
 
-        public bool? Enabled { get; set; }
+        #region Extera Property
+        //public bool? Enabled { get; set; }
+
+        //public bool LimitAccessToProcessUsers { get; set; }
+
+        //public bool ViewOnlyToOwner { get; set; }
+
+        //public bool ShowToCustomer { get; set; }
+
+        //public bool AssignCustomerNumberOnApprove { get; set; }
+
+        //public bool CreateByCustomer { get; set; }
+
+        //public bool CustomerCanViewExtendedProps { get; set; }
+
+        //public string WebhookAddress { get; set; }
+
+        #endregion
 
 
         public ResourceValue[] Name { get; set; }

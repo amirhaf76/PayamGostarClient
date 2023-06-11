@@ -8,21 +8,6 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 
         public PublicFormLogicModel PublicForm { get; set; }
 
-        public bool LimitAccessToProcessUsers { get; set; }
-
-        public bool ViewOnlyToOwner { get; set; }
-
-        public bool ShowToCustomer { get; set; }
-
-        public bool AssignCustomerNumberOnApprove { get; set; }
-
-        public bool CreateByCustomer { get; set; }
-
-        public bool CustomerCanViewExtendedProps { get; set; }
-
-
-        public string WebhookAddress { get; set; }
-
 
         public string Prefix { get; set; }
 
@@ -32,16 +17,17 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 
         public int DigitCount { get; set; }
 
+
+        public class PublicFormLogicModel
+        {
+            public bool FlushFormAfterSave { get; set; }
+
+            public bool IsAutoSubject { get; set; }
+
+            public bool SubmitMessage { get; set; }
+
+            public string RedirectAfterSuccessUrl { get; set; }
+        }
     }
-
-    public class PublicFormLogicModel
-    {
-        public bool FlushFormAfterSave { get; set; }
-
-        public bool IsAutoSubject { get; set; }
-
-        public bool SubmitMessage { get; set; }
-
-        public string RedirectAfterSuccessUrl { get; set; }
-    }
+    
 }

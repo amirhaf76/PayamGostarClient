@@ -2,6 +2,8 @@
 {
     public enum Gp_CrmObjectType
     {
-        Form = 15,
+        // Todo: Check the numbers
+        Form = 13,
+        Ticket = 14,
     }
 }
