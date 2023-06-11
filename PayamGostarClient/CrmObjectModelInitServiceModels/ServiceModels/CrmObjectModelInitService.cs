@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.Abstractions;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
+using PayamGostarClient.InitServiceModels.Factory;
 using System;
 using System.Threading.Tasks;
 
