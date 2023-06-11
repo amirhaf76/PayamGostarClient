@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayamGostarClient", "PayamGostarClient\PayamGostarClient.csproj", "{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayamGostarClientTest", "PayamGostarClientTest\PayamGostarClientTest.csproj", "{B07622D9-5DCF-446C-BF32-142044CD4BCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
