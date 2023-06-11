@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
+using PayamGostarClient.ApiServices.Factory;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.InitServiceModels.Abstractions;
@@ -33,7 +34,7 @@ namespace PayamGostarClient.InitServiceModels.Factory
         }
         private IPayamGostarClientServiceFactory CreatePayamGostarClientServiceFactory(InitServiceFactoryConfig config)
         {
-            throw new NotImplementedException();
+            return new PayamGostarClientServiceFactory(config.ClientService);
         }
     }
 

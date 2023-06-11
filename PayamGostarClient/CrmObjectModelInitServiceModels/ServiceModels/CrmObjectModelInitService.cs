@@ -1,14 +1,13 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.Abstractions;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.InitServiceModels.Factory;
-using System;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
 {
     public class CrmObjectModelInitService : ICrmObjectModelInitService
     {
-        private CrmObjectModelInitServiceConfig _config;
+        private readonly CrmObjectModelInitServiceConfig _config;
 
         public CrmObjectModelInitService()
         {
@@ -22,12 +21,14 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
 
         public void Init(params BaseCRMModel[] crmModels)
         {
-            throw new NotImplementedException();
+            SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => InitAsync(crmModels));
         }
 
         public async Task InitAsync(params BaseCRMModel[] crmModels)
         {
-            var initServiceFactory = new InitServiceFactory();
+            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = _config.ClientService };
+
+            var initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
 
             foreach (var crmModel in crmModels)
             {

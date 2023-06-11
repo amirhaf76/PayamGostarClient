@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels
 {
-    public class FormModel : BaseCRMModel
+    public class CrmFormModel : BaseCRMModel
     {
         public override Gp_CrmObjectType Type => Gp_CrmObjectType.Form;
 

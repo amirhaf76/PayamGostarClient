@@ -1,7 +1,7 @@
-﻿using PayamGostarClient.Helper.Net;
+﻿using Newtonsoft.Json;
+using PayamGostarClient.Helper.Net;
 using System;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.Helper.Api
@@ -70,7 +70,7 @@ namespace PayamGostarClient.Helper.Api
         {
             return await CallApi(
                 prepareAndCallApi,
-                async response => JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true }),
+                async response => JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync()),
                 response => { throw new Exception(response.ToString()); }
                 );
         }

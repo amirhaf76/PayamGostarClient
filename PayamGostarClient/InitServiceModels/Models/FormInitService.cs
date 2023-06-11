@@ -4,13 +4,13 @@ using System;
 
 namespace PayamGostarClient.InitServiceModels.Models
 {
-    public class FormInitService : BaseInitService<FormModel>
+    public class FormInitService : BaseInitService<CrmFormModel>
     {
         public FormInitService(BaseCRMModel baseCrmModel, IPayamGostarClientServiceFactory crmObjectTypeApiService) : base(baseCrmModel, crmObjectTypeApiService)
         {
         }
 
-        protected override FormModel CreateType()
+        protected override CrmFormModel CreateType()
         {
             throw new NotImplementedException();
         }

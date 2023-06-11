@@ -28,12 +28,12 @@ namespace PayamGostarClient.ApiProvider
 
         private void SettingUrl()
         {
-            if (_payamGostarClientConfig.Url == null)
+            if (_payamGostarClientConfig.ClientApiIntraction.DomainUrl == null)
             {
                 throw new UrlApiProviderIsNullException();
             }
 
-            BaseUrl = _payamGostarClientConfig.Url;
+            BaseUrl = _payamGostarClientConfig.ClientApiIntraction.DomainUrl;
         }
 
         private HttpClient CreateHttpClient()

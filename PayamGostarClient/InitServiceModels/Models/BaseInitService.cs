@@ -14,8 +14,6 @@ namespace PayamGostarClient.InitServiceModels.Models
         protected BaseInitService(BaseCRMModel baseCrmModel, IPayamGostarClientServiceFactory crmObjectTypeApiService)
         {
             BaseCrmModel = baseCrmModel;
-
-
         }
 
         public async Task InitAsync<T1>() where T1 : BaseCRMModel
@@ -82,7 +80,7 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             if (false)
             {
-
+                
             }
 
             await CreatePropetiesDefinitionAsync();

@@ -1,6 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiServices.Abstractions;
 using PayamGostarClient.ApiServices.Models;
+using PayamGostarClient.Helper.Net;
 using System;
 
 namespace PayamGostarClient.ApiServices.Factory
@@ -22,12 +23,22 @@ namespace PayamGostarClient.ApiServices.Factory
 
         private PayamGostarClientConfig CreateClientConfig(PayamGostarClientServiceConfig serviceConfig)
         {
-            throw new NotImplementedException();
+            return new PayamGostarClientConfig
+            {
+                LanguageCulture = serviceConfig.LanguageCulture,
+                ClientApiIntraction = new ClientApiIntraction
+                {
+                    DomainUrl = serviceConfig.Url,
+                    // JwtToken
+                    // DeviceId
+                    // ClientId
+                },
+            };
         }
 
         private static PayamGostarClientFactory CreatePayamGostarClientFactory(PayamGostarClientConfig clientConfig)
         {
-            throw new NotImplementedException();
+            return new PayamGostarClientFactory(clientConfig);
         }
 
         public ICrmObjectTypeApiService CreateCrmObjectTypeApiService()
