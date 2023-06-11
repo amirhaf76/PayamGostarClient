@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiProvider;
+using PayamGostarClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiServices.Abstractions;
 using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Extension;
@@ -15,15 +16,16 @@ namespace PayamGostarClient.ApiServices.Models
 
         private readonly PayamGostarClientConfig _payamGostarClientConfig;
 
-        public CrmObjectTypeApiService(PayamGostarClientConfig payamGostarClientConfig, ICrmObjectTypeApiClient crmObjectTypeApiClient)
+        public CrmObjectTypeApiService(PayamGostarClientConfig payamGostarClientConfig, IPayamGostarClientAbstractFactory clientFactory)
         {
             _payamGostarClientConfig = payamGostarClientConfig;
-            _crmObjectTypeApiClient = crmObjectTypeApiClient;
+
+            _crmObjectTypeApiClient = clientFactory.CreateCrmObjectTypeApiClient();
         }
 
-        public async Task<ApiResponse<IEnumerable<CrmObjectTypeGetResultDto>>> SearchAsync(CrmObjectTypeSearchRequestVM request)
+        public async Task<ApiResponse<IEnumerable<CrmObjectTypeGetResultDto>>> SearchAsync(BaseCrmModelDto request)
         {
-            var searchResult = await _crmObjectTypeApiClient.PostApiV2CrmobjecttypeSearchAsync(request);
+            var searchResult = await _crmObjectTypeApiClient.PostApiV2CrmobjecttypeSearchAsync(request.ConvertToCrmObjectTypeSearchRequestVM());
 
             return searchResult.ConvertToApiResponse(result => result.Select(crm => crm.ConvertToCrmObjectTypeGetResultDto()));
         }

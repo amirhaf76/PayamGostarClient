@@ -8,6 +8,6 @@ namespace PayamGostarClient.ApiServices.Abstractions
 {
     public interface ICrmObjectTypeApiService
     {
-        Task<ApiResponse<IEnumerable<CrmObjectTypeGetResultDto>>> SearchAsync(CrmObjectTypeSearchRequestVM request);
+        Task<ApiResponse<IEnumerable<CrmObjectTypeGetResultDto>>> SearchAsync(BaseCrmModelDto request);
     }
 }
