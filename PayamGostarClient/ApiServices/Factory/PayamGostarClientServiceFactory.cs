@@ -29,7 +29,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 ClientApiIntraction = new ClientApiIntraction
                 {
                     DomainUrl = serviceConfig.Url,
-                    // JwtToken
+                    JwtToken = serviceConfig.JwToken,
                     // DeviceId
                     // ClientId
                 },

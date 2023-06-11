@@ -35,13 +35,15 @@ namespace PayamGostarClient.ApiServices.Extension
             return new ApiResponse<ApiItemContainer<T>>((HttpStatusCode)httpStatusCode, apiItemContainer);
         }
 
-        public static Func<Task> WrapInThrowableApiExceptionDto(this Func<Task> func)
+        public static Task<SwaggerResponse<T>> WrapInThrowableApiServiceException<T>(this Task<SwaggerResponse<T>> task)
         {
-            async Task DoElseThrowApiExceptionDto()
+            async Task<SwaggerResponse<T>> DoElseThrowApiServiceException()
             {
                 try
                 {
-                    await func();
+                    var taskResult = await task;
+
+                    return taskResult;
                 }
                 catch (ApiException e)
                 {
@@ -49,16 +51,18 @@ namespace PayamGostarClient.ApiServices.Extension
                 }
             }
 
-            return DoElseThrowApiExceptionDto;
+            return DoElseThrowApiServiceException();
         }
 
-        public static Func<Task<T>> WrapInThrowableApiExceptionDto<T>(this Func<Task<T>> func)
+        public static Task<SwaggerResponse> WrapInThrowableApiServiceException(this Task<SwaggerResponse> task)
         {
-            async Task<T> DoElseThrowApiExceptionDto()
+            async Task<SwaggerResponse> DoElseThrowApiServiceException()
             {
                 try
                 {
-                    return await func();
+                    var taskResult = await task;
+
+                    return taskResult;
                 }
                 catch (ApiException e)
                 {
@@ -66,10 +70,11 @@ namespace PayamGostarClient.ApiServices.Extension
                 }
             }
 
-            return DoElseThrowApiExceptionDto;
+            return DoElseThrowApiServiceException();
         }
 
-        private static ApiExceptionDto CreateApiExceptionDtoFromApiException(ApiException e)
+
+        private static ApiServiceException CreateApiExceptionDtoFromApiException(ApiException e)
         {
             var headers = new Dictionary<string, IEnumerable<string>>();
 
@@ -78,20 +83,30 @@ namespace PayamGostarClient.ApiServices.Extension
                 headers.Add(keyValue.Key, keyValue.Value);
             }
 
-            return new ApiExceptionDto(e)
+            return new ApiServiceException(e)
             {
                 StatusCode = (HttpStatusCode)e.StatusCode,
                 Response = e.Response,
                 Headers = new Dictionary<string, IEnumerable<string>>(headers),
-                ApiErrorDto = JsonConvert.DeserializeObject<ApiErrorDto>(e.Response)
+                ApiError = JsonConvert.DeserializeObject<ApiErrorDto>(e.Response)
             };
+        }
+
+        private static SwaggerResponse CreateSwaggerResponseFromApiServiceException(ApiServiceException e)
+        {
+            return new SwaggerResponse((int)e.StatusCode, e.Headers);
+        }
+
+        private static SwaggerResponse<T> CreateSwaggerResponseFromApiServiceException<T>(ApiServiceException e)
+        {
+            return new SwaggerResponse<T>((int)e.StatusCode, e.Headers, default);
         }
 
     }
 
-    public class ApiExceptionDto : Exception
+    public class ApiServiceException : Exception
     {
-        public ApiExceptionDto(Exception e) : base(e.Message, e.InnerException)
+        public ApiServiceException(Exception e) : base(e.Message, e.InnerException)
         {
         }
 
@@ -101,7 +116,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
         public IReadOnlyDictionary<string, IEnumerable<string>> Headers { get; set; }
 
-        public ApiErrorDto ApiErrorDto { get; set; }
+        public ApiErrorDto ApiError { get; set; }
 
     }
 
@@ -111,7 +126,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
         public string Message { get; set; }
 
-        public IEnumerable<ApiErrorDetailDto> ErrorDetailDtos { get; set; }
+        public IEnumerable<ApiErrorDetailDto> ErrorDetails { get; set; }
     }
 
     public class ApiErrorDetailDto
