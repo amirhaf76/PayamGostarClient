@@ -32,6 +32,13 @@ namespace PayamGostarClient
             }
         }
 
+        private async Task CreateCrmObjectAndSetItsBelongsAsync()
+        {
+            await CreateCrmObjectAsync();
+
+            await CreateCrmObjectTypeBelongs();
+        }
+
         private async Task CheckCrmObjectTypeBelongs()
         {
             await CheckPropetiesDefinitionAsync();
@@ -41,34 +48,69 @@ namespace PayamGostarClient
             await CheckStagesAsync();
         }
 
-        private async Task CreateCrmObjectAndSetItsBelongsAsync()
+        private async Task CreateCrmObjectTypeBelongs()
         {
-            await CreateCrmObjectAsync();
+            await CreatePropetiesDefinitionAsync();
 
-            await CheckCrmObjectTypeBelongs();
+            await CreateGroupPropetiesAsync();
+
+            await CreateStagesAsync();
         }
 
-        private Task CheckStagesAsync()
+
+        private async Task CheckStagesAsync()
+        {
+            if (false)
+            {
+
+            }
+
+            await CreateStagesAsync();
+        }
+
+        private async Task CheckGroupPropetiesAsync()
+        {
+            if (false)
+            {
+
+            }
+
+            await CreateGroupPropetiesAsync();
+        }
+
+        private async Task CheckPropetiesDefinitionAsync()
+        {
+            if (false)
+            {
+
+            }
+
+            await CreatePropetiesDefinitionAsync();
+        }
+
+
+        private Task<object> SearchCrmObjectAsync()
         {
             throw new NotImplementedException();
         }
+
 
         private Task CreateCrmObjectAsync()
         {
             throw new NotImplementedException();
         }
 
-        private Task CheckGroupPropetiesAsync()
+        private Task CreateStagesAsync()
         {
             throw new NotImplementedException();
         }
 
-        private Task CheckPropetiesDefinitionAsync()
+        private Task CreateGroupPropetiesAsync()
         {
             throw new NotImplementedException();
         }
 
-        private Task<object> SearchCrmObjectAsync()
+        private Task CreatePropetiesDefinitionAsync()
         {
             throw new NotImplementedException();
         }
