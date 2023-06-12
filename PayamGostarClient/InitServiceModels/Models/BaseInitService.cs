@@ -42,13 +42,15 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private async Task CreateCrmObjectAndSetItsBelongsAsync(T intendedCrmObject)
         {
-            await CreateCrmObjectAsync();
+            var newCrmObjectId = await CreateCrmObjectAsync();
 
-            await CreateCrmObjectTypeBelongs();
+            await CreateCrmObjectTypeBelongs(newCrmObjectId);
         }
 
-        private async Task CheckCrmObjectTypeBelongs(T intendedCrmObject, BaseCRMModel existedCrmObject)
+        private async Task CheckCrmObjectTypeBelongs(T intendedCrmObject, SearchedCrmObjectModel existedCrmObject)
         {
+            await CheckAndModifyCrmPropertiesAsync();
+
             await CheckExtendedPropertiesAsync();
 
             await CheckGroupPropetiesAsync();
@@ -56,13 +58,13 @@ namespace PayamGostarClient.InitServiceModels.Models
             await CheckStagesAsync();
         }
 
-        private async Task CreateCrmObjectTypeBelongs()
+        private async Task CreateCrmObjectTypeBelongs(Guid Id)
         {
-            await CreateExtendedPropertiesAsync();
+            await CreateGroupPropetiesAsync(Id);
 
-            await CreateGroupPropetiesAsync();
+            await CreateExtendedPropertiesAsync(Id);
 
-            await CreateStagesAsync();
+            await CreateStagesAsync(Id);
         }
 
 
@@ -73,7 +75,9 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             }
 
-            await CreateStagesAsync();
+            await CreateStagesAsync(Guid.Empty);
+
+            throw new NotImplementedException();
         }
 
         private async Task CheckGroupPropetiesAsync()
@@ -83,7 +87,9 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             }
 
-            await CreateGroupPropetiesAsync();
+            await CreateGroupPropetiesAsync(Guid.Empty);
+
+            throw new NotImplementedException();
         }
 
         private async Task CheckExtendedPropertiesAsync()
@@ -93,7 +99,9 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             }
 
-            await CreateExtendedPropertiesAsync();
+            await CreateExtendedPropertiesAsync(Guid.Empty);
+
+            throw new NotImplementedException();
         }
 
 
@@ -122,31 +130,31 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private SearchedCrmObjectModel CreateSearchedCrmObjectModel(ApiServices.Dtos.CrmObjectTypeSearchResultDto receivedCrmObject)
         {
-            return receivedCrmObject.ConvertToSearchedCrmObjectModel();
+            return receivedCrmObject.ToSearchedCrmObjectModel();
         }
 
-        private async Task CreateCrmObjectAsync()
+        private async Task<Guid> CreateCrmObjectAsync()
         {
-            await CreateTypeAsync();
+            return await CreateTypeAsync();
         }
 
-        private Task CreateStagesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        private Task CreateGroupPropetiesAsync()
+        private Task CreateStagesAsync(Guid Id)
         {
             throw new NotImplementedException();
         }
 
-        private Task CreateExtendedPropertiesAsync()
+        private Task CreateGroupPropetiesAsync(Guid Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Task CreateExtendedPropertiesAsync(Guid Id)
         {
             throw new NotImplementedException();
         }
 
 
-        protected abstract Task<T> CreateTypeAsync();
+        protected abstract Task<Guid> CreateTypeAsync();
 
         protected abstract Task<T> CheckAndModifyCrmPropertiesAsync();
 

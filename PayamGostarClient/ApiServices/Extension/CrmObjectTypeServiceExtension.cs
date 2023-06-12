@@ -58,6 +58,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
             return new CrmObjectTypeSearchResultDto
             {
+                Id = viewModel.Id,
                 Code = viewModel.Code,
                 Name = viewModel.Name,
                 CrmOjectTypeIndex = viewModel.CrmOjectTypeIndex,

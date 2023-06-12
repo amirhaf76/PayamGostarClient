@@ -22,5 +22,7 @@ namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos
         public long? StartFrom { get; set; }
 
         public int? DigitCount { get; set; }
+
+        public bool IsPublicForm { get; set; }
     }
 }

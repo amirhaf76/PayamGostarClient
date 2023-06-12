@@ -1,5 +1,8 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
+using PayamGostarClient.InitServiceModels.Extensions;
 using System;
 using System.Threading.Tasks;
 
@@ -12,15 +15,32 @@ namespace PayamGostarClient.InitServiceModels.Models
         }
 
 
-        protected override Task<CrmFormModel> CheckAndModifyCrmPropertiesAsync()
+        protected override async Task<CrmFormModel> CheckAndModifyCrmPropertiesAsync()
         {
-            throw new NotImplementedException();
+            var service = ServiceFactory.CreateCrmObjectTypeFormService();
+
+            var request = new CrmObjectTypeGetRequestDto
+            {
+
+            };
+
+            var gettingCrmObjectResult = await service.GetAsync(request);
+
+            return gettingCrmObjectResult.Result.ToCrmFormModel();
         }
 
-        protected override Task<CrmFormModel> CreateTypeAsync()
+        protected override async Task<Guid> CreateTypeAsync()
         {
+            var service = ServiceFactory.CreateCrmObjectTypeFormService();
 
-            throw new NotImplementedException();
+            var request = new CrmObjectTypeFormCreateRequestDto
+            {
+                
+            };
+
+            var creationResult = await service.CreateAsync(request);
+
+            return creationResult.Result.Id;
         }
     }
 

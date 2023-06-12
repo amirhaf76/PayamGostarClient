@@ -43,7 +43,18 @@ namespace PayamGostarClient.ApiServices.Factory
 
         public ICrmObjectTypeService CreateCrmObjectTypeService()
         {
-            return new CrmObjectTypeService(_clientConfig, _clientFactory);
+            return CreateService<ICrmObjectTypeService, CrmObjectTypeService>();
+        }
+
+        public ICrmObjectTypeFormService CreateCrmObjectTypeFormService()
+        {
+            return CreateService<ICrmObjectTypeFormService, CrmObjectTypeFormService>();
+        }
+
+        public TAbstactService CreateService<TAbstactService, TService>()
+            where TService : BaseApiService, TAbstactService
+        {
+            return (TAbstactService) Activator.CreateInstance(typeof(TService), _clientConfig, _clientFactory);
         }
     }
 }

@@ -13,9 +13,9 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 
         public string Postfix { get; set; }
 
-        public int StartFrom { get; set; }
+        public long? StartFrom { get; set; }
 
-        public int DigitCount { get; set; }
+        public int? DigitCount { get; set; }
 
 
         public class PublicFormLogicModel
@@ -24,7 +24,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 
             public bool IsAutoSubject { get; set; }
 
-            public bool SubmitMessage { get; set; }
+            public string SubmitMessage { get; set; }
 
             public string RedirectAfterSuccessUrl { get; set; }
         }

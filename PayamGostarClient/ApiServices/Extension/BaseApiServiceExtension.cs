@@ -27,9 +27,6 @@ namespace PayamGostarClient.ApiServices.Extension
             };
         }
 
-       
-
-
         public static PropertyGroupGetResultDto ConvertToPropertyGroupGetResultDto(this CrmObjectPropertyGroupGetResultVM group)
         {
             return new PropertyGroupGetResultDto
@@ -66,6 +63,11 @@ namespace PayamGostarClient.ApiServices.Extension
                 UserKey = extendedProperty.UserKey,
                 PropertyGroupId = extendedProperty.PropertyGroupId,
             };
+        }
+
+        public static CrmObjectTypeResultDto ConvertToCrmObjectTypeResultDto(this CrmObjectTypeResultVM vmResult)
+        {
+            return new CrmObjectTypeResultDto { Id = vmResult.Id };
         }
 
 

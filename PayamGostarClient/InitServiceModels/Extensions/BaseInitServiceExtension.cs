@@ -1,5 +1,8 @@
 ﻿using PayamGostarClient.ApiServices.Dtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Models;
 using System.Linq;
@@ -9,53 +12,90 @@ namespace PayamGostarClient.InitServiceModels.Extensions
     internal static class BaseInitServiceExtension
     {
 
-        internal static SearchedCrmObjectModel ConvertToSearchedCrmObjectModel(this CrmObjectTypeSearchResultDto crmModel)
+        internal static SearchedCrmObjectModel ToSearchedCrmObjectModel(this CrmObjectTypeSearchResultDto crmModel)
         {
             var crmObjectType = (Gp_CrmObjectType)crmModel.CrmOjectTypeIndex;
 
             return new SearchedCrmObjectModel(crmObjectType)
             {
-                Code = crmModel.Code,
-                Name = ConvertToResourceValues(crmModel.Name),
-                Description = ConvertToResourceValues(crmModel.Description),
-                Properties = crmModel.Properties?.Select(p => p.To()).ToList(),
-                PropertyGroups = crmModel.Groups?.Select(g => g.To()).ToList(),
-                Stages = crmModel.Stages?.Select(p => p.To()).ToList(),
-            };
+                Id = crmModel.Id
+            }.CopyFromBaseCrmObjectTypeGetResultDto(crmModel);
         }
 
+
+        internal static CrmFormModel ToCrmFormModel(this CrmObjectTypeFormGetResultDto crmModel)
+        {
+            var crmForm = new CrmFormModel
+            {
+                Prefix = crmModel.Prefix,
+                Postfix = crmModel.Postfix,
+                StartFrom = crmModel.StartFrom,
+                DigitCount = crmModel.DigitCount,
+
+            }.CopyFromBaseCrmObjectTypeGetResultDto(crmModel);
+
+            if (crmModel.IsPublicForm)
+            {
+                crmForm.PublicForm = new CrmFormModel.PublicFormLogicModel
+                {
+                    FlushFormAfterSave = crmModel.FlushFormAfterSave,
+                    IsAutoSubject = crmModel.IsAutoSubject,
+                    SubmitMessage = crmModel.SubmitMessage,
+                    RedirectAfterSuccessUrl = crmModel.RedirectAfterSuccessUrl,
+                };
+            }
+
+            return crmForm;
+        }
+
+
+        internal static TTo CopyFromBaseCrmObjectTypeGetResultDto<TFrom, TTo>(this TTo to, TFrom from)
+            where TTo: BaseCRMModel
+            where TFrom: BaseCrmObjectTypeGetResultDto
+        {
+            to.Code = from.Code;
+            to.Name = ToResourceValues(from.Name);
+            to.Description = ToResourceValues(from.Description);
+            to.Properties = from.Properties?.Select(p => p.ToBaseExtendedPropertyModel()).ToList();
+            to.PropertyGroups = from.Groups?.Select(g => g.ToPropertyGroup()).ToList();
+            to.Stages = from.Stages?.Select(p => p.ToStage()).ToList();
+
+            return to;
+        }
+
+
         // Todo: Warning! using hard code value for Language Culture.
-        internal static ResourceValue[] ConvertToResourceValues(string value)
+        internal static ResourceValue[] ToResourceValues(string value)
         {
             return new ResourceValue[] { new ResourceValue { Value = value, LanguageCulture = "Fa" } };
         }
 
-        internal static PropertyGroup To(this PropertyGroupGetResultDto group)
+        internal static PropertyGroup ToPropertyGroup(this PropertyGroupGetResultDto group)
         {
             return new PropertyGroup
             {
-                Name = ConvertToResourceValues(group.Name),
+                Name = ToResourceValues(group.Name),
                 Expanded = group.ExpandForView,
                 CountOfColumns = group.CountOfColumns ?? 0,
             };
         }
 
-        internal static BaseExtendedPropertyModel To(this ExtendedPropertyGetResultDto property)
+        internal static BaseExtendedPropertyModel ToBaseExtendedPropertyModel(this ExtendedPropertyGetResultDto property)
         {
             return new SearchedExtendedPropertyModel
             {
                 UserKey = property.UserKey,
-                Name = ConvertToResourceValues(property.Name),
-                ToolTip = ConvertToResourceValues(property.Tooltip),
-                PropertyGroup = To(property.Group),
+                Name = ToResourceValues(property.Name),
+                ToolTip = ToResourceValues(property.Tooltip),
+                PropertyGroup = ToPropertyGroup(property.Group),
             };
         }
 
-        internal static Stage To(this StageGetResultDto stage)
+        internal static Stage ToStage(this StageGetResultDto stage)
         {
             return new Stage
             {
-                Name = ConvertToResourceValues(stage.Name),
+                Name = ToResourceValues(stage.Name),
                 Enabled = stage.IsActive,
                 IsDoneStage = stage.IsDoneStage,
                 Key = stage.Key,
