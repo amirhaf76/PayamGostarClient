@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Abstractions
 {
-    public interface ICrmObjectTypeApiService
+    public interface ICrmObjectTypeService
     {
-        Task<ApiResponse<IEnumerable<CrmObjectTypeGetResultDto>>> SearchAsync(BaseCrmModelDto request);
+        Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchAsync(CrmObjectTypeSearchRequestDto request);
     }
 }

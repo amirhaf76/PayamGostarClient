@@ -34,7 +34,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
             {
                 var initService = initServiceFactory.Create(crmModel);
 
-                await initService.InitAsync<BaseCRMModel>();
+                await initService.InitAsync();
             }
         }
     }

@@ -5,7 +5,7 @@ namespace PayamGostarClient.InitServiceModels.Abstractions
 {
     public interface IInitService
     {
-        Task InitAsync<T>() where T : BaseCRMModel;
+        Task InitAsync();
     }
 
 }

@@ -35,7 +35,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new ApiResponse<ApiItemContainer<T>>((HttpStatusCode)httpStatusCode, apiItemContainer);
         }
 
-        public static Task<SwaggerResponse<T>> WrapInThrowableApiServiceException<T>(this Task<SwaggerResponse<T>> task)
+        public static Task<SwaggerResponse<T>> WrapInThrowableApiServiceExceptionAndInvoke<T>(this Task<SwaggerResponse<T>> task)
         {
             async Task<SwaggerResponse<T>> DoElseThrowApiServiceException()
             {
@@ -54,7 +54,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return DoElseThrowApiServiceException();
         }
 
-        public static Task<SwaggerResponse> WrapInThrowableApiServiceException(this Task<SwaggerResponse> task)
+        public static Task<SwaggerResponse> WrapInThrowableApiServiceExceptionAndInvoke(this Task<SwaggerResponse> task)
         {
             async Task<SwaggerResponse> DoElseThrowApiServiceException()
             {

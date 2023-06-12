@@ -3,5 +3,7 @@
     public interface IPayamGostarClientAbstractFactory
     {
         ICrmObjectTypeApiClient CreateCrmObjectTypeApiClient();
+
+        ICrmObjectTypeFormApiClient CreateCrmObjectTypeFormApiClientt();
     }
 }

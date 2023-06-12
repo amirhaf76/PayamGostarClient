@@ -2,6 +2,6 @@
 {
     public interface IPayamGostarClientServiceFactory
     {
-        ICrmObjectTypeApiService CreateCrmObjectTypeApiService();
+        ICrmObjectTypeService CreateCrmObjectTypeService();
     }
 }

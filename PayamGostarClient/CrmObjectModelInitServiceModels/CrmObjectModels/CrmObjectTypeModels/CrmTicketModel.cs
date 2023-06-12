@@ -1,6 +1,6 @@
 ﻿namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels
 {
-    internal class CrmTicketModel : BaseCRMModel
+    public class CrmTicketModel : BaseCRMModel
     {
         public override Gp_CrmObjectType Type => Gp_CrmObjectType.Ticket;
 

@@ -1,8 +1,7 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
+using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Extension;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Abstractions;
 using PayamGostarClient.InitServiceModels.Extensions;
 using System;
@@ -13,42 +12,43 @@ namespace PayamGostarClient.InitServiceModels.Models
 {
     public abstract class BaseInitService<T> : IInitService where T : BaseCRMModel
     {
-        protected BaseCRMModel BaseCrmModel { get; }
+        protected T IntendedCrmObject { get; }
+        protected ICrmObjectTypeService CrmObjectTypeService { get; }
+        protected IPayamGostarClientServiceFactory ServiceFactory { get; }
 
-        private readonly ICrmObjectTypeApiService _crmObjectTypeService;
 
-
-        protected BaseInitService(BaseCRMModel baseCrmModel, IPayamGostarClientServiceFactory serviceFactory)
+        protected BaseInitService(T intendedCrmObject, IPayamGostarClientServiceFactory serviceFactory)
         {
-            BaseCrmModel = baseCrmModel;
+            this.IntendedCrmObject = intendedCrmObject;
 
-            _crmObjectTypeService = serviceFactory.CreateCrmObjectTypeApiService();
+            this.ServiceFactory = serviceFactory;
+
+            CrmObjectTypeService = this.ServiceFactory.CreateCrmObjectTypeService();
         }
 
-        public async Task InitAsync<T1>() where T1 : BaseCRMModel
+        public async Task InitAsync()
         {
-            var searchingResult = await SearchCrmObjectAsync();
+            var existedCrmObject = await SearchCrmObjectAsync();
 
-            if (searchingResult == null)
+            if (existedCrmObject == null)
             {
-                await CreateCrmObjectAndSetItsBelongsAsync();
+                await CreateCrmObjectAndSetItsBelongsAsync(IntendedCrmObject);
             }
             else
             {
-                await CheckCrmObjectTypeBelongs();
+                await CheckCrmObjectTypeBelongs(IntendedCrmObject, existedCrmObject);
             }
         }
 
-        private async Task CreateCrmObjectAndSetItsBelongsAsync()
+        private async Task CreateCrmObjectAndSetItsBelongsAsync(T intendedCrmObject)
         {
             await CreateCrmObjectAsync();
 
             await CreateCrmObjectTypeBelongs();
         }
 
-        private async Task CheckCrmObjectTypeBelongs()
+        private async Task CheckCrmObjectTypeBelongs(T intendedCrmObject, BaseCRMModel existedCrmObject)
         {
-
             await CheckExtendedPropertiesAsync();
 
             await CheckGroupPropetiesAsync();
@@ -99,23 +99,35 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private async Task<SearchedCrmObjectModel> SearchCrmObjectAsync()
         {
-            var request = BaseCrmModel.ConvertToBaseCrmModelDto();
+            var request = ConvertToCrmObjectTypeSearchRequestDto(IntendedCrmObject);
 
-            var receivedCrmObjects = await _crmObjectTypeService.SearchAsync(request);
+            var receivedCrmObjects = await CrmObjectTypeService.SearchAsync(request);
 
             var receivedCrmObject = receivedCrmObjects.Result.FirstOrDefault();
 
             return CreateSearchedCrmObjectModel(receivedCrmObject);
         }
 
-        private SearchedCrmObjectModel CreateSearchedCrmObjectModel(ApiServices.Dtos.CrmObjectTypeGetResultDto receivedCrmObject)
+        private static CrmObjectTypeSearchRequestDto ConvertToCrmObjectTypeSearchRequestDto(BaseCRMModel crmMode)
+        {
+            return new CrmObjectTypeSearchRequestDto
+            {
+                Code = crmMode.Code,
+                CrmOjectTypeIndex = (int)crmMode.Type,
+                Name = crmMode.Name.FirstOrDefault()?.Value,
+                PageSiz = 10,
+                PageNumber = 1,
+            };
+        }
+
+        private SearchedCrmObjectModel CreateSearchedCrmObjectModel(ApiServices.Dtos.CrmObjectTypeSearchResultDto receivedCrmObject)
         {
             return receivedCrmObject.ConvertToSearchedCrmObjectModel();
         }
 
-        private Task CreateCrmObjectAsync()
+        private async Task CreateCrmObjectAsync()
         {
-            throw new NotImplementedException();
+            await CreateTypeAsync();
         }
 
         private Task CreateStagesAsync()
@@ -134,9 +146,9 @@ namespace PayamGostarClient.InitServiceModels.Models
         }
 
 
-        protected abstract T CreateType();
+        protected abstract Task<T> CreateTypeAsync();
 
-        //protected abstract T CheckAndModifyCrmProperties(T currentModel);
+        protected abstract Task<T> CheckAndModifyCrmPropertiesAsync();
 
     }
 

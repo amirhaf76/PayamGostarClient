@@ -8,7 +8,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 {
     internal static class BaseInitServiceExtension
     {
-        internal static SearchedCrmObjectModel ConvertToSearchedCrmObjectModel(this CrmObjectTypeGetResultDto crmModel)
+
+        internal static SearchedCrmObjectModel ConvertToSearchedCrmObjectModel(this CrmObjectTypeSearchResultDto crmModel)
         {
             var crmObjectType = (Gp_CrmObjectType)crmModel.CrmOjectTypeIndex;
 
@@ -29,7 +30,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             return new ResourceValue[] { new ResourceValue { Value = value, LanguageCulture = "Fa" } };
         }
 
-        internal static PropertyGroup To(this CrmObjectPropertyGroupGetResultDto group)
+        internal static PropertyGroup To(this PropertyGroupGetResultDto group)
         {
             return new PropertyGroup
             {
@@ -39,7 +40,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             };
         }
 
-        internal static BaseExtendedPropertyModel To(this PropertyDefinitionGetResultDto property)
+        internal static BaseExtendedPropertyModel To(this ExtendedPropertyGetResultDto property)
         {
             return new SearchedExtendedPropertyModel
             {
@@ -50,7 +51,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             };
         }
 
-        internal static Stage To(this CrmObjectTypeStageGetResultDto stage)
+        internal static Stage To(this StageGetResultDto stage)
         {
             return new Stage
             {

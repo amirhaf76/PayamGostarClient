@@ -15,5 +15,10 @@ namespace PayamGostarClient.ApiProvider
         {
             return new CrmObjectTypeApiClient(_config);
         }
+
+        public ICrmObjectTypeFormApiClient CreateCrmObjectTypeFormApiClientt()
+        {
+            return new CrmObjectTypeFormApiClient(_config);
+        }
     }
 }

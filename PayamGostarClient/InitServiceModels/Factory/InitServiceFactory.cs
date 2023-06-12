@@ -22,20 +22,33 @@ namespace PayamGostarClient.InitServiceModels.Factory
             _serviceFactory = CreatePayamGostarClientServiceFactory(config);
         }
 
-        public IInitService Create<T>(T model) where T : BaseCRMModel
+        public IInitService Create(BaseCRMModel model)
         {
             switch (model.Type)
             {
                 case Gp_CrmObjectType.Form:
-                    return new FormInitService(model, _serviceFactory);
+                    return new FormInitService(model as CrmFormModel, _serviceFactory);
                 default:
                     throw new InvalidGpCrmObjectTypeException();
             }
         }
+
+        //public IInitService Create<T>(T model) where T : BaseCRMModel
+        //{
+        //    switch (model.Type)
+        //    {
+        //        case Gp_CrmObjectType.Form:
+        //            return new FormInitService(model as CrmFormModel, _serviceFactory);
+        //        default:
+        //            throw new InvalidGpCrmObjectTypeException();
+        //    }
+        //}
+
         private IPayamGostarClientServiceFactory CreatePayamGostarClientServiceFactory(InitServiceFactoryConfig config)
         {
             return new PayamGostarClientServiceFactory(config.ClientService);
         }
+       
     }
 
 
