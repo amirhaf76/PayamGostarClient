@@ -29,7 +29,7 @@ namespace PayamGostarClient.ApiServices.Models
 
             var searchResult = await searchResultTask.WrapInThrowableApiServiceException().ConfigureAwait(false);
 
-            return searchResult.ConvertToApiResponse(result => result.Select(crm => crm.ConvertToCrmObjectTypeGetResultDto()));
+            return searchResult.ConvertToApiResponse(result => result.Items.Select(crm => crm.ConvertToCrmObjectTypeGetResultDto()));
         }
     }
 }

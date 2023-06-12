@@ -12,5 +12,7 @@
         public string TooltipResourceKey { get; set; }
 
         public string UserKey { get; set; }
+
+        public CrmObjectPropertyGroupGetResultDto Group { get; set; }
     }
 }

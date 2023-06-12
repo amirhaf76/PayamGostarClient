@@ -16,10 +16,10 @@ namespace PayamGostarClient.ApiServices.Extension
                 Type = (int)crmModel.Type,
                 Code = crmModel.Code,
                 Name = crmModel.Name.Select(n => n.ConvertToResourceValue()),
-                Description = crmModel.Description.Select(d => d.ConvertToResourceValue()),
-                Properties = crmModel.Properties.Select(p => p.ConvertToBaseExtendedPropertyModelDto()),
-                PropertyGroups = crmModel.PropertyGroups.Select(pg => pg.ConvertToPropertyGroupDto()),
-                Stages = crmModel.Stages.Select(s => s.ConvertToStageDto()),
+                Description = crmModel.Description?.Select(d => d.ConvertToResourceValue()),
+                Properties = crmModel.Properties?.Select(p => p.ConvertToBaseExtendedPropertyModelDto()),
+                PropertyGroups = crmModel.PropertyGroups?.Select(pg => pg.ConvertToPropertyGroupDto()),
+                Stages = crmModel.Stages?.Select(s => s.ConvertToStageDto()),
             };
         }
 

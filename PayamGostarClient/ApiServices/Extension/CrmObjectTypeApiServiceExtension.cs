@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiServices.Dtos;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PayamGostarClient.ApiServices.Extension
@@ -24,13 +25,29 @@ namespace PayamGostarClient.ApiServices.Extension
         }
         public static CrmObjectTypeGetResultDto ConvertToCrmObjectTypeGetResultDto(this CrmObjectTypeGetResultVM viewModel)
         {
-            return new CrmObjectTypeGetResultDto
+            var groupDictionary = new Dictionary<int, CrmObjectPropertyGroupGetResultDto>();
+
+            foreach (var group in viewModel.Groups)
             {
-                Code = viewModel.Code,
-                Name = viewModel.Name,
-                CrmOjectTypeIndex = viewModel.CrmOjectTypeIndex,
-                Description = viewModel.Description,
-                Properties = viewModel.Properties.Select(property => new PropertyDefinitionGetResultDto
+                groupDictionary.Add(group.Id, new CrmObjectPropertyGroupGetResultDto
+                {
+                    CrmObjectTypeId = group.CrmObjectTypeId,
+                    Name = group.Name,
+                    NameResourceKey = group.NameResourceKey,
+                    CountOfColumns = group.CountOfColumns,
+                    ExpandForView = group.ExpandForView,
+                });
+            }
+
+            var properties = viewModel.Properties.Select(property =>
+            {
+                const int INVALID_GROUP_ID = -1;
+
+                groupDictionary.TryGetValue(
+                    property.PropertyGroupId ?? INVALID_GROUP_ID,
+                    out CrmObjectPropertyGroupGetResultDto propertyGroup);
+
+                return new PropertyDefinitionGetResultDto
                 {
                     UserKey = property.UserKey,
                     Name = property.Name,
@@ -38,15 +55,18 @@ namespace PayamGostarClient.ApiServices.Extension
                     Tooltip = property.Tooltip,
                     TooltipResourceKey = property.TooltipResourceKey,
                     CrmObjectTypeId = property.CrmObjectTypeId,
-                }),
-                Groups = viewModel.Groups.Select(group => new CrmObjectPropertyGroupGetResultDto
-                {
-                    CrmObjectTypeId = group.CrmObjectTypeId,
-                    Name = group.Name,
-                    NameResourceKey = group.NameResourceKey,
-                    CountOfColumns = group.CountOfColumns,
-                    ExpandForView = group.ExpandForView,
-                }),
+                    Group = propertyGroup,
+                };
+            });
+
+            return new CrmObjectTypeGetResultDto
+            {
+                Code = viewModel.Code,
+                Name = viewModel.Name,
+                CrmOjectTypeIndex = viewModel.CrmOjectTypeIndex,
+                Description = viewModel.Description,
+                Properties = properties,
+                Groups = groupDictionary.Values.AsEnumerable(),
                 Stages = viewModel.Stages.Select(stage => new CrmObjectTypeStageGetResultDto
                 {
                     CrmObjectTypeId = stage.CrmObjectTypeId,
