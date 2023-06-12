@@ -1,9 +1,10 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
 using PayamGostarClient.ApiServices.Extension;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
-using PayamGostarClient.Helper.Net;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Abstractions;
-using PayamGostarClient.InitServiceModels.Exceptions;
+using PayamGostarClient.InitServiceModels.Extensions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private async Task CheckCrmObjectTypeBelongs()
         {
-           
+
             await CheckExtendedPropertiesAsync();
 
             await CheckGroupPropetiesAsync();
@@ -89,14 +90,14 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             if (false)
             {
-                
+
             }
 
             await CreateExtendedPropertiesAsync();
         }
 
 
-        private async Task<object> SearchCrmObjectAsync()
+        private async Task<SearchedCrmObjectModel> SearchCrmObjectAsync()
         {
             var request = BaseCrmModel.ConvertToBaseCrmModelDto();
 
@@ -104,9 +105,13 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             var receivedCrmObject = receivedCrmObjects.Result.FirstOrDefault();
 
-            return receivedCrmObjects.Result.FirstOrDefault();
+            return CreateSearchedCrmObjectModel(receivedCrmObject);
         }
 
+        private SearchedCrmObjectModel CreateSearchedCrmObjectModel(ApiServices.Dtos.CrmObjectTypeGetResultDto receivedCrmObject)
+        {
+            return receivedCrmObject.ConvertToSearchedCrmObjectModel();
+        }
 
         private Task CreateCrmObjectAsync()
         {
