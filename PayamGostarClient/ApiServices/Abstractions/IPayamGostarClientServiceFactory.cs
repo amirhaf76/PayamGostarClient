@@ -5,5 +5,12 @@
         ICrmObjectTypeService CreateCrmObjectTypeService();
 
         ICrmObjectTypeFormService CreateCrmObjectTypeFormService();
+
+        IExtendedPropertyService CreateExtendedPropertyService();
+
+        IPropertyGroupService CreatePropertyGroupService();
+
+        ICrmObjectTypeStageService CreateCrmObjectTypeStageService();
+
     }
 }

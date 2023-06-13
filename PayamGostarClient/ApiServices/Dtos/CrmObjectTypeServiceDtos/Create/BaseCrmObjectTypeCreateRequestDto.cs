@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create
@@ -12,12 +11,5 @@ namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create
         public SystemResourceValueDto Description { get; set; }
 
         public string Code { get; set; }
-    }
-
-    public class SystemResourceValueDto
-    {
-        public string ResourceKey { get; set; }
-
-        public IEnumerable<ResourceValueDto> ResourceValues { get; set; }
     }
 }

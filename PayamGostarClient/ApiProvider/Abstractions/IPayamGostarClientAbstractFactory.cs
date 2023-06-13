@@ -6,11 +6,11 @@
 
         ICrmObjectTypeFormApiClient CreateCrmObjectTypeFormApiClientt();
 
-        IPropertyDefinitionApiClient CreateIPropertyDefinitionApiClient();
+        IPropertyDefinitionApiClient CreatePropertyDefinitionApiClient();
 
-        IPropertyGroupApiClient CreateIPropertyGroupApiClient();
+        IPropertyGroupApiClient CreatePropertyGroupApiClient();
 
-        ICrmObjectTypeStageApiClient CreateICrmObjectTypeStageApiClient();
+        ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient();
 
     }
 }

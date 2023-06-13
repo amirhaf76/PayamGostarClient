@@ -9,9 +9,9 @@ namespace PayamGostarClient.ApiServices.Models
 
         public IPayamGostarClientAbstractFactory ClientFactory { get; }
 
-        public BaseApiService(PayamGostarClientConfig payamGostarClientConfig, IPayamGostarClientAbstractFactory clientFactory)
+        public BaseApiService(PayamGostarClientConfig clientConfig, IPayamGostarClientAbstractFactory clientFactory)
         {
-            ClientConfig = payamGostarClientConfig;
+            ClientConfig = clientConfig;
 
             ClientFactory = clientFactory;
         }

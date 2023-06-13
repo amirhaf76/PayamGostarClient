@@ -1,0 +1,12 @@
+﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.MultiValue;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure
+{
+    public class GeneralMultiValueExtendedPropertyCreationDto : BaseMultiValueExtendedPropertyDto
+    {
+        public Guid CrmObjectTypeId { get; set; }
+    }
+}

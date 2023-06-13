@@ -21,6 +21,7 @@ namespace PayamGostarClient.ApiServices.Factory
             _clientFactory = CreatePayamGostarClientFactory(_clientConfig);
         }
 
+
         private PayamGostarClientConfig CreateClientConfig(PayamGostarClientServiceConfig serviceConfig)
         {
             return new PayamGostarClientConfig
@@ -41,6 +42,7 @@ namespace PayamGostarClient.ApiServices.Factory
             return new PayamGostarClientFactory(clientConfig);
         }
 
+
         public ICrmObjectTypeService CreateCrmObjectTypeService()
         {
             return CreateService<ICrmObjectTypeService, CrmObjectTypeService>();
@@ -50,6 +52,22 @@ namespace PayamGostarClient.ApiServices.Factory
         {
             return CreateService<ICrmObjectTypeFormService, CrmObjectTypeFormService>();
         }
+
+        public IExtendedPropertyService CreateExtendedPropertyService()
+        {
+            return CreateService<IExtendedPropertyService, ExtendedPropertyService>();
+        }
+
+        public IPropertyGroupService CreatePropertyGroupService()
+        {
+            return CreateService<IPropertyGroupService, PropertyGroupService>();
+        }
+
+        public ICrmObjectTypeStageService CreateCrmObjectTypeStageService()
+        {
+            return CreateService<ICrmObjectTypeStageService, CrmObjectTypeStageService>();
+        }
+
 
         public TAbstactService CreateService<TAbstactService, TService>()
             where TService : BaseApiService, TAbstactService

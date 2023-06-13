@@ -22,17 +22,17 @@ namespace PayamGostarClient.ApiProvider
             return CreateClient<ICrmObjectTypeFormApiClient, CrmObjectTypeFormApiClient>();
         }
 
-        public ICrmObjectTypeStageApiClient CreateICrmObjectTypeStageApiClient()
+        public ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient()
         {
             return CreateClient<ICrmObjectTypeStageApiClient, CrmObjectTypeStageApiClient>();
         }
 
-        public IPropertyDefinitionApiClient CreateIPropertyDefinitionApiClient()
+        public IPropertyDefinitionApiClient CreatePropertyDefinitionApiClient()
         {
             return CreateClient<IPropertyDefinitionApiClient, PropertyDefinitionApiClient>();
         }
 
-        public IPropertyGroupApiClient CreateIPropertyGroupApiClient()
+        public IPropertyGroupApiClient CreatePropertyGroupApiClient()
         {
             return CreateClient<IPropertyGroupApiClient, PropertyGroupApiClient>();
         }
