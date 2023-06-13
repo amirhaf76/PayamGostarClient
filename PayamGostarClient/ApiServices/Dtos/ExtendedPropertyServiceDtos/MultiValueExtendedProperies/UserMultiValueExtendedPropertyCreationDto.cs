@@ -4,6 +4,8 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class UserMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.UserMultiValue;
+
         public bool? ShowDeactiveMembersOption { get; set; }
     }
 

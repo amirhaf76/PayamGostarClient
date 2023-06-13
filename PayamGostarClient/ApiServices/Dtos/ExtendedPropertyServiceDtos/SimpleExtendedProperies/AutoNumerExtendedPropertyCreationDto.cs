@@ -4,6 +4,8 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
     public class AutoNumerExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.AutoNumer;
+
         public string Prefix { get; set; }
 
         public string Postfix { get; set; }
@@ -11,7 +13,6 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
         public long Seed { get; set; }
 
         public byte AutoNumLength { get; set; }
-
     }
 
 }

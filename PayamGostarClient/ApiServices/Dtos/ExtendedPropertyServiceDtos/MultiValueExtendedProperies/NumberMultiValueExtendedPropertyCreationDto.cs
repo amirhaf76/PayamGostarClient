@@ -4,6 +4,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class NumberMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.NumberMultiValue;
         public int DecimalDigits { get; set; }
 
         public int? MinDigit { get; set; }

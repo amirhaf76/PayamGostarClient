@@ -5,6 +5,8 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class IdentityMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.IdentityMultiValue;
+
         public IEnumerable<ExtendedPropertyIdWrapperDto> ShowInGridProps { get; set; }
     }
 

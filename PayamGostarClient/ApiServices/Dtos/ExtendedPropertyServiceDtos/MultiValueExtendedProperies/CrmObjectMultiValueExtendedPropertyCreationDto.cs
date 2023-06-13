@@ -6,6 +6,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class CrmObjectMultiValueExtendedPropertyCreationDto : BaseMultiValueExtendedPropertyDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.CrmObjectMultiValue;
         public Guid CrmObjectTypeId { get; set; }
         public int CrmObjectTypeIndex { get; set; }
         public Guid? SubTypeId { get; set; }

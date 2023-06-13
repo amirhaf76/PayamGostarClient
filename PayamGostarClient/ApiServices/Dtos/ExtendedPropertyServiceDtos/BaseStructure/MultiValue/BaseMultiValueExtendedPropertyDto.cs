@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.MultiValue
 {
-    public class BaseMultiValueExtendedPropertyDto : BaseExtendedPropertyDto
+    public abstract class BaseMultiValueExtendedPropertyDto : BaseExtendedPropertyDto
     {
 
     }

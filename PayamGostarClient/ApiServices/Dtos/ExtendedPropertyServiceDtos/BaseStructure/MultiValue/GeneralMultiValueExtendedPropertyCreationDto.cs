@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure
 {
-    public class GeneralMultiValueExtendedPropertyCreationDto : BaseMultiValueExtendedPropertyDto
+    public abstract class GeneralMultiValueExtendedPropertyCreationDto : BaseMultiValueExtendedPropertyDto
     {
         public Guid CrmObjectTypeId { get; set; }
     }

@@ -4,6 +4,8 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class ProductMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.ProductMultiValue;
+
         public int FractionLength { get; set; }
 
         public bool ShowAmountColumn { get; set; }

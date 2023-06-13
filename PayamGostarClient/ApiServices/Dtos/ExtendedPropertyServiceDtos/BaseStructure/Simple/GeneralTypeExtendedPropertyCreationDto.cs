@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
-    public class GeneralTypeExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
+    public abstract class GeneralTypeExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
         public int? CalculationTypeIndex { get; set; }
 

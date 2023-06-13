@@ -2,6 +2,7 @@
 {
     public class LinkExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.Link;
     }
      
 

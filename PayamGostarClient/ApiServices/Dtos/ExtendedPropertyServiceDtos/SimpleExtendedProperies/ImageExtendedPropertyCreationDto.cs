@@ -5,6 +5,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
     public class ImageExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.Image;
         public IEnumerable<string> SupportedExtensions { get; set; }
 
         public int? MaxSize { get; set; }

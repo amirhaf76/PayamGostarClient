@@ -2,8 +2,10 @@
 
 namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple
 {
-    public class BaseExtendedPropertyDto
+    public abstract class BaseExtendedPropertyDto
     {
+        public abstract ExtendedPropertyType Type { get; }
+
         public SystemResourceValueDto Name { get; set; }
 
         public SystemResourceValueDto ToolTip { get; set; }

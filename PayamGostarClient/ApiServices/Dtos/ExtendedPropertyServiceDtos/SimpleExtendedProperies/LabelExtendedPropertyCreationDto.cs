@@ -4,6 +4,8 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
     public class LabelExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.Label;
+
         public int? CalculationTypeIndex { get; set; }
 
         public string LabelText { get; set; }

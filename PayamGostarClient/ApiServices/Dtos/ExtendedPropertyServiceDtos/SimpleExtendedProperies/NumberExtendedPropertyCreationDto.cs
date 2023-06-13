@@ -2,6 +2,8 @@
 {
     public class NumberExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.Number;
+
         public int DecimalDigits { get; set; }
         public int? MinDigits { get; set; }
         public int? MaxDigits { get; set; }

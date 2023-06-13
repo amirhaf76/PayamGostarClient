@@ -2,6 +2,7 @@
 {
     public class CheckboxExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
+        public override ExtendedPropertyType Type => ExtendedPropertyType.Checkbox;
     }
 
 
