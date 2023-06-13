@@ -5,5 +5,12 @@
         ICrmObjectTypeApiClient CreateCrmObjectTypeApiClient();
 
         ICrmObjectTypeFormApiClient CreateCrmObjectTypeFormApiClientt();
+
+        IPropertyDefinitionApiClient CreateIPropertyDefinitionApiClient();
+
+        IPropertyGroupApiClient CreateIPropertyGroupApiClient();
+
+        ICrmObjectTypeStageApiClient CreateICrmObjectTypeStageApiClient();
+
     }
 }
