@@ -3,7 +3,6 @@ using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using System.Linq;
 
 namespace PayamGostarClient.ApiServices.Extension
@@ -23,8 +22,18 @@ namespace PayamGostarClient.ApiServices.Extension
             return new SystemResourceValueVM
             {
                 ResourceKey = systemRecource.ResourceKey,
-                ResourceValues = systemRecource.ResourceValues.Select(r => new LocalizedResourceValueDto { Value = r.Value, LanguageCulture = r.LanguageCulture }),
+                ResourceValues = systemRecource.ResourceValues.Select(r => r.ToLocalizedResourceValueDto()),
             };
+        }
+
+        public static LocalizedResourceValueDto ToLocalizedResourceValueDto(this ResourceValueDto resource)
+        {
+            return new LocalizedResourceValueDto { Value = resource.Value, LanguageCulture = resource.LanguageCulture };
+        }
+
+        public static LocalizedResourceDto ToLocalizedResourceDto(this SystemResourceValueDto resource)
+        {
+            return new LocalizedResourceDto { ResourceKey = resource.ResourceKey, ResourceValues = resource.ResourceValues.Select(r => r.ToLocalizedResourceValueDto()) };
         }
 
         public static PropertyGroupGetResultDto ConvertToPropertyGroupGetResultDto(this CrmObjectPropertyGroupGetResultVM group)
@@ -90,7 +99,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
                 return theProperty;
             });
-            
+
             return to;
         }
 
@@ -101,6 +110,7 @@ namespace PayamGostarClient.ApiServices.Extension
             to.Code = from.Code;
             to.Name = from.Name.ConvertToSystemResourceValueDto();
             to.Description = from.Description.ConvertToSystemResourceValueDto();
+            to.PreviewTypeIndex = from.PreviewTypeIndex;
 
             return to;
         }

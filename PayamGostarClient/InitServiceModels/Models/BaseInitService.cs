@@ -13,17 +13,25 @@ namespace PayamGostarClient.InitServiceModels.Models
     public abstract class BaseInitService<T> : IInitService where T : BaseCRMModel
     {
         protected T IntendedCrmObject { get; }
-        protected ICrmObjectTypeService CrmObjectTypeService { get; }
+
         protected IPayamGostarClientServiceFactory ServiceFactory { get; }
+
+        protected ICrmObjectTypeService CrmObjectTypeService { get; }
+        protected IExtendedPropertyService ExtendedPropertyService { get; }
+        protected IPropertyGroupService PropertyGroupService { get; }
+        protected ICrmObjectTypeStageService CrmObjectTypeStageService { get; }
 
 
         protected BaseInitService(T intendedCrmObject, IPayamGostarClientServiceFactory serviceFactory)
         {
-            this.IntendedCrmObject = intendedCrmObject;
+            IntendedCrmObject = intendedCrmObject;
 
-            this.ServiceFactory = serviceFactory;
+            ServiceFactory = serviceFactory;
 
-            CrmObjectTypeService = this.ServiceFactory.CreateCrmObjectTypeService();
+            CrmObjectTypeService = ServiceFactory.CreateCrmObjectTypeService();
+            ExtendedPropertyService = ServiceFactory.CreateExtendedPropertyService();
+            PropertyGroupService = ServiceFactory.CreatePropertyGroupService();
+            CrmObjectTypeStageService = ServiceFactory.CreateCrmObjectTypeStageService();
         }
 
         public async Task InitAsync()
@@ -44,7 +52,7 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             var newCrmObjectId = await CreateCrmObjectAsync();
 
-            await CreateCrmObjectTypeBelongs(newCrmObjectId);
+            // Todo: await CreateCrmObjectTypeBelongs(newCrmObjectId);
         }
 
         private async Task CheckCrmObjectTypeBelongs(T intendedCrmObject, SearchedCrmObjectModel existedCrmObject)
@@ -128,8 +136,13 @@ namespace PayamGostarClient.InitServiceModels.Models
             };
         }
 
-        private SearchedCrmObjectModel CreateSearchedCrmObjectModel(ApiServices.Dtos.CrmObjectTypeSearchResultDto receivedCrmObject)
+        private SearchedCrmObjectModel CreateSearchedCrmObjectModel(CrmObjectTypeSearchResultDto receivedCrmObject)
         {
+            if (receivedCrmObject == null)
+            {
+                return null;
+            }
+
             return receivedCrmObject.ToSearchedCrmObjectModel();
         }
 

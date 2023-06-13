@@ -7,6 +7,8 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
     {
         public abstract Gp_CrmObjectType Type { get; }
 
+        public Gp_PreviewType PreviewType { get; } = Gp_PreviewType.PDFPreview;
+
         public string Code { get; set; }
 
         #region Extera Property

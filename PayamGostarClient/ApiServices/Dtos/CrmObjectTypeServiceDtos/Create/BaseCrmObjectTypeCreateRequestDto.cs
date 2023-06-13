@@ -11,5 +11,7 @@ namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create
         public SystemResourceValueDto Description { get; set; }
 
         public string Code { get; set; }
+
+        public int PreviewTypeIndex { get; set; }
     }
 }

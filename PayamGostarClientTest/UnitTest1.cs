@@ -10,9 +10,10 @@ namespace PayamGostarClientTest
 {
     public class UnitTest1
     {
-        private const string URL = "http://192.168.11.9/";
+        private const string URL = "http://pgonline-dev.com";
         //private const string URL = "https://webhook.site/eba279bf-0642-4288-9a82-b4e8d15fd276";
-        private const string LANGUAGE_CULTURE = "Fa";
+        private const string FA_LANGUAGE_CULTURE = "fa-IR";
+        private const string EN_LANGUAGE_CULTURE = "en_US";
 
         private readonly ITestOutputHelper _testOutput;
 
@@ -29,7 +30,7 @@ namespace PayamGostarClientTest
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
                     Url = URL,
-                    LanguageCulture = LANGUAGE_CULTURE,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
                 }
             };
 
@@ -46,7 +47,7 @@ namespace PayamGostarClientTest
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
                     Url = URL,
-                    LanguageCulture = LANGUAGE_CULTURE,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
                     JwToken = AdminJwToken.JWTOKEN,
                 }
             };
@@ -55,7 +56,18 @@ namespace PayamGostarClientTest
 
             await crmModelService.InitAsync(new CrmFormModel
             {
-                Name = new ResourceValue[] { new ResourceValue { Value = "تست", LanguageCulture = LANGUAGE_CULTURE } },
+                Name = new ResourceValue[] 
+                {
+                    new ResourceValue { Value = "فرم تست ۱", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                
+                Code = "Form_test_20230613"
             });
         }
     }

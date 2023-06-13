@@ -1,9 +1,9 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiServices.Abstractions;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiServices.Factory;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Models
@@ -11,19 +11,22 @@ namespace PayamGostarClient.ApiServices.Models
     public class ExtendedPropertyService : BaseApiService, IExtendedPropertyService
     {
         private readonly IPropertyDefinitionApiClient _propertyDefinitionApiClient;
-        private readonly ITextPropertyDefinitionApiClient _textPropertyApiClient;
+        private readonly ExtendedPropertyCreationFactory _extendedFactory;
+
 
         public ExtendedPropertyService(PayamGostarClientConfig clientConfig, IPayamGostarClientAbstractFactory clientFactory) : base(clientConfig, clientFactory)
         {
             _propertyDefinitionApiClient = ClientFactory.CreatePropertyDefinitionApiClient();
 
-            
+            _extendedFactory = new ExtendedPropertyCreationFactory(clientFactory); 
         }
 
-        public Task<object> CreateAsync(object obj)
+
+        public async Task<object> CreateAsync(BaseExtendedPropertyDto baseProperty)
         {
-            var creationPropertyTask = _textPropertyApiClient.PostApiV2TextpropertydefinitionCreateAsync()
-            throw new NotImplementedException();
+            var extendedPropertyCreationService = _extendedFactory.Create(baseProperty);
+
+            return await extendedPropertyCreationService.CreateAsync();
         }
     }
 

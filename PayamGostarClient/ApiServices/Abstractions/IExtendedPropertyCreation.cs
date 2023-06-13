@@ -2,8 +2,8 @@
 
 namespace PayamGostarClient.ApiServices.Abstractions
 {
-    public interface IExtendedPropertyService
+    public interface IExtendedPropertyCreation
     {
-        Task<object> CreateAsync(object obj);
+        Task CreatePropertyAsync();
     }
 }
