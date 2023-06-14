@@ -4,7 +4,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
     public class HTMLExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.HTML;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Html;
         public bool IsRequired { get; set; }
     }
 

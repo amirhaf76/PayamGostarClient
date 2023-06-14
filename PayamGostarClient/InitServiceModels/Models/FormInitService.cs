@@ -45,7 +45,7 @@ namespace PayamGostarClient.InitServiceModels.Models
                 StartFrom = IntendedCrmObject.StartFrom,
                 DigitCount = IntendedCrmObject.DigitCount,
                 PreviewTypeIndex = (int)IntendedCrmObject.PreviewType,
-
+                
                 IsPublicForm = IntendedCrmObject.PublicForm != null,
                 SubmitMessage = IntendedCrmObject.PublicForm?.SubmitMessage,
                 FlushFormAfterSave = IntendedCrmObject.PublicForm?.FlushFormAfterSave ?? false,

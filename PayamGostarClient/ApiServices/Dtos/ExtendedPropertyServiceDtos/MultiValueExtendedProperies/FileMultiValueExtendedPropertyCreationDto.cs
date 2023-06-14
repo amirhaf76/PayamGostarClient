@@ -5,7 +5,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class FileMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.FileMultiValue;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.FileMultiValue;
 
         public int? MaxFileSize { get; set; }
 

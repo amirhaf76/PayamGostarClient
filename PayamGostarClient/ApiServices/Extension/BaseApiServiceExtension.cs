@@ -9,31 +9,28 @@ namespace PayamGostarClient.ApiServices.Extension
 {
     public static class BaseApiServiceExtension
     {
-
-
-
         public static ResourceValueDto ConvertToResourceValueDto(this ResourceValue resourceValue)
         {
             return new ResourceValueDto { Value = resourceValue.Value, LanguageCulture = resourceValue.LanguageCulture };
         }
 
-        public static SystemResourceValueVM ConvertToSystemResourceValueDto(this SystemResourceValueDto systemRecource)
+        public static SystemResourceValueVM ToSystemResourceValueVM(this SystemResourceValueDto systemRecource)
         {
             return new SystemResourceValueVM
             {
                 ResourceKey = systemRecource.ResourceKey,
-                ResourceValues = systemRecource.ResourceValues.Select(r => r.ToLocalizedResourceValueDto()),
+                ResourceValues = systemRecource.ResourceValues.Select(r => r.ToDto()),
             };
         }
 
-        public static LocalizedResourceValueDto ToLocalizedResourceValueDto(this ResourceValueDto resource)
+        public static LocalizedResourceValueDto ToDto(this ResourceValueDto resource)
         {
             return new LocalizedResourceValueDto { Value = resource.Value, LanguageCulture = resource.LanguageCulture };
         }
 
         public static LocalizedResourceDto ToLocalizedResourceDto(this SystemResourceValueDto resource)
         {
-            return new LocalizedResourceDto { ResourceKey = resource.ResourceKey, ResourceValues = resource.ResourceValues.Select(r => r.ToLocalizedResourceValueDto()) };
+            return new LocalizedResourceDto { ResourceKey = resource.ResourceKey, ResourceValues = resource.ResourceValues.Select(r => r.ToDto()) };
         }
 
         public static PropertyGroupGetResultDto ConvertToPropertyGroupGetResultDto(this CrmObjectPropertyGroupGetResultVM group)
@@ -79,6 +76,14 @@ namespace PayamGostarClient.ApiServices.Extension
             return new CrmObjectTypeResultDto { Id = vmResult.Id };
         }
 
+        public static PropertyDefinitionCreationResultDto ToDto(this PropertyDefinitionPostResultVM result)
+        {
+            return new PropertyDefinitionCreationResultDto
+            {
+                Id = result.Id,
+            };
+        }
+
 
         public static TTo CopyFromBaseCrmObjectTypeGetResultVM<TFrom, TTo>(this TTo to, TFrom from)
             where TTo : BaseCrmObjectTypeGetResultDto
@@ -108,8 +113,8 @@ namespace PayamGostarClient.ApiServices.Extension
             where TFrom : BaseCrmObjectTypeCreateRequestDto
         {
             to.Code = from.Code;
-            to.Name = from.Name.ConvertToSystemResourceValueDto();
-            to.Description = from.Description.ConvertToSystemResourceValueDto();
+            to.Name = from.Name.ToSystemResourceValueVM();
+            to.Description = from.Description.ToSystemResourceValueVM();
             to.PreviewTypeIndex = from.PreviewTypeIndex;
 
             return to;

@@ -4,6 +4,6 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class CurrencyMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.CurrencyMultiValue;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.CurrencyMultiValue;
     }
 }

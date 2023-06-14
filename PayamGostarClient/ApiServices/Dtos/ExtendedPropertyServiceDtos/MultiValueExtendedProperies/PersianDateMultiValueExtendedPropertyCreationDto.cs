@@ -4,7 +4,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class PersianDateMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.PersianDateMultiValue;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.PersianDateMultiValue;
     }
 
 }

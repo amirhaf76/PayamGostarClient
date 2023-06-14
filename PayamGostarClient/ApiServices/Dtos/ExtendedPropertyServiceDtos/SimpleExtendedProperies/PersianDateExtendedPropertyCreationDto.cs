@@ -2,7 +2,7 @@
 {
     public class PersianDateExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.PersianDate;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Date;
     }
      
 

@@ -2,7 +2,7 @@
 {
     public class GpExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.Gp;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Group;
         public string GpKey { get; set; }
     }
 

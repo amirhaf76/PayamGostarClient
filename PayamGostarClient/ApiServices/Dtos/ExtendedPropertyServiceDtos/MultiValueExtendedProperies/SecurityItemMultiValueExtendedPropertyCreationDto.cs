@@ -4,7 +4,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
 {
     public class SecurityItemMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.SecurityItemMultiValue;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.SecurityItemMultiValue;
     }
 
 }

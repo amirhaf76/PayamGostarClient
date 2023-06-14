@@ -2,7 +2,7 @@
 {
     public class CrmItemIdentityExtendedPropertyCreationDto : CrmItemExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.CrmItemIdentity;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Identity;
         public bool? IsRequired { get; set; }
     }
 

@@ -4,7 +4,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
     public class CurrencyExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.Currency;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Currency;
 
         public bool IsRequired { get; set; }
 

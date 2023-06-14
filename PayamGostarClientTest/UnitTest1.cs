@@ -63,7 +63,7 @@ namespace PayamGostarClientTest
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 

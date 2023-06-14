@@ -2,9 +2,9 @@
 
 namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
-    public class AutoNumerExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
+    public class AutoNumberExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.AutoNumer;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.AutoNumber;
 
         public string Prefix { get; set; }
 

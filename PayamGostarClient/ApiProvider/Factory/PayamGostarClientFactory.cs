@@ -22,6 +22,7 @@ namespace PayamGostarClient.ApiProvider
             return CreateClient<ICrmObjectTypeFormApiClient, CrmObjectTypeFormApiClient>();
         }
 
+
         public ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient()
         {
             return CreateClient<ICrmObjectTypeStageApiClient, CrmObjectTypeStageApiClient>();
@@ -38,35 +39,14 @@ namespace PayamGostarClient.ApiProvider
         }
 
 
-
-        public ICheckboxPropertyDefinitionApiClient CreateCheckboxPropertyDefinitionApiClient()
+        public ITextPropertyDefinitionApiClient CreateTextPropertyDefinitionApiClient()
         {
-            return CreateClient<ICheckboxPropertyDefinitionApiClient, CheckboxPropertyDefinitionApiClient>();
+            return CreateClient<ITextPropertyDefinitionApiClient, TextPropertyDefinitionApiClient>();
         }
 
-        public IColorPropertyDefinitionApiClient CreateColorPropertyDefinitionApiClient()
+        public IFormPropertyDefinitionApiClient CreateFormPropertyDefinitionApiClient()
         {
-            return CreateClient<IColorPropertyDefinitionApiClient, ColorPropertyDefinitionApiClient>();
-        }
-
-        public IIdentityPropertyDefinitionApiClient CreateCrmItemIdentityPropertyDefinitionApiClient()
-        {
-            return CreateClient<IIdentityPropertyDefinitionApiClient, IdentityPropertyDefinitionApiClient>();
-        }
-
-        public ICrmObjectMultiValuePropertyDefinitionApiClient CreateCrmObjectMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<ICrmObjectMultiValuePropertyDefinitionApiClient, CrmObjectMultiValuePropertyDefinitionApiClient>();
-        }
-
-        public ICrmObjectMultiValuePropertyDefinitionApiClient CreateCurrencyMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<ICrmObjectMultiValuePropertyDefinitionApiClient, CrmObjectMultiValuePropertyDefinitionApiClient>();
-        }
-
-        public ICurrencyPropertyDefinitionApiClient CreateCurrencyPropertyDefinitionApiClient()
-        {
-            return CreateClient<ICurrencyPropertyDefinitionApiClient, CurrencyPropertyDefinitionApiClient>();
+            return CreateClient<IFormPropertyDefinitionApiClient, FormPropertyDefinitionApiClient>();
         }
 
         public IDropDownListPropertyDefinitionApiClient CreateDropDownListPropertyDefinitionApiClient()
@@ -74,69 +54,14 @@ namespace PayamGostarClient.ApiProvider
             return CreateClient<IDropDownListPropertyDefinitionApiClient, DropDownListPropertyDefinitionApiClient>();
         }
 
-        public IFileMultiValuePropertyDefinitionApiClient CreateFileMultiValuePropertyDefinitionApiClient()
+        public IDropDownListPropertyDefinitionValueApiClient CreateDropDownListPropertyDefinitionValueApiClient()
         {
-            return CreateClient<IFileMultiValuePropertyDefinitionApiClient, FileMultiValuePropertyDefinitionApiClient>();
+            return CreateClient<IDropDownListPropertyDefinitionValueApiClient, DropDownListPropertyDefinitionValueApiClient>();
         }
 
-        public IFilePropertyDefinitionApiClient CreateFilePropertyDefinitionApiClient()
+        public IUserPropertyDefinitionApiClient CreateUserPropertyDefinitionApiClient()
         {
-            return CreateClient<IFilePropertyDefinitionApiClient, FilePropertyDefinitionApiClient>();
-        }
-
-        public IGpPropertyDefinitionApiClient CreateGpPropertyDefinitionApiClient()
-        {
-            return CreateClient<IGpPropertyDefinitionApiClient, GpPropertyDefinitionApiClient>();
-        }
-
-        public IGregorianDateMultiValuePropertyDefintionApiClient CreateGregorianDateMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<IGregorianDateMultiValuePropertyDefintionApiClient, GregorianDateMultiValuePropertyDefintionApiClient>();
-        }
-
-        public IGregorianDatePropertyDefinitionApiClient CreateGregorianDatePropertyDefinitionApiClient()
-        {
-            return CreateClient<IGregorianDatePropertyDefinitionApiClient, GregorianDatePropertyDefinitionApiClient>();
-        }
-
-        public IHTMLPropertyDefinitionApiClient CreateHTMLPropertyDefinitionApiClient()
-        {
-            return CreateClient<IHTMLPropertyDefinitionApiClient, HTMLPropertyDefinitionApiClient>();
-        }
-
-        public IIdentityMultiValuePropertyDefinitionApiClient CreateIdentityMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<IIdentityMultiValuePropertyDefinitionApiClient, IdentityMultiValuePropertyDefinitionApiClient>();
-        }
-
-        public IImagePropertyDefinitionApiClient CreateImagePropertyDefinitionApiClient()
-        {
-            return CreateClient<IImagePropertyDefinitionApiClient, ImagePropertyDefinitionApiClient>();
-        }
-
-        public ILabelPropertyDefinitionApiClient CreateLabelPropertyDefinitionApiClient()
-        {
-            return CreateClient<ILabelPropertyDefinitionApiClient, LabelPropertyDefinitionApiClient>();
-        }
-
-        public ILinkMultiValuePropertyDefinitionApiClient CreateLinkMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<ILinkMultiValuePropertyDefinitionApiClient, LinkMultiValuePropertyDefinitionApiClient>();
-        }
-
-        public ILinkPropertyDefinitionApiClient CreateLinkPropertyDefinitionApiClient()
-        {
-            return CreateClient<ILinkPropertyDefinitionApiClient, LinkPropertyDefinitionApiClient>();
-        }
-
-        public IMarketingCampaignPropertyDefinitionApiClient CreateMarketingCampaignPropertyDefinitionApiClient()
-        {
-            return CreateClient<IMarketingCampaignPropertyDefinitionApiClient, MarketingCampaignPropertyDefinitionApiClient>();
-        }
-
-        public INumberMultiValuePropertyDefinitionApiClient CreateNumberMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<INumberMultiValuePropertyDefinitionApiClient, NumberMultiValuePropertyDefinitionApiClient>();
+            return CreateClient<IUserPropertyDefinitionApiClient, UserPropertyDefinitionApiClient>();
         }
 
         public INumberPropertyDefinitionApiClient CreateNumberPropertyDefinitionApiClient()
@@ -144,9 +69,14 @@ namespace PayamGostarClient.ApiProvider
             return CreateClient<INumberPropertyDefinitionApiClient, NumberPropertyDefinitionApiClient>();
         }
 
-        public IPersianDateMultiValuePropertyDefinitionApiClient CreatePersianDateMultiValuePropertyDefinitionApiClient()
+        public IDepartmentPropertyDefinitionApiClient CreateDepartmentPropertyDefinitionApiClient()
         {
-            return CreateClient<IPersianDateMultiValuePropertyDefinitionApiClient, PersianDateMultiValuePropertyDefinitionApiClient>();
+            return CreateClient<IDepartmentPropertyDefinitionApiClient, DepartmentPropertyDefinitionApiClient>();
+        }
+
+        public IPositionPropertyDefinitionApiClient CreatePositionPropertyDefinitionApiClient()
+        {
+            return CreateClient<IPositionPropertyDefinitionApiClient, PositionPropertyDefinitionApiClient>();
         }
 
         public IPersianDatePropertyDefinitionApiClient CreatePersianDatePropertyDefinitionApiClient()
@@ -154,45 +84,16 @@ namespace PayamGostarClient.ApiProvider
             return CreateClient<IPersianDatePropertyDefinitionApiClient, PersianDatePropertyDefinitionApiClient>();
         }
 
-        public IProductMultiValuePropertyDefinitionApiClient CreateProductMultiValuePropertyDefinitionApiClient()
+        public ILabelPropertyDefinitionApiClient CreateLabelPropertyDefinitionApiClient()
         {
-            return CreateClient<IProductMultiValuePropertyDefinitionApiClient, ProductMultiValuePropertyDefinitionApiClient>();
+            return CreateClient<ILabelPropertyDefinitionApiClient, LabelPropertyDefinitionApiClient>();
         }
 
-        public ISecurityItemMultiValuePropertyDefinitionApiClient CreateSecurityItemMultiValuePropertyDefinitionApiClient()
+        public ICrmObjectMultiValuePropertyDefinitionApiClient CreateCrmObjectMultiValuePropertyDefinitionApiClient()
         {
-            return CreateClient<ISecurityItemMultiValuePropertyDefinitionApiClient, SecurityItemMultiValuePropertyDefinitionApiClient>();
+            return CreateClient<ICrmObjectMultiValuePropertyDefinitionApiClient, CrmObjectMultiValuePropertyDefinitionApiClient>();
         }
 
-        public ISecurityItemPropertyDefinitionApiClient CreateSecurityItemPropertyDefinitionApiClient()
-        {
-            return CreateClient<ISecurityItemPropertyDefinitionApiClient, SecurityItemPropertyDefinitionApiClient>();
-        }
-
-        public ITextMultiValuePropertyDefinitionApiClient CreateTextMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<ITextMultiValuePropertyDefinitionApiClient, TextMultiValuePropertyDefinitionApiClient>();
-        }
-
-        public ITextPropertyDefinitionApiClient CreateTextPropertyDefinitionApiClient()
-        {
-            return CreateClient<ITextPropertyDefinitionApiClient, TextPropertyDefinitionApiClient>();
-        }
-
-        public ITimePropertyDefinitionApiClient CreateTimePropertyDefinitionApiClient()
-        {
-            return CreateClient<ITimePropertyDefinitionApiClient, TimePropertyDefinitionApiClient>();
-        }
-
-        public IUserMultiValuePropertyDefinitionApiClient CreateUserMultiValuePropertyDefinitionApiClient()
-        {
-            return CreateClient<IUserMultiValuePropertyDefinitionApiClient, UserMultiValuePropertyDefinitionApiClient>();
-        }
-
-        public IUserPropertyDefinitionApiClient CreateUserPropertyDefinitionApiClient()
-        {
-            return CreateClient<IUserPropertyDefinitionApiClient, UserPropertyDefinitionApiClient>();
-        }
 
 
         private TAbstractClient CreateClient<TAbstractClient, TClient>()
@@ -201,9 +102,5 @@ namespace PayamGostarClient.ApiProvider
             return (TAbstractClient)Activator.CreateInstance(typeof(TClient), _config);
         }
 
-        public IAutoNumberPropertyDefinitionApiClient CreateAutoNumberPropertyDefinitionApiClient()
-        {
-            return CreateClient<IAutoNumberPropertyDefinitionApiClient, AutoNumberPropertyDefinitionApiClient>();
-        }
     }
 }

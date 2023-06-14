@@ -2,7 +2,7 @@
 {
     public class TimeExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.Time;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Time;
     }
      
 

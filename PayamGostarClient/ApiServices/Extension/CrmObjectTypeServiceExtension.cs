@@ -1,6 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using System.Collections.Generic;
@@ -110,6 +111,11 @@ namespace PayamGostarClient.ApiServices.Extension
                 IsDoneStage = stage.IsDoneStage,
                 Key = stage.Key,
             };
+        }
+
+        public static PropertyDefinitionIdWrapper ToVM(this ExtendedPropertyIdWrapperDto dto)
+        {
+            return new PropertyDefinitionIdWrapper { Id = dto.Id };
         }
 
 

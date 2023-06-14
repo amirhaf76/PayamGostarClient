@@ -4,7 +4,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
     public class MarketingCampaignExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.MarketingCampaign;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.MarketingCampaign;
         public bool IsRequired { get; set; }
     }
      

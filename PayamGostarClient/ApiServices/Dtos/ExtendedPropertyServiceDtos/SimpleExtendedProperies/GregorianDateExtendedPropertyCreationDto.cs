@@ -2,7 +2,7 @@
 {
     public class GregorianDateExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.GregorianDate;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.GregorianDate;
     }
 
 }

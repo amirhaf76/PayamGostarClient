@@ -2,10 +2,8 @@
 
 namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
 {
-    public class CrmItemExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
+    public abstract class CrmItemExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.CrmItem;
+        
     }
-
-
 }

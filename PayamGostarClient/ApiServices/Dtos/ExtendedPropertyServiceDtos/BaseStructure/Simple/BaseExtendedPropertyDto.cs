@@ -4,7 +4,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStr
 {
     public abstract class BaseExtendedPropertyDto
     {
-        public abstract ExtendedPropertyType Type { get; }
+        public abstract Gp_ExtendedPropertyType Type { get; }
 
         public SystemResourceValueDto Name { get; set; }
 

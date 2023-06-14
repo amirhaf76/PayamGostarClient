@@ -1,15 +1,11 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+﻿using PayamGostarClient.ApiServices.Dtos;
+using PayamGostarClient.Helper.Net;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Abstractions
 {
     public interface IExtendedPropertyCreationService
     {
-        Task<object> CreateAsync();
-    }
-
-    public interface IExtendedPropertyService
-    {
-        Task<object> CreateAsync(BaseExtendedPropertyDto baseProperty);
+        Task<ApiResponse<PropertyDefinitionCreationResultDto>> CreateAsync();
     }
 }

@@ -2,7 +2,7 @@
 {
     public class DropDownListExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
-        public override ExtendedPropertyType Type => ExtendedPropertyType.DropDownList;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.DropDownList;
     }
 
 
