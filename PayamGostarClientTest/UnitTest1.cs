@@ -1,7 +1,11 @@
-﻿using PayamGostarClient.CrmObjectModelInitServiceModels;
+﻿using PayamGostarClient.ApiProvider;
+using PayamGostarClient.ApiServices.Factory;
+using PayamGostarClient.CrmObjectModelInitServiceModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels;
+using PayamGostarClient.Helper.Net;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -21,6 +25,34 @@ namespace PayamGostarClientTest
         {
             _testOutput = testOutput;
         }
+
+        [Fact]
+        public async Task Test_Search()
+        {
+
+            var clientFactory = new PayamGostarClientFactory(new PayamGostarClientConfig
+            {
+                LanguageCulture = FA_LANGUAGE_CULTURE,
+                ClientApiIntraction = new ClientApiIntraction
+                {
+                    DomainUrl = URL,
+                    JwtToken = JwTokenRepository.JWTOKEN,
+                    // DeviceId
+                    // ClientId
+                },
+            });
+
+            var client = clientFactory.CreateCrmObjectTypeApiClient();
+
+            var result = await client.PostApiV2CrmobjecttypeSearchAsync(new CrmObjectTypeSearchRequestVM
+            {
+                Code = "NJsonSchemaTest_Form"
+            });
+
+            var t = result.Result.Items.FirstOrDefault()?.Properties?.FirstOrDefault()?.ExtraConfiguration as ImageFilePropertyDefinitionExtraConfigs;
+
+        }
+
 
         [Fact]
         public async Task InitAsync_EmptyModel_DoNothing()
@@ -48,7 +80,7 @@ namespace PayamGostarClientTest
                 {
                     Url = URL,
                     LanguageCulture = FA_LANGUAGE_CULTURE,
-                    JwToken = AdminJwToken.JWTOKEN,
+                    JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
 

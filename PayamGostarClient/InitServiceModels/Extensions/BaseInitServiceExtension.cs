@@ -1,6 +1,7 @@
 ﻿using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
@@ -18,7 +19,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new SearchedCrmObjectModel(crmObjectType)
             {
-                Id = crmModel.Id
+                Id = crmModel.Id,
             }.CopyFromBaseCrmObjectTypeGetResultDto(crmModel);
         }
 
@@ -59,6 +60,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             to.Properties = from.Properties?.Select(p => p.ToBaseExtendedPropertyModel()).ToList();
             to.PropertyGroups = from.Groups?.Select(g => g.ToPropertyGroup()).ToList();
             to.Stages = from.Stages?.Select(p => p.ToStage()).ToList();
+            
 
             return to;
         }
@@ -82,7 +84,9 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
         internal static BaseExtendedPropertyModel ToBaseExtendedPropertyModel(this ExtendedPropertyGetResultDto property)
         {
-            return new SearchedExtendedPropertyModel
+            var type = (Gp_ExtendedPropertyType)property.PropertyDisplayTypeIndex;
+
+            return new SearchedExtendedPropertyModel(type)
             {
                 UserKey = property.UserKey,
                 Name = ToResourceValues(property.Name),

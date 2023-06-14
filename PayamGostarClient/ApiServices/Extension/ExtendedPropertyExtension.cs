@@ -69,6 +69,15 @@ namespace PayamGostarClient.ApiServices.Extension
             return new DropDownListPropertyDefinitionCreateVM().FillGeneralTypePropertyDefinitionCreateVM(dto);
         }
 
+        internal static DropDownListPropertyDefinitionValueCreateVM ToVM(this DropDownListExtendedPropertyValueCreationDto dto)
+        {
+            return new DropDownListPropertyDefinitionValueCreateVM
+            {
+                PropertyDefinitionId = dto.PropertyDefinitionId,
+                Value = dto.Value,
+            };
+        }
+
         internal static FileMultiValuePropertyDefinitionCreateVM ToVM(this FileMultiValueExtendedPropertyCreationDto dto)
         {
             return new FileMultiValuePropertyDefinitionCreateVM();
@@ -111,7 +120,14 @@ namespace PayamGostarClient.ApiServices.Extension
 
         internal static LabelPropertyDefinitionCreateVM ToVM(this LabelExtendedPropertyCreationDto dto)
         {
-            return new LabelPropertyDefinitionCreateVM();
+            return new LabelPropertyDefinitionCreateVM
+            {
+                CalculationTypeIndex = dto.CalculationTypeIndex,
+                LabelText = dto.LabelText,
+                ColorId = dto.ColorId,
+                ShowTitleTypeIndex = dto.ShowTitleTypeIndex,
+                IconName = dto.IconName,
+            }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
         internal static LinkMultiValuePropertyDefinitionCreateVM ToVM(this LinkMultiValueExtendedPropertyCreationDto dto)
@@ -136,7 +152,15 @@ namespace PayamGostarClient.ApiServices.Extension
 
         internal static NumberPropertyDefinitionCreateVM ToVM(this NumberExtendedPropertyCreationDto dto)
         {
-            return new NumberPropertyDefinitionCreateVM();
+            return new NumberPropertyDefinitionCreateVM
+            {
+                DecimalDigits = dto.DecimalDigits,
+                MinDigits = dto.MinDigits,
+                MaxDigits = dto.MaxDigits,
+                MinValue = dto.MinValue,
+                MaxValue = dto.MaxValue,
+
+            }.FillGeneralTypePropertyDefinitionCreateVM(dto);
         }
 
         internal static PersianDateMultiValuePropertyDefinitionCreateVM ToVM(this PersianDateMultiValueExtendedPropertyCreationDto dto)
@@ -146,7 +170,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
         internal static PersianDatePropertyDefinitionCreateVM ToVM(this PersianDateExtendedPropertyCreationDto dto)
         {
-            return new PersianDatePropertyDefinitionCreateVM();
+            return new PersianDatePropertyDefinitionCreateVM().FillGeneralTypePropertyDefinitionCreateVM(dto);
         }
 
         internal static ProductMultiValuePropertyDefinitionCreateVM ToVM(this ProductMultiValueExtendedPropertyCreationDto dto)
@@ -161,7 +185,10 @@ namespace PayamGostarClient.ApiServices.Extension
 
         internal static SecurityItemPropertyDefinitionCreateVM ToVM(this SecurityItemExtendedPropertyCreationDto dto)
         {
-            return new SecurityItemPropertyDefinitionCreateVM();
+            return new SecurityItemPropertyDefinitionCreateVM
+            {
+                IsRequired = dto.IsRequired,
+            }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
         internal static TextMultiValuePropertyDefinitionCreateVM ToVM(this TextMultiValueExtendedPropertyCreationDto dto)

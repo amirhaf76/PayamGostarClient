@@ -7,6 +7,6 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStr
 {
     public abstract class GeneralMultiValueExtendedPropertyCreationDto : BaseMultiValueExtendedPropertyDto
     {
-        public Guid CrmObjectTypeId { get; set; }
+        //public Guid CrmObjectTypeId { get; set; }
     }
 }

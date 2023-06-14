@@ -1,10 +1,14 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
 using PayamGostarClient.ApiServices.Dtos;
-using PayamGostarClient.ApiServices.Extension;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Abstractions;
 using PayamGostarClient.InitServiceModels.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -52,7 +56,7 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             var newCrmObjectId = await CreateCrmObjectAsync();
 
-            // Todo: await CreateCrmObjectTypeBelongs(newCrmObjectId);
+            await CreateCrmObjectTypeBelongs(newCrmObjectId);
         }
 
         private async Task CheckCrmObjectTypeBelongs(T intendedCrmObject, SearchedCrmObjectModel existedCrmObject)
@@ -68,11 +72,11 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private async Task CreateCrmObjectTypeBelongs(Guid Id)
         {
-            await CreateGroupPropetiesAsync(Id);
+            // await CreateGroupPropetiesAsync(Id);
 
             await CreateExtendedPropertiesAsync(Id);
 
-            await CreateStagesAsync(Id);
+            // await CreateStagesAsync(Id);
         }
 
 
@@ -136,15 +140,6 @@ namespace PayamGostarClient.InitServiceModels.Models
             };
         }
 
-        private SearchedCrmObjectModel CreateSearchedCrmObjectModel(CrmObjectTypeSearchResultDto receivedCrmObject)
-        {
-            if (receivedCrmObject == null)
-            {
-                return null;
-            }
-
-            return receivedCrmObject.ToSearchedCrmObjectModel();
-        }
 
         private async Task<Guid> CreateCrmObjectAsync()
         {
@@ -161,9 +156,22 @@ namespace PayamGostarClient.InitServiceModels.Models
             throw new NotImplementedException();
         }
 
-        private Task CreateExtendedPropertiesAsync(Guid Id)
+        private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var createdPropertiesId = new List<Guid>();
+
+            foreach (var property in IntendedCrmObject.Properties)
+            {
+                var propertyDto = CreateExtendedPropertyDto(property);
+
+                propertyDto.CrmObjectTypeId = id;
+
+                var response = await ExtendedPropertyService.CreateAsync(propertyDto);
+
+                createdPropertiesId.Add(response.Result.Id);
+            }
+
+            return createdPropertiesId;
         }
 
 
@@ -171,6 +179,54 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         protected abstract Task<T> CheckAndModifyCrmPropertiesAsync();
 
+        private BaseExtendedPropertyCreationDto CreateExtendedPropertyDto(BaseExtendedPropertyModel propertyModel)
+        {
+            switch (propertyModel.Type)
+            {
+                case Gp_ExtendedPropertyType.Text:
+                    return propertyModel.ToTextExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Form:
+                    return propertyModel.ToFormExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.DropDownList:
+                    return propertyModel.ToDropDownListExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.User:
+                    return propertyModel.ToUserExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Number:
+                    return propertyModel.ToNumberExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Department:
+                    return propertyModel.ToDepartmentExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Position:
+                    return propertyModel.ToPositionExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Date:
+                    return propertyModel.ToPersianDateExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Label:
+                    return propertyModel.ToLabelExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.CrmObjectMultiValue:
+                    return propertyModel.ToCrmObjectMultiValueExtendedPropertyCreationDto();
+
+                default:
+                    throw new NotFoundExtendedPropertyTypeException();
+            }
+        }
+
+        private SearchedCrmObjectModel CreateSearchedCrmObjectModel(CrmObjectTypeSearchResultDto receivedCrmObject)
+        {
+            if (receivedCrmObject == null)
+            {
+                return null;
+            }
+
+            return receivedCrmObject.ToSearchedCrmObjectModel();
+        }
     }
 
 

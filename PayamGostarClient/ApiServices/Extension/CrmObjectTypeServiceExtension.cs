@@ -48,6 +48,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
                 return new ExtendedPropertyGetResultDto
                 {
+                    PropertyDisplayTypeIndex = property.PropertyDisplayTypeIndex,
                     UserKey = property.UserKey,
                     Name = property.Name,
                     NameResourceKey = property.NameResourceKey,

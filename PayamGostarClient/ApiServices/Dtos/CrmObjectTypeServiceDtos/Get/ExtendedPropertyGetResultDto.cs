@@ -2,6 +2,8 @@
 {
     public class ExtendedPropertyGetResultDto
     {
+        public int PropertyDisplayTypeIndex { get;  set; }
+
         public int? PropertyGroupId { get; set; }
 
         public string Name { get; set; }

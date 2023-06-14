@@ -1,7 +1,11 @@
-﻿namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels
+﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+
+namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels
 {
     public abstract class BaseExtendedPropertyModel
     {
+        public abstract Gp_ExtendedPropertyType Type { get; }
+
         public string UserKey { get; set; }
 
         public ResourceValue[] Name { get; set; }

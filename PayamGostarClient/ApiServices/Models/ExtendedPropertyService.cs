@@ -22,6 +22,7 @@ namespace PayamGostarClient.ApiServices.Models
             _extendedFactory = new ExtendedPropertyCreationFactory(clientFactory); 
         }
 
+        // Todo: change BaseExtendedPropertyDto to BaseExtendedPropertyCreationDto.
         public async Task<ApiResponse<PropertyDefinitionCreationResultDto>> CreateAsync(BaseExtendedPropertyDto baseProperty)
         {
             var extendedPropertyCreationService = _extendedFactory.Create(baseProperty);
