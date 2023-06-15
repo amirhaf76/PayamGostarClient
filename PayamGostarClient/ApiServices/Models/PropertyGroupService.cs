@@ -1,7 +1,9 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiServices.Abstractions;
-using System;
+using PayamGostarClient.ApiServices.Dtos.PropertyGroupServiceDtos;
+using PayamGostarClient.ApiServices.Extension;
+using PayamGostarClient.Helper.Net;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Models
@@ -15,9 +17,13 @@ namespace PayamGostarClient.ApiServices.Models
             _propertyGroupApiClient = ClientFactory.CreatePropertyGroupApiClient();
         }
 
-        public Task<object> CreateAsync(object obj)
+        public async Task<ApiResponse<CrmObjectPropertyGroupCreationResultDto>> CreateAsync(CrmObjectPropertyGroupCreationRequestDto request)
         {
-            throw new NotImplementedException();
+            var groupCreationTask = _propertyGroupApiClient.PostApiV2CrmobjecttypepropertygroupCreateAsync(request.ToVM());
+
+            var groupCreationResult = await groupCreationTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
+
+            return groupCreationResult.ConvertToApiResponse(result => result.ToDto());
         }
     }
 }
