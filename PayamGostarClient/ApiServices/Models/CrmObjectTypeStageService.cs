@@ -1,6 +1,9 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiServices.Abstractions;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos;
+using PayamGostarClient.ApiServices.Extension;
+using PayamGostarClient.Helper.Net;
 using System;
 using System.Threading.Tasks;
 
@@ -15,9 +18,13 @@ namespace PayamGostarClient.ApiServices.Models
             _crmObjectTypeStageApiClient = ClientFactory.CreateCrmObjectTypeStageApiClient();
         }
 
-        public Task<object> CreateAsync(object obj)
+        public async Task<ApiResponse<CrmObjectTypeStageCreationResultDto>> CreateAsync(CrmObjectTypeStageCreationRequestDto request)
         {
-            throw new NotImplementedException();
+            var stageCreationTask = _crmObjectTypeStageApiClient.PostApiV2CrmobjecttypestageCreateAsync(request.ToVM());
+
+            var stageCreationResult = await stageCreationTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
+
+            return stageCreationResult.ConvertToApiResponse(result => result.ToDto());
         }
     }
 }
