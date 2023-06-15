@@ -6,6 +6,5 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
     {
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Form;
 
-        public string CrmObjectTypeId { get; set; }
     }
 }

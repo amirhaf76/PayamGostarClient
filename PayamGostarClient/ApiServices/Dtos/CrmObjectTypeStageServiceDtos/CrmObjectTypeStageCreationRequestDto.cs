@@ -2,11 +2,11 @@
 
 namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos
 {
-    public class CrmObjectTypeStageCreationRequestDto
+    public class CrmObjectTypeStageCreationRequestDto : BaseCrmObjectTypeStageRequestDto
     {
         public Guid CrmObjectTypeId { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool Enabled { get; set; }
 
     }
 }

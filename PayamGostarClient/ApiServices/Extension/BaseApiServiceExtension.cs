@@ -58,16 +58,45 @@ namespace PayamGostarClient.ApiServices.Extension
             };
         }
 
-        public static ExtendedPropertyGetResultDto ConvertToExtendedPropertyGetResultDto(this PropertyDefinitionGetResultVM extendedProperty)
+        private static ExtendedPropertyExtraConfigDto CastOrDefault(this PropertyDefinitionExtraConfigs config, Dtos.Gp_PropertyDisplayType displaytype)
+        {
+            switch (displaytype)
+            {
+                case Dtos.Gp_PropertyDisplayType.Number:
+                    return (config as NumericPropertyDefinitionExtraConfigs)?.ToDto() ?? throw new System.Exception();
+
+                case Dtos.Gp_PropertyDisplayType.Label:
+                    return (config as LabelPropertyDefinitionExtraConfig)?.ToDto() ?? throw new System.Exception();
+
+                case Dtos.Gp_PropertyDisplayType.CrmObjectMultiValue:
+                    return (config as CrmObjectMultiValuePropertyDefinitionExtraConfigs)?.ToDto() ?? throw new System.Exception();
+
+                case Dtos.Gp_PropertyDisplayType.CrmObject:
+                    return (config as CrmObjectReferencedTypeExteraConfigs)?.ToDto() ?? throw new System.Exception();
+
+                default:
+                    break;
+            }
+
+            return null;
+        }
+        
+        public static ExtendedPropertyGetResultDto ToDto(this PropertyDefinitionGetResultVM extendedProperty)
         {
             return new ExtendedPropertyGetResultDto
             {
+                Id = extendedProperty.Id,
+                CrmObjectTypeId = extendedProperty.CrmObjectTypeId,
                 Name = extendedProperty.Name,
                 NameResourceKey = extendedProperty.NameResourceKey,
                 Tooltip = extendedProperty.Tooltip,
                 TooltipResourceKey = extendedProperty.TooltipResourceKey,
                 UserKey = extendedProperty.UserKey,
                 PropertyGroupId = extendedProperty.PropertyGroupId,
+                PropertyDisplayTypeIndex = extendedProperty.PropertyDisplayTypeIndex,
+                DefaultValue = extendedProperty.DefaultValue,
+                IsRequired = extendedProperty.IsRequired,
+                ExtraConfig = extendedProperty.ExtraConfiguration.CastOrDefault((Dtos.Gp_PropertyDisplayType)extendedProperty.PropertyDisplayTypeIndex),
             };
         }
 
@@ -98,7 +127,7 @@ namespace PayamGostarClient.ApiServices.Extension
             to.Groups = from.Groups.Select(g => g.ConvertToPropertyGroupGetResultDto());
             to.Properties = from.Properties.Select(p =>
             {
-                var theProperty = p.ConvertToExtendedPropertyGetResultDto();
+                var theProperty = p.ToDto();
 
                 theProperty.Group = to.Groups.Where(g => g.Id == theProperty.PropertyGroupId).FirstOrDefault();
 

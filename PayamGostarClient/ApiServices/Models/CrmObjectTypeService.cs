@@ -23,11 +23,11 @@ namespace PayamGostarClient.ApiServices.Models
 
         public async Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchAsync(CrmObjectTypeSearchRequestDto request)
         {
-            var searchResultTask = _crmObjectTypeClient.PostApiV2CrmobjecttypeSearchAsync(request.ConvertToCrmObjectTypeSearchRequestVM());
+            var searchResultTask = _crmObjectTypeClient.PostApiV2CrmobjecttypeSearchAsync(request.ToVM());
 
             var searchResult = await searchResultTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
 
-            return searchResult.ConvertToApiResponse(result => result.Items.Select(crm => crm.ConvertToCrmObjectTypeSearchResultDto()));
+            return searchResult.ConvertToApiResponse(result => result.Items.Select(crm => crm.ToDto()));
         }
     }
 }

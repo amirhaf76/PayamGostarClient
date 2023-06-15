@@ -6,8 +6,6 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
     {
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.CrmObjectMultiValue;
 
-        public string CrmObjectTypeId { get; set; }
-
         public int CrmObjectTypeIndex { get; set; }
 
         public string SubTypeId { get; set; }

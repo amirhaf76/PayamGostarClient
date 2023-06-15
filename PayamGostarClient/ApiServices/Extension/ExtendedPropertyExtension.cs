@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiProvider;
+using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
 using System.Linq;
@@ -221,5 +222,51 @@ namespace PayamGostarClient.ApiServices.Extension
                 ShowDeactiveMembersOption = dto.ShowDeactiveMembersOption,
             }.FillBasePropertyDefinitionCreateVM(dto);
         }
+
+        internal static NumericExtendedPropertyExtraConfigDto ToDto(this NumericPropertyDefinitionExtraConfigs config)
+        {
+            return new NumericExtendedPropertyExtraConfigDto
+            {
+                DecimalDigits = config.DecimalDigits,
+                MinDigits = config.MinDigits,
+                MaxDigits = config.MaxDigits,
+                MinValue = config.MinValue,
+                MaxValue = config.MaxValue,
+                ShowColumn = config.ShowColumn,
+
+            };
+        }
+        internal static LabelExtendedPropertyExtraConfigDto ToDto(this LabelPropertyDefinitionExtraConfig config)
+        {
+            return new LabelExtendedPropertyExtraConfigDto
+            {
+                LabelText = config.LabelText,
+                ColorName = config.ColorName,
+                ColorIndex = config.ColorIndex,
+                ShowTitle = config.ShowTitle,
+                IconName = config.IconName,
+
+            };
+        }
+        internal static CrmObjectMultiValueExtendedPropertyExtraConfigDto ToDto(this CrmObjectMultiValuePropertyDefinitionExtraConfigs config)
+        {
+            return new CrmObjectMultiValueExtendedPropertyExtraConfigDto
+            {
+                VisibleProperties = config.VisibleProperties,
+                CrmObjectType = (CrmObjectModelInitServiceModels.CrmObjectModels.Gp_CrmObjectType)config.CrmObjectType,
+                SubTypeId = config.SubTypeId,
+
+            };
+        }
+        internal static CrmObjectReferencedTypeExtendedPropertyExtraConfigDto ToDto(this CrmObjectReferencedTypeExteraConfigs config)
+        {
+            return new CrmObjectReferencedTypeExtendedPropertyExtraConfigDto
+            {
+                CrmObjectTypeId = config.CrmObjectTypeId,
+                PreventSettingContainerCrmobjectAsParent = config.PreventSettingContainerCrmobjectAsParent,
+
+            };
+        }
+
     }
 }

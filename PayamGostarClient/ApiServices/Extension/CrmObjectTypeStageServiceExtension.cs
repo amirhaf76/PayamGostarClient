@@ -10,7 +10,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new CrmObjectTypeStageCreateRequestVM
             {
                 CrmObjectTypeId = dto.CrmObjectTypeId,
-                IsActive = dto.IsActive,
+                IsActive = dto.Enabled,
             };
         }
 

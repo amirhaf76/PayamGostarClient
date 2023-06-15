@@ -3,9 +3,12 @@ using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiServices.Dtos.PropertyGroupServiceDtos;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Abstractions;
+using PayamGostarClient.InitServiceModels.Exceptions;
 using PayamGostarClient.InitServiceModels.Extensions;
 using System;
 using System.Collections.Generic;
@@ -70,13 +73,13 @@ namespace PayamGostarClient.InitServiceModels.Models
             await CheckStagesAsync();
         }
 
-        private async Task CreateCrmObjectTypeBelongs(Guid Id)
+        private async Task CreateCrmObjectTypeBelongs(Guid id)
         {
-            // await CreateGroupPropetiesAsync(Id);
+            await CreateGroupPropetiesAsync(id);
 
-            await CreateExtendedPropertiesAsync(Id);
+            await CreateExtendedPropertiesAsync(id);
 
-            // await CreateStagesAsync(Id);
+            await CreateStagesAsync(id);
         }
 
 
@@ -125,7 +128,12 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             var receivedCrmObject = receivedCrmObjects.Result.FirstOrDefault();
 
-            return CreateSearchedCrmObjectModel(receivedCrmObject);
+            if (receivedCrmObject == null)
+            {
+                return null;
+            }
+
+            return receivedCrmObject.ToModel();
         }
 
         private static CrmObjectTypeSearchRequestDto ConvertToCrmObjectTypeSearchRequestDto(BaseCRMModel crmMode)
@@ -135,8 +143,6 @@ namespace PayamGostarClient.InitServiceModels.Models
                 Code = crmMode.Code,
                 CrmOjectTypeIndex = (int)crmMode.Type,
                 Name = crmMode.Name.FirstOrDefault()?.Value,
-                PageSiz = 10,
-                PageNumber = 1,
             };
         }
 
@@ -146,14 +152,37 @@ namespace PayamGostarClient.InitServiceModels.Models
             return await CreateTypeAsync();
         }
 
-        private Task CreateStagesAsync(Guid Id)
+        private async Task CreateStagesAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var aFinalStage = IntendedCrmObject.Stages.FirstOrDefault(s => s.IsDoneStage == true);
+
+            if (aFinalStage == null)
+            {
+                throw new NotFoundAtleastAFinalStageException();
+            }
+
+            IntendedCrmObject.Stages.Sort(StagePriorityComparer.GetInstance());
+
+            foreach (var stage in IntendedCrmObject.Stages)
+            {
+                var stageDto = stage.CreateStageCreationRequest(id);
+
+                var stageCreationResult = await CrmObjectTypeStageService.CreateAsync(stageDto);
+
+                stage.Id = stageCreationResult.Result.StageId;
+            }
         }
 
-        private Task CreateGroupPropetiesAsync(Guid Id)
+        private async Task CreateGroupPropetiesAsync(Guid id)
         {
-            throw new NotImplementedException();
+            foreach (var group in IntendedCrmObject.PropertyGroups)
+            {
+                var groupDto = group.CreatePropertyGroupCreationRequest(id);
+
+                var groupCreationResult = await PropertyGroupService.CreateAsync(groupDto);
+
+                group.Id = groupCreationResult.Result.Id;
+            }
         }
 
         private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id)
@@ -218,14 +247,46 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
 
+        private BaseExtendedPropertyModel CreateExtendedPropertyModel(ExtendedPropertyGetResultDto propertyDto)
+        {
+            switch ((Gp_ExtendedPropertyType)propertyDto.PropertyDisplayTypeIndex)
+            {
+                case Gp_ExtendedPropertyType.Text:
+                    return propertyDto.ToTextExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.Form:
+                    return propertyDto.ToFormExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.DropDownList:
+                    return propertyDto.ToDropDownListExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.User:
+                    return propertyDto.ToUserExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.Number:
+                    return propertyDto.ToNumberExtendedPropertyModel();
+                case Gp_ExtendedPropertyType.Department:
+                    return propertyDto.ToDepartmentExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.Position:
+                    return propertyDto.ToPositionExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.Date:
+                    return propertyDto.ToPersianDateExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.Label:
+                    return propertyDto.ToLabelExtendedPropertyModel();
+                    
+                case Gp_ExtendedPropertyType.CrmObjectMultiValue:
+                    return propertyDto.ToCrmObjectMultiValueExtendedPropertyModel();
+                    
+                default:
+                    throw new NotFoundExtendedPropertyTypeException();
+            }
+        }
         private SearchedCrmObjectModel CreateSearchedCrmObjectModel(CrmObjectTypeSearchResultDto receivedCrmObject)
         {
-            if (receivedCrmObject == null)
-            {
-                return null;
-            }
-
-            return receivedCrmObject.ToSearchedCrmObjectModel();
+            return receivedCrmObject.ToModel();
         }
     }
 

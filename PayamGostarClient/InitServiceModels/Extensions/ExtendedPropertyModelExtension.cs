@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+﻿using PayamGostarClient.ApiServices.Dtos;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using System;
@@ -14,9 +15,9 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new TextExtendedPropertyCreationDto
             {
-                IsRequired = model.IsRequired,
-                CalculationTypeIndex = model.CalculationTypeIndex,
-                IsMultiline = model.IsMultiLine,
+                // IsRequired = model.IsRequired,
+                // CalculationTypeIndex = model.CalculationTypeIndex,
+                // IsMultiline = model.IsMultiLine,
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -38,8 +39,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new DropDownListExtendedPropertyCreationDto
             {
-                IsRequired = model.IsRequired,
-                CalculationTypeIndex = model.CalculationTypeIndex,
+                // IsRequired = model.IsRequired,
+                // CalculationTypeIndex = model.CalculationTypeIndex,
                 CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
 
             }.FillBaseExtendedPropertyDto(baseModel);
@@ -51,8 +52,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new UserExtendedPropertyCreationDto
             {
-                ShowDeactiveMembersOption = model.ShowDeactiveMembersOption,
-                IsRequired = model.IsRequired,
+                //ShowDeactiveMembersOption = model.ShowDeactiveMembersOption,
+                //IsRequired = model.IsRequired,
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -67,8 +68,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 MaxDigits = model.MaxDigits,
                 MinValue = model.MinValue,
                 MaxValue = model.MaxValue,
-                IsRequired = model.IsRequired,
-                CalculationTypeIndex = model.CalculationTypeIndex,
+                // IsRequired = model.IsRequired,
+                // CalculationTypeIndex = model.CalculationTypeIndex,
                 DecimalDigits = model.DecimalDigits,
                 CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
 
@@ -125,6 +126,103 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
+
+
+        public static NumberExtendedPropertyModel ToNumberExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            var extraConfig = (NumericExtendedPropertyExtraConfigDto)dto.ExtraConfig;
+
+            return new NumberExtendedPropertyModel
+            {
+                MinDigits = extraConfig.MinDigits,
+                MaxDigits = extraConfig.MaxDigits,
+                MinValue = extraConfig.MinValue,
+                MaxValue = extraConfig.MaxValue,
+                DecimalDigits = extraConfig.DecimalDigits,
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static TextExtendedPropertyModel ToTextExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new TextExtendedPropertyModel
+            {
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static DropDownListExtendedPropertyModel ToDropDownListExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new DropDownListExtendedPropertyModel
+            {
+                
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static UserExtendedPropertyModel ToUserExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new UserExtendedPropertyModel
+            {
+                
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static FormExtendedPropertyModel ToFormExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new FormExtendedPropertyModel
+            {
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static DepartmentExtendedPropertyModel ToDepartmentExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new DepartmentExtendedPropertyModel
+            {
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static PositionExtendedPropertyModel ToPositionExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new PositionExtendedPropertyModel
+            {
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static PersianDateExtendedPropertyModel ToPersianDateExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new PersianDateExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static LabelExtendedPropertyModel ToLabelExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            var extraConfig = (LabelExtendedPropertyExtraConfigDto)dto.ExtraConfig;
+
+            return new LabelExtendedPropertyModel
+            {
+                // ColorId = extraConfig.ColorIndex,
+                IconName = extraConfig.IconName,
+                LabelText = extraConfig.LabelText,
+                
+                
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static CrmObjectMultiValueExtendedPropertyModel ToCrmObjectMultiValueExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            var extraConfig = (CrmObjectMultiValueExtendedPropertyExtraConfigDto)dto.ExtraConfig;
+
+            return new CrmObjectMultiValueExtendedPropertyModel
+            {
+                ShowInGridProps = extraConfig.VisibleProperties.Select(g => new PropertyDefinitionIdWrapperModel { Id = g.ToString() }).ToArray(),
+                CrmObjectTypeIndex = (int)extraConfig.CrmObjectType,
+                SubTypeId = extraConfig.SubTypeId?.ToString(),
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
 
         public static ExtendedPropertyIdWrapperDto ToDto(this PropertyDefinitionIdWrapperModel model)
         {

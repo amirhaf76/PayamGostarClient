@@ -1,7 +1,5 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
+﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,16 +13,6 @@ namespace PayamGostarClient.InitServiceModels.Models
         public override Gp_CrmObjectType Type { get; }
 
         public SearchedCrmObjectModel(Gp_CrmObjectType type)
-        {
-            Type = type;
-        }
-    }
-
-    internal class SearchedExtendedPropertyModel : BaseExtendedPropertyModel
-    {
-        public override Gp_ExtendedPropertyType Type { get; }
-
-        public SearchedExtendedPropertyModel(Gp_ExtendedPropertyType type)
         {
             Type = type;
         }

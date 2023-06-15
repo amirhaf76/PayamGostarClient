@@ -1,11 +1,14 @@
 ﻿using PayamGostarClient.ApiServices.Dtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.PropertyGroupServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Models;
+using System;
 using System.Linq;
 
 namespace PayamGostarClient.InitServiceModels.Extensions
@@ -13,56 +16,44 @@ namespace PayamGostarClient.InitServiceModels.Extensions
     internal static class BaseInitServiceExtension
     {
 
-        internal static SearchedCrmObjectModel ToSearchedCrmObjectModel(this CrmObjectTypeSearchResultDto crmModel)
+        internal static SearchedCrmObjectModel ToModel(this CrmObjectTypeSearchResultDto crmModel)
         {
             var crmObjectType = (Gp_CrmObjectType)crmModel.CrmOjectTypeIndex;
 
             return new SearchedCrmObjectModel(crmObjectType)
             {
                 Id = crmModel.Id,
-            }.CopyFromBaseCrmObjectTypeGetResultDto(crmModel);
+            }.FillBaseCRMModel(crmModel);
         }
 
+        //CrmObjectTypeFormCreateRequestDto
 
-        internal static CrmFormModel ToCrmFormModel(this CrmObjectTypeFormGetResultDto crmModel)
+
+        internal static TTarget FillBaseCRMModel<TFrom, TTarget>(this TTarget target, TFrom from)
+            where TTarget : BaseCRMModel
+            where TFrom : BaseCrmObjectTypeGetResultDto
         {
-            var crmForm = new CrmFormModel
-            {
-                Prefix = crmModel.Prefix,
-                Postfix = crmModel.Postfix,
-                StartFrom = crmModel.StartFrom,
-                DigitCount = crmModel.DigitCount,
+            target.Code = from.Code;
+            target.Name = ToResourceValues(from.Name);
+            target.Description = ToResourceValues(from.Description);
+            target.Properties = from.Properties?.Select(p => p.ToBaseExtendedPropertyModel()).ToList();
+            target.PropertyGroups = from.Groups?.Select(g => g.ToPropertyGroup()).ToList();
+            target.Stages = from.Stages?.Select(p => p.ToStage()).ToList();
 
-            }.CopyFromBaseCrmObjectTypeGetResultDto(crmModel);
 
-            if (crmModel.IsPublicForm)
-            {
-                crmForm.PublicForm = new CrmFormModel.PublicFormLogicModel
-                {
-                    FlushFormAfterSave = crmModel.FlushFormAfterSave,
-                    IsAutoSubject = crmModel.IsAutoSubject,
-                    SubmitMessage = crmModel.SubmitMessage,
-                    RedirectAfterSuccessUrl = crmModel.RedirectAfterSuccessUrl,
-                };
-            }
-
-            return crmForm;
+            return target;
         }
 
-
-        internal static TTo CopyFromBaseCrmObjectTypeGetResultDto<TFrom, TTo>(this TTo to, TFrom from)
-            where TTo: BaseCRMModel
-            where TFrom: BaseCrmObjectTypeGetResultDto
+        internal static TTarget FillBaseCrmObjectTypeCreateRequestDto<TFrom, TTarget>(this TTarget target, TFrom from)
+            where TTarget : BaseCrmObjectTypeCreateRequestDto
+            where TFrom : BaseCRMModel
         {
-            to.Code = from.Code;
-            to.Name = ToResourceValues(from.Name);
-            to.Description = ToResourceValues(from.Description);
-            to.Properties = from.Properties?.Select(p => p.ToBaseExtendedPropertyModel()).ToList();
-            to.PropertyGroups = from.Groups?.Select(g => g.ToPropertyGroup()).ToList();
-            to.Stages = from.Stages?.Select(p => p.ToStage()).ToList();
-            
+            target.Name.ResourceValues = from.Name.Select(n => n.ToDto());
+            target.Description.ResourceValues = from.Description.Select(d => d.ToDto());
+            target.Code = from.Code;
+            target.PreviewTypeIndex = (int)from.PreviewTypeIndex;
 
-            return to;
+            return target;
         }
 
 
@@ -95,6 +86,18 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             };
         }
 
+        internal static BaseExtendedPropertyModel FillBaseExtendedPropertyModel<TTarget, TFrom>(this BaseExtendedPropertyModel target, ExtendedPropertyGetResultDto from)
+            where TTarget : BaseExtendedPropertyModel
+            where TFrom : ExtendedPropertyGetResultDto
+        {
+            target.UserKey = from.UserKey;
+            target.Name = ToResourceValues(from.Name);
+            target.ToolTip = ToResourceValues(from.Tooltip);
+            target.PropertyGroup = ToPropertyGroup(from.Group);
+
+            return target;
+        }
+
         internal static Stage ToStage(this StageGetResultDto stage)
         {
             return new Stage
@@ -103,6 +106,37 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 Enabled = stage.IsActive,
                 IsDoneStage = stage.IsDoneStage,
                 Key = stage.Key,
+            };
+        }
+
+        internal static CrmObjectPropertyGroupCreationRequestDto CreatePropertyGroupCreationRequest(this PropertyGroup group, Guid crmObjectTypeId)
+        {
+            return new CrmObjectPropertyGroupCreationRequestDto
+            {
+                CrmObjectTypeId = crmObjectTypeId,
+                CountOfColumns = group.CountOfColumns,
+                ExpandForView = group.Expanded,
+                Name = new SystemResourceValueDto
+                {
+                    ResourceKey = group.ResouceKey.ToString(),
+                    ResourceValues = group.Name.Select(n => n.ToDto())
+                }
+            };
+        }
+
+        internal static CrmObjectTypeStageCreationRequestDto CreateStageCreationRequest(this Stage stage, Guid crmObjectTypeId)
+        {
+            return new CrmObjectTypeStageCreationRequestDto
+            {
+                CrmObjectTypeId = crmObjectTypeId,
+                Enabled = stage.Enabled,
+                IsDoneStage = stage.IsDoneStage,
+                Key = stage.Key,
+                Name = new SystemResourceValueDto
+                {
+                    ResourceKey = stage.ResouceKey.ToString(),
+                    ResourceValues = stage.Name.Select(n => n.ToDto())
+                }
             };
         }
 

@@ -11,7 +11,7 @@ namespace PayamGostarClient.ApiServices.Extension
 {
     public static class CrmObjectTypeServiceExtension
     {
-        public static CrmObjectTypeSearchRequestVM ConvertToCrmObjectTypeSearchRequestVM(this CrmObjectTypeSearchRequestDto crmModel)
+        public static CrmObjectTypeSearchRequestVM ToVM(this CrmObjectTypeSearchRequestDto crmModel)
         {
             return new CrmObjectTypeSearchRequestVM
             {
@@ -23,7 +23,7 @@ namespace PayamGostarClient.ApiServices.Extension
             };
         }
 
-        public static CrmObjectTypeSearchResultDto ConvertToCrmObjectTypeSearchResultDto(this CrmObjectTypeGetResultVM viewModel)
+        public static CrmObjectTypeSearchResultDto ToDto(this CrmObjectTypeGetResultVM viewModel)
         {
             var groupDictionary = new Dictionary<int, PropertyGroupGetResultDto>();
 
@@ -46,16 +46,12 @@ namespace PayamGostarClient.ApiServices.Extension
                     property.PropertyGroupId ?? INVALID_GROUP_ID,
                     out PropertyGroupGetResultDto propertyGroup);
 
-                return new ExtendedPropertyGetResultDto
-                {
-                    PropertyDisplayTypeIndex = property.PropertyDisplayTypeIndex,
-                    UserKey = property.UserKey,
-                    Name = property.Name,
-                    NameResourceKey = property.NameResourceKey,
-                    Tooltip = property.Tooltip,
-                    TooltipResourceKey = property.TooltipResourceKey,
-                    Group = propertyGroup,
-                };
+                var propertyDto = property.ToDto();
+
+                propertyDto.Group = propertyGroup;
+                propertyDto.PropertyGroupId = propertyGroup?.Id;
+
+                return propertyDto;
             });
 
             return new CrmObjectTypeSearchResultDto

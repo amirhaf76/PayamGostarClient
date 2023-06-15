@@ -6,7 +6,7 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
     {
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.DropDownList;
 
-        public IEnumerable<DropDownListExtendedPropertyValueCreationDto> Values;
+        public IEnumerable<DropDownListExtendedPropertyValueCreationDto> Values { get; set; }
     }
 
 

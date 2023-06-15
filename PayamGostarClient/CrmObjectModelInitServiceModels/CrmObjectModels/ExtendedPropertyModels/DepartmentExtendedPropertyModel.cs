@@ -4,9 +4,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
 {
     public class DepartmentExtendedPropertyModel : BaseExtendedPropertyModel
     {
-        public bool IsRequired { get; set; }
-
-        public string CrmObjectTypeId { get; set; }
+        //public bool IsRequired { get; set; }
 
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Department;
     }

@@ -1,6 +1,5 @@
 ﻿using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
-using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
@@ -16,6 +15,17 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             target.UserKey = from.UserKey;
             target.Name = new SystemResourceValueDto { ResourceValues = from.Name.Select(r => r.ToDto()) };
             target.ToolTip = new SystemResourceValueDto { ResourceValues = from.ToolTip.Select(r => r.ToDto()) };
+
+            return target;
+        }
+
+        public static T FillBaseExtendedPropertyModel<T>(this T target, ExtendedPropertyGetResultDto from)
+            where T : BaseExtendedPropertyModel
+        {
+            target.UserKey = from.UserKey;
+            target.Name = BaseInitServiceExtension.ToResourceValues(from.Name);
+            target.ToolTip = BaseInitServiceExtension.ToResourceValues(from.Tooltip);
+            target.CrmObjectTypeId = from.CrmObjectTypeId.ToString();
 
             return target;
         }

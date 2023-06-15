@@ -12,5 +12,9 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
         public ResourceValue[] ToolTip { get; set; }
 
         public PropertyGroup PropertyGroup { get; set; }
+
+        internal string CrmObjectTypeId { get; set; }
+
+
     }
 }
