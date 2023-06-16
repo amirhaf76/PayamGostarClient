@@ -59,8 +59,25 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             if (string.IsNullOrEmpty(IntendedCrmObject.Code))
             {
-                throw new CrmCodeIsNullException();
+                throw new NullCrmCodeException();
             }
+
+            if (IntendedCrmObject.Properties.All(p => !string.IsNullOrEmpty(p.UserKey)))
+            {
+                throw new NullPropertyUserKeyExcpetion();
+            }
+
+            var propertyKeyGroups = IntendedCrmObject.Properties.GroupBy(p => p.UserKey);
+
+            foreach (var propertyKeyGroup in propertyKeyGroups)
+            {
+                if (propertyKeyGroup.Count() > 1)
+                {
+                    throw new NonUniqeUserKeyException($"There is more than one property with \"{propertyKeyGroup.Key}\".");
+                }
+            }
+
+
         }
 
         private async Task CreateCrmObjectAndSetItsBelongsAsync()
@@ -74,13 +91,13 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             var currentCrmObject = await GetCrmObjectTypeAsync(id);
 
-            var newCrmObject = CheckBaseCrmObjectMatching(currentCrmObject);
+            CheckBaseCrmObjectMatching(currentCrmObject);
 
-            await CheckExtendedPropertiesAsync();
+            await CheckGroupPropetiesAsync(id, currentCrmObject.PropertyGroups);
 
-            await CheckGroupPropetiesAsync();
+            await CheckExtendedPropertiesAsync(id, currentCrmObject.Properties);
 
-            await CheckStagesAsync();
+            await CheckStagesAsync(id, currentCrmObject.Stages);
         }
 
         private async Task CreateCrmObjectTypeBelongs(Guid id)
@@ -93,40 +110,45 @@ namespace PayamGostarClient.InitServiceModels.Models
         }
 
 
-        private async Task CheckStagesAsync()
+        private async Task CheckStagesAsync(Guid id, IEnumerable<Stage> currentStages)
         {
-            if (false)
-            {
+            var newStages = new List<Stage>();
 
+            foreach (var stage in IntendedCrmObject.Stages)
+            {
+                var newStage = CheckStage(stage, currentStages);
+
+                if (newStage != null)
+                {
+                    newStages.Add(newStage);
+                }
             }
 
-            await CreateStagesAsync(Guid.Empty);
-
-            throw new NotImplementedException();
+            await CreateStagesAsync(id, newStages);
         }
 
-        private async Task CheckGroupPropetiesAsync()
+        private async Task CheckGroupPropetiesAsync(Guid id, IEnumerable<PropertyGroup> groups)
         {
-            if (false)
-            {
+            var newGroups = new List<PropertyGroup>();
 
+            foreach (var group in IntendedCrmObject.PropertyGroups)
+            {
+                var newGroup = CheckGroupPropety(group, groups);
+
+                if (newGroup != null)
+                {
+                    newGroups.Add(newGroup);
+                }
             }
 
-            await CreateGroupPropetiesAsync(Guid.Empty);
-
-            throw new NotImplementedException();
+            await CreateGroupPropetiesAsync(id, newGroups);
         }
 
-        private async Task CheckExtendedPropertiesAsync()
+        private async Task CheckExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> currentExtendedProperties)
         {
-            if (false)
-            {
+            var newProperties = CheckExtendedProperties(currentExtendedProperties);
 
-            }
-
-            await CreateExtendedPropertiesAsync(Guid.Empty);
-
-            throw new NotImplementedException();
+            await CreateExtendedPropertiesAsync(id, newProperties);
         }
 
 
@@ -163,42 +185,67 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private async Task CreateStagesAsync(Guid id)
         {
-            var aFinalStage = IntendedCrmObject.Stages.FirstOrDefault(s => s.IsDoneStage == true);
+            await CreateStagesAsync(id, IntendedCrmObject.Stages);
+        }
+
+        private async Task CreateStagesAsync(Guid id, List<Stage> stages)
+        {
+            var aFinalStage = stages.FirstOrDefault(s => s.IsDoneStage == true);
 
             if (aFinalStage == null)
             {
                 throw new NotFoundAtleastAFinalStageException();
             }
 
-            IntendedCrmObject.Stages.Sort(StagePriorityComparer.GetInstance());
+            stages.Sort(StagePriorityComparer.GetInstance());
 
-            foreach (var stage in IntendedCrmObject.Stages)
+            foreach (var stage in stages)
             {
-                var stageDto = stage.CreateStageCreationRequest(id);
-
-                var stageCreationResult = await CrmObjectTypeStageService.CreateAsync(stageDto);
-
-                stage.Id = stageCreationResult.Result.StageId;
+                await CreateStageAsync(id, stage);
             }
+        }
+
+        private async Task CreateStageAsync(Guid id, Stage stage)
+        {
+            var stageDto = stage.CreateStageCreationRequest(id);
+
+            var stageCreationResult = await CrmObjectTypeStageService.CreateAsync(stageDto);
+
+            stage.Id = stageCreationResult.Result.StageId;
         }
 
         private async Task CreateGroupPropetiesAsync(Guid id)
         {
-            foreach (var group in IntendedCrmObject.PropertyGroups)
+            await CreateGroupPropetiesAsync(id, IntendedCrmObject.PropertyGroups);
+        }
+
+        private async Task CreateGroupPropetiesAsync(Guid id, IEnumerable<PropertyGroup> groups)
+        {
+            foreach (var group in groups)
             {
-                var groupDto = group.CreatePropertyGroupCreationRequest(id);
-
-                var groupCreationResult = await PropertyGroupService.CreateAsync(groupDto);
-
-                group.Id = groupCreationResult.Result.Id;
+                await CreateGroupPropetiesAsync(id, group);
             }
+        }
+
+        private async Task CreateGroupPropetiesAsync(Guid id, PropertyGroup group)
+        {
+            var groupDto = group.CreatePropertyGroupCreationRequest(id);
+
+            var groupCreationResult = await PropertyGroupService.CreateAsync(groupDto);
+
+            group.Id = groupCreationResult.Result.Id;
         }
 
         private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id)
         {
+            return await CreateExtendedPropertiesAsync(id, IntendedCrmObject.Properties);
+        }
+
+        private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> properties)
+        {
             var createdPropertiesId = new List<Guid>();
 
-            foreach (var property in IntendedCrmObject.Properties)
+            foreach (var property in properties)
             {
                 var propertyDto = CreateExtendedPropertyDto(property);
 
@@ -239,10 +286,8 @@ namespace PayamGostarClient.InitServiceModels.Models
         }
 
 
-        private IEnumerable<PropertyGroup> CheckGroupPropety(PropertyGroup intendedGroup, IEnumerable<PropertyGroup> currentGroups)
+        private PropertyGroup CheckGroupPropety(PropertyGroup intendedGroup, IEnumerable<PropertyGroup> currentGroups)
         {
-            var unexistedGroup = new List<PropertyGroup>();
-
             var resourceValueComparer = ResourceValueEqualityComparer.GetInstance();
 
             foreach (var currentGroup in currentGroups)
@@ -256,20 +301,16 @@ namespace PayamGostarClient.InitServiceModels.Models
 
                     CheckFieldMatching(intendedGroup.Expanded, currentGroup.Expanded);
                     CheckFieldMatching(intendedGroup.CountOfColumns, currentGroup.CountOfColumns);
-                }
-                else
-                {
-                    unexistedGroup.Add(currentGroup);
+
+                    return null;
                 }
             }
 
-            return unexistedGroup;
+            return intendedGroup;
         }
 
-        private IEnumerable<Stage> CheckStage(Stage intendedStage, IEnumerable<Stage> currentStages)
+        private Stage CheckStage(Stage intendedStage, IEnumerable<Stage> currentStages)
         {
-            var unexistedStage = new List<Stage>();
-
             var resourceValueComparer = ResourceValueEqualityComparer.GetInstance();
 
             foreach (var currentStage in currentStages)
@@ -284,16 +325,90 @@ namespace PayamGostarClient.InitServiceModels.Models
                     CheckFieldMatching(intendedStage.Key, currentStage.Key);
                     CheckFieldMatching(intendedStage.Enabled, currentStage.Enabled);
                     CheckFieldMatching(intendedStage.IsDoneStage, currentStage.IsDoneStage);
-                }
-                else
-                {
-                    unexistedStage.Add(currentStage);
+
+                    return null;
                 }
             }
 
-            return unexistedStage;
+            return intendedStage;
         }
 
+        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedProperties(IEnumerable<BaseExtendedPropertyModel> currentProperties)
+        {
+            var detectedPair = IntendedCrmObject.Properties.Join(
+                currentProperties,
+                intendedProperty => intendedProperty.UserKey,
+                currentProperty => currentProperty.UserKey,
+                (intendedProperty, currentProperty) => Tuple.Create(intendedProperty, currentProperty)
+                );
+
+            foreach (var pair in detectedPair)
+            {
+                CheckExtendedProperty(pair.Item1, pair.Item2);
+            }
+
+            return IntendedCrmObject.Properties.Except(detectedPair.Select(d => d.Item1));
+        }
+
+
+        private void CheckExtendedProperty(BaseExtendedPropertyModel item1, BaseExtendedPropertyModel item2)
+        {
+            switch (item1.Type)
+            {
+                case Gp_ExtendedPropertyType.Text:
+                    new TextExtendedPropertyModelEqualityComparer()
+                        .Checks((TextExtendedPropertyModel)item1, (TextExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Form:
+                    new FormExtendedPropertyModelEqualityComparer()
+                        .Checks((FormExtendedPropertyModel)item1, (FormExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.DropDownList:
+                    new DropDownListExtendedPropertyModelEqualityComparer()
+                        .Checks((DropDownListExtendedPropertyModel)item1, (DropDownListExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.User:
+                    new UserExtendedPropertyModelEqualityComparer()
+                        .Checks((UserExtendedPropertyModel)item1, (UserExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Number:
+                    new NumberExtendedPropertyModelEqualityComparer()
+                        .Checks((NumberExtendedPropertyModel)item1, (NumberExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Department:
+                    new DepartmentExtendedPropertyModelEqualityComparer()
+                        .Checks((DepartmentExtendedPropertyModel)item1, (DepartmentExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Position:
+                    new PositionExtendedPropertyModelEqualityComparer()
+                        .Checks((PositionExtendedPropertyModel)item1, (PositionExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Date:
+                    new PersianDateExtendedPropertyModelEqualityComparer()
+                        .Checks((PersianDateExtendedPropertyModel)item1, (PersianDateExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Label:
+                    new LabelExtendedPropertyModelEqualityComparer()
+                        .Checks((LabelExtendedPropertyModel)item1, (LabelExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.CrmObjectMultiValue:
+                    new CrmObjectMultiValueExtendedPropertyModelEqualityComparer()
+                        .Checks((CrmObjectMultiValueExtendedPropertyModel)item1, (CrmObjectMultiValueExtendedPropertyModel)item2);
+                    break;
+
+                default:
+                    throw new NotFoundExtendedPropertyTypeException();
+            }
+        }
 
         private BaseExtendedPropertyCreationDto CreateExtendedPropertyDto(BaseExtendedPropertyModel propertyModel)
         {

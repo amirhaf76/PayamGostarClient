@@ -1,10 +1,11 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+using System;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels
 {
     public class NumberExtendedPropertyModel : BaseExtendedPropertyModel
     {
-        public int? MinDigits {get; set; }
+        public int? MinDigits { get; set; }
 
         public int? MaxDigits { get; set; }
 
@@ -17,5 +18,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
         public int DecimalDigits { get; set; }
 
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Number;
+
+        
     }
 }
