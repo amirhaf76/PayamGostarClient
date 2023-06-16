@@ -15,6 +15,10 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
 
         internal string CrmObjectTypeId { get; set; }
 
+        public bool IsRequired { get; set; }
+
+        public string DefaultValue { get; set; }
+
 
     }
 }

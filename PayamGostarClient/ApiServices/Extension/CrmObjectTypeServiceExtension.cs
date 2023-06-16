@@ -94,7 +94,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new PropertyGroupSearchRequestDto
             {
                 Name = propertyGroup.Name.Select(n => n.ConvertToResourceValueDto()),
-                CountOfColumns = propertyGroup.CountOfColumns,
+                CountOfColumns = propertyGroup.CountOfColumns ?? 1,
                 Expanded = propertyGroup.Expanded,
             };
         }

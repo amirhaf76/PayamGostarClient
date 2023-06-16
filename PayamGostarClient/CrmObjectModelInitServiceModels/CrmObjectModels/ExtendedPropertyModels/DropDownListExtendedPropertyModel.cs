@@ -1,13 +1,15 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+using PayamGostarClient.CrmObjectModelInitServiceModels.Exceptions;
 using System;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels
 {
     public class DropDownListExtendedPropertyModel : BaseExtendedPropertyModel
     {
-        // public bool IsRequired { get; set; }
-
-        // public int CalculationTypeIndex { get; set; }
+        /// <summary>
+        /// Does not work!!! It can not be received by api.
+        /// </summary>
+        public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
 
         public DropDownListExtendedPropertyValueModel[] Values { get; set; }
 

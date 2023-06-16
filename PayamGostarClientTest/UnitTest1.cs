@@ -5,6 +5,7 @@ using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels;
 using PayamGostarClient.Helper.Net;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -88,7 +89,7 @@ namespace PayamGostarClientTest
 
             await crmModelService.InitAsync(new CrmFormModel
             {
-                Name = new ResourceValue[] 
+                Name = new ResourceValue[]
                 {
                     new ResourceValue { Value = "فرم تست ۱", LanguageCulture = FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
@@ -98,11 +99,90 @@ namespace PayamGostarClientTest
                     new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
-                
+
                 Code = "Form_test_20230613"
             });
         }
+
+        [Fact]
+        public void Test1()
+        {
+            var name1 = new ResourceValue[]
+            {
+                new ResourceValue { Value = "name1", LanguageCulture = "fa"}
+            };
+
+            var name2 = new ResourceValue[]
+            {
+                new ResourceValue { Value = "name1", LanguageCulture = "en"}
+            };
+
+
+            var res = name1
+                .Join(
+                    name2,
+                    outter => outter.LanguageCulture,
+                    inner => inner.LanguageCulture,
+                    (inner, outter) => new ValueTuple<string, string>(outter.Value, inner.Value))
+                .All(join => join.Item1 == join.Item2);
+
+            Assert.True(res);
+        }
+        [Fact]
+        public void Test2()
+        {
+            var name1 = new ResourceValue[]
+            {
+                new ResourceValue { Value = "name1", LanguageCulture = "fa"}
+            };
+
+            var name2 = new ResourceValue[]
+            {
+                new ResourceValue { Value = "name1", LanguageCulture = "fa"}
+            };
+
+            var joinedName = name1
+                .Join(
+                    name2,
+                    outter => outter.LanguageCulture,
+                    inner => inner.LanguageCulture,
+                    (inner, outter) => new ValueTuple<string, string>(outter.Value, inner.Value))
+                .ToList();
+
+            var res = joinedName
+                .All(join => join.Item1 == join.Item2);
+
+            Assert.True(res);
+        }
+
+        [Fact]
+        public void Test3()
+        {
+            var name1 = new ResourceValue[]
+            {
+                new ResourceValue { Value = "name1", LanguageCulture = "fa"}
+            };
+
+            var name2 = new ResourceValue[]
+            {
+                new ResourceValue { Value = "name2", LanguageCulture = "fa"}
+            };
+
+            var joinedName = name1
+                .Join(
+                    name2,
+                    outter => outter.LanguageCulture,
+                    inner => inner.LanguageCulture,
+                    (inner, outter) => new ValueTuple<string, string>(outter.Value, inner.Value))
+                .ToList();
+
+            var res = joinedName
+                .All(join => join.Item1 == join.Item2);
+
+            Assert.False(res);
+
+        }
+
+
     }
-
-
 }

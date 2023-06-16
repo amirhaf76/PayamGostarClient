@@ -53,7 +53,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             return new UserExtendedPropertyCreationDto
             {
                 //ShowDeactiveMembersOption = model.ShowDeactiveMembersOption,
-                //IsRequired = model.IsRequired,
+                IsRequired = model.IsRequired,
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -68,7 +68,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 MaxDigits = model.MaxDigits,
                 MinValue = model.MinValue,
                 MaxValue = model.MaxValue,
-                // IsRequired = model.IsRequired,
+                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 DecimalDigits = model.DecimalDigits,
                 CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
@@ -147,7 +147,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             return new TextExtendedPropertyModel
             {
-
+                
             }.FillBaseExtendedPropertyModel(dto);
         }
 

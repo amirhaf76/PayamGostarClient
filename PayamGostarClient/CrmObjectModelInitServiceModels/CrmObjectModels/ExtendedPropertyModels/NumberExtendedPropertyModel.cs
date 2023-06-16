@@ -12,8 +12,6 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
 
         public int? MaxValue { get; set; }
 
-        public bool IsRequired { get; set; }
-
         public int CalculationTypeIndex { get; set; }
 
         public int DecimalDigits { get; set; }

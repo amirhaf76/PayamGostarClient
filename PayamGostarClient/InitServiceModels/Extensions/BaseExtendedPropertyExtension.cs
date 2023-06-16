@@ -13,6 +13,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             where T : BaseExtendedPropertyDto
         {
             target.UserKey = from.UserKey;
+            target.PropertyGroupId = from.PropertyGroup.Id;
             target.Name = new SystemResourceValueDto { ResourceValues = from.Name.Select(r => r.ToDto()) };
             target.ToolTip = new SystemResourceValueDto { ResourceValues = from.ToolTip.Select(r => r.ToDto()) };
 
@@ -26,6 +27,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             target.Name = BaseInitServiceExtension.ToResourceValues(from.Name);
             target.ToolTip = BaseInitServiceExtension.ToResourceValues(from.Tooltip);
             target.CrmObjectTypeId = from.CrmObjectTypeId.ToString();
+            target.DefaultValue = from.DefaultValue;
+            target.IsRequired = from.IsRequired;
 
             return target;
         }

@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels
 {
-    public class ResourceValue
+    public class ResourceValue 
     {
         public string Value { get; set; }
 

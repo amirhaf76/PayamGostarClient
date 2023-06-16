@@ -26,6 +26,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             }.FillBaseCRMModel(crmModel);
         }
 
+
         //CrmObjectTypeFormCreateRequestDto
 
 
@@ -77,13 +78,41 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             var type = (Gp_ExtendedPropertyType)property.PropertyDisplayTypeIndex;
 
-            return new SearchedExtendedPropertyModel(type)
+            switch ((Gp_ExtendedPropertyType)property.PropertyDisplayTypeIndex)
             {
-                UserKey = property.UserKey,
-                Name = ToResourceValues(property.Name),
-                ToolTip = ToResourceValues(property.Tooltip),
-                PropertyGroup = ToPropertyGroup(property.Group),
-            };
+                case Gp_ExtendedPropertyType.Text:
+                    return property.ToTextExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.Form:
+                    return property.ToFormExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.DropDownList:
+                    return property.ToDropDownListExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.User:
+                    return property.ToUserExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.Number:
+                    return property.ToNumberExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.Department:
+                    return property.ToDepartmentExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.Position:
+                    return property.ToPositionExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.Date:
+                    return property.ToPersianDateExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.Label:
+                    return property.ToLabelExtendedPropertyModel();
+
+                case Gp_ExtendedPropertyType.CrmObjectMultiValue:
+                    return property.ToCrmObjectMultiValueExtendedPropertyModel();
+
+                default:
+                    throw new NotFoundExtendedPropertyTypeException();
+            }
         }
 
         internal static BaseExtendedPropertyModel FillBaseExtendedPropertyModel<TTarget, TFrom>(this BaseExtendedPropertyModel target, ExtendedPropertyGetResultDto from)

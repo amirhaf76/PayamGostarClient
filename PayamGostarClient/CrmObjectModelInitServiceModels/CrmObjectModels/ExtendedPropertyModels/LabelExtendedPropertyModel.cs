@@ -1,12 +1,14 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+using PayamGostarClient.CrmObjectModelInitServiceModels.Exceptions;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels
 {
     public class LabelExtendedPropertyModel : BaseExtendedPropertyModel
     {
-        public int CalculationTypeIndex { get; set; }
-
-        public string CrmObjectTypeId { get; set; }
+        /// <summary>
+         /// Does not work!!! It can not be received by api.
+         /// </summary>
+        public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
 
         public string LabelText { get; set; }
 
