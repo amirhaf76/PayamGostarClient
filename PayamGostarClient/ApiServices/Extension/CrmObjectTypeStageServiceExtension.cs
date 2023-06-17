@@ -11,6 +11,9 @@ namespace PayamGostarClient.ApiServices.Extension
             {
                 CrmObjectTypeId = dto.CrmObjectTypeId,
                 IsActive = dto.Enabled,
+                IsDoneStage = dto.IsDoneStage,
+                Key = dto.Key,
+                Name = dto.Name.ToSystemResourceValueVM(),
             };
         }
 

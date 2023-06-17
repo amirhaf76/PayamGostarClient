@@ -15,6 +15,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 {
     internal static class BaseInitServiceExtension
     {
+        internal static string LanguageCulture { get; set; } = "fa-IR";
 
         internal static SearchedCrmObjectModel ToModel(this CrmObjectTypeSearchResultDto crmModel)
         {
@@ -35,6 +36,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             where TFrom : BaseCrmObjectTypeGetResultDto
         {
             target.Code = from.Code;
+            target.Enabled = from.Enabled;
             target.Name = ToResourceValues(from.Name);
             target.Description = ToResourceValues(from.Description);
             target.Properties = from.Properties?.Select(p => p.ToBaseExtendedPropertyModel()).ToList();
@@ -49,9 +51,13 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             where TTarget : BaseCrmObjectTypeCreateRequestDto
             where TFrom : BaseCRMModel
         {
+            target.Name = new SystemResourceValueDto();
+            target.Description = new SystemResourceValueDto();
+
             target.Name.ResourceValues = from.Name.Select(n => n.ToDto());
             target.Description.ResourceValues = from.Description.Select(d => d.ToDto());
             target.Code = from.Code;
+            target.Enabled = from.Enabled ?? true;
             target.PreviewTypeIndex = (int)from.PreviewTypeIndex;
 
             return target;
@@ -61,7 +67,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         // Todo: Warning! using hard code value for Language Culture.
         internal static ResourceValue[] ToResourceValues(string value)
         {
-            return new ResourceValue[] { new ResourceValue { Value = value, LanguageCulture = "Fa" } };
+            return new ResourceValue[] { new ResourceValue { Value = value, LanguageCulture = LanguageCulture } };
         }
 
         internal static PropertyGroup ToPropertyGroup(this PropertyGroupGetResultDto group)
@@ -71,6 +77,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 Name = ToResourceValues(group.Name),
                 Expanded = group.ExpandForView,
                 CountOfColumns = group.CountOfColumns ?? 0,
+                Id = group.Id,
+                //ResouceKey = (!string.IsNullOrEmpty(group.NameResourceKey)) ? Guid.Parse(group.NameResourceKey) : Guid.Empty,
             };
         }
 
@@ -165,7 +173,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 {
                     ResourceKey = stage.ResouceKey.ToString(),
                     ResourceValues = stage.Name.Select(n => n.ToDto())
-                }
+                },
             };
         }
 

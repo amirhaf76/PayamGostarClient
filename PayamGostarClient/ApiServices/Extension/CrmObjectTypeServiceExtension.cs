@@ -58,6 +58,7 @@ namespace PayamGostarClient.ApiServices.Extension
             {
                 Id = viewModel.Id,
                 Code = viewModel.Code,
+                Enabled = viewModel.IsActive,
                 Name = viewModel.Name,
                 CrmOjectTypeIndex = viewModel.CrmOjectTypeIndex,
                 Description = viewModel.Description,

@@ -15,10 +15,7 @@ namespace PayamGostarClient.InitServiceModels.Models
     {
         protected static void CheckFieldMatching<TField>(TField first, TField second)
         {
-            if (!first.Equals(second))
-            {
-                throw new MisMatchException($"{first} != {second}");
-            }
+            ModelChecker.CheckFieldMatching(first, second);
         }
 
         public void ChecksBase(BaseExtendedPropertyModel x, BaseExtendedPropertyModel y)
@@ -62,13 +59,13 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             ChecksBase(x, y);
 
-            foreach (var value in x.Values)
-            {
-                if (!y.Values.Any(v => v.Value == value.Value))
-                {
-                    throw new MisMatchException($"'{value}' does not exist in {{userKey: {x.UserKey}}} dropdown list!");
-                }
-            }
+            //foreach (var value in x.Values)
+            //{
+            //    if (!y.Values.Any(v => v.Value == value.Value))
+            //    {
+            //        throw new MisMatchException($"'{value}' does not exist in {{userKey: {x.UserKey}}} dropdown list!");
+            //    }
+            //}
 
            // counts !!!
 

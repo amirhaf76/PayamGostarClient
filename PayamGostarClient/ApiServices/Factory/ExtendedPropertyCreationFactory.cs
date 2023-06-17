@@ -128,10 +128,15 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
+                //var propertyApi = ClientFactory.CreatePropertyDefinitionApiClient();
                 var clientApi = ClientFactory.CreateDropDownListPropertyDefinitionApiClient();
                 var clientValueApi = ClientFactory.CreateDropDownListPropertyDefinitionValueApiClient();
 
                 var propertyCreationResult = await clientApi.PostApiV2DropdownlistpropertydefinitionCreateAsync(Property.ToVM());
+
+                //var property = propertyApi.PostApiV2PropertydefinitionSearchAsync(null);
+
+                //var values = clientValueApi.PostApiV2DropDownListPropertyDefinitionValueSearchAsync(null);
 
                 foreach (var value in Property.Values)
                 {

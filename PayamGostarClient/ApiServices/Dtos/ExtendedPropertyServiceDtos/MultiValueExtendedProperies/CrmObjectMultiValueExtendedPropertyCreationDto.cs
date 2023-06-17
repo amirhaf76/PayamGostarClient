@@ -8,8 +8,6 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiVa
     {
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.CrmObjectMultiValue;
 
-        public Guid CrmObjectTypeId { get; set; }
-
         public int CrmObjectTypeIndex { get; set; }
 
         public Guid? SubTypeId { get; set; }
