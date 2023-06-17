@@ -15,7 +15,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new TextExtendedPropertyCreationDto
             {
-                // IsRequired = model.IsRequired,
+                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 // IsMultiline = model.IsMultiLine,
 
@@ -28,8 +28,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new FormExtendedPropertyCreationDto
             {
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
-
+                
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 
@@ -39,9 +38,13 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new DropDownListExtendedPropertyCreationDto
             {
+                Values = model.Values?.Select(v => new DropDownListExtendedPropertyValueCreationDto
+                {
+                    PropertyDefinitionId = v.PropertyDefinitionId,
+                    Value = v.Value
+                }) ?? Array.Empty<DropDownListExtendedPropertyValueCreationDto>()
                 // IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -53,7 +56,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             return new UserExtendedPropertyCreationDto
             {
                 //ShowDeactiveMembersOption = model.ShowDeactiveMembersOption,
-                //IsRequired = model.IsRequired,
+                IsRequired = model.IsRequired,
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -68,10 +71,9 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 MaxDigits = model.MaxDigits,
                 MinValue = model.MinValue,
                 MaxValue = model.MaxValue,
-                // IsRequired = model.IsRequired,
+                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 DecimalDigits = model.DecimalDigits,
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -83,7 +85,6 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             return new DepartmentExtendedPropertyCreationDto
             {
                 IsRequired = model.IsRequired,
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -119,10 +120,9 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new CrmObjectMultiValueExtendedPropertyCreationDto
             {
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
-                CrmObjectTypeIndex = model.CrmObjectTypeIndex,
+                CrmObjectTypeIndex = (int)model.CrmObjectTypeIndex,
                 SubTypeId = (model.SubTypeId != null) ? (Guid?)Guid.Parse(model.SubTypeId) : null,
-                ShowInGridProps = model.ShowInGridProps.Select(s => s.ToDto()),
+                ShowInGridProps = model.ShowInGridProps?.Select(s => s.ToDto()) ?? Array.Empty<ExtendedPropertyIdWrapperDto>(),
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -147,7 +147,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             return new TextExtendedPropertyModel
             {
-
+                
             }.FillBaseExtendedPropertyModel(dto);
         }
 
@@ -217,7 +217,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             return new CrmObjectMultiValueExtendedPropertyModel
             {
                 ShowInGridProps = extraConfig.VisibleProperties.Select(g => new PropertyDefinitionIdWrapperModel { Id = g.ToString() }).ToArray(),
-                CrmObjectTypeIndex = (int)extraConfig.CrmObjectType,
+                CrmObjectTypeIndex = extraConfig.CrmObjectType,
                 SubTypeId = extraConfig.SubTypeId?.ToString(),
 
             }.FillBaseExtendedPropertyModel(dto);

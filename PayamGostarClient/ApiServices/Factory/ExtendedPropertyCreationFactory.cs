@@ -9,6 +9,7 @@ using PayamGostarClient.ApiServices.Exceptions;
 using PayamGostarClient.ApiServices.Extension;
 using PayamGostarClient.Helper.Net;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Factory
@@ -128,6 +129,7 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
+                var propertyApi = ClientFactory.CreatePropertyDefinitionApiClient();
                 var clientApi = ClientFactory.CreateDropDownListPropertyDefinitionApiClient();
                 var clientValueApi = ClientFactory.CreateDropDownListPropertyDefinitionValueApiClient();
 
@@ -135,6 +137,9 @@ namespace PayamGostarClient.ApiServices.Factory
 
                 foreach (var value in Property.Values)
                 {
+                    // Todo: er
+                    value.PropertyDefinitionId = propertyCreationResult.Result.Id;
+
                     await clientValueApi.PostApiV2DropDownListPropertyDefinitionValueCreateAsync(value.ToVM());
                 }
 

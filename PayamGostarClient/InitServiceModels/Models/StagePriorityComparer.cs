@@ -31,11 +31,11 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
             else if (x.IsDoneStage && !y.IsDoneStage)
             {
-                return 1;
+                return -1;
             }
             else
             {
-                return -1;
+                return 1;
             }
         }
 

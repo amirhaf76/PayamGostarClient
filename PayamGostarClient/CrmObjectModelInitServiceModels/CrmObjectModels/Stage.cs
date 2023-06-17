@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels
 {
@@ -18,4 +19,6 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels
         public bool Enabled { get; set; }
 
     }
+
+    
 }

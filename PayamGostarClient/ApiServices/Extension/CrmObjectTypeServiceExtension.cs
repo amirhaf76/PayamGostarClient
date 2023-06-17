@@ -58,6 +58,7 @@ namespace PayamGostarClient.ApiServices.Extension
             {
                 Id = viewModel.Id,
                 Code = viewModel.Code,
+                Enabled = viewModel.IsActive,
                 Name = viewModel.Name,
                 CrmOjectTypeIndex = viewModel.CrmOjectTypeIndex,
                 Description = viewModel.Description,
@@ -94,7 +95,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new PropertyGroupSearchRequestDto
             {
                 Name = propertyGroup.Name.Select(n => n.ConvertToResourceValueDto()),
-                CountOfColumns = propertyGroup.CountOfColumns,
+                CountOfColumns = propertyGroup.CountOfColumns ?? 1,
                 Expanded = propertyGroup.Expanded,
             };
         }

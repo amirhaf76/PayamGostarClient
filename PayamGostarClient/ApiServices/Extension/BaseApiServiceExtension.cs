@@ -120,6 +120,7 @@ namespace PayamGostarClient.ApiServices.Extension
         {
             to.CrmOjectTypeIndex = from.CrmOjectTypeIndex;
             to.Code = from.Code;
+            to.Enabled = from.IsActive;
             to.Name = from.Name;
             to.Description = from.Description;
 
@@ -145,6 +146,7 @@ namespace PayamGostarClient.ApiServices.Extension
             to.Name = from.Name.ToSystemResourceValueVM();
             to.Description = from.Description.ToSystemResourceValueVM();
             to.PreviewTypeIndex = from.PreviewTypeIndex;
+            to.IsActive = from.Enabled;
 
             return to;
         }

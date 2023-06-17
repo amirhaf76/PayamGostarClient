@@ -10,6 +10,8 @@ namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos
         public string Description { get; set; }
         public string Code { get; set; }
         public int CrmOjectTypeIndex { get; set; }
+        public bool Enabled { get; set; }
+
 
         public IEnumerable<PropertyGroupGetResultDto> Groups { get; set; }
 
