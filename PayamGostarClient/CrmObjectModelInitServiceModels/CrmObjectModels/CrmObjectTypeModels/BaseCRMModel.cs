@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
+using System;
 using System.Collections.Generic;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels
@@ -10,7 +11,8 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
             Properties = new List<BaseExtendedPropertyModel>();
             PropertyGroups = new List<PropertyGroup>();
             Stages = new List<Stage>();
-
+            Name = Array.Empty<ResourceValue>();
+            Description = Array.Empty<ResourceValue>();
         }
         public abstract Gp_CrmObjectType Type { get; }
 

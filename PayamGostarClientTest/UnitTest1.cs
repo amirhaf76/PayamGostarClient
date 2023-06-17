@@ -103,6 +103,89 @@ namespace PayamGostarClientTest
                 Code = "Form_test_20230613"
             });
         }
+        [Fact]
+        public async Task InitAsync_FormModel_DropDown()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+
+
+            var model = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = $"Auto_gen_Form_test_{Guid.NewGuid()}",
+            };
+
+            var groupA = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model.PropertyGroups.Add(groupA);
+
+            model.Properties.Add(new DropDownListExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Values = new []
+                {
+                    new DropDownListExtendedPropertyValueModel
+                    {
+                        Value = "Item1"
+                    },
+                    new DropDownListExtendedPropertyValueModel
+                    {
+                        Value = "Item2"
+                    },
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA,
+
+            });
+           
+
+            
+
+
+            _testOutput.WriteLine(model.Name.FirstOrDefault()?.Value);
+            _testOutput.WriteLine(model.Code);
+
+            await crmModelService.InitAsync(model);
+        }
 
         [Fact]
         public async Task InitAsync_FormModel_()
@@ -882,7 +965,24 @@ namespace PayamGostarClientTest
 
             var crmModelService = new CrmObjectModelInitService(initServiceConfig);
 
-            await crmModelService.InitAsync(EmploymentRequestCrmFormModel.Create());
+            await crmModelService.InitAsync(EmploymentRequestModel.Create());
+        }
+        [Fact]
+        public async Task InitAsync_EmploymentRequestAdModel()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+
+            await crmModelService.InitAsync(EmploymentRequestAdModel.Create());
         }
     }
 }

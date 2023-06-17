@@ -5,7 +5,7 @@ using System;
 
 namespace PayamGostarClientTest
 {
-    public class EmploymentRequestCrmFormModel : CrmFormModel
+    public class EmploymentRequestModel : CrmFormModel
     {
         public const string LANGUAGE_CULTURE = "fa-IR";
 
@@ -133,6 +133,17 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
                     },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "دارد"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "ندارد"
+                        }
+                    },
                     PropertyGroup = newModel.PropertyGroups[0],
                     UserKey = Guid.NewGuid().ToString(),
                     IsRequired = false,
@@ -208,6 +219,17 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
                     },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "نیروی جایگزین"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "نیروی جدید"
+                        }
+                    },
                     PropertyGroup = newModel.PropertyGroups[0],
                     UserKey = "ReqType",
                     IsRequired = false,
@@ -238,6 +260,17 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
                     },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "بلی"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "خیر"
+                        }
+                    },
                     PropertyGroup = newModel.PropertyGroups[0],
                     UserKey = Guid.NewGuid().ToString(),
                     IsRequired = false,
@@ -252,6 +285,13 @@ namespace PayamGostarClientTest
                     ToolTip = new[]
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "بله"
+                        }
                     },
                     PropertyGroup = newModel.PropertyGroups[2],
                     UserKey = Guid.NewGuid().ToString(),
@@ -408,7 +448,7 @@ namespace PayamGostarClientTest
                     IsRequired = true,
                     DefaultValue = string.Empty,
                 },
-                new UserExtendedPropertyModel()
+                new DropDownListExtendedPropertyModel()
                 {
                     Name = new[]
                     {
@@ -417,6 +457,33 @@ namespace PayamGostarClientTest
                     ToolTip = new[]
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "شرکت پیام گستر"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "شرکت الوویپ"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "هلدینگ تجارت الکترونیک اول"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "شرکت هیتوبیت"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "شرکت تجارت اول"
+                        },
+                        new DropDownListExtendedPropertyValueModel
+                        {
+                            Value = "شرکت سپتا پرداخت"
+                        }
                     },
                     PropertyGroup = newModel.PropertyGroups[0],
                     UserKey = "CompanyName",
@@ -432,6 +499,30 @@ namespace PayamGostarClientTest
                     ToolTip = new[]
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel() { Value = "تجارت اول" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "امور مشتریان" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "امور نمایندگان" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "فروش پیام گستر" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "فروش تکمیلی پیام گستر" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "مارکتینگ" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "مالی" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "منابع انسانی" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "فروش ویپ" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "پشتیبانی ویپ" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "فنی" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "محصول" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "پشتیبانی پیام گستر" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "نصب پیام گستر" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "IT" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "استقرار و آموزش" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "سیستم و روش ها" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "سپتا" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "اداری" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "مارکتینگ هیتوبیت" },
+                        new DropDownListExtendedPropertyValueModel() { Value = "موفقیت مشتری هیتوبیت" },
                     },
                     PropertyGroup = newModel.PropertyGroups[4],
                     UserKey = "DepName",
@@ -478,6 +569,21 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
                     },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "بالا"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "متوسط"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "پایین"
+                        }
+                    },
                     PropertyGroup = newModel.PropertyGroups[0],
                     UserKey = "ReqPriority",
                     IsRequired = false,
@@ -507,6 +613,17 @@ namespace PayamGostarClientTest
                     ToolTip = new[]
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "بله"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "خیر"
+                        },
                     },
                     PropertyGroup = newModel.PropertyGroups[2],
                     UserKey = Guid.NewGuid().ToString(),
@@ -554,6 +671,25 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
                     },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "junior"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "mid level"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "senior"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "کارآموز"
+                        }
+                    },
                     PropertyGroup = newModel.PropertyGroups[0],
                     UserKey = "level",
                     IsRequired = false,
@@ -598,6 +734,21 @@ namespace PayamGostarClientTest
                     ToolTip = new[]
                     {
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    Values = new[]
+                    {
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "خانم"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "آقا"
+                        },
+                        new DropDownListExtendedPropertyValueModel()
+                        {
+                            Value = "مهم نیست"
+                        }
                     },
                     PropertyGroup = newModel.PropertyGroups[0],
                     UserKey = Guid.NewGuid().ToString(),
