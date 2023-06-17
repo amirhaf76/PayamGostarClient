@@ -3,6 +3,7 @@ using PayamGostarClient.ApiServices.Factory;
 using PayamGostarClient.CrmObjectModelInitServiceModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels;
 using PayamGostarClient.Helper.Net;
 using System;
@@ -105,6 +106,568 @@ namespace PayamGostarClientTest
         }
 
         [Fact]
+        public async Task InitAsync_FormModel_()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+
+           
+            var model = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = $"Auto_gen_Form_test_{Guid.NewGuid()}",
+            };
+
+            var groupA = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model.PropertyGroups.Add(groupA);
+
+            model.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA
+            });
+
+
+            await crmModelService.InitAsync(model);
+        }
+
+        [Fact]
+        public async Task InitAsync_FormModel_5()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+
+
+            var model = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = $"Auto_gen_Form_test_{Guid.NewGuid()}",
+            };
+
+            var groupA = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            var finalStage = new Stage
+            {
+                Enabled = true,
+                IsDoneStage = true,
+                Key = "myKey",
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "end", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            var startStage = new Stage
+            {
+                Enabled = true,
+                IsDoneStage = true,
+                Key = "myKey",
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "Start", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model.Stages.Add(finalStage);
+            model.Stages.Add(startStage);
+
+            model.PropertyGroups.Add(groupA);
+
+            model.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA
+            });
+
+
+            await crmModelService.InitAsync(model);
+        }
+
+        [Fact]
+        public async Task InitAsync_FormModel_2()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+            var code = $"Auto_gen_Form_test_{Guid.NewGuid()}";
+            var name = $"AutogenFormTest_{Guid.NewGuid()}";
+
+            var textPropertyUserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}";
+            var model = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = code,
+            };
+
+            var groupA = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model.PropertyGroups.Add(groupA);
+
+            model.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = textPropertyUserKey,
+                PropertyGroup = groupA
+            });
+
+
+            var model2 = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = code,
+            };
+
+            var groupA2 = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model2.PropertyGroups.Add(groupA2);
+
+            model2.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = textPropertyUserKey,
+                PropertyGroup = groupA2
+            });
+
+            model2.Properties.Add(new NumberExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "number", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA2,
+                MinDigits = 1,
+                MaxDigits = 10,
+                MaxValue = 10000,
+                MinValue = -1,
+                DecimalDigits = 1,
+            }) ;
+
+            await crmModelService.InitAsync(model, model2);
+        }
+
+        [Fact]
+        public async Task InitAsync_FormModel_3()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+            var code = $"Auto_gen_Form_test_{Guid.NewGuid()}";
+            var model = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = code,
+            };
+
+            var groupA = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model.PropertyGroups.Add(groupA);
+
+            model.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA
+            });
+
+
+            var model2 = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = code,
+            };
+
+            var groupA2 = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model2.PropertyGroups.Add(groupA2);
+
+            model2.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA2
+            });
+
+            model2.Properties.Add(new NumberExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA2,
+                MinDigits = 1,
+                MaxDigits = 10,
+                MaxValue = 10000,
+                MinValue = -1,
+                DecimalDigits = 1,
+            });
+
+            await crmModelService.InitAsync(model, model2);
+        }
+
+        [Fact]
+        public async Task InitAsync_FormModel_4()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+            var code = $"Auto_gen_Form_test_{Guid.NewGuid()}";
+            var name = $"AutogenFormTest_{Guid.NewGuid()}";
+            var model = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = code,
+            };
+
+            var groupA = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model.PropertyGroups.Add(groupA);
+
+            model.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA
+            });
+
+
+            var model2 = new CrmFormModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                Description = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                Code = code,
+            };
+
+            var groupA2 = new PropertyGroup
+            {
+                CountOfColumns = 1,
+                Expanded = true,
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                }
+            };
+
+            model2.PropertyGroups.Add(groupA2);
+
+            model2.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA2
+            });
+
+            model2.Properties.Add(new NumberExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA2,
+                MinDigits = 1,
+                MaxDigits = 10,
+                MaxValue = 10000,
+                MinValue = -1,
+                DecimalDigits = 1,
+            });
+
+            await crmModelService.InitAsync(model, model2);
+        }
+
+        [Fact]
         public void Test1()
         {
             var name1 = new ResourceValue[]
@@ -128,6 +691,7 @@ namespace PayamGostarClientTest
 
             Assert.True(res);
         }
+
         [Fact]
         public void Test2()
         {

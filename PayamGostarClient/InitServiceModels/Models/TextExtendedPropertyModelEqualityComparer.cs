@@ -15,10 +15,7 @@ namespace PayamGostarClient.InitServiceModels.Models
     {
         protected static void CheckFieldMatching<TField>(TField first, TField second)
         {
-            if (!first.Equals(second))
-            {
-                throw new MisMatchException($"{first} != {second}");
-            }
+            ModelChecker.CheckFieldMatching(first, second);
         }
 
         public void ChecksBase(BaseExtendedPropertyModel x, BaseExtendedPropertyModel y)

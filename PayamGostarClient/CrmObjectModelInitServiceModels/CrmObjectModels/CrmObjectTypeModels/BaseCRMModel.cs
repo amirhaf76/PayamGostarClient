@@ -5,14 +5,21 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 {
     public abstract class BaseCRMModel
     {
+        public BaseCRMModel()
+        {
+            Properties = new List<BaseExtendedPropertyModel>();
+            PropertyGroups = new List<PropertyGroup>();
+            Stages = new List<Stage>();
+
+        }
         public abstract Gp_CrmObjectType Type { get; }
 
         public Gp_PreviewType PreviewTypeIndex { get; } = Gp_PreviewType.PDFPreview;
 
         public string Code { get; set; }
 
+        public bool? Enabled { get; set; } = true;
         #region Extera Property
-        //public bool? Enabled { get; set; }
 
         //public bool LimitAccessToProcessUsers { get; set; }
 

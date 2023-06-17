@@ -62,7 +62,7 @@ namespace PayamGostarClient.InitServiceModels.Models
                 throw new NullCrmCodeException();
             }
 
-            if (IntendedCrmObject.Properties.All(p => !string.IsNullOrEmpty(p.UserKey)))
+            if (!IntendedCrmObject.Properties.All(p => !string.IsNullOrEmpty(p.UserKey)))
             {
                 throw new NullPropertyUserKeyExcpetion();
             }
@@ -133,7 +133,7 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             foreach (var group in IntendedCrmObject.PropertyGroups)
             {
-                var newGroup = CheckGroupPropety(group, groups);
+                var newGroup = CheckGroupPropetyAndUpdateIdIfExists(group, groups);
 
                 if (newGroup != null)
                 {
@@ -190,6 +190,11 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private async Task CreateStagesAsync(Guid id, List<Stage> stages)
         {
+            if (!stages.Any())
+            {
+                 return;
+            }
+
             var aFinalStage = stages.FirstOrDefault(s => s.IsDoneStage == true);
 
             if (aFinalStage == null)
@@ -247,9 +252,9 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             foreach (var property in properties)
             {
-                var propertyDto = CreateExtendedPropertyDto(property);
+                property.CrmObjectTypeId = id.ToString();
 
-                propertyDto.CrmObjectTypeId = id;
+                var propertyDto = CreateExtendedPropertyDto(property);
 
                 var response = await ExtendedPropertyService.CreateAsync(propertyDto);
 
@@ -270,23 +275,24 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             CheckFieldMatching(IntendedCrmObject.Type, currentCrmObj.Type);
             CheckFieldMatching(IntendedCrmObject.Code, currentCrmObj.Code);
+            CheckFieldMatching(IntendedCrmObject.Enabled, currentCrmObj.Enabled);
             CheckFieldMatching(IntendedCrmObject.PreviewTypeIndex, currentCrmObj.PreviewTypeIndex);
 
             if (!IntendedCrmObject.Name.CheckResourceValues(currentCrmObj.Name))
             {
-                throw new MisMatchException();
+                throw MisMatchException.Create(IntendedCrmObject.Name, currentCrmObj.Name);
             }
 
             if (!IntendedCrmObject.Description.CheckResourceValues(currentCrmObj.Description))
             {
-                throw new MisMatchException();
+                throw MisMatchException.Create(IntendedCrmObject.Description, currentCrmObj.Description);
             }
 
             return CheckCrmObjectMatching(currentCrmObj);
         }
 
 
-        private PropertyGroup CheckGroupPropety(PropertyGroup intendedGroup, IEnumerable<PropertyGroup> currentGroups)
+        private PropertyGroup CheckGroupPropetyAndUpdateIdIfExists(PropertyGroup intendedGroup, IEnumerable<PropertyGroup> currentGroups)
         {
             var resourceValueComparer = ResourceValueEqualityComparer.GetInstance();
 
@@ -301,6 +307,8 @@ namespace PayamGostarClient.InitServiceModels.Models
 
                     CheckFieldMatching(intendedGroup.Expanded, currentGroup.Expanded);
                     CheckFieldMatching(intendedGroup.CountOfColumns, currentGroup.CountOfColumns);
+
+                    intendedGroup.Id = currentGroup.Id;
 
                     return null;
                 }
@@ -451,17 +459,14 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         protected static void CheckFieldMatching<TField>(TField first, TField second)
         {
-            if (!first.Equals(second))
-            {
-                throw new MisMatchException($"{first} != {second}");
-            }
+            ModelChecker.CheckFieldMatching(first, second);
         }
 
     }
 
-    public static class ModelChecker
+    internal static class ModelChecker
     {
-        public static bool CheckResourceValues(this IEnumerable<ResourceValue> first, IEnumerable<ResourceValue> second)
+        internal static bool CheckResourceValues(this IEnumerable<ResourceValue> first, IEnumerable<ResourceValue> second)
         {
             return first
                 .Join(
@@ -471,7 +476,34 @@ namespace PayamGostarClient.InitServiceModels.Models
                     (inner, outter) => new ValueTuple<string, string>(outter.Value, inner.Value))
                 .All(join => join.Item1 == join.Item2);
         }
+
+        internal static void CheckFieldMatching<TField>(TField first, TField second)
+        {
+            if (typeof(TField) == typeof(string))
+            {
+                if (
+                    (string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string)) ||
+                    (!string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string)))
+                {
+                    throw new MisMatchException($"{first} != {second}");
+                }
+
+                if (string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
+                {
+                    return;
+                }
+            }
+
+            if (first == null && second == null)
+            {
+                return;
+            }
+
+            if (!first.Equals(second))
+            {
+                throw new MisMatchException($"{first} != {second}");
+            }
+        }
+
     }
-
-
 }

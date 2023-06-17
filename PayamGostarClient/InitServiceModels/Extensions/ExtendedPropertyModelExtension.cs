@@ -15,7 +15,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new TextExtendedPropertyCreationDto
             {
-                // IsRequired = model.IsRequired,
+                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 // IsMultiline = model.IsMultiLine,
 
@@ -28,8 +28,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new FormExtendedPropertyCreationDto
             {
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
-
+                
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 
@@ -41,7 +40,6 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             {
                 // IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -83,7 +81,6 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             return new DepartmentExtendedPropertyCreationDto
             {
                 IsRequired = model.IsRequired,
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -119,7 +116,6 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new CrmObjectMultiValueExtendedPropertyCreationDto
             {
-                CrmObjectTypeId = Guid.Parse(model.CrmObjectTypeId),
                 CrmObjectTypeIndex = model.CrmObjectTypeIndex,
                 SubTypeId = (model.SubTypeId != null) ? (Guid?)Guid.Parse(model.SubTypeId) : null,
                 ShowInGridProps = model.ShowInGridProps.Select(s => s.ToDto()),
