@@ -97,7 +97,16 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             await CheckExtendedPropertiesAsync(id, currentCrmObject.Properties);
 
-            await CheckStagesAsync(id, currentCrmObject.Stages);
+            var stages = await GetStagesAsync(id);
+
+            await CheckStagesAsync(id, stages);
+        }
+
+        private async Task<IEnumerable<Stage>> GetStagesAsync(Guid id)
+        {
+               var stages = await CrmObjectTypeStageService.GetStagesAsync(id);
+
+            return stages.Result.Select(x => x.ToModel());
         }
 
         private async Task CreateCrmObjectTypeBelongs(Guid id)
@@ -331,6 +340,7 @@ namespace PayamGostarClient.InitServiceModels.Models
                     }
 
                     CheckFieldMatching(intendedStage.Key, currentStage.Key, "Stage:Key -> ");
+                    CheckFieldMatching(intendedStage.Index, currentStage.Index, "Stage:Key -> ");
                     CheckFieldMatching(intendedStage.Enabled, currentStage.Enabled, "Stage:Enabled -> ");
                     CheckFieldMatching(intendedStage.IsDoneStage, currentStage.IsDoneStage, "Stage:IsDoneStage -> ");
 

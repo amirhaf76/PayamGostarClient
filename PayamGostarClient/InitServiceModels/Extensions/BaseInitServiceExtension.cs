@@ -140,6 +140,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 Enabled = stage.IsActive,
                 IsDoneStage = stage.IsDoneStage,
                 Key = stage.Key,
+                Index = stage.Index,
             };
         }
 
@@ -164,6 +165,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             {
                 CrmObjectTypeId = crmObjectTypeId,
                 Enabled = stage.Enabled,
+                Index = stage.Index,
                 IsDoneStage = stage.IsDoneStage,
                 Key = stage.Key,
                 Name = new SystemResourceValueDto
@@ -173,6 +175,21 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 },
             };
         }
+
+        internal static Stage ToModel(this CrmObjectTypeStageGetResultDto dto)
+        {
+            return new Stage
+            {
+                Id = dto.Id,
+                ResouceKey = (!string.IsNullOrEmpty(dto.NameResourceKey)) ? Guid.Parse(dto.NameResourceKey) : Guid.Empty,
+                Name = ToResourceValues(dto.Name),
+                Key = dto.Key,
+                IsDoneStage = dto.IsDoneStage,
+                Enabled = dto.IsActive,
+                Index = dto.Index,
+            };
+        }
+         
 
     }
 }
