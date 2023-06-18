@@ -10,7 +10,7 @@ namespace PayamGostarClient.ApiServices.Extension
 {
     public static class CrmObjectTypeFormServiceExtension
     {
-        public static CrmObjectTypeFormGetResultDto ConvertToCrmObjectTypeFormGetResultDto(this CrmObjectTypeFormGetResultVM vmResult)
+        public static CrmObjectTypeFormGetResultDto ToDto(this CrmObjectTypeFormGetResultVM vmResult)
         {
             return new CrmObjectTypeFormGetResultDto
             {
@@ -23,10 +23,10 @@ namespace PayamGostarClient.ApiServices.Extension
                 StartFrom = vmResult.StartFrom,
                 DigitCount = vmResult.DigitCount,
 
-            }.CopyFromBaseCrmObjectTypeGetResultVM(vmResult);
+            }.FillBaseCrmObjectTypeGetResultDto(vmResult);
         }
 
-        public static CrmObjectTypeFormCreateRequestVM ConvertToCrmObjectTypeFormCreateRequestVM(this CrmObjectTypeFormCreateRequestDto request)
+        public static CrmObjectTypeFormCreateRequestVM ToVM(this CrmObjectTypeFormCreateRequestDto request)
         {
             return new CrmObjectTypeFormCreateRequestVM
             {
@@ -39,7 +39,7 @@ namespace PayamGostarClient.ApiServices.Extension
                 StartFrom = request.StartFrom,
                 DigitCount = request.DigitCount,
 
-            }.CopyFromBaseCrmObjectTypeCreateRequestDto(request);
+            }.FillBaseCrmObjectTypeCreateRequestVM(request);
         }
 
     }

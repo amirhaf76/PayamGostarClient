@@ -53,6 +53,11 @@ namespace PayamGostarClient.ApiServices.Factory
             return CreateService<ICrmObjectTypeFormService, CrmObjectTypeFormService>();
         }
 
+        public ICrmObjectTypeTicketService CreateCrmObjectTypeTicketService()
+        {
+            return CreateService<ICrmObjectTypeTicketService, CrmObjectTypeTicketService>();
+        }
+
         public IExtendedPropertyService CreateExtendedPropertyService()
         {
             return CreateService<IExtendedPropertyService, ExtendedPropertyService>();
@@ -74,5 +79,7 @@ namespace PayamGostarClient.ApiServices.Factory
         {
             return (TAbstactService) Activator.CreateInstance(typeof(TService), _clientConfig, _clientFactory);
         }
+
+        
     }
 }

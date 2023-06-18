@@ -9,7 +9,7 @@ namespace PayamGostarClient.ApiServices.Extension
     internal static class BaseExtendedPropertyExtension
     {
         public static T FillBasePropertyDefinitionVM<T>(this T target, BaseExtendedPropertyDto from)
-            where T: BasePropertyDefinitionVM
+            where T : BasePropertyDefinitionVM
         {
             target.Name = from.Name.ToLocalizedResourceDto();
             target.ToolTip = from.ToolTip.ToLocalizedResourceDto();
@@ -21,7 +21,7 @@ namespace PayamGostarClient.ApiServices.Extension
         }
 
         public static T FillBasePropertyDefinitionCreateVM<T>(this T target, BaseExtendedPropertyCreationDto from)
-            where T: BasePropertyDefinitionCreateVM
+            where T : BasePropertyDefinitionCreateVM
         {
             target = target.FillBasePropertyDefinitionVM(from);
 
@@ -40,7 +40,7 @@ namespace PayamGostarClient.ApiServices.Extension
         }
 
         public static T FillGeneralTypePropertyDefinitionCreateVM<T>(this T target, GeneralTypeExtendedPropertyCreationDto from)
-            where T: GeneralTypePropertyDefinitionCreateVM
+            where T : GeneralTypePropertyDefinitionCreateVM
         {
             target = target.FillBasePropertyDefinitionCreateVM(from);
 
@@ -51,7 +51,7 @@ namespace PayamGostarClient.ApiServices.Extension
         }
 
         public static T FillBaseMultiValuePropertyDefinitionVM<T>(this T target, BaseMultiValueExtendedPropertyDto from)
-            where T: BaseMultiValuePropertyDefinitionVM
+            where T : BaseMultiValuePropertyDefinitionVM
         {
             target.Name = from.Name.ToLocalizedResourceDto();
             target.ToolTip = from.ToolTip.ToLocalizedResourceDto();
@@ -62,7 +62,7 @@ namespace PayamGostarClient.ApiServices.Extension
         }
 
         public static T CopyGeneralMultiValuePropertyDefinitionCreateVM<T>(this T target, GeneralMultiValueExtendedPropertyCreationDto from)
-            where T: GeneralMultiValuePropertyDefinitionCreateVM
+            where T : GeneralMultiValuePropertyDefinitionCreateVM
         {
             target = target.FillBaseMultiValuePropertyDefinitionVM(from);
 

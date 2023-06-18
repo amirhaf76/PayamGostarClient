@@ -27,13 +27,13 @@ namespace PayamGostarClient.ApiServices.Models
 
             var gettingFormResult = await gettingFormTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
 
-            return gettingFormResult.ConvertToApiResponse(result => result.ConvertToCrmObjectTypeFormGetResultDto());
+            return gettingFormResult.ConvertToApiResponse(result => result.ToDto());
         }
 
         public async Task<ApiResponse<CrmObjectTypeResultDto>> CreateAsync(CrmObjectTypeFormCreateRequestDto request)
         {
             var formCreationTask = _crmObjectFormClient
-                .PostApiV2CrmobjecttypeFormCreateAsync(request.ConvertToCrmObjectTypeFormCreateRequestVM());
+                .PostApiV2CrmobjecttypeFormCreateAsync(request.ToVM());
 
             var formCreationResult = await formCreationTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
 

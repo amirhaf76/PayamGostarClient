@@ -6,6 +6,8 @@
 
         ICrmObjectTypeFormService CreateCrmObjectTypeFormService();
 
+        ICrmObjectTypeTicketService CreateCrmObjectTypeTicketService();
+
         IExtendedPropertyService CreateExtendedPropertyService();
 
         IPropertyGroupService CreatePropertyGroupService();

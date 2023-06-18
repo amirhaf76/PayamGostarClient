@@ -114,7 +114,7 @@ namespace PayamGostarClient.ApiServices.Extension
         }
 
 
-        public static TTo CopyFromBaseCrmObjectTypeGetResultVM<TFrom, TTo>(this TTo to, TFrom from)
+        public static TTo FillBaseCrmObjectTypeGetResultDto<TFrom, TTo>(this TTo to, TFrom from)
             where TTo : BaseCrmObjectTypeGetResultDto
             where TFrom : BaseCrmObjectTypeGetResultVM
         {
@@ -138,7 +138,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return to;
         }
 
-        public static TTo CopyFromBaseCrmObjectTypeCreateRequestDto<TFrom, TTo>(this TTo to, TFrom from)
+        public static TTo FillBaseCrmObjectTypeCreateRequestVM<TFrom, TTo>(this TTo to, TFrom from)
             where TTo : BaseCrmObjectTypeCreateRequestVM
             where TFrom : BaseCrmObjectTypeCreateRequestDto
         {
