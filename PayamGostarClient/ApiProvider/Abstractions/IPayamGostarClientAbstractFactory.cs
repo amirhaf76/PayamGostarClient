@@ -29,5 +29,13 @@
         ILabelPropertyDefinitionApiClient CreateLabelPropertyDefinitionApiClient();
         ICrmObjectMultiValuePropertyDefinitionApiClient CreateCrmObjectMultiValuePropertyDefinitionApiClient();
 
+
+        ITimePropertyDefinitionApiClient CreateTimePropertyDefinitionApiClient();
+        ICurrencyPropertyDefinitionApiClient CreateCurrencyPropertyDefinitionApiClient();
+        IFilePropertyDefinitionApiClient CreateFilePropertyDefinitionApiClient();
+        ICheckboxPropertyDefinitionApiClient CreateCheckboxPropertyDefinitionApiClient();
+        IAppointmentPropertyDefinitionApiClient CreateAppointmentPropertyDefinitionApiClient();
+        ISecurityItemPropertyDefinitionApiClient CreateSecurityItemPropertyDefinitionApiClient();
+
     }
 }

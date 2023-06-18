@@ -100,6 +100,37 @@ namespace PayamGostarClient.ApiProvider
         }
 
 
+        public ITimePropertyDefinitionApiClient CreateTimePropertyDefinitionApiClient()
+        {
+            return CreateClient<ITimePropertyDefinitionApiClient, TimePropertyDefinitionApiClient>();
+        }
+
+        public ICurrencyPropertyDefinitionApiClient CreateCurrencyPropertyDefinitionApiClient()
+        {
+            return CreateClient<ICurrencyPropertyDefinitionApiClient, CurrencyPropertyDefinitionApiClient>();
+        }
+
+        public IFilePropertyDefinitionApiClient CreateFilePropertyDefinitionApiClient()
+        {
+            return CreateClient<IFilePropertyDefinitionApiClient, FilePropertyDefinitionApiClient>();
+        }
+
+        public ICheckboxPropertyDefinitionApiClient CreateCheckboxPropertyDefinitionApiClient()
+        {
+            return CreateClient<ICheckboxPropertyDefinitionApiClient, CheckboxPropertyDefinitionApiClient>();
+        }
+
+        public IAppointmentPropertyDefinitionApiClient CreateAppointmentPropertyDefinitionApiClient()
+        {
+            return CreateClient<IAppointmentPropertyDefinitionApiClient, AppointmentPropertyDefinitionApiClient>();
+        }
+
+        public ISecurityItemPropertyDefinitionApiClient CreateSecurityItemPropertyDefinitionApiClient()
+        {
+            return CreateClient<ISecurityItemPropertyDefinitionApiClient, SecurityItemPropertyDefinitionApiClient>();
+        }
+
+
 
         private TAbstractClient CreateClient<TAbstractClient, TClient>()
             where TClient : TAbstractClient
@@ -107,6 +138,6 @@ namespace PayamGostarClient.ApiProvider
             return (TAbstractClient)Activator.CreateInstance(typeof(TClient), _config);
         }
 
-        
+
     }
 }
