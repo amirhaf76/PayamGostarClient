@@ -22,6 +22,11 @@ namespace PayamGostarClient.ApiProvider
             return CreateClient<ICrmObjectTypeFormApiClient, CrmObjectTypeFormApiClient>();
         }
 
+        public ICrmObjectTypeTicketApiClient CreateCrmObjectTypeTicketApiClient()
+        {
+            return CreateClient<ICrmObjectTypeTicketApiClient, CrmObjectTypeTicketApiClient>();
+        }
+
 
         public ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient()
         {
@@ -102,5 +107,6 @@ namespace PayamGostarClient.ApiProvider
             return (TAbstractClient)Activator.CreateInstance(typeof(TClient), _config);
         }
 
+        
     }
 }

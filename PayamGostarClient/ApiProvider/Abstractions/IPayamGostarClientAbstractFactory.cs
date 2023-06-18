@@ -6,6 +6,9 @@
 
         ICrmObjectTypeFormApiClient CreateCrmObjectTypeFormApiClientt();
 
+        ICrmObjectTypeTicketApiClient CreateCrmObjectTypeTicketApiClient();
+
+
         IPropertyDefinitionApiClient CreatePropertyDefinitionApiClient();
 
 
