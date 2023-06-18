@@ -28,7 +28,6 @@ namespace PayamGostarClient.ApiServices.Factory
             {
                 case Gp_ExtendedPropertyType.Text:
                     return CreateExtendedPropertyCreationService<TextExtendedPropertyCreation, TextExtendedPropertyCreationDto>(baseProperty);
-                // return new AutoNumerExtendedPropertyCreation((AutoNumerExtendedPropertyCreationDto)baseProperty, _clientFactory);
 
                 case Gp_ExtendedPropertyType.Form:
                     return CreateExtendedPropertyCreationService<FormExtendedPropertyCreation, FormExtendedPropertyCreationDto>(baseProperty);
@@ -56,7 +55,12 @@ namespace PayamGostarClient.ApiServices.Factory
 
                 case Gp_ExtendedPropertyType.CrmObjectMultiValue:
                     return CreateExtendedPropertyCreationService<CrmObjectMultiValueExtendedPropertyCreation, CrmObjectMultiValueExtendedPropertyCreationDto>(baseProperty);
-
+                case Gp_ExtendedPropertyType.Time:
+                case Gp_ExtendedPropertyType.Currency:
+                case Gp_ExtendedPropertyType.File:
+                case Gp_ExtendedPropertyType.Checkbox:
+                case Gp_ExtendedPropertyType.Appointment:
+                case Gp_ExtendedPropertyType.SecurityItem:
                 default:
                     throw new ExtendedPropertyTypeNotFoundException();
             }
@@ -314,11 +318,135 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-
                     throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
                 }
             }
         }
+
+
+        private class TimeExtendedPropertyCreation : BaseExtendedPropertyCreation<TimeExtendedPropertyCreationDto>
+        {
+            public TimeExtendedPropertyCreation(TimeExtendedPropertyCreationDto property, IPayamGostarClientAbstractFactory clientFactory) : base(property, clientFactory)
+            {
+            }
+
+            public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            {
+                try
+                {
+                    var clientApi = ClientFactory.CreateTimePropertyDefinitionApiClient();
+
+                    return await clientApi.PostApiV2TimepropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+                throw new NotImplementedException();
+            }
+        }
+        private class CurrencyExtendedPropertyCreation : BaseExtendedPropertyCreation<CurrencyExtendedPropertyCreationDto>
+        {
+            public CurrencyExtendedPropertyCreation(CurrencyExtendedPropertyCreationDto property, IPayamGostarClientAbstractFactory clientFactory) : base(property, clientFactory)
+            {
+            }
+
+            public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            {
+                try
+                {
+                    var clientApi = ClientFactory.CreateCurrencyPropertyDefinitionApiClient();
+
+                    return await clientApi.PostApiV2CurrencypropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+
+                throw new NotImplementedException();
+            }
+        }
+        private class FileExtendedPropertyCreation : BaseExtendedPropertyCreation<FileExtendedPropertyCreationDto>
+        {
+            public FileExtendedPropertyCreation(FileExtendedPropertyCreationDto property, IPayamGostarClientAbstractFactory clientFactory) : base(property, clientFactory)
+            {
+            }
+
+            public override Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            {
+                try
+                {
+                    var clientApi = ClientFactory.CreateFilePropertyDefinitionApiClient();
+
+                }
+                catch (ApiException e)
+                {
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+                throw new NotImplementedException();
+            }
+        }
+        private class CheckboxExtendedPropertyCreation : BaseExtendedPropertyCreation<CheckboxExtendedPropertyCreationDto>
+        {
+            public CheckboxExtendedPropertyCreation(CheckboxExtendedPropertyCreationDto property, IPayamGostarClientAbstractFactory clientFactory) : base(property, clientFactory)
+            {
+            }
+
+            public override Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            {
+                try
+                {
+                    var clientApi = ClientFactory.CreateCheckboxPropertyDefinitionApiClient();
+
+                }
+                catch (ApiException e)
+                {
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+                throw new NotImplementedException();
+            }
+        }
+        private class AppointmentExtendedPropertyCreation : BaseExtendedPropertyCreation<CrmItemExtendedPropertyCreationDto>
+        {
+            public AppointmentExtendedPropertyCreation(CrmItemExtendedPropertyCreationDto property, IPayamGostarClientAbstractFactory clientFactory) : base(property, clientFactory)
+            {
+            }
+
+            public override Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            {
+                try
+                {
+                    var clientApi = ClientFactory.CreateAppointmentPropertyDefinitionApiClient();
+
+                }
+                catch (ApiException e)
+                {
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+                throw new NotImplementedException();
+            }
+        }
+        private class SecurityItemExtendedPropertyCreation : BaseExtendedPropertyCreation<SecurityItemExtendedPropertyCreationDto>
+        {
+            public SecurityItemExtendedPropertyCreation(SecurityItemExtendedPropertyCreationDto property, IPayamGostarClientAbstractFactory clientFactory) : base(property, clientFactory)
+            {
+            }
+
+            public override Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            {
+                try
+                {
+                    var clientApi = ClientFactory.CreateSecurityItemPropertyDefinitionApiClient();
+                }
+                catch (ApiException e)
+                {
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+                throw new NotImplementedException();
+            }
+        }
+
     }
 
 }

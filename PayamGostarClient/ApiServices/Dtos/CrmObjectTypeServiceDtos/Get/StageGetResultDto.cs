@@ -7,6 +7,6 @@
         public string Key { get; set; }
         public bool IsDoneStage { get; set; }
         public bool IsActive { get; set; }
-
+        public int Index { get; set; }
     }
 }

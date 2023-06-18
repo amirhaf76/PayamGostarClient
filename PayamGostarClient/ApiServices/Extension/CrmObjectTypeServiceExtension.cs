@@ -80,36 +80,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new CrmObjectTypeGetRequestVM { Id = request.Id };
         }
 
-        public static ExtendedPropertySearchRequestDto ConvertToBaseExtendedPropertySearchRequestDto(this BaseExtendedPropertyModel property)
-        {
-            return new ExtendedPropertySearchRequestDto
-            {
-                Name = property.Name.Select(n => n.ConvertToResourceValueDto()),
-                ToolTip = property.ToolTip.Select(tp => tp.ConvertToResourceValueDto()),
-                UserKey = property.UserKey
-            };
-        }
-
-        public static PropertyGroupSearchRequestDto ConvertTPropertyGroupSearchRequestDto(this PropertyGroup propertyGroup)
-        {
-            return new PropertyGroupSearchRequestDto
-            {
-                Name = propertyGroup.Name.Select(n => n.ConvertToResourceValueDto()),
-                CountOfColumns = propertyGroup.CountOfColumns ?? 1,
-                Expanded = propertyGroup.Expanded,
-            };
-        }
-
-        public static StageSearchRequestDto ConvertToStageSearchRequestDto(this Stage stage)
-        {
-            return new StageSearchRequestDto
-            {
-                Name = stage.Name.Select(n => n.ConvertToResourceValueDto()),
-                Enabled = stage.Enabled,
-                IsDoneStage = stage.IsDoneStage,
-                Key = stage.Key,
-            };
-        }
+ 
 
         public static PropertyDefinitionIdWrapper ToVM(this ExtendedPropertyIdWrapperDto dto)
         {

@@ -5,6 +5,8 @@ using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos;
 using PayamGostarClient.ApiServices.Extension;
 using PayamGostarClient.Helper.Net;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Models
@@ -26,5 +28,26 @@ namespace PayamGostarClient.ApiServices.Models
 
             return stageCreationResult.ConvertToApiResponse(result => result.ToDto());
         }
+
+        public async Task<ApiResponse<IEnumerable<CrmObjectTypeStageGetResultDto>>> GetStagesAsync(Guid crmObjectId)
+        {
+            try
+            {
+                var request = new CrmObjectTypeStageGetCollectionRequestVM
+                {
+                    CrmObjectTypeId = crmObjectId,
+                };
+
+                var stageCreationResult = await _crmObjectTypeStageApiClient.PostApiV2CrmobjecttypestageGetcrmobjecttypestagesAsync(request);
+
+                return stageCreationResult.ConvertToApiResponse(result => result.Select(x => x.ToDto()));
+            }
+            catch (ApiException e)
+            {
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+            }
+
+        }
+         
     }
 }

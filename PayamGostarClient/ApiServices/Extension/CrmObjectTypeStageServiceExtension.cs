@@ -11,6 +11,7 @@ namespace PayamGostarClient.ApiServices.Extension
             {
                 CrmObjectTypeId = dto.CrmObjectTypeId,
                 IsActive = dto.Enabled,
+                Index = dto.Index,
                 IsDoneStage = dto.IsDoneStage,
                 Key = dto.Key,
                 Name = dto.Name.ToSystemResourceValueVM(),
@@ -24,6 +25,21 @@ namespace PayamGostarClient.ApiServices.Extension
                 StageId = vmResult.StageId,
             };
         }
+         
+        internal static CrmObjectTypeStageGetResultDto ToDto(this CrmObjectTypeStageGetResultVM vm)
+        {
+            return new CrmObjectTypeStageGetResultDto
+            {
+                Id = vm.Id,
+                CrmObjectTypeId = vm.CrmObjectTypeId,
+                Name = vm.Name,
+                NameResourceKey = vm.NameResourceKey,
+                Key = vm.Key,
+                Index = vm.Index,
+                IsDoneStage = vm.IsDoneStage,
+                IsActive = vm.IsActive,
 
+            };
+        }
     }
 }

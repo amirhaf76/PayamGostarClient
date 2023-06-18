@@ -62,7 +62,13 @@ namespace PayamGostarClient.ApiServices.Extension
 
         internal static CurrencyPropertyDefinitionCreateVM ToVM(this CurrencyExtendedPropertyCreationDto dto)
         {
-            return new CurrencyPropertyDefinitionCreateVM();
+            return new CurrencyPropertyDefinitionCreateVM
+            {
+                IsRequired = dto.IsRequired,
+                IsBalance = dto.IsBalance,
+                CalculationTypeIndex = dto.CalculationTypeIndex,
+
+            }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
         internal static DropDownListPropertyDefinitionCreateVM ToVM(this DropDownListExtendedPropertyCreationDto dto)
@@ -207,7 +213,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
         internal static TimePropertyDefinitionCreateVM ToVM(this TimeExtendedPropertyCreationDto dto)
         {
-            return new TimePropertyDefinitionCreateVM();
+            return new TimePropertyDefinitionCreateVM().FillGeneralTypePropertyDefinitionCreateVM(dto);
         }
 
         internal static UserMultiValuePropertyDefinitionCreateVM ToVM(this UserMultiValueExtendedPropertyCreationDto dto)
@@ -224,6 +230,10 @@ namespace PayamGostarClient.ApiServices.Extension
             }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
+    }
+
+    internal static class ExtendedPropertyExtraConfigExtension
+    {
         internal static NumericExtendedPropertyExtraConfigDto ToDto(this NumericPropertyDefinitionExtraConfigs config)
         {
             return new NumericExtendedPropertyExtraConfigDto
@@ -237,6 +247,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
             };
         }
+
         internal static LabelExtendedPropertyExtraConfigDto ToDto(this LabelPropertyDefinitionExtraConfig config)
         {
             return new LabelExtendedPropertyExtraConfigDto
@@ -249,6 +260,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
             };
         }
+
         internal static CrmObjectMultiValueExtendedPropertyExtraConfigDto ToDto(this CrmObjectMultiValuePropertyDefinitionExtraConfigs config)
         {
             return new CrmObjectMultiValueExtendedPropertyExtraConfigDto
@@ -259,6 +271,7 @@ namespace PayamGostarClient.ApiServices.Extension
 
             };
         }
+
         internal static CrmObjectReferencedTypeExtendedPropertyExtraConfigDto ToDto(this CrmObjectReferencedTypeExteraConfigs config)
         {
             return new CrmObjectReferencedTypeExtendedPropertyExtraConfigDto
@@ -268,6 +281,5 @@ namespace PayamGostarClient.ApiServices.Extension
 
             };
         }
-
     }
 }

@@ -8,5 +8,7 @@ namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos
 
         public bool Enabled { get; set; }
 
+        public int Index { get; set; }
+
     }
 }
