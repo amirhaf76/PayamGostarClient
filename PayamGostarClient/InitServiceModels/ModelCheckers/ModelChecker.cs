@@ -32,7 +32,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
 
-        internal static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
+        internal static void CheckFieldMatching<TField>(TField first, TField second, Func<string> getErrorMessage)
         {
             if (typeof(TField) == typeof(string))
             {
@@ -40,7 +40,7 @@ namespace PayamGostarClient.InitServiceModels.Models
                     (string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string)) ||
                     (!string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string)))
                 {
-                    throw CreateMisMatchException(first, second, errorMessage);
+                    throw CreateMisMatchException(first, second, getErrorMessage());
                 }
 
                 if (string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
@@ -56,7 +56,19 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             if (!first.Equals(second))
             {
-                throw CreateMisMatchException(first, second, errorMessage);
+                throw CreateMisMatchException(first, second, getErrorMessage());
+            }
+        }
+
+        internal static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
+        {
+            if (string.IsNullOrEmpty(errorMessage))
+            {
+                CheckFieldMatching(first, second, () => string.Empty);
+            }
+            else
+            {
+                CheckFieldMatching(first, second, () => errorMessage);
             }
         }
 

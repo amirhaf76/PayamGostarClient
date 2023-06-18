@@ -28,9 +28,6 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         }
 
 
-        //CrmObjectTypeFormCreateRequestDto
-
-
         internal static TTarget FillBaseCRMModel<TFrom, TTarget>(this TTarget target, TFrom from)
             where TTarget : BaseCRMModel
             where TFrom : BaseCrmObjectTypeGetResultDto

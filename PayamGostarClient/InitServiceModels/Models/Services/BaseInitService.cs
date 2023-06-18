@@ -457,9 +457,9 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
 
-        protected static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage="")
+        protected void CheckFieldMatching<TField>(TField first, TField second, string errorMessage="")
         {
-            ModelChecker.CheckFieldMatching(first, second, errorMessage);
+            ModelChecker.CheckFieldMatching(first, second, $"{Helper.Helper.GetStringsFromProperties(IntendedCrmObject)} -> {errorMessage}");
         }
 
     }

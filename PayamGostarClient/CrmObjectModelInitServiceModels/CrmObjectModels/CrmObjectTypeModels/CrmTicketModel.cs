@@ -9,20 +9,21 @@
         public PriorityMatrixModel PriorityMatrix { get; set; }
 
 
-        public class PriorityMatrixModel
-        {
-            public PriorityMatrixDetailModel[] Details { get; set; }
-        }
-
-        public class PriorityMatrixDetailModel
-        {
-            public int SeverityIndex { get; set; }
-
-            public int ImpactIndex { get; set; }
-
-            public int PriorityIndex { get; set; }
-        }
+        
+    }
+    public class PriorityMatrixModel
+    {
+        public PriorityMatrixDetailModel[] Details { get; set; }
     }
 
-    
+    public class PriorityMatrixDetailModel
+    {
+        public int SeverityIndex { get; set; }
+
+        public int ImpactIndex { get; set; }
+
+        public int PriorityIndex { get; set; }
+    }
+
+
 }
