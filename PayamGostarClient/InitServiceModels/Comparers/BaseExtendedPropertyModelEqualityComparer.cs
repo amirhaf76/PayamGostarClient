@@ -1,5 +1,4 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace PayamGostarClient.InitServiceModels.Models
@@ -13,7 +12,7 @@ namespace PayamGostarClient.InitServiceModels.Models
     internal abstract class BaseExtendedPropertyModelEqualityComparer<T> : ICheckExtendedProperty<T>
         where T : BaseExtendedPropertyModel
     {
-        protected static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage="")
+        protected static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
         {
             ModelChecker.CheckFieldMatching(first, second, errorMessage);
         }
@@ -67,7 +66,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             //    }
             //}
 
-           // counts !!!
+            // counts !!!
 
         }
     }
@@ -153,5 +152,64 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
     }
+
+    internal class TimeExtendedPropertyModelEqualityComparer : BaseExtendedPropertyModelEqualityComparer<TimeExtendedPropertyModel>
+    {
+        public override void Checks(TimeExtendedPropertyModel x, TimeExtendedPropertyModel y)
+        {
+            ChecksBase(x, y);
+
+
+        }
+    }
+    internal class CurrencyExtendedPropertyModelEqualityComparer : BaseExtendedPropertyModelEqualityComparer<CurrencyExtendedPropertyModel>
+    {
+        public override void Checks(CurrencyExtendedPropertyModel x, CurrencyExtendedPropertyModel y)
+        {
+            ChecksBase(x, y);
+
+            CheckFieldMatching(x.IsBalance, y.IsBalance, "CurrencyExtendedPropertyModel:IsBalance -> ");
+        }
+    }
+    internal class FileExtendedPropertyModelEqualityComparer : BaseExtendedPropertyModelEqualityComparer<FileExtendedPropertyModel>
+    {
+        public override void Checks(FileExtendedPropertyModel x, FileExtendedPropertyModel y)
+        {
+            ChecksBase(x, y);
+
+            CheckFieldMatching(x.MaxFileSize, y.MaxFileSize, "FileExtendedPropertyModel:MaxFileSize -> ");
+            CheckFieldMatching(x.FileSizeTypeIndex, y.FileSizeTypeIndex, "FileExtendedPropertyModel:FileSizeTypeIndex -> ");
+
+            foreach (var extension in x.Extensions)
+            {
+                if (!y.Extensions.Contains(extension))
+                {
+                    throw new MisMatchException($"'{extension}' id is not exist in current existed property!");
+                }
+            }
+        }
+    }
+    internal class CheckboxExtendedPropertyModelEqualityComparer : BaseExtendedPropertyModelEqualityComparer<CheckboxExtendedPropertyModel>
+    {
+        public override void Checks(CheckboxExtendedPropertyModel x, CheckboxExtendedPropertyModel y)
+        {
+            ChecksBase(x, y);
+        }
+    }
+    internal class AppointmentExtendedPropertyModelEqualityComparer : BaseExtendedPropertyModelEqualityComparer<AppointmentExtendedPropertyModel>
+    {
+        public override void Checks(AppointmentExtendedPropertyModel x, AppointmentExtendedPropertyModel y)
+        {
+            ChecksBase(x, y);
+        }
+    }
+    internal class SecurityItemExtendedPropertyModelEqualityComparer : BaseExtendedPropertyModelEqualityComparer<SecurityItemExtendedPropertyModel>
+    {
+        public override void Checks(SecurityItemExtendedPropertyModel x, SecurityItemExtendedPropertyModel y)
+        {
+            ChecksBase(x, y);
+        }
+    }
+
 
 }

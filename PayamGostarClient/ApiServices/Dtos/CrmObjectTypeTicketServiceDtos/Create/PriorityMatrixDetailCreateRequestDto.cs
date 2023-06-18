@@ -1,10 +1,9 @@
-﻿namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Create
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Get;
+
+namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Create
 {
-    public class PriorityMatrixDetailCreateRequestDto
+    public class PriorityMatrixDetailCreateRequestDto : PriorityMatrixDto
     {
-        public int SeverityIndex { get; set; }
-        public int ImpactIndex { get; set; }
-        public int PriorityIndex { get; set; }
 
     }
 }

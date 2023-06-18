@@ -8,7 +8,7 @@ namespace PayamGostarClient.ApiServices.Abstractions
 {
     public interface ICrmObjectTypeTicketService
     {
-        Task<ApiResponse<CrmObjectTypeTicketGetResultDto>> GetAsync(CrmObjectTypeGetRequestDto request);
+        Task<ApiResponse<CrmObjectTypeTicketGetResultDto>> GetWithPriorityMatrixAsync(CrmObjectTypeGetRequestDto request);
 
         Task<ApiResponse<CrmObjectTypeResultDto>> CreateAsync(CrmObjectTypeTicketCreateRequestDto request);
     }

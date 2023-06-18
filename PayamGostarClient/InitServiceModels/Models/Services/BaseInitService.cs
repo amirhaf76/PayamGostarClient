@@ -423,6 +423,37 @@ namespace PayamGostarClient.InitServiceModels.Models
                         .Checks((CrmObjectMultiValueExtendedPropertyModel)item1, (CrmObjectMultiValueExtendedPropertyModel)item2);
                     break;
 
+                case Gp_ExtendedPropertyType.Time:
+                    new TimeExtendedPropertyModelEqualityComparer()
+                        .Checks((TimeExtendedPropertyModel)item1, (TimeExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Currency:
+                    new CurrencyExtendedPropertyModelEqualityComparer()
+                        .Checks((CurrencyExtendedPropertyModel)item1, (CurrencyExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.File:
+                    new FileExtendedPropertyModelEqualityComparer()
+                        .Checks((FileExtendedPropertyModel)item1, (FileExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Checkbox:
+                    new CheckboxExtendedPropertyModelEqualityComparer()
+                        .Checks((CheckboxExtendedPropertyModel)item1, (CheckboxExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.Appointment:
+                    new AppointmentExtendedPropertyModelEqualityComparer()
+                        .Checks((AppointmentExtendedPropertyModel)item1, (AppointmentExtendedPropertyModel)item2);
+                    break;
+
+                case Gp_ExtendedPropertyType.SecurityItem:
+                    new SecurityItemExtendedPropertyModelEqualityComparer()
+                        .Checks((SecurityItemExtendedPropertyModel)item1, (SecurityItemExtendedPropertyModel)item2);
+                    break;
+
+
                 default:
                     throw new NotFoundExtendedPropertyTypeException();
             }
@@ -461,6 +492,26 @@ namespace PayamGostarClient.InitServiceModels.Models
 
                 case Gp_ExtendedPropertyType.CrmObjectMultiValue:
                     return propertyModel.ToCrmObjectMultiValueExtendedPropertyCreationDto();
+
+
+                case Gp_ExtendedPropertyType.Time:
+                    return propertyModel.ToTimeExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Currency:
+                    return propertyModel.ToCurrencyExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.File:
+                    return propertyModel.ToFileExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Checkbox:
+                    return propertyModel.ToCheckboxExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Appointment:
+                    return propertyModel.ToAppointmentExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.SecurityItem:
+                    return propertyModel.ToSecurityItemExtendedPropertyCreationDto();
+
 
                 default:
                     throw new NotFoundExtendedPropertyTypeException();

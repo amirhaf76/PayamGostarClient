@@ -42,15 +42,10 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
                 Id = id,
             };
 
-            var gettingTicketResult = await service.GetAsync(request);
+            var gettingTicketResult = await service.GetWithPriorityMatrixAsync(request);
 
             return gettingTicketResult.Result.ToModel();
         }
-
-        //        CrmObjectTypeTicketGetResultDto
-        //CrmObjectTypeGetRequestDto
-        //CrmObjectTypeResultDto
-        //CrmObjectTypeTicketCreateRequestDto
 
     }
 }

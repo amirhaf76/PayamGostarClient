@@ -1138,7 +1138,7 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty2", LanguageCulture = FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
@@ -1147,7 +1147,7 @@ namespace PayamGostarClientTest
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
-                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                UserKey = $"Auto_gen_text_property_test_46545646",
                 PropertyGroup = groupA
             });
             model.Properties.Add(new CrmObjectMultiValueExtendedPropertyModel()

@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
+﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using System;
 using System.Collections.Generic;
 
@@ -74,9 +75,58 @@ namespace PayamGostarClient.ApiServices.Dtos
         public bool? PreventSettingContainerCrmobjectAsParent { get; set; }
 
     }
+
     public class TextInvoiceDetailExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
     {
         public bool ShowColumn { get; set; }
     }
+    public class ImageExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
+    {
+        public int Height { get; set; }
+        public int Width { get; set; }
+
+    }
+    public class SecurityItemExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
+    {
+        public bool ShowDeactiveMembersOption { get; set; }
+    }
+    public class FileExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
+    {
+        public IEnumerable<string> Extensions { get; set; }
+
+        public int? MaxSize { get; set; }
+
+        public FileSizeType FileSizeType { get; set; }
+
+    }
+    public class ImageFileExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+    }
+    public class AutoNumberExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
+    {
+        public string Prefix { get; set; }
+        public string Postfix { get; set; }
+        public long Seed { get; set; }
+        public byte Length { get; set; }
+
+    }
+    public class ProductListExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
+    {
+        public int FractionLength { get; set; }
+        public bool ShowAmountColumn { get; set; }
+        public bool ShowDiscountColumn { get; set; }
+        public bool ShowUnitPriceColumn { get; set; }
+        public bool ShowFinalPriceColumn { get; set; }
+
+    }
+    public class CurrencyExtendedPropertyExtraConfigDto : ExtendedPropertyExtraConfigDto
+    {
+        public bool IsBalance { get; set; }
+    }
+
+
 
 }

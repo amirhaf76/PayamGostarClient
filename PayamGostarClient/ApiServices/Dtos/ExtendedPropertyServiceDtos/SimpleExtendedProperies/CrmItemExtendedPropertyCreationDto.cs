@@ -6,4 +6,9 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
     {
         
     }
+
+    public class AppointmentExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
+    {
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Appointment;
+    }
 }

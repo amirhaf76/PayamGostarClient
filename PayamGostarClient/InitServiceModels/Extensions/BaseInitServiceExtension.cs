@@ -115,6 +115,26 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 case Gp_ExtendedPropertyType.CrmObjectMultiValue:
                     return property.ToCrmObjectMultiValueExtendedPropertyModel();
 
+                case Gp_ExtendedPropertyType.Time:
+                    return property.ToTimeExtendedPropertyModel(); 
+
+                case Gp_ExtendedPropertyType.Currency:
+                    return property.ToCurrencyExtendedPropertyModel(); 
+
+                case Gp_ExtendedPropertyType.File:
+                    return property.ToFileExtendedPropertyModel(); 
+
+                case Gp_ExtendedPropertyType.Checkbox:
+                    return property.ToCheckboxExtendedPropertyModel(); 
+
+                case Gp_ExtendedPropertyType.Appointment:
+                    return property.ToAppointmentExtendedPropertyModel(); 
+
+                case Gp_ExtendedPropertyType.SecurityItem:
+                    return property.ToSecurityItemExtendedPropertyModel();
+
+
+
                 default:
                     throw new NotFoundExtendedPropertyTypeException();
             }

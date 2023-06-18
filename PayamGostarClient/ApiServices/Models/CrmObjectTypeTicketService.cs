@@ -7,6 +7,7 @@ using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Get;
 using PayamGostarClient.ApiServices.Extension;
 using PayamGostarClient.Helper.Net;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -35,13 +36,24 @@ namespace PayamGostarClient.ApiServices.Models
             }
         }
 
-        public async Task<ApiResponse<CrmObjectTypeTicketGetResultDto>> GetAsync(CrmObjectTypeGetRequestDto request)
+        public async Task<ApiResponse<CrmObjectTypeTicketGetResultDto>> GetWithPriorityMatrixAsync(CrmObjectTypeGetRequestDto request)
         {
             try
             {
                 var ticketGettingResult = await _crmObjectTypeTicketApiClient.PostApiV2CrmobjecttypeTicketGetAsync(request.ConvertToCrmObjectTypeGetRequestVM());
 
-                return ticketGettingResult.ConvertToApiResponse(result => result.ToDto());
+                var ticketMatrixResult = await _crmObjectTypeTicketApiClient.PostApiV2CrmobjecttypeTicketGetprioritymatrixAsync(new CrmObjectTypeTicketPriorityMatrixGetRequestVM
+                {
+                    CrmObjectTypeId = ticketGettingResult.Result.Id,
+                });
+
+                var dto = ticketGettingResult.ConvertToApiResponse(result => result.ToDto());
+
+                dto.Result.PriorityMatrix = new PriorityMatrixsGetResultDto
+                {
+                    Details = ticketMatrixResult.Result.Select(mx => mx.ToDto()).AsEnumerable()
+                };
+                return dto;
             }
             catch (ApiException e)
             {

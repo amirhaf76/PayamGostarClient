@@ -7,15 +7,15 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
     {
         public FileExtendedPropertyModel()
         {
-            FileExtensions = Array.Empty<string>();
+            Extensions = Array.Empty<string>();
         }
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.File;
 
         public int? MaxFileSize { get; set; }
 
-        public int FileSizeTypeIndex { get; set; }
+        public FileSizeType FileSizeTypeIndex { get; set; }
 
-        public string[] FileExtensions { get; set; }
+        public string[] Extensions { get; set; }
 
     }
 }

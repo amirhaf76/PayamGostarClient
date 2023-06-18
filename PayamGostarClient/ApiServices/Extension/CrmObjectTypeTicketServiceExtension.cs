@@ -31,5 +31,16 @@ namespace PayamGostarClient.ApiServices.Extension
 
             }.FillBaseCrmObjectTypeGetResultDto(vm);
         }
+
+        public static PriorityMatrixGetResultDto ToDto(this PriorityMatrixGetResultVM vm)
+        {
+            return new PriorityMatrixGetResultDto
+            {
+                Id = vm.Id,
+                SeverityIndex = vm.SeverityIndex,
+                ImpactIndex = vm.ImpactIndex,
+                PriorityIndex = vm.PriorityIndex, 
+            };
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new FormExtendedPropertyCreationDto
             {
-             
+
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 
@@ -128,6 +128,63 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         }
 
 
+        public static TimeExtendedPropertyCreationDto ToTimeExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (TimeExtendedPropertyModel)baseModel;
+
+            return new TimeExtendedPropertyCreationDto
+            {
+                IsRequired = model.IsRequired,
+
+            }.FillBaseExtendedPropertyDto(model);
+        }
+        public static CurrencyExtendedPropertyCreationDto ToCurrencyExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (CurrencyExtendedPropertyModel)baseModel;
+
+            return new CurrencyExtendedPropertyCreationDto
+            {
+                IsRequired = model.IsRequired,
+                IsBalance = model.IsBalance,
+
+            }.FillBaseExtendedPropertyDto(model);
+        }
+        public static FileExtendedPropertyCreationDto ToFileExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (FileExtendedPropertyModel)baseModel;
+
+            return new FileExtendedPropertyCreationDto
+            {
+                MaxFileSize = model.MaxFileSize,
+                FileSizeTypeIndex = (int)model.FileSizeTypeIndex,
+                FileExtensions = model.Extensions,
+
+            }.FillBaseExtendedPropertyDto(model);
+        }
+        public static CheckboxExtendedPropertyCreationDto ToCheckboxExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (CheckboxExtendedPropertyModel)baseModel;
+
+            return new CheckboxExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(model);
+        }
+        public static AppointmentExtendedPropertyCreationDto ToAppointmentExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (AppointmentExtendedPropertyModel)baseModel;
+
+            return new AppointmentExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(model);
+        }
+        public static SecurityItemExtendedPropertyCreationDto ToSecurityItemExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (SecurityItemExtendedPropertyModel)baseModel;
+
+            return new SecurityItemExtendedPropertyCreationDto
+            {
+                IsRequired = model.IsRequired,
+              
+            }.FillBaseExtendedPropertyDto(model);
+        }
+
+
         public static NumberExtendedPropertyModel ToNumberExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
         {
             var extraConfig = (NumericExtendedPropertyExtraConfigDto)dto.ExtraConfig;
@@ -147,7 +204,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             return new TextExtendedPropertyModel
             {
-                
+
             }.FillBaseExtendedPropertyModel(dto);
         }
 
@@ -155,7 +212,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             return new DropDownListExtendedPropertyModel
             {
-                
+
             }.FillBaseExtendedPropertyModel(dto);
         }
 
@@ -163,7 +220,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             return new UserExtendedPropertyModel
             {
-                
+
             }.FillBaseExtendedPropertyModel(dto);
         }
 
@@ -205,8 +262,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 // ColorId = extraConfig.ColorIndex,
                 IconName = extraConfig.IconName,
                 LabelText = extraConfig.LabelText,
-                
-                
+
+
             }.FillBaseExtendedPropertyModel(dto);
         }
 
@@ -219,6 +276,50 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 ShowInGridProps = extraConfig.VisibleProperties.Select(g => new PropertyDefinitionIdWrapperModel { Id = g.ToString() }).ToArray(),
                 CrmObjectTypeIndex = extraConfig.CrmObjectType,
                 SubTypeId = extraConfig.SubTypeId?.ToString(),
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
+        public static TimeExtendedPropertyModel ToTimeExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new TimeExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+        }
+        public static CurrencyExtendedPropertyModel ToCurrencyExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            var extraConfig = (CurrencyExtendedPropertyExtraConfigDto)dto.ExtraConfig;
+
+            return new CurrencyExtendedPropertyModel
+            {
+                IsBalance = extraConfig.IsBalance,
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+        public static FileExtendedPropertyModel ToFileExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            var extraConfig = (FileExtendedPropertyExtraConfigDto)dto.ExtraConfig;
+
+            return new FileExtendedPropertyModel
+            {
+                Extensions = extraConfig.Extensions?.ToArray(),
+                MaxFileSize = extraConfig.MaxSize,
+                FileSizeTypeIndex = extraConfig.FileSizeType,
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+        public static CheckboxExtendedPropertyModel ToCheckboxExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new CheckboxExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+        }
+        public static AppointmentExtendedPropertyModel ToAppointmentExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            return new AppointmentExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+        }
+        public static SecurityItemExtendedPropertyModel ToSecurityItemExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            var extraConfig = (SecurityItemExtendedPropertyExtraConfigDto)dto.ExtraConfig;
+
+            return new SecurityItemExtendedPropertyModel
+            {
 
             }.FillBaseExtendedPropertyModel(dto);
         }

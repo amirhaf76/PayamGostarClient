@@ -55,12 +55,26 @@ namespace PayamGostarClient.ApiServices.Factory
 
                 case Gp_ExtendedPropertyType.CrmObjectMultiValue:
                     return CreateExtendedPropertyCreationService<CrmObjectMultiValueExtendedPropertyCreation, CrmObjectMultiValueExtendedPropertyCreationDto>(baseProperty);
+
+
                 case Gp_ExtendedPropertyType.Time:
+                    return CreateExtendedPropertyCreationService<TimeExtendedPropertyCreation, TimeExtendedPropertyCreationDto>(baseProperty);
+
                 case Gp_ExtendedPropertyType.Currency:
+                    return CreateExtendedPropertyCreationService<CurrencyExtendedPropertyCreation, CurrencyExtendedPropertyCreationDto>(baseProperty);
+
                 case Gp_ExtendedPropertyType.File:
+                    return CreateExtendedPropertyCreationService<FileExtendedPropertyCreation, FileExtendedPropertyCreationDto>(baseProperty);
+
                 case Gp_ExtendedPropertyType.Checkbox:
+                    return CreateExtendedPropertyCreationService<CheckboxExtendedPropertyCreation, CheckboxExtendedPropertyCreationDto>(baseProperty);
+
                 case Gp_ExtendedPropertyType.Appointment:
+                    return CreateExtendedPropertyCreationService<AppointmentExtendedPropertyCreation, CrmItemExtendedPropertyCreationDto>(baseProperty);
+
                 case Gp_ExtendedPropertyType.SecurityItem:
+                    return CreateExtendedPropertyCreationService<SecurityItemExtendedPropertyCreation, SecurityItemExtendedPropertyCreationDto>(baseProperty);
+
                 default:
                     throw new ExtendedPropertyTypeNotFoundException();
             }
@@ -373,12 +387,13 @@ namespace PayamGostarClient.ApiServices.Factory
             {
             }
 
-            public override Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
                 try
                 {
                     var clientApi = ClientFactory.CreateFilePropertyDefinitionApiClient();
 
+                    return await clientApi.PostApiV2FilepropertydefinitionCreateAsync(Property.ToVM());
                 }
                 catch (ApiException e)
                 {
@@ -399,6 +414,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 {
                     var clientApi = ClientFactory.CreateCheckboxPropertyDefinitionApiClient();
 
+                    return clientApi.PostApiV2CheckboxpropertydefinitionCreateAsync(Property.ToVM());
                 }
                 catch (ApiException e)
                 {
@@ -413,12 +429,13 @@ namespace PayamGostarClient.ApiServices.Factory
             {
             }
 
-            public override Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
                 try
                 {
                     var clientApi = ClientFactory.CreateAppointmentPropertyDefinitionApiClient();
 
+                    return await clientApi.PostApiV2AppointmentpropertydefinitionCreateAsync(Property.ToVM());
                 }
                 catch (ApiException e)
                 {
@@ -433,11 +450,13 @@ namespace PayamGostarClient.ApiServices.Factory
             {
             }
 
-            public override Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
                 try
                 {
                     var clientApi = ClientFactory.CreateSecurityItemPropertyDefinitionApiClient();
+
+                    return await clientApi.PostApiV2SecurityitempropertydefinitionCreateAsync(Property.ToVM());
                 }
                 catch (ApiException e)
                 {
