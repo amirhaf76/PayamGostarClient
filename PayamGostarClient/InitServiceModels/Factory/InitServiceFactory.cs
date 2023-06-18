@@ -6,6 +6,7 @@ using PayamGostarClient.InitServiceModels.Abstractions;
 using PayamGostarClient.InitServiceModels.Exceptions;
 using PayamGostarClient.InitServiceModels.Extensions;
 using PayamGostarClient.InitServiceModels.Models;
+using PayamGostarClient.InitServiceModels.Models.Services;
 using System;
 
 namespace PayamGostarClient.InitServiceModels.Factory
@@ -31,6 +32,8 @@ namespace PayamGostarClient.InitServiceModels.Factory
             {
                 case Gp_CrmObjectType.Form:
                     return new FormInitService(model as CrmFormModel, _serviceFactory);
+                case Gp_CrmObjectType.Ticket:
+                    return new TicketInitService(model as CrmTicketModel, _serviceFactory);
                 default:
                     throw new InvalidGpCrmObjectTypeException();
             }

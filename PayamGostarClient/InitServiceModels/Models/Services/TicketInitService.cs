@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PayamGostarClient.InitServiceModels.Models.Services
 {
-    internal class TicketInitService : BaseInitService<CrmTicketModel>
+    public class TicketInitService : BaseInitService<CrmTicketModel>
     {
         public TicketInitService(CrmTicketModel intendedCrmObject, IPayamGostarClientServiceFactory serviceFactory) : base(intendedCrmObject, serviceFactory)
         {
@@ -18,6 +18,9 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         protected override CrmTicketModel CheckCrmObjectMatching(CrmTicketModel currentCrmObj)
         {
             CheckFieldMatching(IntendedCrmObject.ResponseTemplate, currentCrmObj.ResponseTemplate);
+            CheckFieldMatching(IntendedCrmObject.ListenLineId, currentCrmObj.ListenLineId);
+
+            // todo: matrix
 
             return currentCrmObj;
         }

@@ -4,7 +4,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
 {
     public class CurrencyExtendedPropertyModel : BaseExtendedPropertyModel
     {
-        public bool IsBalance { get; set; }
+        public bool IsBalance { get; internal set; }
 
         // public int CalculationTypeIndex { get; set; }
 
