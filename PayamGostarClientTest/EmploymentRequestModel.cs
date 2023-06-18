@@ -81,6 +81,7 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
+                        Index = 3,
                     },
                     new Stage()
                     {
@@ -90,6 +91,7 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = true,
                         Enabled = true,
+                        Index = 4
                     },
                     new Stage()
                     {
@@ -99,6 +101,7 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
+                        Index = 1
                     },
                     new Stage()
                     {
@@ -108,6 +111,7 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
+                        Index = 2,
                     },
                     new Stage()
                     {
@@ -117,6 +121,7 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = true,
                         Enabled = true,
+                        Index = 5
                     }
                 },
             };

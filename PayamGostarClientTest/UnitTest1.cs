@@ -275,6 +275,7 @@ namespace PayamGostarClientTest
                     },
                     IsDoneStage = false,
                     Enabled = true,
+                    Index = 1
                 },
                 new Stage()
                 {
@@ -284,6 +285,7 @@ namespace PayamGostarClientTest
                     },
                     IsDoneStage = true,
                     Enabled = true,
+                    Index = 2
                 },
                 new Stage()
                 {
@@ -293,6 +295,7 @@ namespace PayamGostarClientTest
                     },
                     IsDoneStage = false,
                     Enabled = true,
+                    Index = 3
                 },
                 new Stage()
                 {
@@ -302,6 +305,7 @@ namespace PayamGostarClientTest
                     },
                     IsDoneStage = false,
                     Enabled = true,
+                    Index = 4
                 },
                 new Stage()
                 {
@@ -311,6 +315,7 @@ namespace PayamGostarClientTest
                     },
                     IsDoneStage = true,
                     Enabled = true,
+                    Index = 5
                 }
             };
       
@@ -510,6 +515,60 @@ namespace PayamGostarClientTest
                 PropertyGroup = groupA
             });
 
+            model.Stages = new System.Collections.Generic.List<Stage>
+            {
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "تایید شده"},
+                    },
+                    IsDoneStage = false,
+                    Enabled = true,
+                    Index = 1
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "جذب شده"},
+                    },
+                    IsDoneStage = true,
+                    Enabled = true,
+                    Index = 2
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
+                    },
+                    IsDoneStage = false,
+                    Enabled = true,
+                    Index = 3
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
+                    },
+                    IsDoneStage = false,
+                    Enabled = true,
+                    Index = 4
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "رد شده"},
+                    },
+                    IsDoneStage = true,
+                    Enabled = true,
+                    Index = 5
+                }
+            };
+
 
             var model2 = new CrmFormModel
             {
@@ -578,6 +637,60 @@ namespace PayamGostarClientTest
                 MinValue = -1,
                 DecimalDigits = 1,
             });
+
+            model2.Stages = new System.Collections.Generic.List<Stage>
+            {
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "تایید شده"},
+                    },
+                    IsDoneStage = false,
+                    Enabled = true,
+                    Index = 1
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "جذب شده"},
+                    },
+                    IsDoneStage = true,
+                    Enabled = true,
+                    Index = 2
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
+                    },
+                    IsDoneStage = false,
+                    Enabled = true,
+                    Index = 3
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
+                    },
+                    IsDoneStage = false,
+                    Enabled = true,
+                    Index = 4
+                },
+                new Stage()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "رد شده"},
+                    },
+                    IsDoneStage = true,
+                    Enabled = true,
+                    Index = 5
+                }
+            };
 
             await crmModelService.InitAsync(model, model2);
         }
@@ -966,6 +1079,101 @@ namespace PayamGostarClientTest
             var crmModelService = new CrmObjectModelInitService(initServiceConfig);
 
             await crmModelService.InitAsync(EmploymentRequestModel.Create());
+        }
+        [Fact]
+        public async Task InitAsync_EmploymentRequestCrmFormModel_2()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+
+
+            var model = new CrmFormModel
+            {
+                Name = new[]
+                {
+                    new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "1stco- آگهی مرتبط با درخواست جذب نیرو"},
+                },
+                Description = new[]
+                {
+                    new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty },
+                },
+                Code = "EmploymentRequestAd",
+                Enabled = true,
+                PropertyGroups = new System.Collections.Generic.List<PropertyGroup>
+                {
+                    new PropertyGroup()
+                    {
+                        Name = new[]
+                        {
+                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "اطلاعات محل انتشار"},
+                        },
+                        CountOfColumns = 1,
+                        Expanded = false,
+                    }
+                },
+            };
+
+            var groupA = new PropertyGroup()
+            {
+                Name = new[]
+                        {
+                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "مرتبط با فرآیند"},
+                        },
+                CountOfColumns = 2,
+                Expanded = false,
+            };
+
+            model.PropertyGroups.Add(groupA);
+
+            model.Properties.Add(new TextExtendedPropertyModel
+            {
+                Name = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+                ToolTip = new ResourceValue[]
+                {
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
+                },
+
+                UserKey = $"Auto_gen_text_property_test_{Guid.NewGuid()}",
+                PropertyGroup = groupA
+            });
+            model.Properties.Add(new CrmObjectMultiValueExtendedPropertyModel()
+            {
+                Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "آگهی ها"},
+                    },
+                ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                PropertyGroup = groupA,
+                UserKey = "EmploymentRequestAds",
+                IsRequired = false,
+                DefaultValue = string.Empty,
+                CrmObjectTypeIndex = PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Gp_CrmObjectType.Form,
+            });
+
+        
+
+
+            _testOutput.WriteLine(model.Name.FirstOrDefault()?.Value);
+            _testOutput.WriteLine(model.Code);
+
+            await crmModelService.InitAsync(model);
         }
 
         [Fact]

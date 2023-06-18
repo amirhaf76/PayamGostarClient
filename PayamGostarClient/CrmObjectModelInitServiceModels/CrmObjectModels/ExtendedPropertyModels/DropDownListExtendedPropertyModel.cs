@@ -9,7 +9,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
         /// <summary>
         /// Does not work!!! It can not be received by api.
         /// </summary>
-        public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
+        // public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
 
         public DropDownListExtendedPropertyValueModel[] Values { get; set; }
 

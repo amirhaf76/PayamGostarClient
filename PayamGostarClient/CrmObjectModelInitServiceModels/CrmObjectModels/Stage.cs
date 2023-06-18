@@ -18,6 +18,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels
 
         public bool Enabled { get; set; }
 
+        public int Index { get; set; }
     }
 
     

@@ -2,10 +2,8 @@
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels
 {
-    public class SecurityItemExtendedPropertyModel : BaseExtendedPropertyModel
+    public class CheckboxExtendedPropertyModel : BaseExtendedPropertyModel
     {
-        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.SecurityItem;
+        public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Checkbox;
     }
-
-
 }

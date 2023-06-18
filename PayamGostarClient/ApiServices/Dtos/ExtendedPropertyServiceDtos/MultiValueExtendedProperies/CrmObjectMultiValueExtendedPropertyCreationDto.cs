@@ -1,5 +1,4 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.MultiValue;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.MultiValue;
 using System;
 using System.Collections.Generic;
 
