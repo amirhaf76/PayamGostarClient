@@ -53,7 +53,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             }
             else
             {
-                await CheckCrmObjectTypeBelongs(searchedCrmObject);
+                await CheckCrmObjectTypeBelongsAndInsert(searchedCrmObject);
             }
         }
 
@@ -97,7 +97,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         private void ValidateExtendedProperites()
         {
             if (
-                (IntendedCrmObject.Properties?.Any() ?? false) && 
+                (IntendedCrmObject.Properties?.Any() ?? false) &&
                 (IntendedCrmObject.PropertyGroups == null || !IntendedCrmObject.PropertyGroups.Any()))
             {
                 throw new InvalidGroupCountException();
@@ -140,7 +140,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             await CreateCrmObjectTypeBelongs(newCrmObjectId);
         }
 
-        private async Task CheckCrmObjectTypeBelongs(CrmObjectTypeSearchResultDto currentCrmObject)
+        private async Task CheckCrmObjectTypeBelongsAndInsert(CrmObjectTypeSearchResultDto currentCrmObject)
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
@@ -149,6 +149,17 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToModel()));
 
             await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
+        }
+
+        public void CheckCrmObjectTypeBelongs(CrmObjectTypeSearchResultDto currentCrmObject)
+        {
+            CheckBaseCrmObjectMatching(currentCrmObject);
+
+            CheckGroupPropertiesAndReturnNewGroupsWithId(currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
+
+            CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentCrmObject.Properties?.Select(x => x.ToModel()));
+
+            CheckStagesAndGetNewStages(currentCrmObject.Stages?.Select(x => x.ToStage()));
         }
 
         private async Task CreateCrmObjectTypeBelongs(Guid id)
@@ -163,12 +174,19 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
 
         private async Task CheckStagesAndUpdateUnexistedStagesAsync(Guid id, IEnumerable<Stage> currentStages)
         {
+            List<Stage> newStages = CheckStagesAndGetNewStages(currentStages);
+
+            await UpdateStagesAsync(id, newStages);
+        }
+
+        private List<Stage> CheckStagesAndGetNewStages(IEnumerable<Stage> currentStages)
+        {
             var detectedPair = IntendedCrmObject.Stages.Join(
-                currentStages,
-                intendedStage => intendedStage.Key,
-                currentStage => currentStage.Key,
-                (intendedStage, currentStage) => Tuple.Create(intendedStage, currentStage)
-                );
+                            currentStages,
+                            intendedStage => intendedStage.Key,
+                            currentStage => currentStage.Key,
+                            (intendedStage, currentStage) => Tuple.Create(intendedStage, currentStage)
+                            );
 
             foreach (var pair in detectedPair)
             {
@@ -179,10 +197,17 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
                 .Except(detectedPair.Select(d => d.Item1))
                 .ToList();
 
-            await UpdateStagesAsync(id, newStages);
+            return newStages;
         }
 
         private async Task CheckGroupPropertiesAndCreateUnexistedGroupPropetiesAsync(Guid id, IEnumerable<PropertyGroup> groups)
+        {
+            var newGroups = CheckGroupPropertiesAndReturnNewGroupsWithId(groups);
+
+            await CreateGroupPropetiesAsync(id, newGroups);
+        }
+
+        private List<PropertyGroup> CheckGroupPropertiesAndReturnNewGroupsWithId(IEnumerable<PropertyGroup> groups)
         {
             var newGroups = new List<PropertyGroup>();
 
@@ -196,7 +221,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
                 }
             }
 
-            await CreateGroupPropetiesAsync(id, newGroups);
+            return newGroups;
         }
 
         private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> currentExtendedProperties)
@@ -451,5 +476,29 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             ModelChecker.CheckFieldMatching(first, second, errorMessage);
         }
 
+        public async Task<bool> CheckSchemaAsync()
+        {
+            ValidateInitialValidationModel();
+
+            var searchedCrmObject = await SearchCrmObjectAsync();
+
+            if (searchedCrmObject == null)
+            {
+                return false;
+            }
+            else
+            {
+                try
+                {
+                    CheckCrmObjectTypeBelongs(searchedCrmObject);
+
+                    return true;
+                }
+                catch(MisMatchException)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

@@ -33,7 +33,15 @@ namespace PayamGostarClient.InitServiceModels.ModelCheckers
             }
         }
 
-        internal static void CheckFieldMatching<TField>(TField first, TField second, Func<string> getErrorMessage)
+        internal static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
+        {
+            if (!AreTheFieldsMatched(first, second))
+            {
+                throw CreateMisMatchException(first, second, errorMessage);
+            }
+        }
+
+        internal static bool AreTheFieldsMatched<TField>(TField first, TField second)
         {
             if (typeof(TField) == typeof(string))
             {
@@ -41,36 +49,21 @@ namespace PayamGostarClient.InitServiceModels.ModelCheckers
                     string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string) ||
                     !string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
                 {
-                    throw CreateMisMatchException(first, second, getErrorMessage());
+                    return false;
                 }
 
                 if (string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
                 {
-                    return;
+                    return true;
                 }
             }
 
             if (first == null && second == null)
             {
-                return;
+                return true;
             }
 
-            if (!first.Equals(second))
-            {
-                throw CreateMisMatchException(first, second, getErrorMessage());
-            }
-        }
-
-        internal static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
-        {
-            if (string.IsNullOrEmpty(errorMessage))
-            {
-                CheckFieldMatching(first, second, () => string.Empty);
-            }
-            else
-            {
-                CheckFieldMatching(first, second, () => errorMessage);
-            }
+            return first.Equals(second);
         }
 
         private static MisMatchException CreateMisMatchException<TField>(TField first, TField second, string errorMessage)

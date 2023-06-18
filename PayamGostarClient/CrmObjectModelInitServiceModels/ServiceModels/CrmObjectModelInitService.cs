@@ -20,6 +20,22 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
             }
         }
 
+        public async Task<bool> CheckSchemaAsync(params BaseCRMModel[] crmModels)
+        {
+            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = _config.ClientService };
+
+            var initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
+
+            foreach (var crmModel in crmModels)
+            {
+                var initService = initServiceFactory.Create(crmModel);
+
+                return await initService.CheckSchemaAsync();
+            }
+
+            return true;
+        }
+
         public void Init(params BaseCRMModel[] crmModels)
         {
             SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => InitAsync(crmModels));

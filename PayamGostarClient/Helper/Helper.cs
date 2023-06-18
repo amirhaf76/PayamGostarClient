@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PayamGostarClient.Helper
 {
     internal class Helper
     {
-        public static string GetStringsFromProperties<T>(T obj) where T: class
+        public static string GetStringsFromProperties<T>(T obj) where T : class
         {
             var type = typeof(T);
 
@@ -16,15 +15,16 @@ namespace PayamGostarClient.Helper
 
             foreach (var property in properties)
             {
-                if (IsValidTypeForPresentation(property.PropertyType))
-                {
-                    var value = property.GetValue(obj);
+                var value = property.GetValue(obj);
 
-                    messages.Add($"{property.Name}: {(value ?? "null")}");
-                } else
-                {
-                    messages.Add($"{property.Name}: <{property.Name}>");
-                }
+                messages.Add($"{property.Name}: {(value ?? "null")}");
+                //if (IsValidTypeForPresentation(property.PropertyType))
+                //{
+                //}
+                //else
+                //{
+                //    messages.Add($"{property.Name}: <{property.Name}>");
+                //}
             }
 
             var message = string.Join(", ", messages);

@@ -8,5 +8,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.Abstractions
         void Init(params BaseCRMModel[] crmModels);
 
         Task InitAsync(params BaseCRMModel[] crmModels);
+
+        Task<bool> CheckSchemaAsync(params BaseCRMModel[] crmModels);
     }
 }
