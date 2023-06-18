@@ -24,10 +24,6 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
         }
 
-        public static MisMatchException Create<T>(T first, T second)
-        {
-            return new MisMatchException($"{first} != {second}");
-        }
         public static MisMatchException Create(ResourceValue[] first, ResourceValue[] second)
         {
             var messageBuilder = new StringBuilder();

@@ -273,10 +273,10 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         private T CheckBaseCrmObjectMatching(T currentCrmObj)
         {
-            CheckFieldMatching(IntendedCrmObject.Type, currentCrmObj.Type);
-            CheckFieldMatching(IntendedCrmObject.Code, currentCrmObj.Code);
-            CheckFieldMatching(IntendedCrmObject.Enabled, currentCrmObj.Enabled);
-            CheckFieldMatching(IntendedCrmObject.PreviewTypeIndex, currentCrmObj.PreviewTypeIndex);
+            CheckFieldMatching(IntendedCrmObject.Type, currentCrmObj.Type, "BaseCrmObj:Type -> ");
+            CheckFieldMatching(IntendedCrmObject.Code, currentCrmObj.Code, "BaseCrmObj:Code -> ");
+            CheckFieldMatching(IntendedCrmObject.Enabled, currentCrmObj.Enabled, "BaseCrmObj:Enabled -> ");
+            CheckFieldMatching(IntendedCrmObject.PreviewTypeIndex, currentCrmObj.PreviewTypeIndex, "BaseCrmObj:PreviewTypeIndex -> ");
 
             if (!IntendedCrmObject.Name.CheckResourceValues(currentCrmObj.Name))
             {
@@ -302,11 +302,11 @@ namespace PayamGostarClient.InitServiceModels.Models
                 {
                     if (!intendedGroup.Name.CheckResourceValues(currentGroup.Name))
                     {
-                        throw new MisMatchException();
+                        MisMatchException.Create(intendedGroup.Name, currentGroup.Name);
                     }
 
-                    CheckFieldMatching(intendedGroup.Expanded, currentGroup.Expanded);
-                    CheckFieldMatching(intendedGroup.CountOfColumns, currentGroup.CountOfColumns);
+                    CheckFieldMatching(intendedGroup.Expanded, currentGroup.Expanded, "GroupPropertis:Expanded -> ");
+                    CheckFieldMatching(intendedGroup.CountOfColumns, currentGroup.CountOfColumns, "GroupPropertis:CountOfColumns -> ");
 
                     intendedGroup.Id = currentGroup.Id;
 
@@ -327,12 +327,12 @@ namespace PayamGostarClient.InitServiceModels.Models
                 {
                     if (!intendedStage.Name.CheckResourceValues(currentStage.Name))
                     {
-                        throw new MisMatchException();
+                        throw MisMatchException.Create(intendedStage.Name, currentStage.Name);
                     }
 
-                    CheckFieldMatching(intendedStage.Key, currentStage.Key);
-                    CheckFieldMatching(intendedStage.Enabled, currentStage.Enabled);
-                    CheckFieldMatching(intendedStage.IsDoneStage, currentStage.IsDoneStage);
+                    CheckFieldMatching(intendedStage.Key, currentStage.Key, "Stage:Key -> ");
+                    CheckFieldMatching(intendedStage.Enabled, currentStage.Enabled, "Stage:Enabled -> ");
+                    CheckFieldMatching(intendedStage.IsDoneStage, currentStage.IsDoneStage, "Stage:IsDoneStage -> ");
 
                     return null;
                 }
@@ -457,52 +457,9 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
 
-        protected static void CheckFieldMatching<TField>(TField first, TField second)
+        protected static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage="")
         {
-            ModelChecker.CheckFieldMatching(first, second);
-        }
-
-    }
-
-    internal static class ModelChecker
-    {
-        internal static bool CheckResourceValues(this IEnumerable<ResourceValue> first, IEnumerable<ResourceValue> second)
-        {
-            return first
-                .Join(
-                    second,
-                    outter => outter.LanguageCulture,
-                    inner => inner.LanguageCulture,
-                    (inner, outter) => new ValueTuple<string, string>(outter.Value, inner.Value))
-                .All(join => join.Item1 == join.Item2);
-        }
-
-        internal static void CheckFieldMatching<TField>(TField first, TField second)
-        {
-            if (typeof(TField) == typeof(string))
-            {
-                if (
-                    (string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string)) ||
-                    (!string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string)))
-                {
-                    throw new MisMatchException($"{first} != {second}");
-                }
-
-                if (string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
-                {
-                    return;
-                }
-            }
-
-            if (first == null && second == null)
-            {
-                return;
-            }
-
-            if (!first.Equals(second))
-            {
-                throw new MisMatchException($"{first} != {second}");
-            }
+            ModelChecker.CheckFieldMatching(first, second, errorMessage);
         }
 
     }

@@ -28,7 +28,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new FormExtendedPropertyCreationDto
             {
-                
+             
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 
@@ -38,13 +38,12 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new DropDownListExtendedPropertyCreationDto
             {
+                IsRequired = model.IsRequired,
                 Values = model.Values?.Select(v => new DropDownListExtendedPropertyValueCreationDto
                 {
                     PropertyDefinitionId = v.PropertyDefinitionId,
                     Value = v.Value
-                }) ?? Array.Empty<DropDownListExtendedPropertyValueCreationDto>()
-                // IsRequired = model.IsRequired,
-                // CalculationTypeIndex = model.CalculationTypeIndex,
+                }) ?? Array.Empty<DropDownListExtendedPropertyValueCreationDto>(),
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -106,6 +105,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             return new PersianDateExtendedPropertyCreationDto
             {
+                IsRequired = model.IsRequired,
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 

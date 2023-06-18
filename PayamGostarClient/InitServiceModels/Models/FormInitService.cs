@@ -5,6 +5,7 @@ using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjec
 using PayamGostarClient.InitServiceModels.Extensions;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PayamGostarClient.InitServiceModels.Models
 {
@@ -40,15 +41,15 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         protected override CrmFormModel CheckCrmObjectMatching(CrmFormModel currentCrmObj)
         {
-            CheckFieldMatching(IntendedCrmObject.Prefix, currentCrmObj.Prefix);
-            CheckFieldMatching(IntendedCrmObject.Postfix, currentCrmObj.Postfix);
-            CheckFieldMatching(IntendedCrmObject.StartFrom, currentCrmObj.StartFrom);
-            CheckFieldMatching(IntendedCrmObject.DigitCount, currentCrmObj.DigitCount);
+            CheckFieldMatching(IntendedCrmObject.Prefix, currentCrmObj.Prefix, "FormCrmObj:Prefix -> ");
+            CheckFieldMatching(IntendedCrmObject.Postfix, currentCrmObj.Postfix, "FormCrmObj:Postfix -> ");
+            CheckFieldMatching(IntendedCrmObject.StartFrom, currentCrmObj.StartFrom, "FormCrmObj:StartFrom -> ");
+            CheckFieldMatching(IntendedCrmObject.DigitCount, currentCrmObj.DigitCount, "FormCrmObj:DigitCount -> ");
 
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.FlushFormAfterSave, currentCrmObj.PublicForm?.FlushFormAfterSave);
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.IsAutoSubject, currentCrmObj.PublicForm?.IsAutoSubject);
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.SubmitMessage, currentCrmObj.PublicForm?.SubmitMessage);
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.RedirectAfterSuccessUrl, currentCrmObj.PublicForm?.RedirectAfterSuccessUrl);
+            CheckFieldMatching(IntendedCrmObject.PublicForm?.FlushFormAfterSave, currentCrmObj.PublicForm?.FlushFormAfterSave, "FormCrmObj:PublicForm:FlushFormAfterSave -> ");
+            CheckFieldMatching(IntendedCrmObject.PublicForm?.IsAutoSubject, currentCrmObj.PublicForm?.IsAutoSubject, "FormCrmObj:PublicForm:IsAutoSubject -> ");
+            CheckFieldMatching(IntendedCrmObject.PublicForm?.SubmitMessage, currentCrmObj.PublicForm?.SubmitMessage, "FormCrmObj:PublicForm:SubmitMessage -> ");
+            CheckFieldMatching(IntendedCrmObject.PublicForm?.RedirectAfterSuccessUrl, currentCrmObj.PublicForm?.RedirectAfterSuccessUrl, "FormCrmObj:PublicForm:RedirectAfterSuccessUrl -> ");
 
             return currentCrmObj;
         }

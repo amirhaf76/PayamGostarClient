@@ -220,6 +220,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new UserPropertyDefinitionCreateVM
             {
                 ShowDeactiveMembersOption = dto.ShowDeactiveMembersOption,
+                IsRequired = dto.IsRequired,
             }.FillBasePropertyDefinitionCreateVM(dto);
         }
 

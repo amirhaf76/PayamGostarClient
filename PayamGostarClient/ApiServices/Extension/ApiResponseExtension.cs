@@ -4,6 +4,7 @@ using PayamGostarClient.Helper.Net;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Extension
@@ -74,7 +75,7 @@ namespace PayamGostarClient.ApiServices.Extension
         }
 
 
-        private static ApiServiceException CreateApiExceptionDtoFromApiException(ApiException e)
+        public static ApiServiceException CreateApiExceptionDtoFromApiException(ApiException e)
         {
             var headers = new Dictionary<string, IEnumerable<string>>();
 
@@ -84,6 +85,24 @@ namespace PayamGostarClient.ApiServices.Extension
             }
 
             return new ApiServiceException(e)
+            {
+                StatusCode = (HttpStatusCode)e.StatusCode,
+                Response = e.Response,
+                Headers = new Dictionary<string, IEnumerable<string>>(headers),
+                ApiError = JsonConvert.DeserializeObject<ApiErrorDto>(e.Response)
+            };
+        }
+
+        public static ApiServiceException CreateApiExceptionDtoFromApiException(string message, ApiException e)
+        {
+            var headers = new Dictionary<string, IEnumerable<string>>();
+
+            foreach (var keyValue in e.Headers)
+            {
+                headers.Add(keyValue.Key, keyValue.Value);
+            }
+
+            return new ApiServiceException(message, e)
             {
                 StatusCode = (HttpStatusCode)e.StatusCode,
                 Response = e.Response,
@@ -106,7 +125,23 @@ namespace PayamGostarClient.ApiServices.Extension
 
     public class ApiServiceException : Exception
     {
+        public ApiServiceException()
+        {
+        }
+
         public ApiServiceException(Exception e) : base(e.Message, e.InnerException)
+        {
+        }
+
+        public ApiServiceException(string message) : base(message)
+        {
+        }
+
+        public ApiServiceException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected ApiServiceException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 

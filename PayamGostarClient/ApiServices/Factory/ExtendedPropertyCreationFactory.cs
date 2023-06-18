@@ -9,7 +9,6 @@ using PayamGostarClient.ApiServices.Exceptions;
 using PayamGostarClient.ApiServices.Extension;
 using PayamGostarClient.Helper.Net;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Factory
@@ -29,7 +28,7 @@ namespace PayamGostarClient.ApiServices.Factory
             {
                 case Gp_ExtendedPropertyType.Text:
                     return CreateExtendedPropertyCreationService<TextExtendedPropertyCreation, TextExtendedPropertyCreationDto>(baseProperty);
-                    // return new AutoNumerExtendedPropertyCreation((AutoNumerExtendedPropertyCreationDto)baseProperty, _clientFactory);
+                // return new AutoNumerExtendedPropertyCreation((AutoNumerExtendedPropertyCreationDto)baseProperty, _clientFactory);
 
                 case Gp_ExtendedPropertyType.Form:
                     return CreateExtendedPropertyCreationService<FormExtendedPropertyCreation, FormExtendedPropertyCreationDto>(baseProperty);
@@ -86,9 +85,7 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public async Task<ApiResponse<PropertyDefinitionCreationResultDto>> CreateAsync()
             {
-                var propertyCreationTask = CreatePropertyCreationActionAsync();
-
-                var propertyCreationResult = await propertyCreationTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
+                var propertyCreationResult = await CreatePropertyCreationActionAsync().ConfigureAwait(false);
 
                 return propertyCreationResult.ConvertToApiResponse(result => result.ToDto());
             }
@@ -103,9 +100,17 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreateTextPropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreateTextPropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2TextpropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2TextpropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
             }
         }
         private class FormExtendedPropertyCreation : BaseExtendedPropertyCreation<FormExtendedPropertyCreationDto>
@@ -116,9 +121,17 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreateFormPropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreateFormPropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2FormpropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2FormpropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
             }
         }
         private class DropDownListExtendedPropertyCreation : BaseExtendedPropertyCreation<DropDownListExtendedPropertyCreationDto>
@@ -129,21 +142,30 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var propertyApi = ClientFactory.CreatePropertyDefinitionApiClient();
-                var clientApi = ClientFactory.CreateDropDownListPropertyDefinitionApiClient();
-                var clientValueApi = ClientFactory.CreateDropDownListPropertyDefinitionValueApiClient();
-
-                var propertyCreationResult = await clientApi.PostApiV2DropdownlistpropertydefinitionCreateAsync(Property.ToVM());
-
-                foreach (var value in Property.Values)
+                try
                 {
-                    // Todo: er
-                    value.PropertyDefinitionId = propertyCreationResult.Result.Id;
+                    var clientApi = ClientFactory.CreateDropDownListPropertyDefinitionApiClient();
+                    var clientValueApi = ClientFactory.CreateDropDownListPropertyDefinitionValueApiClient();
 
-                    await clientValueApi.PostApiV2DropDownListPropertyDefinitionValueCreateAsync(value.ToVM());
+                    var propertyCreationResult = await clientApi.PostApiV2DropdownlistpropertydefinitionCreateAsync(Property.ToVM());
+
+                    foreach (var value in Property.Values)
+                    {
+                        // Todo: er
+                        value.PropertyDefinitionId = propertyCreationResult.Result.Id;
+
+                        await clientValueApi.PostApiV2DropDownListPropertyDefinitionValueCreateAsync(value.ToVM());
+                    }
+
+                    return propertyCreationResult;
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
                 }
 
-                return propertyCreationResult;
+
             }
         }
         private class UserExtendedPropertyCreation : BaseExtendedPropertyCreation<UserExtendedPropertyCreationDto>
@@ -154,9 +176,18 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreateUserPropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreateUserPropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2UserpropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2UserpropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+
             }
         }
         private class NumberExtendedPropertyCreation : BaseExtendedPropertyCreation<NumberExtendedPropertyCreationDto>
@@ -167,9 +198,18 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreateNumberPropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreateNumberPropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2NumberpropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2NumberpropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+
             }
         }
         private class DepartmentExtendedPropertyCreation : BaseExtendedPropertyCreation<DepartmentExtendedPropertyCreationDto>
@@ -180,9 +220,18 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreateDepartmentPropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreateDepartmentPropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2DepartmentpropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2DepartmentpropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+
             }
         }
         private class PositionExtendedPropertyCreation : BaseExtendedPropertyCreation<PositionExtendedPropertyCreationDto>
@@ -193,9 +242,18 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreatePositionPropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreatePositionPropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2PositionpropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2PositionpropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
+
             }
         }
         private class PersianDateExtendedPropertyCreation : BaseExtendedPropertyCreation<PersianDateExtendedPropertyCreationDto>
@@ -206,9 +264,17 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreatePersianDatePropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreatePersianDatePropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2PersiandatepropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2PersiandatepropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
             }
         }
         private class LabelExtendedPropertyCreation : BaseExtendedPropertyCreation<LabelExtendedPropertyCreationDto>
@@ -219,9 +285,17 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreateLabelPropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreateLabelPropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2LabelpropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2LabelpropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
             }
         }
         private class CrmObjectMultiValueExtendedPropertyCreation : BaseExtendedPropertyCreation<CrmObjectMultiValueExtendedPropertyCreationDto>
@@ -232,9 +306,17 @@ namespace PayamGostarClient.ApiServices.Factory
 
             public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
             {
-                var clientApi = ClientFactory.CreateCrmObjectMultiValuePropertyDefinitionApiClient();
+                try
+                {
+                    var clientApi = ClientFactory.CreateCrmObjectMultiValuePropertyDefinitionApiClient();
 
-                return await clientApi.PostApiV2CrmObjectmultivaluepropertydefinitionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2CrmObjectmultivaluepropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                }
             }
         }
     }
