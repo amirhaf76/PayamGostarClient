@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayamGostarClient.ApiProvider
+namespace PayamGostarClient.ApiProvider.ClientModels
 {
     public class PayamGostarBaseClient
     {

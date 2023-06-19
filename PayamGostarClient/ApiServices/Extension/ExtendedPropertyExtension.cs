@@ -1,6 +1,6 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
 using System.Linq;
 
 namespace PayamGostarClient.ApiServices.Extension

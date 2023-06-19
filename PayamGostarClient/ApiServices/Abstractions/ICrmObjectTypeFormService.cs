@@ -1,6 +1,7 @@
-﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos;
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Gets;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.Helper.Net;
 using System.Threading.Tasks;
 

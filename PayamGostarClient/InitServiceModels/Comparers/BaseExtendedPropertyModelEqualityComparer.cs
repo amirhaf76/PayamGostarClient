@@ -1,10 +1,11 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
+using PayamGostarClient.InitServiceModels.ModelCheckers;
 using System.Linq;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Comparers
 {
 
-    internal class GeneralExtendedPropertyModelEqualityComparer 
+    internal class GeneralExtendedPropertyModelEqualityComparer
     {
         protected static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
         {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PayamGostarClient.ApiServices.Dtos
+namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search
 {
     public class CrmObjectTypeSearchRequestDto
     {
@@ -12,7 +12,7 @@ namespace PayamGostarClient.ApiServices.Dtos
 
         public int PageSiz { get; set; }
 
-        public int PageNumber{ get; set; }
+        public int PageNumber { get; set; }
 
     }
 

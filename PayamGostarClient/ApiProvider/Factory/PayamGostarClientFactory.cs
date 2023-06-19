@@ -1,7 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider.Abstractions;
 using System;
 
-namespace PayamGostarClient.ApiProvider
+namespace PayamGostarClient.ApiProvider.Factory
 {
     public class PayamGostarClientFactory : IPayamGostarClientAbstractFactory
     {

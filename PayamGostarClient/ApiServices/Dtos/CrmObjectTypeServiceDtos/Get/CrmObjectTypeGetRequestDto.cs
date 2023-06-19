@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos
+namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get
 {
     public class CrmObjectTypeGetRequestDto
     {

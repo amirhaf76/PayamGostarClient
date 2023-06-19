@@ -1,6 +1,7 @@
-﻿using PayamGostarClient.ApiServices.Dtos;
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using System;
 using System.Linq;

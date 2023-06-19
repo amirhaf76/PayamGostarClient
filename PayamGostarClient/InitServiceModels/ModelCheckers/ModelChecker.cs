@@ -1,9 +1,10 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
+using PayamGostarClient.InitServiceModels.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.ModelCheckers
 {
     internal static class ModelChecker
     {
@@ -37,8 +38,8 @@ namespace PayamGostarClient.InitServiceModels.Models
             if (typeof(TField) == typeof(string))
             {
                 if (
-                    (string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string)) ||
-                    (!string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string)))
+                    string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string) ||
+                    !string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
                 {
                     throw CreateMisMatchException(first, second, getErrorMessage());
                 }

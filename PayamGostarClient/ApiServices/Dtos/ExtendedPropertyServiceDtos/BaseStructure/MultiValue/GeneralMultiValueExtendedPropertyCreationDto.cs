@@ -1,6 +1,4 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.MultiValue;
-
-namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure
+﻿namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.MultiValue
 {
     public abstract class GeneralMultiValueExtendedPropertyCreationDto : BaseMultiValueExtendedPropertyDto
     {

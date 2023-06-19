@@ -1,7 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiServices.Abstractions;
-using PayamGostarClient.ApiServices.Dtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.ApiServices.Extension;
 using PayamGostarClient.Helper.Net;
 using System.Collections.Generic;

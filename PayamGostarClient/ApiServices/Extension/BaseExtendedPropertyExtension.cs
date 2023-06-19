@@ -1,8 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.MultiValue;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
 
 namespace PayamGostarClient.ApiServices.Extension
 {

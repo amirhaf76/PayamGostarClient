@@ -1,13 +1,15 @@
-﻿using PayamGostarClient.ApiServices.Dtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.PropertyGroupServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
-using PayamGostarClient.InitServiceModels.Models;
+using PayamGostarClient.InitServiceModels.Exceptions;
+using PayamGostarClient.InitServiceModels.Models.CrmModels;
 using System;
 using System.Linq;
 
@@ -116,23 +118,22 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                     return property.ToCrmObjectMultiValueExtendedPropertyModel();
 
                 case Gp_ExtendedPropertyType.Time:
-                    return property.ToTimeExtendedPropertyModel(); 
+                    return property.ToTimeExtendedPropertyModel();
 
                 case Gp_ExtendedPropertyType.Currency:
-                    return property.ToCurrencyExtendedPropertyModel(); 
+                    return property.ToCurrencyExtendedPropertyModel();
 
                 case Gp_ExtendedPropertyType.File:
-                    return property.ToFileExtendedPropertyModel(); 
+                    return property.ToFileExtendedPropertyModel();
 
                 case Gp_ExtendedPropertyType.Checkbox:
-                    return property.ToCheckboxExtendedPropertyModel(); 
+                    return property.ToCheckboxExtendedPropertyModel();
 
                 case Gp_ExtendedPropertyType.Appointment:
-                    return property.ToAppointmentExtendedPropertyModel(); 
+                    return property.ToAppointmentExtendedPropertyModel();
 
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return property.ToSecurityItemExtendedPropertyModel();
-
 
 
                 default:
@@ -209,7 +210,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 Index = dto.Index,
             };
         }
-         
+
 
     }
 }

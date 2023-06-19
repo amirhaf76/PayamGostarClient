@@ -1,7 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Gets;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
 using System;
 using System.Collections.Generic;
 using System.Text;

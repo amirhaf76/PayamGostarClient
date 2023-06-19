@@ -1,10 +1,10 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
 
-namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
+namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies
 {
     public abstract class CrmItemExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
-        
+
     }
 
     public class AppointmentExtendedPropertyCreationDto : CrmItemExtendedPropertyCreationDto

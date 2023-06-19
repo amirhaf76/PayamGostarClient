@@ -7,7 +7,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Models.Services
 {
     public class FormInitService : BaseInitService<CrmFormModel>
     {
@@ -24,7 +24,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             return creationResult.Result.Id;
         }
 
-       
+
     }
 
 }

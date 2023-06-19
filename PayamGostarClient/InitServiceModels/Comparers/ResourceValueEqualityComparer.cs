@@ -1,7 +1,7 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using System.Collections.Generic;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Comparers
 {
     public class ResourceValueEqualityComparer : IEqualityComparer<ResourceValue>
     {

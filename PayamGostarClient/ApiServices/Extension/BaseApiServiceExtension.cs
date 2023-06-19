@@ -2,6 +2,7 @@
 using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using System.Linq;
 

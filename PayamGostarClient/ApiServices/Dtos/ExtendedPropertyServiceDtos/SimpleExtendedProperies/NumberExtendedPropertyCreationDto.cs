@@ -1,4 +1,6 @@
-﻿namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
+﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+
+namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies
 {
     public class NumberExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {
@@ -11,6 +13,6 @@
         public int? MaxValue { get; set; }
 
     }
-     
+
 
 }

@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
 
 namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple
 {

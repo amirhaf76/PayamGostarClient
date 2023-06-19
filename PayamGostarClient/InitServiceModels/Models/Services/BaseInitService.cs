@@ -1,19 +1,21 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
-using PayamGostarClient.ApiServices.Dtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Abstractions;
+using PayamGostarClient.InitServiceModels.Comparers;
 using PayamGostarClient.InitServiceModels.Exceptions;
 using PayamGostarClient.InitServiceModels.Extensions;
+using PayamGostarClient.InitServiceModels.ModelCheckers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Models.Services
 {
     public abstract class BaseInitService<T> : IInitService where T : BaseCRMModel
     {
@@ -220,7 +222,7 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             if (!stages.Any())
             {
-                 return;
+                return;
             }
 
             var aFinalStage = stages.FirstOrDefault(s => s.IsDoneStage == true);
@@ -333,7 +335,7 @@ namespace PayamGostarClient.InitServiceModels.Models
                         return (intendedGroup, false);
                     }
 
-    
+
                     intendedGroup.Id = currentGroup.Id;
 
                     return (intendedGroup, true);
@@ -424,7 +426,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
 
-        protected void CheckFieldMatching<TField>(TField first, TField second, string errorMessage="")
+        protected void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
         {
             ModelChecker.CheckFieldMatching(first, second, errorMessage);
         }

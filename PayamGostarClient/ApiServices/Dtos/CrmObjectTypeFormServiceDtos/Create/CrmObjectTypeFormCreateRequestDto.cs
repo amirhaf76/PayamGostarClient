@@ -1,4 +1,6 @@
-﻿namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
+
+namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Create
 {
     public class CrmObjectTypeFormCreateRequestDto : BaseCrmObjectTypeCreateRequestDto
     {

@@ -1,6 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiServices.Dtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;

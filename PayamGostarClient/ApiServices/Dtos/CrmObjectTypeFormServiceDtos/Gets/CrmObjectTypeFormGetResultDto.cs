@@ -1,9 +1,9 @@
-﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos
+namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Gets
 {
     public class CrmObjectTypeFormGetResultDto : BaseCrmObjectTypeGetResultDto
     {

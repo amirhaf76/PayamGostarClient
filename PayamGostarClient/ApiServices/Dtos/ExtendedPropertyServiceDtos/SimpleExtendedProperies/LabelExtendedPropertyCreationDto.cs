@@ -1,6 +1,6 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
 
-namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
+namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies
 {
     public class LabelExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
@@ -17,6 +17,6 @@ namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
         public string IconName { get; set; }
 
     }
-     
+
 
 }

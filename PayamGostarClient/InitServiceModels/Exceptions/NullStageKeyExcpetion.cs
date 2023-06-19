@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
     internal class NullStageKeyExcpetion : Exception

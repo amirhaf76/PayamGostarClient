@@ -3,7 +3,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
     public class MisMatchException : Exception

@@ -1,4 +1,4 @@
-﻿namespace PayamGostarClient.ApiServices.Dtos
+﻿namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get
 {
     public class StageGetResultDto
     {

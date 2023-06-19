@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiProvider;
+using PayamGostarClient.ApiProvider.Factory;
 using PayamGostarClient.CrmObjectModelInitServiceModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
@@ -160,7 +161,7 @@ namespace PayamGostarClientTest
                     new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
-                Values = new []
+                Values = new[]
                 {
                     new DropDownListExtendedPropertyValueModel
                     {
@@ -176,9 +177,9 @@ namespace PayamGostarClientTest
                 PropertyGroup = groupA,
 
             });
-           
 
-            
+
+
 
 
             _testOutput.WriteLine(model.Name.FirstOrDefault()?.Value);
@@ -318,7 +319,7 @@ namespace PayamGostarClientTest
                     Index = 5
                 }
             };
-      
+
 
             _testOutput.WriteLine(model.Name.FirstOrDefault()?.Value);
             _testOutput.WriteLine(model.Code);
@@ -1167,7 +1168,7 @@ namespace PayamGostarClientTest
                 CrmObjectTypeIndex = PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Gp_CrmObjectType.Form,
             });
 
-        
+
 
 
             _testOutput.WriteLine(model.Name.FirstOrDefault()?.Value);
@@ -1272,7 +1273,7 @@ namespace PayamGostarClientTest
                 DefaultValue = string.Empty,
             });
 
-          
+
 
 
             _testOutput.WriteLine(model.Name.FirstOrDefault()?.Value);

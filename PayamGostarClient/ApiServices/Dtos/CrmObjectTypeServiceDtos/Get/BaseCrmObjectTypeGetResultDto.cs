@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos
+namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get
 {
     public abstract class BaseCrmObjectTypeGetResultDto
     {

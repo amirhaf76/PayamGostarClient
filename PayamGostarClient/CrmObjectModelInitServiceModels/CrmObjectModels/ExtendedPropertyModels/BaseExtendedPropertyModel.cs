@@ -1,5 +1,5 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.InitServiceModels.Models;
+using PayamGostarClient.InitServiceModels.ModelCheckers;
 using System;
 using System.Collections.Generic;
 

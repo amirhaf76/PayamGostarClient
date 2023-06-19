@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
+﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Create;
 using System;
 

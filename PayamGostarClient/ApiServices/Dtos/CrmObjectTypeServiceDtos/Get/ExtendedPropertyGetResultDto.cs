@@ -3,7 +3,7 @@ using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using System;
 using System.Collections.Generic;
 
-namespace PayamGostarClient.ApiServices.Dtos
+namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get
 {
     public class ExtendedPropertyGetResultDto
     {

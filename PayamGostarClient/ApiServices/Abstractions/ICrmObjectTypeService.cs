@@ -1,5 +1,5 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiServices.Dtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.Helper.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;

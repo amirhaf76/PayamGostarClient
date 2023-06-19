@@ -1,9 +1,10 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiServices.Abstractions;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Gets;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.ApiServices.Extension;
 using PayamGostarClient.Helper.Net;
 using System;
@@ -23,21 +24,30 @@ namespace PayamGostarClient.ApiServices.Models
 
         public async Task<ApiResponse<CrmObjectTypeFormGetResultDto>> GetAsync(CrmObjectTypeGetRequestDto request)
         {
-            var gettingFormTask = _crmObjectFormClient.PostApiV2CrmobjecttypeFormGetAsync(request.ConvertToCrmObjectTypeGetRequestVM());
+            try
+            {
+                var gettingFormResult = await _crmObjectFormClient.PostApiV2CrmobjecttypeFormGetAsync(request.ConvertToCrmObjectTypeGetRequestVM());
 
-            var gettingFormResult = await gettingFormTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
-
-            return gettingFormResult.ConvertToApiResponse(result => result.ToDto());
+                return gettingFormResult.ConvertToApiResponse(result => result.ToDto());
+            }
+            catch (ApiException e)
+            {
+               throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+            }
         }
 
         public async Task<ApiResponse<CrmObjectTypeResultDto>> CreateAsync(CrmObjectTypeFormCreateRequestDto request)
         {
-            var formCreationTask = _crmObjectFormClient
-                .PostApiV2CrmobjecttypeFormCreateAsync(request.ToVM());
+            try
+            {
+                var formCreationResult = await _crmObjectFormClient.PostApiV2CrmobjecttypeFormCreateAsync(request.ToVM());
 
-            var formCreationResult = await formCreationTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
-
-            return formCreationResult.ConvertToApiResponse(result => result.ConvertToCrmObjectTypeResultDto());
+                return formCreationResult.ConvertToApiResponse(result => result.ConvertToCrmObjectTypeResultDto());
+            }
+            catch (ApiException e)
+            {
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+            }
 
         }
     }

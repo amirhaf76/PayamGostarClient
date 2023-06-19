@@ -5,6 +5,7 @@ using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
 using PayamGostarClient.ApiServices.Exceptions;
 using PayamGostarClient.ApiServices.Extension;
 using PayamGostarClient.Helper.Net;

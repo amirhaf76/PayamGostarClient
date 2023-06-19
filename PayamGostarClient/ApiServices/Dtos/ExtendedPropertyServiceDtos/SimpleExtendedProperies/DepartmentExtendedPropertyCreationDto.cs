@@ -1,4 +1,4 @@
-﻿namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
+﻿namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies
 {
     public class DepartmentExtendedPropertyCreationDto : SecurityItemExtendedPropertyCreationDto
     {

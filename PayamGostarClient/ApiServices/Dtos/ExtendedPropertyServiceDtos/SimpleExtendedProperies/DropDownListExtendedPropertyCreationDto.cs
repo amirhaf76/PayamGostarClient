@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using System.Collections.Generic;
 
-namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos
+namespace PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies
 {
     public class DropDownListExtendedPropertyCreationDto : GeneralTypeExtendedPropertyCreationDto
     {

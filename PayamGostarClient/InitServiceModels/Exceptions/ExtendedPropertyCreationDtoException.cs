@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PayamGostarClient.InitServiceModels.Extensions
+namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
     internal class ExtendedPropertyCreationDtoException : Exception

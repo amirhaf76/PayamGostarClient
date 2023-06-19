@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Comparers
 {
     internal class StagePriorityComparer : IComparer<Stage>
     {
@@ -25,7 +25,7 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         public int Compare(Stage x, Stage y)
         {
-            if ((x.IsDoneStage && y.IsDoneStage) || (!x.IsDoneStage && !y.IsDoneStage))
+            if (x.IsDoneStage && y.IsDoneStage || !x.IsDoneStage && !y.IsDoneStage)
             {
                 return 0;
             }
@@ -39,6 +39,6 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
 
-        
+
     }
 }

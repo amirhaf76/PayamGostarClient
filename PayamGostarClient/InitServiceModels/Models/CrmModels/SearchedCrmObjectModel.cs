@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayamGostarClient.InitServiceModels.Models
+namespace PayamGostarClient.InitServiceModels.Models.CrmModels
 {
     internal class SearchedCrmObjectModel : BaseCRMModel
     {
