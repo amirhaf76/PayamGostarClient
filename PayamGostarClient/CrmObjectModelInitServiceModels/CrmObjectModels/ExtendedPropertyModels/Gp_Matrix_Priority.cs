@@ -9,7 +9,6 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
         High = 1,
         Middle = 2,
         Low = 3,
-        Test = 4,
     }
 
     public enum Gp_Matrix_Severity

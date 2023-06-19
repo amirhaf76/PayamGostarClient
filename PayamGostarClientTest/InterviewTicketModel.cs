@@ -202,7 +202,7 @@ namespace PayamGostarClientTest
                         {
                             ImpactIndex = (int)Gp_Matrix_Impact.Little,
                             SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Low,
+                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
                         },
                         new PriorityMatrixDetailModel
                         {
@@ -220,7 +220,7 @@ namespace PayamGostarClientTest
                         {
                             ImpactIndex = (int)Gp_Matrix_Impact.Seriously,
                             SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
+                            PriorityIndex = (int)Gp_Matrix_Priority.High,
                         },
                         new PriorityMatrixDetailModel
                         {

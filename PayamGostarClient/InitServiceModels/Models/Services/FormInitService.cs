@@ -39,20 +39,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             return creationResult.Result.Id;
         }
 
-        protected override CrmFormModel CheckCrmObjectMatching(CrmFormModel currentCrmObj)
-        {
-            CheckFieldMatching(IntendedCrmObject.Prefix, currentCrmObj.Prefix, "FormCrmObj:Prefix -> ");
-            CheckFieldMatching(IntendedCrmObject.Postfix, currentCrmObj.Postfix, "FormCrmObj:Postfix -> ");
-            CheckFieldMatching(IntendedCrmObject.StartFrom, currentCrmObj.StartFrom, "FormCrmObj:StartFrom -> ");
-            CheckFieldMatching(IntendedCrmObject.DigitCount, currentCrmObj.DigitCount, "FormCrmObj:DigitCount -> ");
-
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.FlushFormAfterSave, currentCrmObj.PublicForm?.FlushFormAfterSave, "FormCrmObj:PublicForm:FlushFormAfterSave -> ");
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.IsAutoSubject, currentCrmObj.PublicForm?.IsAutoSubject, "FormCrmObj:PublicForm:IsAutoSubject -> ");
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.SubmitMessage, currentCrmObj.PublicForm?.SubmitMessage, "FormCrmObj:PublicForm:SubmitMessage -> ");
-            CheckFieldMatching(IntendedCrmObject.PublicForm?.RedirectAfterSuccessUrl, currentCrmObj.PublicForm?.RedirectAfterSuccessUrl, "FormCrmObj:PublicForm:RedirectAfterSuccessUrl -> ");
-
-            return currentCrmObj;
-        }
+       
     }
 
 }

@@ -17,20 +17,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         {
         }
 
-        protected override CrmTicketModel CheckCrmObjectMatching(CrmTicketModel currentCrmObj)
-        {
-            CheckFieldMatching(IntendedCrmObject.ResponseTemplate, currentCrmObj.ResponseTemplate);
-            CheckFieldMatching(IntendedCrmObject.ListenLineId, currentCrmObj.ListenLineId);
-
-            if (currentCrmObj.PriorityMatrix.Details.Count() != 9)
-            {
-                throw new InvalidPriorityMatrixCount();
-            }
-
-            // todo: matrix
-
-            return currentCrmObj;
-        }
+       
 
         protected override async Task<Guid> CreateTypeAsync()
         {
