@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.ApiProvider.Exceptions
 {
     [Serializable]
-    internal class HttpClientCreationException : Exception
+    public class HttpClientCreationException : Exception
     {
         public HttpClientCreationException()
         {

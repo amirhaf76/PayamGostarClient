@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.ApiProvider.Exceptions
 {
     [Serializable]
-    internal class UrlApiProviderIsNullException : Exception
+    public class UrlApiProviderIsNullException : Exception
     {
         public UrlApiProviderIsNullException()
         {

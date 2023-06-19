@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
 using PayamGostarClient.ApiProvider;
+using PayamGostarClient.ApiServices.Dtos.ExceptionDtos;
+using PayamGostarClient.ApiServices.Exceptions;
 using PayamGostarClient.Helper.Net;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiServices.Extension
@@ -74,7 +75,6 @@ namespace PayamGostarClient.ApiServices.Extension
             return DoElseThrowApiServiceException();
         }
 
-
         public static ApiServiceException CreateApiExceptionDtoFromApiException(ApiException e)
         {
             var headers = new Dictionary<string, IEnumerable<string>>();
@@ -110,67 +110,6 @@ namespace PayamGostarClient.ApiServices.Extension
                 ApiError = JsonConvert.DeserializeObject<ApiErrorDto>(e.Response)
             };
         }
-
-        private static SwaggerResponse CreateSwaggerResponseFromApiServiceException(ApiServiceException e)
-        {
-            return new SwaggerResponse((int)e.StatusCode, e.Headers);
-        }
-
-        private static SwaggerResponse<T> CreateSwaggerResponseFromApiServiceException<T>(ApiServiceException e)
-        {
-            return new SwaggerResponse<T>((int)e.StatusCode, e.Headers, default);
-        }
-
-    }
-
-    public class ApiServiceException : Exception
-    {
-        public ApiServiceException()
-        {
-        }
-
-        public ApiServiceException(Exception e) : base(e.Message, e.InnerException)
-        {
-        }
-
-        public ApiServiceException(string message) : base(message)
-        {
-        }
-
-        public ApiServiceException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected ApiServiceException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-
-        public HttpStatusCode StatusCode { get; set; }
-
-        public string Response { get; set; }
-
-        public IReadOnlyDictionary<string, IEnumerable<string>> Headers { get; set; }
-
-        public ApiErrorDto ApiError { get; set; }
-
-    }
-
-    public class ApiErrorDto
-    {
-        public int Code { get; set; }
-
-        public string Message { get; set; }
-
-        public IEnumerable<ApiErrorDetailDto> ErrorDetails { get; set; }
-    }
-
-    public class ApiErrorDetailDto
-    {
-        public int StatusCode { get; set; }
-
-        public string Field { get; set; }
-
-        public string Message { get; set; }
 
     }
 }

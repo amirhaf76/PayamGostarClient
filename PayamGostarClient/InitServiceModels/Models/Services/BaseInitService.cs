@@ -126,7 +126,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
 
             await CheckGroupPropertiesAndCreateUnexistedGroupPropetiesAsync(currentCrmObject.Id, currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
 
-            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToBaseExtendedPropertyModel()));
+            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToModel()));
 
             await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
         }

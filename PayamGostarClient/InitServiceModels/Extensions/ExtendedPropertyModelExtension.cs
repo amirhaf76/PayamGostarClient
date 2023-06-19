@@ -3,6 +3,7 @@ using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
+using PayamGostarClient.InitServiceModels.Exceptions;
 using System;
 using System.Linq;
 
@@ -139,6 +140,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             }.FillBaseExtendedPropertyDto(model);
         }
+
         public static CurrencyExtendedPropertyCreationDto ToCurrencyExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
             var model = (CurrencyExtendedPropertyModel)baseModel;
@@ -150,6 +152,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             }.FillBaseExtendedPropertyDto(model);
         }
+
         public static FileExtendedPropertyCreationDto ToFileExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
             var model = (FileExtendedPropertyModel)baseModel;
@@ -162,18 +165,21 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             }.FillBaseExtendedPropertyDto(model);
         }
+
         public static CheckboxExtendedPropertyCreationDto ToCheckboxExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
             var model = (CheckboxExtendedPropertyModel)baseModel;
 
             return new CheckboxExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(model);
         }
+
         public static AppointmentExtendedPropertyCreationDto ToAppointmentExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
             var model = (AppointmentExtendedPropertyModel)baseModel;
 
             return new AppointmentExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(model);
         }
+
         public static SecurityItemExtendedPropertyCreationDto ToSecurityItemExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
             var model = (SecurityItemExtendedPropertyModel)baseModel;
@@ -185,6 +191,49 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             }.FillBaseExtendedPropertyDto(model);
         }
 
+
+        public static BaseExtendedPropertyModel ToModel(this ExtendedPropertyGetResultDto dto)
+        {
+            
+            switch ((Gp_ExtendedPropertyType)dto.PropertyDisplayTypeIndex)
+            {
+                case Gp_ExtendedPropertyType.Text:
+                    return new TextExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Form:
+                    return new FormExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.DropDownList:
+                    return new DropDownListExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.User:
+                    return new UserExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Number:
+                    return new NumberExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Department:
+                    return new DepartmentExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Position:
+                    return new PositionExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Date:
+                    return new PersianDateExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Label:
+                    return new LabelExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.CrmObjectMultiValue:
+                    return new CrmObjectMultiValueExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Time:
+                    return new TimeExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Currency:
+                    return new CurrencyExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.File:
+                    return new FileExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Checkbox:
+                    return new CheckboxExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.Appointment:
+                    return new AppointmentExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.SecurityItem:
+                    return new SecurityItemExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                default:
+                    throw new NotFoundExtendedPropertyTypeException();
+
+            }
+        }
 
         public static NumberExtendedPropertyModel ToNumberExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
         {

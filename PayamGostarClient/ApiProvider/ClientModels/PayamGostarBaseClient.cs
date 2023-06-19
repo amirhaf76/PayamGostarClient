@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiProvider.ClientModels
 {
-    public class PayamGostarBaseClient
+    internal abstract class PayamGostarBaseClient
     {
         private readonly PayamGostarClientConfig _payamGostarClientConfig;
 

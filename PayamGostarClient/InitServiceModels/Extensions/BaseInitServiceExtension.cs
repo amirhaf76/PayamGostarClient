@@ -83,62 +83,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
         internal static BaseExtendedPropertyModel ToBaseExtendedPropertyModel(this ExtendedPropertyGetResultDto property)
         {
-            var type = (Gp_ExtendedPropertyType)property.PropertyDisplayTypeIndex;
-
-            switch ((Gp_ExtendedPropertyType)property.PropertyDisplayTypeIndex)
-            {
-                case Gp_ExtendedPropertyType.Text:
-                    return property.ToTextExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Form:
-                    return property.ToFormExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.DropDownList:
-                    return property.ToDropDownListExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.User:
-                    return property.ToUserExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Number:
-                    return property.ToNumberExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Department:
-                    return property.ToDepartmentExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Position:
-                    return property.ToPositionExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Date:
-                    return property.ToPersianDateExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Label:
-                    return property.ToLabelExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.CrmObjectMultiValue:
-                    return property.ToCrmObjectMultiValueExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Time:
-                    return property.ToTimeExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Currency:
-                    return property.ToCurrencyExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.File:
-                    return property.ToFileExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Checkbox:
-                    return property.ToCheckboxExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.Appointment:
-                    return property.ToAppointmentExtendedPropertyModel();
-
-                case Gp_ExtendedPropertyType.SecurityItem:
-                    return property.ToSecurityItemExtendedPropertyModel();
-
-
-                default:
-                    throw new NotFoundExtendedPropertyTypeException();
-            }
+            return property.ToModel();
         }
 
         internal static BaseExtendedPropertyModel FillBaseExtendedPropertyModel<TTarget, TFrom>(this BaseExtendedPropertyModel target, ExtendedPropertyGetResultDto from)
