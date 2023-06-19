@@ -15,21 +15,6 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
         }
 
-
-        protected override async Task<CrmFormModel> GetCrmObjectTypeAsync(Guid id)
-        {
-            var service = ServiceFactory.CreateCrmObjectTypeFormService();
-
-            var request = new CrmObjectTypeGetRequestDto
-            {
-                Id = id,
-            };
-
-            var gettingCrmObjectResult = await service.GetAsync(request);
-
-            return gettingCrmObjectResult.Result.ToModel();
-        }
-
         protected override async Task<Guid> CreateTypeAsync()
         {
             var service = ServiceFactory.CreateCrmObjectTypeFormService();

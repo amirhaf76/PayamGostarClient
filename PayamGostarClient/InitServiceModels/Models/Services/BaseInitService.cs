@@ -55,6 +55,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             }
         }
 
+
         private void ValidateInitialValidationModel()
         {
             if (string.IsNullOrEmpty(IntendedCrmObject.Code))
@@ -67,22 +68,14 @@ namespace PayamGostarClient.InitServiceModels.Models
                 throw new NullNameException();
             }
 
-            if (!IntendedCrmObject.Properties.All(p => !string.IsNullOrEmpty(p.UserKey)))
-            {
-                throw new NullPropertyUserKeyExcpetion();
-            }
+            ValidateExtendedProperites();
 
-            var propertyKeyGroups = IntendedCrmObject.Properties.GroupBy(p => p.UserKey);
+            ValidateStages();
 
-            foreach (var propertyKeyGroup in propertyKeyGroups)
-            {
-                if (propertyKeyGroup.Count() > 1)
-                {
-                    throw new NonUniqeUserKeyException($"There is more than one property with \"{propertyKeyGroup.Key}\".");
-                }
-            }
+        }
 
-
+        private void ValidateStages()
+        {
             if (!IntendedCrmObject.Stages.All(s => !string.IsNullOrEmpty(s.Key)))
             {
                 throw new NullStageKeyExcpetion();
@@ -97,9 +90,26 @@ namespace PayamGostarClient.InitServiceModels.Models
                     throw new NonUniqeStageKeyException($"There is more than one property with \"{stageKeyGroup.Key}\".");
                 }
             }
-
-
         }
+
+        private void ValidateExtendedProperites()
+        {
+            if (!IntendedCrmObject.Properties.All(p => !string.IsNullOrEmpty(p.UserKey)))
+            {
+                throw new NullPropertyUserKeyExcpetion();
+            }
+
+            var propertyKeyGroups = IntendedCrmObject.Properties.GroupBy(p => p.UserKey);
+
+            foreach (var propertyKeyGroup in propertyKeyGroups)
+            {
+                if (propertyKeyGroup.Count() > 1)
+                {
+                    throw new NonUniqeUserKeyException($"There is more than one property with \"{propertyKeyGroup.Key}\".");
+                }
+            }
+        }
+
 
         private async Task CreateCrmObjectAndSetItsBelongsAsync()
         {
@@ -112,18 +122,11 @@ namespace PayamGostarClient.InitServiceModels.Models
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
-            await CheckGroupPropetiesAsync(currentCrmObject.Id, currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
+            await CheckGroupPropertiesAndCreateUnexistedGroupPropetiesAsync(currentCrmObject.Id, currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
 
-            await CheckExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToBaseExtendedPropertyModel()));
+            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToBaseExtendedPropertyModel()));
 
-            await CheckStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
-        }
-
-        private async Task<IEnumerable<Stage>> GetStagesAsync(Guid id)
-        {
-           var stages = await CrmObjectTypeStageService.GetStagesAsync(id);
-
-            return stages.Result.Select(x => x.ToModel());
+            await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
         }
 
         private async Task CreateCrmObjectTypeBelongs(Guid id)
@@ -136,7 +139,7 @@ namespace PayamGostarClient.InitServiceModels.Models
         }
 
 
-        private async Task CheckStagesAsync(Guid id, IEnumerable<Stage> currentStages)
+        private async Task CheckStagesAndUpdateUnexistedStagesAsync(Guid id, IEnumerable<Stage> currentStages)
         {
             var detectedPair = IntendedCrmObject.Stages.Join(
                 currentStages,
@@ -147,7 +150,7 @@ namespace PayamGostarClient.InitServiceModels.Models
 
             foreach (var pair in detectedPair)
             {
-                CheckFieldMatching(pair.Item1.IsDoneStage, pair.Item2.IsDoneStage, "CheckingStage:Key -> ");
+                CheckFieldMatching(pair.Item1.IsDoneStage, pair.Item2.IsDoneStage, "CheckingStage:IsDoneStage -> ");
             }
 
             var newStages = IntendedCrmObject.Stages
@@ -157,7 +160,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             await UpdateStagesAsync(id, newStages);
         }
 
-        private async Task CheckGroupPropetiesAsync(Guid id, IEnumerable<PropertyGroup> groups)
+        private async Task CheckGroupPropertiesAndCreateUnexistedGroupPropetiesAsync(Guid id, IEnumerable<PropertyGroup> groups)
         {
             var newGroups = new List<PropertyGroup>();
 
@@ -174,9 +177,9 @@ namespace PayamGostarClient.InitServiceModels.Models
             await CreateGroupPropetiesAsync(id, newGroups);
         }
 
-        private async Task CheckExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> currentExtendedProperties)
+        private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> currentExtendedProperties)
         {
-            var newProperties = CheckExtendedProperties(currentExtendedProperties);
+            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentExtendedProperties);
 
             await CreateExtendedPropertiesAsync(id, newProperties);
         }
@@ -259,6 +262,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             stage.Id = stageCreationResult.Result.StageId;
         }
 
+
         private async Task CreateGroupPropetiesAsync(Guid id)
         {
             await CreateGroupPropetiesAsync(id, IntendedCrmObject.PropertyGroups);
@@ -281,6 +285,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             group.Id = groupCreationResult.Result.Id;
         }
 
+
         private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id)
         {
             return await CreateExtendedPropertiesAsync(id, IntendedCrmObject.Properties);
@@ -294,7 +299,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             {
                 property.CrmObjectTypeId = id.ToString();
 
-                var propertyDto = CreateExtendedPropertyDto(property);
+                var propertyDto = CreateExtendedPropertyCreationDto(property);
 
                 var response = await ExtendedPropertyService.CreateAsync(propertyDto);
 
@@ -305,18 +310,14 @@ namespace PayamGostarClient.InitServiceModels.Models
         }
 
 
-        protected abstract Task<Guid> CreateTypeAsync();
-
-        protected abstract Task<T> GetCrmObjectTypeAsync(Guid id);
-
-        private CrmObjectTypeSearchResultDto CheckBaseCrmObjectMatching(CrmObjectTypeSearchResultDto currentCrmObj)
+        private void CheckBaseCrmObjectMatching(CrmObjectTypeSearchResultDto currentCrmObj)
         {
             CheckFieldMatching(IntendedCrmObject.Type, (Gp_CrmObjectType)currentCrmObj.CrmOjectTypeIndex, "BaseCrmObj:Type -> ");
             CheckFieldMatching(IntendedCrmObject.Code, currentCrmObj.Code, "BaseCrmObj:Code -> ");
-  
-
-            return currentCrmObj;
         }
+
+
+        protected abstract Task<Guid> CreateTypeAsync();
 
 
         private (PropertyGroup group, bool found) CheckGroupPropetyAndUpdateIdIfExists(PropertyGroup intendedGroup, IEnumerable<PropertyGroup> currentGroups)
@@ -342,32 +343,7 @@ namespace PayamGostarClient.InitServiceModels.Models
             return (intendedGroup, false);
         }
 
-        private Stage CheckStage(Stage intendedStage, IEnumerable<Stage> currentStages)
-        {
-            var resourceValueComparer = ResourceValueEqualityComparer.GetInstance();
-
-            foreach (var currentStage in currentStages)
-            {
-                if (intendedStage.Name.Any(n => currentStage.Name.Contains(n, resourceValueComparer)))
-                {
-                    if (!intendedStage.Name.CheckResourceValues(currentStage.Name))
-                    {
-                        throw MisMatchException.Create(intendedStage.Name, currentStage.Name);
-                    }
-
-                    CheckFieldMatching(intendedStage.Key, currentStage.Key, "Stage:Key -> ");
-                    CheckFieldMatching(intendedStage.Index, currentStage.Index, "Stage:Key -> ");
-                    CheckFieldMatching(intendedStage.Enabled, currentStage.Enabled, "Stage:Enabled -> ");
-                    CheckFieldMatching(intendedStage.IsDoneStage, currentStage.IsDoneStage, "Stage:IsDoneStage -> ");
-
-                    return null;
-                }
-            }
-
-            return intendedStage;
-        }
-
-        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedProperties(IEnumerable<BaseExtendedPropertyModel> currentProperties)
+        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<BaseExtendedPropertyModel> currentProperties)
         {
             var detectedPair = IntendedCrmObject.Properties.Join(
                 currentProperties,
@@ -384,13 +360,12 @@ namespace PayamGostarClient.InitServiceModels.Models
             return IntendedCrmObject.Properties.Except(detectedPair.Select(d => d.Item1));
         }
 
-
         private void CheckExtendedProperty(BaseExtendedPropertyModel item1, BaseExtendedPropertyModel item2)
         {
             new GeneralExtendedPropertyModelEqualityComparer().Checks(item1, item2);
         }
 
-        private BaseExtendedPropertyCreationDto CreateExtendedPropertyDto(BaseExtendedPropertyModel propertyModel)
+        private BaseExtendedPropertyCreationDto CreateExtendedPropertyCreationDto(BaseExtendedPropertyModel propertyModel)
         {
             switch (propertyModel.Type)
             {
@@ -451,7 +426,7 @@ namespace PayamGostarClient.InitServiceModels.Models
 
         protected void CheckFieldMatching<TField>(TField first, TField second, string errorMessage="")
         {
-            ModelChecker.CheckFieldMatching(first, second, $"{Helper.Helper.GetStringsFromProperties(IntendedCrmObject)} -> {errorMessage}");
+            ModelChecker.CheckFieldMatching(first, second, errorMessage);
         }
 
     }

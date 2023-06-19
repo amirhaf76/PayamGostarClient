@@ -30,19 +30,5 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             return creationTicketResult.Result.Id;
         }
 
-        protected override async Task<CrmTicketModel> GetCrmObjectTypeAsync(Guid id)
-        {
-            var service = ServiceFactory.CreateCrmObjectTypeTicketService();
-
-            var request = new CrmObjectTypeGetRequestDto
-            {
-                Id = id,
-            };
-
-            var gettingTicketResult = await service.GetWithPriorityMatrixAsync(request);
-
-            return gettingTicketResult.Result.ToModel();
-        }
-
     }
 }

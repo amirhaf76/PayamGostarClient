@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
+using System;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels
 {
@@ -19,11 +20,11 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 
     public class PriorityMatrixDetailModel
     {
-        public int SeverityIndex { get; set; }
+        public Gp_Matrix_Severity SeverityIndex { get; set; }
 
-        public int ImpactIndex { get; set; }
+        public Gp_Matrix_Impact ImpactIndex { get; set; }
 
-        public int PriorityIndex { get; set; }
+        public Gp_Matrix_Priority PriorityIndex { get; set; }
     }
 
 

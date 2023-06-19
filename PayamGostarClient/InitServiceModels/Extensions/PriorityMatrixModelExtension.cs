@@ -1,6 +1,7 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Create;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Get;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using System.Linq;
 
 namespace PayamGostarClient.InitServiceModels.Extensions
@@ -19,9 +20,9 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             return new PriorityMatrixDetailCreateRequestDto
             {
-                ImpactIndex = model.ImpactIndex,
-                PriorityIndex = model.PriorityIndex,
-                SeverityIndex = model.SeverityIndex,
+                ImpactIndex = (int)model.ImpactIndex,
+                PriorityIndex = (int)model.PriorityIndex,
+                SeverityIndex = (int)model.SeverityIndex,
             };
         }
 
@@ -37,9 +38,9 @@ namespace PayamGostarClient.InitServiceModels.Extensions
         {
             return new PriorityMatrixDetailModel
             {
-                ImpactIndex = dto.ImpactIndex,
-                SeverityIndex = dto.SeverityIndex,
-                PriorityIndex = dto.PriorityIndex,
+                ImpactIndex = (Gp_Matrix_Impact)dto.ImpactIndex,
+                SeverityIndex = (Gp_Matrix_Severity)dto.SeverityIndex,
+                PriorityIndex = (Gp_Matrix_Priority)dto.PriorityIndex,
             };
         }
 

@@ -97,57 +97,57 @@ namespace PayamGostarClientTest
                     {
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Little,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Low,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Low,
+                            ImpactIndex = Gp_Matrix_Impact.Little,
+                            SeverityIndex = Gp_Matrix_Severity.Low,
+                            PriorityIndex = Gp_Matrix_Priority.Low,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Little,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Low,
+                            ImpactIndex = Gp_Matrix_Impact.Little,
+                            SeverityIndex = Gp_Matrix_Severity.Middle,
+                            PriorityIndex = Gp_Matrix_Priority.Low,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Little,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Critical,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
+                            ImpactIndex = Gp_Matrix_Impact.Little,
+                            SeverityIndex = Gp_Matrix_Severity.Critical,
+                            PriorityIndex = Gp_Matrix_Priority.Middle,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Seriously,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Low,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Low,
+                            ImpactIndex = Gp_Matrix_Impact.Seriously,
+                            SeverityIndex = Gp_Matrix_Severity.Low,
+                            PriorityIndex = Gp_Matrix_Priority.Low,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Seriously,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
+                            ImpactIndex = Gp_Matrix_Impact.Seriously,
+                            SeverityIndex = Gp_Matrix_Severity.Middle,
+                            PriorityIndex = Gp_Matrix_Priority.Middle,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Seriously,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Critical,
-                            PriorityIndex = (int)Gp_Matrix_Priority.High,
+                            ImpactIndex = Gp_Matrix_Impact.Seriously,
+                            SeverityIndex = Gp_Matrix_Severity.Critical,
+                            PriorityIndex = Gp_Matrix_Priority.High,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Disastrous,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Low,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
+                            ImpactIndex = Gp_Matrix_Impact.Disastrous,
+                            SeverityIndex = Gp_Matrix_Severity.Low,
+                            PriorityIndex = Gp_Matrix_Priority.Middle,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Disastrous,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.High,
+                            ImpactIndex = Gp_Matrix_Impact.Disastrous,
+                            SeverityIndex = Gp_Matrix_Severity.Middle,
+                            PriorityIndex = Gp_Matrix_Priority.High,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Disastrous,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Critical,
-                            PriorityIndex = (int)Gp_Matrix_Priority.High,
+                            ImpactIndex = Gp_Matrix_Impact.Disastrous,
+                            SeverityIndex = Gp_Matrix_Severity.Critical,
+                            PriorityIndex = Gp_Matrix_Priority.High,
                         },
 
 

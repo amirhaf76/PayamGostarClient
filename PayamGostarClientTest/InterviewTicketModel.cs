@@ -194,57 +194,57 @@ namespace PayamGostarClientTest
                    {
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Little,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Low,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Low,
+                            ImpactIndex = Gp_Matrix_Impact.Little,
+                            SeverityIndex = Gp_Matrix_Severity.Low,
+                            PriorityIndex = Gp_Matrix_Priority.Low,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Little,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
+                            ImpactIndex = Gp_Matrix_Impact.Little,
+                            SeverityIndex = Gp_Matrix_Severity.Middle,
+                            PriorityIndex = Gp_Matrix_Priority.Middle,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Little,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Critical,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
+                            ImpactIndex = Gp_Matrix_Impact.Little,
+                            SeverityIndex = Gp_Matrix_Severity.Critical,
+                            PriorityIndex = Gp_Matrix_Priority.Middle,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Seriously,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Low,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Low,
+                            ImpactIndex = Gp_Matrix_Impact.Seriously,
+                            SeverityIndex = Gp_Matrix_Severity.Low,
+                            PriorityIndex = Gp_Matrix_Priority.Low,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Seriously,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.High,
+                            ImpactIndex = Gp_Matrix_Impact.Seriously,
+                            SeverityIndex = Gp_Matrix_Severity.Middle,
+                            PriorityIndex = Gp_Matrix_Priority.High,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Seriously,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Critical,
-                            PriorityIndex = (int)Gp_Matrix_Priority.High,
+                            ImpactIndex = Gp_Matrix_Impact.Seriously,
+                            SeverityIndex = Gp_Matrix_Severity.Critical,
+                            PriorityIndex = Gp_Matrix_Priority.High,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Disastrous,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Low,
-                            PriorityIndex = (int)Gp_Matrix_Priority.Middle,
+                            ImpactIndex = Gp_Matrix_Impact.Disastrous,
+                            SeverityIndex = Gp_Matrix_Severity.Low,
+                            PriorityIndex = Gp_Matrix_Priority.Middle,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Disastrous,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Middle,
-                            PriorityIndex = (int)Gp_Matrix_Priority.High,
+                            ImpactIndex = Gp_Matrix_Impact.Disastrous,
+                            SeverityIndex = Gp_Matrix_Severity.Middle,
+                            PriorityIndex = Gp_Matrix_Priority.High,
                         },
                         new PriorityMatrixDetailModel
                         {
-                            ImpactIndex = (int)Gp_Matrix_Impact.Disastrous,
-                            SeverityIndex = (int)Gp_Matrix_Severity.Critical,
-                            PriorityIndex = (int)Gp_Matrix_Priority.High,
+                            ImpactIndex = Gp_Matrix_Impact.Disastrous,
+                            SeverityIndex = Gp_Matrix_Severity.Critical,
+                            PriorityIndex = Gp_Matrix_Priority.High,
                         },
                     }
                 }
@@ -671,8 +671,8 @@ namespace PayamGostarClientTest
                         new DropDownListExtendedPropertyValueModel{ Value = "بله" },
                         new DropDownListExtendedPropertyValueModel{ Value = "خیر" },
                     },
-                    PropertyGroup = model.PropertyGroups[0],
-                    UserKey = "Source",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "Source", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -699,8 +699,8 @@ namespace PayamGostarClientTest
                         new DropDownListExtendedPropertyValueModel{ Value = "Email Marketing" },
                         new DropDownListExtendedPropertyValueModel{ Value = "شبکه های اجتماعی" },
                     },
-                    PropertyGroup = model.PropertyGroups[0],
-                    UserKey = "ResumeStatus",
+                    PropertyGroup = model.PropertyGroups[6],
+                    UserKey = "ResumeStatus", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1079,8 +1079,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[2],
-                    UserKey = "ResumeSendDate",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "ResumeSendDate", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1110,7 +1110,7 @@ namespace PayamGostarClientTest
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
                     PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "Coordinator",
+                    UserKey = "Coordinator", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1156,7 +1156,7 @@ namespace PayamGostarClientTest
                     UserKey = "SecondInterviewMeeting",
                     DefaultValue = string.Empty,
                 },
-                new CheckboxExtendedPropertyModel
+                new CheckboxExtendedPropertyModel 
                 {
                     Name = new[]
                     {
@@ -1166,8 +1166,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "Important",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "Important", // mj
                     IsRequired = false,
                     DefaultValue = Convert.ToString(true),
                 },
@@ -1181,8 +1181,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "Obsolete",
+                    PropertyGroup = model.PropertyGroups[6],
+                    UserKey = "Obsolete", // mj
                     IsRequired = false,
                     DefaultValue = Convert.ToString(false),
                 },
@@ -1226,8 +1226,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "FirstAssessor",
+                    PropertyGroup = model.PropertyGroups[0],
+                    UserKey = "FirstAssessor", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1256,8 +1256,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "SecondAssessor",
+                    PropertyGroup = model.PropertyGroups[1],
+                    UserKey = "SecondAssessor", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1271,8 +1271,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "SourceRefId",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "SourceRefId", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1376,8 +1376,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "ApproverNote",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "ApproverNote", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1406,8 +1406,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "FirstRejectReason",
+                    PropertyGroup = model.PropertyGroups[6],
+                    UserKey = "FirstRejectReason", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1556,8 +1556,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "Title",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "Title", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1616,8 +1616,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "Approver",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "Approver", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1706,8 +1706,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "EmploymentRequestForm",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "EmploymentRequestForm", //mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -1721,8 +1721,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "ResumeFile",
+                    PropertyGroup = model.PropertyGroups[4],
+                    UserKey = "ResumeFile", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
