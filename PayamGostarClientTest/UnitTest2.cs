@@ -590,5 +590,24 @@ namespace PayamGostarClientTest
 
             await crmModelService.InitAsync(model);
         }
+
+        [Fact]
+        public async Task InitAsync_FormModel_InterviewTicket()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = URL,
+                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+
+
+            await crmModelService.InitAsync(InterviewTicketModel.Create());
+        }
     }
 }

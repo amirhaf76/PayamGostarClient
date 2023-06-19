@@ -1,9 +1,11 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
+using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using PayamGostarClient.InitServiceModels.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +21,11 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         {
             CheckFieldMatching(IntendedCrmObject.ResponseTemplate, currentCrmObj.ResponseTemplate);
             CheckFieldMatching(IntendedCrmObject.ListenLineId, currentCrmObj.ListenLineId);
+
+            if (currentCrmObj.PriorityMatrix.Details.Count() != 9)
+            {
+                throw new InvalidPriorityMatrixCount();
+            }
 
             // todo: matrix
 
