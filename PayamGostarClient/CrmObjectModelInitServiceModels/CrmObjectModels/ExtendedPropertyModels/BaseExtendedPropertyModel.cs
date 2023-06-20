@@ -7,6 +7,12 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
 {
     public abstract class BaseExtendedPropertyModel : IEquatable<BaseExtendedPropertyModel>
     {
+        public BaseExtendedPropertyModel()
+        {
+            Name = Array.Empty<ResourceValue>();
+            ToolTip = Array.Empty<ResourceValue>();
+        }
+
         public abstract Gp_ExtendedPropertyType Type { get; }
 
         public string UserKey { get; set; }

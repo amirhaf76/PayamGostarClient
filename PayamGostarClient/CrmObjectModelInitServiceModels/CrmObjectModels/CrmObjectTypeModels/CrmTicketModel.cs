@@ -5,6 +5,10 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 {
     public class CrmTicketModel : BaseCRMModel
     {
+        public CrmTicketModel()
+        {
+            PriorityMatrix = new PriorityMatrixModel();
+        }
         public override Gp_CrmObjectType Type => Gp_CrmObjectType.Ticket;
 
         public Guid ListenLineId { get; set; }
@@ -13,8 +17,14 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmO
 
         public PriorityMatrixModel PriorityMatrix { get; set; }
     }
+
     public class PriorityMatrixModel
     {
+        public PriorityMatrixModel()
+        {
+            Details = Array.Empty<PriorityMatrixDetailModel>();
+        }
+
         public PriorityMatrixDetailModel[] Details { get; set; }
     }
 

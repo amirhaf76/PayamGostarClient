@@ -11,6 +11,11 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
         /// </summary>
         // public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
 
+        public DropDownListExtendedPropertyModel()
+        {
+            Values = Array.Empty<DropDownListExtendedPropertyValueModel>();
+        }
+
         public DropDownListExtendedPropertyValueModel[] Values { get; set; }
 
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.DropDownList;

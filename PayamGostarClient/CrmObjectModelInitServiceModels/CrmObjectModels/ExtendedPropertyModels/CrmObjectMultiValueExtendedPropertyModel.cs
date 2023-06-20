@@ -8,7 +8,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Exte
     {
         public CrmObjectMultiValueExtendedPropertyModel()
         {
-            ShowInGridProps = Array.Empty< PropertyDefinitionIdWrapperModel>();
+            ShowInGridProps = Array.Empty<PropertyDefinitionIdWrapperModel>();
         }
 
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.CrmObjectMultiValue;

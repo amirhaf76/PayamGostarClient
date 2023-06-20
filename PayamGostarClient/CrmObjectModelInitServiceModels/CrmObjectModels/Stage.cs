@@ -5,9 +5,14 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels
 {
     public class Stage
     {
+        public Stage()
+        {
+            Array.Empty<ResourceValue>();
+        }
+
         internal Guid Id { get; set; }
 
-        internal Guid ResouceKey { get; set; }
+        internal Guid? ResouceKey { get; set; }
 
 
         public ResourceValue[] Name { get; set; }

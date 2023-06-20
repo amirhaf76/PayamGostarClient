@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.CrmObjectModelInitServiceModels.Abstractions;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
+using PayamGostarClient.CrmObjectModelInitServiceModels.Exceptions;
 using PayamGostarClient.InitServiceModels.Factory;
 using System.Threading.Tasks;
 
@@ -9,14 +10,14 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
     {
         private readonly CrmObjectModelInitServiceConfig _config;
 
-        public CrmObjectModelInitService()
-        {
-
-        }
-
         public CrmObjectModelInitService(CrmObjectModelInitServiceConfig config)
         {
             _config = config;
+
+            if (config.ClientService == null)
+            {
+                throw new ClientServiceConfigNullException();
+            }
         }
 
         public void Init(params BaseCRMModel[] crmModels)
