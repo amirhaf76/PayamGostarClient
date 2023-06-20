@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiServices.Abstractions;
+using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
@@ -144,9 +145,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
-            await CheckGroupPropertiesAndCreateUnexistedGroupPropetiesAsync(currentCrmObject.Id, currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
-
-            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToModel()));
+            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToModel()), currentCrmObject.Groups);
 
             await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
         }
@@ -154,13 +153,6 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         public void CheckCrmObjectTypeBelongs(CrmObjectTypeSearchResultDto currentCrmObject)
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
-
-            var newGroups = CheckGroupPropertiesAndReturnNewGroupsWithId(currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
-
-            if (newGroups.Any())
-            {
-                throw new MisMatchException("There are some new groups.");
-            }
 
             var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentCrmObject.Properties?.Select(x => x.ToModel()));
 
@@ -215,35 +207,12 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             return newStages;
         }
 
-        private async Task CheckGroupPropertiesAndCreateUnexistedGroupPropetiesAsync(Guid id, IEnumerable<PropertyGroup> groups)
-        {
-            var newGroups = CheckGroupPropertiesAndReturnNewGroupsWithId(groups);
 
-            await CreateGroupPropetiesAsync(id, newGroups);
-        }
-
-        private List<PropertyGroup> CheckGroupPropertiesAndReturnNewGroupsWithId(IEnumerable<PropertyGroup> groups)
-        {
-            var newGroups = new List<PropertyGroup>();
-
-            foreach (var group in IntendedCrmObject.PropertyGroups)
-            {
-                var newGroup = CheckGroupPropetyAndUpdateIdIfExists(group, groups);
-
-                if (!newGroup.found)
-                {
-                    newGroups.Add(newGroup.group);
-                }
-            }
-
-            return newGroups;
-        }
-
-        private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> currentExtendedProperties)
+        private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> currentExtendedProperties, IEnumerable<PropertyGroupGetResultDto> groups)
         {
             var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentExtendedProperties);
 
-            await CreateExtendedPropertiesAsync(id, newProperties);
+            await CreateExtendedPropertiesAsync(id, newProperties, groups);
         }
 
 
@@ -334,17 +303,19 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         {
             foreach (var group in groups)
             {
-                await CreateGroupPropetiesAsync(id, group);
+                var gId = await CreateGroupPropetiesAsync(id, group);
+
+                group.Id = gId;
             }
         }
 
-        private async Task CreateGroupPropetiesAsync(Guid id, PropertyGroup group)
+        private async Task<int> CreateGroupPropetiesAsync(Guid id, PropertyGroup group)
         {
             var groupDto = group.CreatePropertyGroupCreationRequest(id);
 
             var groupCreationResult = await PropertyGroupService.CreateAsync(groupDto);
 
-            group.Id = groupCreationResult.Result.Id;
+            return groupCreationResult.Result.Id;
         }
 
 
@@ -371,6 +342,37 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             return createdPropertiesId;
         }
 
+        private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> properties, IEnumerable<PropertyGroupGetResultDto> groups)
+        {
+            var createdPropertiesId = new List<Guid>();
+
+            foreach (var property in properties)
+            {
+                property.CrmObjectTypeId = id.ToString();
+
+                //fetch group by name
+                var group = groups.Where(g => property.PropertyGroup.Name.Any(xx => xx.Value == g.Name)).FirstOrDefault();
+                if (group == null)
+                {
+                    // create group if not exist
+                    var gId = await CreateGroupPropetiesAsync(id, property.PropertyGroup);
+                    property.PropertyGroup.Id = gId;
+                }
+                else
+                {
+                    property.PropertyGroup.Id = group.Id;
+                }
+
+                var propertyDto = CreateExtendedPropertyCreationDto(property);
+
+                var response = await ExtendedPropertyService.CreateAsync(propertyDto);
+
+                createdPropertiesId.Add(response.Result.Id);
+            }
+
+            return createdPropertiesId;
+        }
+
 
         private void CheckBaseCrmObjectMatching(CrmObjectTypeSearchResultDto currentCrmObj)
         {
@@ -381,29 +383,6 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
 
         protected abstract Task<Guid> CreateTypeAsync();
 
-
-        private (PropertyGroup group, bool found) CheckGroupPropetyAndUpdateIdIfExists(PropertyGroup intendedGroup, IEnumerable<PropertyGroup> currentGroups)
-        {
-            var resourceValueComparer = ResourceValueEqualityComparer.GetInstance();
-
-            foreach (var currentGroup in currentGroups)
-            {
-                if (intendedGroup.Name.Any(n => currentGroup.Name.Contains(n, resourceValueComparer)))
-                {
-                    if (!intendedGroup.Name.CheckResourceValues(currentGroup.Name))
-                    {
-                        return (intendedGroup, false);
-                    }
-
-
-                    intendedGroup.Id = currentGroup.Id;
-
-                    return (intendedGroup, true);
-                }
-            }
-
-            return (intendedGroup, false);
-        }
 
         private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<BaseExtendedPropertyModel> currentProperties)
         {

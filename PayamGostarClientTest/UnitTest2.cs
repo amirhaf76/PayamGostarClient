@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+﻿using FluentAssertions;
+using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
@@ -604,7 +605,28 @@ namespace PayamGostarClientTest
             var crmModelService = new CrmObjectModelInitService(initServiceConfig);
 
 
-            await crmModelService.InitAsync(InterviewTicketModel.Create());
+            await crmModelService.InitAsync(EmploymentRequestAdModel.Create(), EmploymentRequestModel.Create(), InterviewTicketModel.Create());
+       
+        }
+
+        [Fact]
+        public async Task CheckExistenceSchemaAsync_TicketmModel_InterviewTicket()
+        {
+            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            {
+                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                {
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
+                    JwToken = JwTokenRepository.JWTOKEN,
+                }
+            };
+
+            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+
+
+            var doesExistTheModels = await crmModelService.CheckExistenceSchemaAsync(EmploymentRequestAdModel.Create(), EmploymentRequestModel.Create());
+            doesExistTheModels.Should().BeFalse();
         }
     }
 }
