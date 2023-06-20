@@ -82,6 +82,7 @@ namespace PayamGostarClientTest
                         IsDoneStage = false,
                         Enabled = true,
                         Index = 3,
+                        Key = "Approved"
                     },
                     new Stage()
                     {
@@ -91,7 +92,8 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = true,
                         Enabled = true,
-                        Index = 4
+                        Index = 4,
+                        Key = "Hired"
                     },
                     new Stage()
                     {
@@ -101,7 +103,8 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 1
+                        Index = 1,
+                        Key = "Processing"
                     },
                     new Stage()
                     {
@@ -112,6 +115,7 @@ namespace PayamGostarClientTest
                         IsDoneStage = false,
                         Enabled = true,
                         Index = 2,
+                        Key = "HRProcessing"
                     },
                     new Stage()
                     {
@@ -121,7 +125,8 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = true,
                         Enabled = true,
-                        Index = 5
+                        Index = 5,
+                        Key = "Rejected"
                     }
                 },
             };

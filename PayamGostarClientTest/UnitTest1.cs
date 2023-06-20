@@ -16,11 +16,6 @@ namespace PayamGostarClientTest
 {
     public class UnitTest1
     {
-        private const string URL = "http://pgonline-dev.com";
-        //private const string URL = "https://webhook.site/eba279bf-0642-4288-9a82-b4e8d15fd276";
-        private const string FA_LANGUAGE_CULTURE = "fa-IR";
-        private const string EN_LANGUAGE_CULTURE = "en_US";
-
         private readonly ITestOutputHelper _testOutput;
 
         public UnitTest1(ITestOutputHelper testOutput)
@@ -34,10 +29,10 @@ namespace PayamGostarClientTest
 
             var clientFactory = new PayamGostarClientFactory(new PayamGostarClientConfig
             {
-                LanguageCulture = FA_LANGUAGE_CULTURE,
+                LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                 ClientApiIntraction = new ClientApiIntraction
                 {
-                    DomainUrl = URL,
+                    DomainUrl = MarkedUrl.URL,
                     JwtToken = JwTokenRepository.JWTOKEN,
                     // DeviceId
                     // ClientId
@@ -63,8 +58,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                 }
             };
 
@@ -80,8 +75,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -92,12 +87,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "فرم تست ۱", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "فرم تست ۱", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -111,8 +106,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -124,12 +119,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -142,7 +137,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -153,12 +148,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Values = new[]
@@ -195,8 +190,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -208,12 +203,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -226,7 +221,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -237,12 +232,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -253,11 +248,11 @@ namespace PayamGostarClientTest
             {
                 Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "آگهی ها"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "آگهی ها"},
                     },
                 ToolTip = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
                 PropertyGroup = groupA,
                 UserKey = "EmploymentRequestAds",
@@ -272,7 +267,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "تایید شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "تایید شده"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -282,7 +277,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "جذب شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "جذب شده"},
                     },
                     IsDoneStage = true,
                     Enabled = true,
@@ -292,7 +287,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -302,7 +297,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -312,7 +307,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "رد شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "رد شده"},
                     },
                     IsDoneStage = true,
                     Enabled = true,
@@ -334,8 +329,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -347,12 +342,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -365,7 +360,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -377,7 +372,7 @@ namespace PayamGostarClientTest
                 Key = "myKey",
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "end", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "end", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -389,7 +384,7 @@ namespace PayamGostarClientTest
                 Key = "myKey",
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "Start", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "Start", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -403,12 +398,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -459,8 +454,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -474,12 +469,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = name, LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -492,7 +487,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -503,12 +498,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -522,7 +517,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "تایید شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "تایید شده"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -532,7 +527,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "جذب شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "جذب شده"},
                     },
                     IsDoneStage = true,
                     Enabled = true,
@@ -542,7 +537,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -552,7 +547,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -562,7 +557,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "رد شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "رد شده"},
                     },
                     IsDoneStage = true,
                     Enabled = true,
@@ -575,12 +570,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = name, LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -593,7 +588,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -604,12 +599,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -621,12 +616,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "number", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "number", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -645,7 +640,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "تایید شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "تایید شده"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -655,7 +650,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "جذب شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "جذب شده"},
                     },
                     IsDoneStage = true,
                     Enabled = true,
@@ -665,7 +660,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "درحال بررسی"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -675,7 +670,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "درحال بررسی منابع انسانی"},
                     },
                     IsDoneStage = false,
                     Enabled = true,
@@ -685,7 +680,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "رد شده"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "رد شده"},
                     },
                     IsDoneStage = true,
                     Enabled = true,
@@ -703,8 +698,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -715,12 +710,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -733,7 +728,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -744,12 +739,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -762,12 +757,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -780,7 +775,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -791,12 +786,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -808,12 +803,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -836,8 +831,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -849,12 +844,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = name, LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -867,7 +862,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -878,12 +873,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -896,12 +891,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = name, LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = name, LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -914,7 +909,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -925,12 +920,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -942,12 +937,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -970,8 +965,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -1064,6 +1059,8 @@ namespace PayamGostarClientTest
 
         }
 
+
+
         [Fact]
         public async Task InitAsync_EmploymentRequestCrmFormModel()
         {
@@ -1071,8 +1068,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -1081,101 +1078,7 @@ namespace PayamGostarClientTest
 
             await crmModelService.InitAsync(EmploymentRequestModel.Create());
         }
-        [Fact]
-        public async Task InitAsync_EmploymentRequestCrmFormModel_2()
-        {
-            var initServiceConfig = new CrmObjectModelInitServiceConfig
-            {
-                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
-                {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
-                    JwToken = JwTokenRepository.JWTOKEN,
-                }
-            };
 
-            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
-
-
-            var model = new CrmFormModel
-            {
-                Name = new[]
-                {
-                    new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "1stco- آگهی مرتبط با درخواست جذب نیرو"},
-                },
-                Description = new[]
-                {
-                    new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty },
-                },
-                Code = "EmploymentRequestAd",
-                Enabled = true,
-                PropertyGroups = new System.Collections.Generic.List<PropertyGroup>
-                {
-                    new PropertyGroup()
-                    {
-                        Name = new[]
-                        {
-                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "اطلاعات محل انتشار"},
-                        },
-                        CountOfColumns = 1,
-                        Expanded = false,
-                    }
-                },
-            };
-
-            var groupA = new PropertyGroup()
-            {
-                Name = new[]
-                        {
-                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "مرتبط با فرآیند"},
-                        },
-                CountOfColumns = 2,
-                Expanded = false,
-            };
-
-            model.PropertyGroups.Add(groupA);
-
-            model.Properties.Add(new TextExtendedPropertyModel
-            {
-                Name = new ResourceValue[]
-                {
-                    new ResourceValue { Value = "AutogenTextProperty2", LanguageCulture = FA_LANGUAGE_CULTURE },
-                    //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
-                },
-                ToolTip = new ResourceValue[]
-                {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
-                    //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
-                },
-
-                UserKey = $"Auto_gen_text_property_test_46545646",
-                PropertyGroup = groupA
-            });
-            model.Properties.Add(new CrmObjectMultiValueExtendedPropertyModel()
-            {
-                Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "آگهی ها"},
-                    },
-                ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                PropertyGroup = groupA,
-                UserKey = "EmploymentRequestAds",
-                IsRequired = false,
-                DefaultValue = string.Empty,
-                CrmObjectTypeIndex = PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.Gp_CrmObjectType.Form,
-            });
-
-
-
-
-            _testOutput.WriteLine(model.Name.FirstOrDefault()?.Value);
-            _testOutput.WriteLine(model.Code);
-
-            await crmModelService.InitAsync(model);
-        }
 
         [Fact]
         public async Task InitAsync_EmploymentRequestAdModel()
@@ -1184,8 +1087,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -1202,8 +1105,8 @@ namespace PayamGostarClientTest
             {
                 ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
                 {
-                    Url = URL,
-                    LanguageCulture = FA_LANGUAGE_CULTURE,
+                    Url = MarkedUrl.URL,
+                    LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE,
                     JwToken = JwTokenRepository.JWTOKEN,
                 }
             };
@@ -1215,12 +1118,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = $"AutogenFormTest_{Guid.NewGuid()}", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 Description = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -1233,7 +1136,7 @@ namespace PayamGostarClientTest
                 Expanded = true,
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "GroupA", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "GroupA", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 }
             };
@@ -1244,12 +1147,12 @@ namespace PayamGostarClientTest
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "AutogenTextProperty", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "Test form 1", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
                 ToolTip = new ResourceValue[]
                 {
-                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = FA_LANGUAGE_CULTURE },
+                    new ResourceValue { Value = "توضیحات فارسی", LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE },
                     //new ResourceValue { Value = "English Descrpition", LanguageCulture = EN_LANGUAGE_CULTURE }
                 },
 
@@ -1261,11 +1164,11 @@ namespace PayamGostarClientTest
             {
                 Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "آگهی ها"},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = "آگهی ها"},
                     },
                 ToolTip = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                        new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
                 PropertyGroup = groupA,
                 UserKey = "Auto_gen_text_property_test_{Guid.NewGuid()}",

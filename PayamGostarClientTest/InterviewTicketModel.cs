@@ -22,8 +22,8 @@ namespace PayamGostarClientTest
                     new ResourceValue { LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty },
                 },
                 Code = $"interview",
-                ResponseTemplate = "",
-                ListenLineId = Guid.Parse("eb7fbe77-37b2-4ac7-95d4-96f09d5bafbe"), // payamgostarst@gmail.com
+                ResponseTemplate = string.Empty,
+                ListenLineId = Guid.Parse("48a64a95-50bd-428e-9663-f1a222dbb8b9"), 
                 Enabled = true,
                 PreviewTypeIndex = Gp_PreviewType.WordPreview,
                 PropertyGroups = new System.Collections.Generic.List<PropertyGroup>

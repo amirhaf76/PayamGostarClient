@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+	  <PackageVersion>1.0.0</PackageVersion>
+	  <Company>1st</Company>
+	  <Authors>Amirhaf76</Authors>
+	  <RepositoryUrl>https://github.com/amirhaf76/PayamGostarClient</RepositoryUrl>
+	  
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,7 +14,5 @@
     <PackageReference Include="SeptaKit" Version="1.0.15" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

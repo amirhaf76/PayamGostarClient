@@ -100,7 +100,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
                 (IntendedCrmObject.Properties?.Any() ?? false) &&
                 (IntendedCrmObject.PropertyGroups == null || !IntendedCrmObject.PropertyGroups.Any()))
             {
-                throw new InvalidGroupCountException();
+                throw new InvalidGroupCountException("CrmObject needs atleast a group for its extended properties.");
             }
 
             if (!IntendedCrmObject.Properties?.All(p => p.PropertyGroup != null) ?? false)

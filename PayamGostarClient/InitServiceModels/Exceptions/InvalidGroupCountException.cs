@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
-    internal class InvalidGroupCountException : Exception
+    public class InvalidGroupCountException : Exception
     {
         public InvalidGroupCountException()
         {
