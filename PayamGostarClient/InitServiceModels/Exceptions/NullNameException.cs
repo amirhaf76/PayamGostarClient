@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
-    internal class NullNameException : Exception
+    public class NullNameException : Exception
     {
         public NullNameException()
         {

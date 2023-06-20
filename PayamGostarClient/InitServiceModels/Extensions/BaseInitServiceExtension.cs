@@ -1,15 +1,11 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiServices.Dtos.PropertyGroupServiceDtos;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
-using PayamGostarClient.InitServiceModels.Exceptions;
-using PayamGostarClient.InitServiceModels.Models.CrmModels;
 using System;
 using System.Linq;
 
@@ -18,16 +14,6 @@ namespace PayamGostarClient.InitServiceModels.Extensions
     internal static class BaseInitServiceExtension
     {
         internal static string LanguageCulture { get; set; } = "fa-IR";
-
-        internal static SearchedCrmObjectModel ToModel(this CrmObjectTypeSearchResultDto crmModel)
-        {
-            var crmObjectType = (Gp_CrmObjectType)crmModel.CrmOjectTypeIndex;
-
-            return new SearchedCrmObjectModel(crmObjectType)
-            {
-                Id = crmModel.Id,
-            }.FillBaseCRMModel(crmModel);
-        }
 
 
         internal static TTarget FillBaseCRMModel<TFrom, TTarget>(this TTarget target, TFrom from)
@@ -119,7 +105,6 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 ExpandForView = group.Expanded,
                 Name = new SystemResourceValueDto
                 {
-                    ResourceKey = group.ResouceKey.ToString(),
                     ResourceValues = group.Name.Select(n => n.ToDto())
                 }
             };
@@ -136,7 +121,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
                 Key = stage.Key,
                 Name = new SystemResourceValueDto
                 {
-                    ResourceKey = stage.ResouceKey.ToString(),
+                    ResourceKey = stage.ResouceKey?.ToString(),
                     ResourceValues = stage.Name.Select(n => n.ToDto())
                 },
             };
@@ -147,7 +132,7 @@ namespace PayamGostarClient.InitServiceModels.Extensions
             return new Stage
             {
                 Id = dto.Id,
-                ResouceKey = (!string.IsNullOrEmpty(dto.NameResourceKey)) ? Guid.Parse(dto.NameResourceKey) : Guid.Empty,
+                ResouceKey = (!string.IsNullOrEmpty(dto.NameResourceKey)) ? (Guid?) Guid.Parse(dto.NameResourceKey) : null,
                 Name = ToResourceValues(dto.Name),
                 Key = dto.Key,
                 IsDoneStage = dto.IsDoneStage,

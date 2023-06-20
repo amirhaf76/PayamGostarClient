@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
-    internal class NotFoundAtleastAFinalStageException : Exception
+    public class NotFoundAtleastAFinalStageException : Exception
     {
         public NotFoundAtleastAFinalStageException()
         {

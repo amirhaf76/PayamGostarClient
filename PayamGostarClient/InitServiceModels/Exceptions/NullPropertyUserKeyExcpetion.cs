@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
-    internal class NullPropertyUserKeyExcpetion : Exception
+    public class NullPropertyUserKeyExcpetion : Exception
     {
         public NullPropertyUserKeyExcpetion()
         {

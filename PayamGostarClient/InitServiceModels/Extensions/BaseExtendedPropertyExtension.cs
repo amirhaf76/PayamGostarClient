@@ -21,8 +21,8 @@ namespace PayamGostarClient.InitServiceModels.Extensions
 
             target.UserKey = from.UserKey;
             target.PropertyGroupId = from.PropertyGroup.Id;
-            target.Name = new SystemResourceValueDto { ResourceValues = from.Name.Select(r => r.ToDto()) };
-            target.ToolTip = new SystemResourceValueDto { ResourceValues = from.ToolTip.Select(r => r.ToDto()) };
+            target.Name = new SystemResourceValueDto { ResourceValues = from.Name?.Select(r => r.ToDto()) ?? Array.Empty<ResourceValueDto>() };
+            target.ToolTip = new SystemResourceValueDto { ResourceValues = from.ToolTip?.Select(r => r.ToDto()) ?? Array.Empty<ResourceValueDto>() };
             target.CrmObjectTypeId = Guid.Parse(from.CrmObjectTypeId);
             target.DefaultValue = from.DefaultValue;
 

@@ -5,19 +5,13 @@ using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjec
 using PayamGostarClient.InitServiceModels.Abstractions;
 using PayamGostarClient.InitServiceModels.Exceptions;
 using PayamGostarClient.InitServiceModels.Extensions;
-using PayamGostarClient.InitServiceModels.Models;
 using PayamGostarClient.InitServiceModels.Models.Services;
-using System;
 
 namespace PayamGostarClient.InitServiceModels.Factory
 {
     public class InitServiceFactory : IInitServiceFactory
     {
         private readonly IPayamGostarClientServiceFactory _serviceFactory;
-
-        public InitServiceFactory() : this(InitServiceFactoryConfig.Default)
-        {
-        }
 
         public InitServiceFactory(InitServiceFactoryConfig config)
         {
@@ -39,22 +33,11 @@ namespace PayamGostarClient.InitServiceModels.Factory
             }
         }
 
-        //public IInitService Create<T>(T model) where T : BaseCRMModel
-        //{
-        //    switch (model.Type)
-        //    {
-        //        case Gp_CrmObjectType.Form:
-        //            return new FormInitService(model as CrmFormModel, _serviceFactory);
-        //        default:
-        //            throw new InvalidGpCrmObjectTypeException();
-        //    }
-        //}
-
         private IPayamGostarClientServiceFactory CreatePayamGostarClientServiceFactory(InitServiceFactoryConfig config)
         {
             return new PayamGostarClientServiceFactory(config.ClientService);
         }
-       
+
     }
 
 

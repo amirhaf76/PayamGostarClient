@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
-    internal class NonUniqeStageKeyException : Exception
+    public class NonUniqeStageKeyException : Exception
     {
         public NonUniqeStageKeyException()
         {

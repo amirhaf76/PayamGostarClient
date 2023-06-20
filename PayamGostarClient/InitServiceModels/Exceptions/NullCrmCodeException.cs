@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.InitServiceModels.Exceptions
 {
     [Serializable]
-    internal class NullCrmCodeException : Exception
+    public class NullCrmCodeException : Exception
     {
         public NullCrmCodeException()
         {
