@@ -127,8 +127,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
             }
         }
@@ -149,7 +148,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
             }
         }
@@ -181,7 +180,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
 
 
@@ -204,7 +203,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
 
             }
@@ -226,7 +225,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
 
             }
@@ -248,7 +247,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
 
             }
@@ -270,7 +269,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
 
             }
@@ -292,7 +291,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
             }
         }
@@ -313,7 +312,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 catch (ApiException e)
                 {
 
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
             }
         }
@@ -333,7 +332,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
             }
         }
@@ -355,7 +354,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
                 throw new NotImplementedException();
             }
@@ -376,7 +375,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
 
                 throw new NotImplementedException();
@@ -398,7 +397,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
                 throw new NotImplementedException();
             }
@@ -419,7 +418,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
                 throw new NotImplementedException();
             }
@@ -440,7 +439,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
                 throw new NotImplementedException();
             }
@@ -461,7 +460,7 @@ namespace PayamGostarClient.ApiServices.Factory
                 }
                 catch (ApiException e)
                 {
-                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
                 }
                 throw new NotImplementedException();
             }

@@ -19,11 +19,17 @@ namespace PayamGostarClient.ApiServices.Models
 
         public async Task<ApiResponse<CrmObjectPropertyGroupCreationResultDto>> CreateAsync(CrmObjectPropertyGroupCreationRequestDto request)
         {
-            var groupCreationTask = _propertyGroupApiClient.PostApiV2CrmobjecttypepropertygroupCreateAsync(request.ToVM());
+            try
+            {
+                var groupCreationResult = await _propertyGroupApiClient.PostApiV2CrmobjecttypepropertygroupCreateAsync(request.ToVM());
 
-            var groupCreationResult = await groupCreationTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
+                return groupCreationResult.ConvertToApiResponse(result => result.ToDto());
+            }
+            catch (ApiException e)
+            {
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(request), e);
+            }
 
-            return groupCreationResult.ConvertToApiResponse(result => result.ToDto());
         }
     }
 }

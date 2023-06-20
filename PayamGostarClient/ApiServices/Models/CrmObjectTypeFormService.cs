@@ -32,7 +32,7 @@ namespace PayamGostarClient.ApiServices.Models
             }
             catch (ApiException e)
             {
-               throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+               throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(request),e);
             }
         }
 
@@ -46,7 +46,7 @@ namespace PayamGostarClient.ApiServices.Models
             }
             catch (ApiException e)
             {
-                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(request),e);
             }
 
         }

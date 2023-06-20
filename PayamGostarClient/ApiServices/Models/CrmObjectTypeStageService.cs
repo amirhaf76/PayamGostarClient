@@ -22,32 +22,38 @@ namespace PayamGostarClient.ApiServices.Models
 
         public async Task<ApiResponse<CrmObjectTypeStageCreationResultDto>> CreateAsync(CrmObjectTypeStageCreationRequestDto request)
         {
-            var stageCreationTask = _crmObjectTypeStageApiClient.PostApiV2CrmobjecttypestageCreateAsync(request.ToVM());
+            try
+            {
+                var stageCreationResult = await _crmObjectTypeStageApiClient.PostApiV2CrmobjecttypestageCreateAsync(request.ToVM());
 
-            var stageCreationResult = await stageCreationTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
+                return stageCreationResult.ConvertToApiResponse(result => result.ToDto());
+            }
+            catch (ApiException e)
+            {
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(request), e);
+            }
 
-            return stageCreationResult.ConvertToApiResponse(result => result.ToDto());
         }
 
         public async Task<ApiResponse<IEnumerable<CrmObjectTypeStageGetResultDto>>> GetStagesAsync(Guid crmObjectId)
         {
+            var request = new CrmObjectTypeStageGetCollectionRequestVM
+            {
+                CrmObjectTypeId = crmObjectId,
+            };
+
             try
             {
-                var request = new CrmObjectTypeStageGetCollectionRequestVM
-                {
-                    CrmObjectTypeId = crmObjectId,
-                };
-
                 var stageCreationResult = await _crmObjectTypeStageApiClient.PostApiV2CrmobjecttypestageGetcrmobjecttypestagesAsync(request);
 
                 return stageCreationResult.ConvertToApiResponse(result => result.Select(x => x.ToDto()));
             }
             catch (ApiException e)
             {
-                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(request), e);
             }
 
         }
-         
+
     }
 }

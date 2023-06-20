@@ -15,7 +15,7 @@ namespace PayamGostarClient.ApiServices.Models
     {
         private readonly ICrmObjectTypeApiClient _crmObjectTypeClient;
 
-        public CrmObjectTypeService(PayamGostarClientConfig clientConfig, IPayamGostarClientAbstractFactory clientFactory) 
+        public CrmObjectTypeService(PayamGostarClientConfig clientConfig, IPayamGostarClientAbstractFactory clientFactory)
             : base(clientConfig, clientFactory)
         {
             _crmObjectTypeClient = ClientFactory.CreateCrmObjectTypeApiClient();
@@ -23,11 +23,17 @@ namespace PayamGostarClient.ApiServices.Models
 
         public async Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchAsync(CrmObjectTypeSearchRequestDto request)
         {
-            var searchResultTask = _crmObjectTypeClient.PostApiV2CrmobjecttypeSearchAsync(request.ToVM());
+            try
+            {
+                var searchResult = await _crmObjectTypeClient.PostApiV2CrmobjecttypeSearchAsync(request.ToVM());
 
-            var searchResult = await searchResultTask.WrapInThrowableApiServiceExceptionAndInvoke().ConfigureAwait(false);
+                return searchResult.ConvertToApiResponse(result => result.Items.Select(crm => crm.ToDto()));
+            }
+            catch (ApiException e)
+            {
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(request), e);
+            }
 
-            return searchResult.ConvertToApiResponse(result => result.Items.Select(crm => crm.ToDto()));
         }
     }
 }

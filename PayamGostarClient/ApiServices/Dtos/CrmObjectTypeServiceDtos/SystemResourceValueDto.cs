@@ -12,5 +12,10 @@ namespace PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos
         public string ResourceKey { get; set; }
 
         public IEnumerable<ResourceValueDto> ResourceValues { get; set; }
+
+        public override string ToString()
+        {
+            return Helper.Helper.GetStringsFromProperties(this);
+        }
     }
 }
