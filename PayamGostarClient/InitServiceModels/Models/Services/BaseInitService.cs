@@ -155,11 +155,26 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
-            CheckGroupPropertiesAndReturnNewGroupsWithId(currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
+            var newGroups = CheckGroupPropertiesAndReturnNewGroupsWithId(currentCrmObject.Groups?.Select(g => g.ToPropertyGroup()));
 
-            CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentCrmObject.Properties?.Select(x => x.ToModel()));
+            if (newGroups.Any())
+            {
+                throw new MisMatchException("There are some new groups.");
+            }
 
-            CheckStagesAndGetNewStages(currentCrmObject.Stages?.Select(x => x.ToStage()));
+            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentCrmObject.Properties?.Select(x => x.ToModel()));
+
+            if (newProperties.Any())
+            {
+                throw new MisMatchException("There are some new properties.");
+            }
+
+            var newStages = CheckStagesAndGetNewStages(currentCrmObject.Stages?.Select(x => x.ToStage()));
+
+            if (newStages.Any())
+            {
+                throw new MisMatchException("There are some new stages.");
+            }
         }
 
         private async Task CreateCrmObjectTypeBelongs(Guid id)
@@ -476,7 +491,7 @@ namespace PayamGostarClient.InitServiceModels.Models.Services
             ModelChecker.CheckFieldMatching(first, second, errorMessage);
         }
 
-        public async Task<bool> CheckSchemaAsync()
+        public async Task<bool> CheckExistenceSchemaAsync()
         {
             ValidateInitialValidationModel();
 

@@ -2,6 +2,7 @@
 using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
 using PayamGostarClient.CrmObjectModelInitServiceModels.Exceptions;
 using PayamGostarClient.InitServiceModels.Factory;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
@@ -20,7 +21,7 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
             }
         }
 
-        public async Task<bool> CheckSchemaAsync(params BaseCRMModel[] crmModels)
+        public async Task<bool> CheckExistenceSchemaAsync(params BaseCRMModel[] crmModels)
         {
             var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = _config.ClientService };
 
@@ -30,7 +31,9 @@ namespace PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels
             {
                 var initService = initServiceFactory.Create(crmModel);
 
-                return await initService.CheckSchemaAsync();
+                var isMatched = await initService.CheckExistenceSchemaAsync();
+
+                if (!isMatched) return false;
             }
 
             return true;

@@ -7,7 +7,7 @@ namespace PayamGostarClient.InitServiceModels.Abstractions
     {
         Task InitAsync();
 
-        Task<bool> CheckSchemaAsync();
+        Task<bool> CheckExistenceSchemaAsync();
     }
 
 }
