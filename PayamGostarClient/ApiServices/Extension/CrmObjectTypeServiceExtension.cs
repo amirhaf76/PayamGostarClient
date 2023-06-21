@@ -33,6 +33,7 @@ namespace PayamGostarClient.ApiServices.Extension
                     NameResourceKey = group.NameResourceKey,
                     CountOfColumns = group.CountOfColumns,
                     ExpandForView = group.ExpandForView,
+                    Id = group.Id,
                 });
             }
 

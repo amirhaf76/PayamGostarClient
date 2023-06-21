@@ -108,9 +108,9 @@ namespace PayamGostarClient.Initializer.Services
             {
                 var errorMessage = IntendedCrmObject.Properties
                     .Where(p => p.PropertyGroup == null)
-                    .Select(p => p.Name);
+                    .Select(p => p.UserKey);
 
-                throw new UnBindedExtendedPropertyToGroupPropertyException($"Invalid Properties: {errorMessage}");
+                throw new UnBindedExtendedPropertyToGroupPropertyException($"Some properties are not binded to a group. their userkeys are: {errorMessage}");
             }
 
             if (!IntendedCrmObject.Properties?.All(p => !string.IsNullOrEmpty(p.UserKey)) ?? false)
@@ -119,7 +119,7 @@ namespace PayamGostarClient.Initializer.Services
                     .Where(p => string.IsNullOrEmpty(p.UserKey))
                     .Select(p => p.Name);
 
-                throw new NullPropertyUserKeyExcpetion($"Invalid Properties: {errorMessage}");
+                throw new NullPropertyUserKeyExcpetion($"Some properties don't have userkey. their first re are: {errorMessage}");
             }
 
             var propertyKeyGroups = IntendedCrmObject.Properties.GroupBy(p => p.UserKey);
