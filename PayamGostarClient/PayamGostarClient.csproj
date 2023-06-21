@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	  <PackageVersion>1.0.2</PackageVersion>
+	  <PackageVersion>1.0.3</PackageVersion>
 	  <Company>1st</Company>
 	  <Authors>Amirhaf76</Authors>
 	  <RepositoryUrl>https://github.com/amirhaf76/PayamGostarClient</RepositoryUrl>
@@ -13,6 +13,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SeptaKit" Version="1.0.15" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApiClient\" />
   </ItemGroup>
 
 </Project>

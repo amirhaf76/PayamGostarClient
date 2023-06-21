@@ -37,7 +37,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new CrmObjectMultiValueExtendedPropertyExtraConfigDto
             {
                 VisibleProperties = config.VisibleProperties,
-                CrmObjectType = (CrmObjectModelInitServiceModels.CrmObjectModels.Gp_CrmObjectType)config.CrmObjectType,
+                CrmObjectType = (Initializer.CrmModels.Gp_CrmObjectType)config.CrmObjectType,
                 SubTypeId = config.SubTypeId,
 
             };

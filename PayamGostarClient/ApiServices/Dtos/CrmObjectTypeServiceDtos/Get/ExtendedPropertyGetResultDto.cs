@@ -1,5 +1,5 @@
 ﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
+using PayamGostarClient.Initializer.CrmModels;
 using System;
 using System.Collections.Generic;
 

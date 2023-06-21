@@ -1,10 +1,7 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiServices.Dtos;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
 using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -81,7 +78,7 @@ namespace PayamGostarClient.ApiServices.Extension
             return new CrmObjectTypeGetRequestVM { Id = request.Id };
         }
 
- 
+
 
         public static PropertyDefinitionIdWrapper ToVM(this ExtendedPropertyIdWrapperDto dto)
         {
