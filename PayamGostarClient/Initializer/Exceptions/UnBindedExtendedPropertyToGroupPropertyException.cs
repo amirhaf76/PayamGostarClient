@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PayamGostarClient.Initializer.Exceptions
 {
     [Serializable]
-    internal class UnBindedExtendedPropertyToGroupPropertyException : Exception
+    public class UnBindedExtendedPropertyToGroupPropertyException : Exception
     {
         public UnBindedExtendedPropertyToGroupPropertyException()
         {
