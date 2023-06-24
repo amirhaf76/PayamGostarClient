@@ -1,6 +1,6 @@
-﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
+﻿using PayamGostarClient.Initializer.CrmModels;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System;
 
 namespace PayamGostarClientTest

@@ -1,7 +1,6 @@
-﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
-using System;
+﻿using PayamGostarClient.Initializer.CrmModels;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 
 namespace PayamGostarClientTest
 {
@@ -651,7 +650,7 @@ namespace PayamGostarClientTest
                         new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
                     },
                     PropertyGroup = newModel.PropertyGroups[2],
-                    UserKey = "EmploymentRequestAd",
+                    UserKey = "EmploymentRequestAds",
                     IsRequired = false,
                     DefaultValue = string.Empty,
                     CrmObjectTypeIndex = Gp_CrmObjectType.Form,

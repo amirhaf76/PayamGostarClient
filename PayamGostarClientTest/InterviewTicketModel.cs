@@ -1,6 +1,6 @@
-﻿using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
+﻿using PayamGostarClient.Initializer.CrmModels;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System;
 
 namespace PayamGostarClientTest
@@ -23,7 +23,7 @@ namespace PayamGostarClientTest
                 },
                 Code = $"interview",
                 ResponseTemplate = string.Empty,
-                ListenLineId = Guid.Parse("48a64a95-50bd-428e-9663-f1a222dbb8b9"), 
+                ListenLineId = Guid.Parse("2b0e6171-e9ff-4aa2-b697-0fb95fa64237"),
                 Enabled = true,
                 PreviewTypeIndex = Gp_PreviewType.WordPreview,
                 PropertyGroups = new System.Collections.Generic.List<PropertyGroup>
@@ -334,11 +334,11 @@ namespace PayamGostarClientTest
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
                     PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "Coordinator", // mj
+                    UserKey = "CoordinatorX", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
-                new CheckboxExtendedPropertyModel 
+                new CheckboxExtendedPropertyModel
                 {
                     Name = new[]
                     {
