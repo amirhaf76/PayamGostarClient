@@ -114,8 +114,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithoutGroupAndProperties()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
 
@@ -130,8 +130,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithJustGroup()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
 
@@ -150,8 +150,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithADifferentGroup()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
 
@@ -159,7 +159,66 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
 
             var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
 
-            existedModel.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup(nameFromat: "group_{0}"));
+            existedModel.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup(nameFromat: "group_{0:N}"));
+
+            return new[]
+            {
+                new object[] { model, existedModel },
+            };
+        }
+
+        public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithSameGroupAndDifferentTextProperty()
+        {
+            var guid = Guid.NewGuid();
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
+
+            var firstGroup = DataTest.CreateASimplePropertyGroup();
+
+
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+
+            model.PropertyGroups.Add(firstGroup);
+
+            model.Properties.Add(DataTest.CreateTextExtendedProperty(firstGroup));
+
+
+            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+
+            existedModel.PropertyGroups.Add(firstGroup);
+
+            existedModel.Properties.Add(DataTest.CreateTextExtendedProperty(firstGroup, userKeyFromat: "textPropertyUserKey_{0:N}"));
+
+
+            return new[]
+            {
+                new object[] { model, existedModel },
+            };
+        }
+
+        public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithDifferentGroupAndSameTextProperty()
+        {
+            var guid = Guid.NewGuid();
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
+
+            var firstGroup = DataTest.CreateASimplePropertyGroup();
+            var secondGroup = DataTest.CreateASimplePropertyGroup("group_{0:N}");
+
+
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+
+            model.PropertyGroups.Add(firstGroup);
+
+            model.Properties.Add(DataTest.CreateTextExtendedProperty(firstGroup));
+
+
+            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+
+            existedModel.PropertyGroups.Add(secondGroup);
+
+            existedModel.Properties.Add(DataTest.CreateTextExtendedProperty(secondGroup));
+
 
             return new[]
             {
@@ -172,6 +231,20 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
 
             model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> AnUnexistedSimpleFormModelWithAGroupAndATextProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]));
 
             return new[]
             {
@@ -245,8 +318,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> ExistedSimpleFormModelWithAGroupAndAProperty()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
@@ -303,8 +376,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> ExistedSimpleFormModelWithAGroupAndAnExtraProperty()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
@@ -335,8 +408,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> ExistedSimpleFormModelWithAGroupAndJustAnExtraProperty()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
 
@@ -363,8 +436,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> SimpleFormModelWithSameUserKeys()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
@@ -384,8 +457,8 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         public static IEnumerable<object[]> SimpleFormModelWithUnbindedPropertyToGroup()
         {
             var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid}";
-            var code = $"Auto_gen_Form_test_code_{guid}";
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
 
 
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);

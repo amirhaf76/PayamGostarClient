@@ -122,7 +122,7 @@ namespace PayamGostarClientTest
             var searchedObjectAfter = await SearchModel(service, model);
 
             searchedObjectAfter.Result.Should().HaveCount(1);
-            searchedObjectAfter.Result.FirstOrDefault().Id.Should().NotBeEmpty();
+            searchedObjectAfter.Result.FirstOrDefault()?.Id.Should().NotBeEmpty();
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
