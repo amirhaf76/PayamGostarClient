@@ -53,7 +53,7 @@ namespace PayamGostarClientTest
             return initServiceConfig;
         }
 
-        public PayamGostarClientServiceConfig CreatePayamGostarClientServiceConfig(bool ReadFromCatch = true)
+        public PayamGostarClientServiceConfig CreatePayamGostarClientServiceConfig()
         {
             var setting = TestSettingsDto;
 

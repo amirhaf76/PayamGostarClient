@@ -1,11 +1,9 @@
-﻿using PayamGostarClient.Initializer.CrmModels;
+﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
 {
@@ -26,7 +24,6 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             return resourceValues.ToArray();
         }
 
-
         internal static CrmFormModel CreateAnCrmFormWithNewGeneratedCodeAndName(string nameFromat = "Auto_gen_crm_test_name_{0:N}", string codeFromat = "Auto_gen_crm_test_name_{0:N}")
         {
             var guid = Guid.NewGuid();
@@ -40,7 +37,6 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
                 Name = CreateResourceValues(nameFromat),
             };
         }
-
 
         internal static PropertyGroup CreateASimplePropertyGroup(string nameFromat = "group", bool expand = false, int countOfColumns = 2)
         {
@@ -56,7 +52,7 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             };
         }
 
-        internal static Stage CreateStage(string nameFromat = "stage_{0:N}", string keyFormat = "stageKey_{0:N}", bool enable = false, bool isDoneStage = false, int index = 1)
+        internal static Stage CreateStage(string nameFromat = "stage", string keyFormat = "stageKey", bool enable = false, bool isDoneStage = false, int index = 1)
         {
             var guid = Guid.NewGuid();
 
@@ -74,163 +70,187 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
         }
 
 
-        internal static TextExtendedPropertyModel CreateTextExtendedProperty(string nameFromat = "textProperty", string userKeyFromat = "textPropertyUserKey", bool isRequired = false)
+        internal static NumberExtendedPropertyModel CreateDefaultNumberExtendedPropertyModel(PropertyGroup group)
         {
-            var guid = Guid.NewGuid();
+            var property = CreateExtendedPropertyWithDefaultDto<NumberExtendedPropertyModel>(group);
 
-            nameFromat = string.Format(nameFromat, guid);
-            userKeyFromat = string.Format(userKeyFromat, guid);
-
-            return new TextExtendedPropertyModel
-            {
-                Name = CreateResourceValues(nameFromat),
-                UserKey = userKeyFromat,
-                IsRequired = isRequired,
-            };
-        }
-
-        internal static TextExtendedPropertyModel CreateTextExtendedProperty(PropertyGroup group, string nameFromat = "textProperty", string userKeyFromat = "textPropertyUserKey", bool isRequired = false)
-        {
-            var property = CreateTextExtendedProperty(nameFromat, userKeyFromat, isRequired);
-
-            property.PropertyGroup = group;
+            property.MinDigits = 1;
+            property.MaxDigits = 3;
+            property.MinValue = 1;
+            property.MaxValue = 999;
+            property.DecimalDigits = 2;
 
             return property;
         }
 
+        internal static CheckboxExtendedPropertyModel CreateDefaultCheckBoxExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<CheckboxExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static AppointmentExtendedPropertyModel CreateDefaultAppointmentExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<AppointmentExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static CrmObjectMultiValueExtendedPropertyModel CreateCrmFormMultiValueExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<CrmObjectMultiValueExtendedPropertyModel>(group);
+
+            property.CrmObjectTypeIndex = Gp_CrmObjectType.Form;
+
+            return property;
+        }
+
+        internal static CurrencyExtendedPropertyModel CreateDefaultCurrencyExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<CurrencyExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static DropDownListExtendedPropertyModel CreateDefaultDropDownListExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<DropDownListExtendedPropertyModel>(group);
+
+            property.Values = new[]
+            {
+                new DropDownListExtendedPropertyValueModel { Value = "Item1" },
+                new DropDownListExtendedPropertyValueModel { Value = "Item2" },
+                new DropDownListExtendedPropertyValueModel { Value = "Item3" },
+            };
+
+            return property;
+        }
+
+        internal static FormExtendedPropertyModel CreateDefaultFormExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<FormExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static FileExtendedPropertyModel CreateDefaultFileExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<FileExtendedPropertyModel>(group);
+
+            property.MaxFileSize = 20;
+            property.FileSizeTypeIndex = FileSizeType.Megabyte;
+            property.Extensions = new[] { "jpg", "png" };
+
+            return property;
+        }
+
+        internal static UserExtendedPropertyModel CreateDefaultUserExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<UserExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static DepartmentExtendedPropertyModel CreateDefaultDepartmentExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<DepartmentExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static PositionExtendedPropertyModel CreateDefaultPositionExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<PositionExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static PersianDateExtendedPropertyModel CreateDefaultPersianDateExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<PersianDateExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static TimeExtendedPropertyModel CreateDefaultTimeExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<TimeExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+        internal static LabelExtendedPropertyModel CreateDefaultLabelExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<LabelExtendedPropertyModel>(group);
+
+            property.LabelText = "label_text";
+
+            return property;
+        }
+
+        internal static SecurityItemExtendedPropertyModel CreateDefaultSecurityItemExtendedPropertyModel(PropertyGroup group)
+        {
+            var property = CreateExtendedPropertyWithDefaultDto<SecurityItemExtendedPropertyModel>(group);
+
+            return property;
+        }
+
+
+        internal static T CreateExtendedPropertyWithDefaultDto<T>(PropertyGroup group) where T : BaseExtendedPropertyModel, new()
+        {
+            return CreateExtendedPropertyWithDefaultDto<T>(x =>
+            {
+                x.Group = group;
+            });
+        }
+
+        internal static T CreateExtendedPropertyWithDefaultDto<T>(Action<BaseExtendedPropertyDataTestDto> changeDefaultDto) where T : BaseExtendedPropertyModel, new()
+        {
+            var dto = BaseExtendedPropertyDataTestDto.Default;
+
+            changeDefaultDto?.Invoke(dto);
+
+            return new T().FillBaseExtendedPropertyModel(dto);
+        }
+
+        internal static T CreateExtendedPropertyWithDefaultDto<T>() where T : BaseExtendedPropertyModel, new()
+        {
+            return CreateExtendedPropertyWithDefaultDto<T>(changeDefaultDto: null);
+        }
+
+        private static T FillBaseExtendedPropertyModel<T>(this T baseModel, BaseExtendedPropertyDataTestDto dto) where T : BaseExtendedPropertyModel
+        {
+            var guid = Guid.NewGuid();
+
+            var nameFromat = !string.IsNullOrEmpty(dto.NameFormat) ? string.Format(dto.NameFormat, guid) : dto.NameFormat;
+            var toolTipFormat = !string.IsNullOrEmpty(dto.ToolTipFormat) ? string.Format(dto.ToolTipFormat, guid) : dto.ToolTipFormat;
+
+            baseModel.UserKey = !string.IsNullOrEmpty(dto.UserKeyFormat) ? string.Format(dto.UserKeyFormat, guid) : dto.UserKeyFormat;
+
+            baseModel.Name = CreateResourceValues(nameFromat);
+            baseModel.ToolTip = CreateResourceValues(toolTipFormat);
+
+            baseModel.IsRequired = dto.IsRequired;
+            baseModel.DefaultValue = dto.DefaultValue;
+            baseModel.PropertyGroup = dto.Group;
+
+            return baseModel;
+        }
+
     }
 
-    internal class CheckExistenceSchemaDataTestCase
+    internal class ExtendedPropertyDataTest
     {
-        
-        public static IEnumerable<object[]> AnUnexistedSimpleFormModelWithoutGroupAndProperties()
-        {
-            return new[]
-            {
-                new object[] { DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName() },
-            };
-        }
-
-        public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithoutGroupAndProperties()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithJustGroup()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            existedModel.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithADifferentGroup()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            existedModel.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup(nameFromat: "group_{0:N}"));
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithSameGroupAndDifferentTextProperty()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-            var firstGroup = DataTest.CreateASimplePropertyGroup();
-
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(firstGroup);
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(firstGroup));
-
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            existedModel.PropertyGroups.Add(firstGroup);
-
-            existedModel.Properties.Add(DataTest.CreateTextExtendedProperty(firstGroup, userKeyFromat: "textPropertyUserKey_{0:N}"));
-
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> TwoUnexistedSimpleFormModelWithDifferentGroupAndSameTextProperty()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-            var firstGroup = DataTest.CreateASimplePropertyGroup();
-            var secondGroup = DataTest.CreateASimplePropertyGroup("group_{0:N}");
-
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(firstGroup);
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(firstGroup));
-
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            existedModel.PropertyGroups.Add(secondGroup);
-
-            existedModel.Properties.Add(DataTest.CreateTextExtendedProperty(secondGroup));
-
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> AnUnexistedSimpleFormModelWithJustAGroup()
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndTextExtendedProperty()
         {
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
 
             model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateExtendedPropertyWithDefaultDto<TextExtendedPropertyModel>(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
 
             return new[]
             {
@@ -238,13 +258,15 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             };
         }
 
-        public static IEnumerable<object[]> AnUnexistedSimpleFormModelWithAGroupAndATextProperty()
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleNumberExtendedProperty()
         {
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
 
             model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
 
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]));
+            var extendedProperty = DataTest.CreateDefaultNumberExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
 
             return new[]
             {
@@ -252,225 +274,264 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             };
         }
 
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleCheckboxExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultCheckBoxExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleAppointmentExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultAppointmentExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleCrmFormMultiValueExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateCrmFormMultiValueExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleCurrencyExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultCurrencyExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleDropDownListExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultDropDownListExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleFormExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultFormExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleFileExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultFileExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleUserExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultUserExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleDepartmentExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultDepartmentExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimplePositionExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultPositionExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimplePersianDateExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultPersianDateExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleTimeExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultTimeExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleLabelExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultLabelExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
+        public static IEnumerable<object[]> ASimpleCrmFormWithGroupAndASimpleSecurityItemExtendedProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
+
+            var extendedProperty = DataTest.CreateDefaultSecurityItemExtendedPropertyModel(model.PropertyGroups[0]);
+
+            model.Properties.Add(extendedProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
 
     }
 
-    internal class InitDataTestCase
+    internal class BaseExtendedPropertyDataTestDto
     {
-        public static IEnumerable<object[]> SimpleFormModelWithoutGroupAndProperties()
+        /// <summary>
+        /// It can be Added guid in format like: property_{0:N}. The result is 'property_66d904e7e8e943f5974f8e6251e10fe9'.
+        /// </summary>
+        public string UserKeyFormat { get; set; }
+
+        /// <summary>
+        /// It can be Added guid in format like: property_{0:N}. The result is 'property_66d904e7e8e943f5974f8e6251e10fe9'.
+        /// </summary>
+        public string NameFormat { get; set; }
+
+        /// <summary>
+        /// It can be Added guid in format like: property_{0:N}. The result is 'property_66d904e7e8e943f5974f8e6251e10fe9'.
+        /// </summary>
+        public string ToolTipFormat { get; set; }
+
+        public bool IsRequired { get; set; }
+
+        public string DefaultValue { get; set; }
+
+        public PropertyGroup Group { get; set; }
+
+        public static BaseExtendedPropertyDataTestDto Default => new BaseExtendedPropertyDataTestDto
         {
-            return new[]
-            {
-                new object[] { DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName() },
-            };
-        }
+            IsRequired = false,
+            DefaultValue = string.Empty,
+            UserKeyFormat = "propertyUserKey",
+            NameFormat = "proprtyName",
+            ToolTipFormat = "proprtyToolTip",
+            Group = null,
+        };
 
-        public static IEnumerable<object[]> SimpleFormModelWithoutGroupAndPropertiesAndCode()
-        {
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
-
-            model.Code = string.Empty;
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
-
-        public static IEnumerable<object[]> SimpleFormModelWithoutGroupAndPropertiesAndName()
-        {
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
-
-            model.Name = Array.Empty<ResourceValue>();
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
-
-        public static IEnumerable<object[]> SimpleFormModelWithJustAGroup()
-        {
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
-
-        public static IEnumerable<object[]> SimpleFormModelWithAGroupAndATextProperty()
-        {
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]));
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
-
-        public static IEnumerable<object[]> ExistedSimpleFormModelWithAGroupAndAProperty()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]));
-
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            existedModel.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            existedModel.Properties.Add(DataTest.CreateTextExtendedProperty(existedModel.PropertyGroups[0]));
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> SimpleFormModelWithEmptyExtendedUserKey()
-        {
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            var property = DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]);
-
-            property.UserKey = string.Empty;
-
-            model.Properties.Add(property);
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
-
-        public static IEnumerable<object[]> SimpleFormModelWithPropertyThatThereIsNotAnyGroup()
-        {
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
-
-            var group = DataTest.CreateASimplePropertyGroup();
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(group));
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
-
-        public static IEnumerable<object[]> ExistedSimpleFormModelWithAGroupAndAnExtraProperty()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]));
-
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            existedModel.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            existedModel.Properties.Add(DataTest.CreateTextExtendedProperty(existedModel.PropertyGroups[0]));
-
-            existedModel.Properties.Add(
-                DataTest.CreateTextExtendedProperty(
-                    group: existedModel.PropertyGroups[0],
-                    nameFromat: "secondTextProperty",
-                    userKeyFromat: "secondTextProperty"));
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> ExistedSimpleFormModelWithAGroupAndJustAnExtraProperty()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]));
-
-            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            existedModel.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            existedModel.Properties.Add(
-                DataTest.CreateTextExtendedProperty(
-                    group: existedModel.PropertyGroups[0],
-                    nameFromat: "secondTextProperty",
-                    userKeyFromat: "secondTextProperty"));
-
-            return new[]
-            {
-                new object[] { model, existedModel },
-            };
-        }
-
-        public static IEnumerable<object[]> SimpleFormModelWithSameUserKeys()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0]));
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty(model.PropertyGroups[0], nameFromat: "SecondTextProperty"));
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
-
-        public static IEnumerable<object[]> SimpleFormModelWithUnbindedPropertyToGroup()
-        {
-            var guid = Guid.NewGuid();
-            var name = $"Auto_gen_Form_test_name_{guid:N}";
-            var code = $"Auto_gen_Form_test_code_{guid:N}";
-
-
-            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
-
-            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup());
-
-            model.Properties.Add(DataTest.CreateTextExtendedProperty());
-
-            return new[]
-            {
-                new object[] { model },
-            };
-        }
     }
 }
