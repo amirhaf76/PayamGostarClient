@@ -231,6 +231,211 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             };
         }
 
+        public static IEnumerable<object[]> ExistedSimpleFormModelWithThreeExistedStages()
+        {
+            var guid = Guid.NewGuid();
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
+
+
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+
+            var stage1 = DataTest.CreateStage(
+                    nameFromat: $"stage_1",
+                    keyFormat: $"stageKey_1",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 1);
+            var existedStage1 = DataTest.CreateStage(
+                    nameFromat: $"stage_1",
+                    keyFormat: $"stageKey_1",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 1);
+
+            var stage2 = DataTest.CreateStage(
+                    nameFromat: $"stage_2",
+                    keyFormat: $"stageKey_2",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 2);
+            var existedStage2 = DataTest.CreateStage(
+                    nameFromat: $"stage_2",
+                    keyFormat: $"stageKey_2",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 2);
+
+            var stage3 = DataTest.CreateStage(
+                    nameFromat: $"stage_3",
+                    keyFormat: $"stageKey_3",
+                    enable: true,
+                    isDoneStage: true,
+                    index: 3);
+            var existedStage3 = DataTest.CreateStage(
+                    nameFromat: $"stage_3",
+                    keyFormat: $"stageKey_3",
+                    enable: true,
+                    isDoneStage: true,
+                    index: 3);
+
+            model.Stages.Add(stage1);
+            model.Stages.Add(stage2);
+            model.Stages.Add(stage3);
+
+            existedModel.Stages.Add(existedStage1);
+            existedModel.Stages.Add(existedStage2);
+            existedModel.Stages.Add(existedStage3);
+
+            return new[]
+            {
+                new object[] { model, existedModel },
+            };
+        }
+
+        public static IEnumerable<object[]> ExistedSimpleFormModelWithThreeExistedStagesAndNewUnDoneStage()
+        {
+            var guid = Guid.NewGuid();
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
+
+
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+
+            var stage1 = DataTest.CreateStage(
+                    nameFromat: $"stage_1",
+                    keyFormat: $"stageKey_1",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 1);
+            var existedStage1 = DataTest.CreateStage(
+                    nameFromat: $"stage_1",
+                    keyFormat: $"stageKey_1",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 1);
+
+            var stage2 = DataTest.CreateStage(
+                    nameFromat: $"stage_2",
+                    keyFormat: $"stageKey_2",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 2);
+            var existedStage2 = DataTest.CreateStage(
+                    nameFromat: $"stage_2",
+                    keyFormat: $"stageKey_2",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 2);
+
+            var stage3 = DataTest.CreateStage(
+                    nameFromat: $"stage_3",
+                    keyFormat: $"stageKey_3",
+                    enable: true,
+                    isDoneStage: true,
+                    index: 4);
+            var existedStage3 = DataTest.CreateStage(
+                    nameFromat: $"stage_3",
+                    keyFormat: $"stageKey_3",
+                    enable: true,
+                    isDoneStage: true,
+                    index: 4);
+
+            var newStage = DataTest.CreateStage(
+                    nameFromat: $"stage_4",
+                    keyFormat: $"stageKey_4",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 3);
+
+            model.Stages.Add(stage1);
+            model.Stages.Add(stage2);
+            model.Stages.Add(stage3);
+
+            existedModel.Stages.Add(existedStage1);
+            existedModel.Stages.Add(existedStage2);
+            existedModel.Stages.Add(existedStage3);
+            existedModel.Stages.Add(newStage);
+
+            return new[]
+            {
+                new object[] { model, existedModel },
+            };
+        }
+
+        public static IEnumerable<object[]> ExistedSimpleFormModelWithThreeExistedStagesAndNewDoneStage()
+        {
+            var guid = Guid.NewGuid();
+            var name = $"Auto_gen_Form_test_name_{guid:N}";
+            var code = $"Auto_gen_Form_test_code_{guid:N}";
+
+
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+            var existedModel = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName(nameFromat: name, codeFromat: code);
+
+            var stage1 = DataTest.CreateStage(
+                    nameFromat: $"stage_1",
+                    keyFormat: $"stageKey_1",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 1);
+            var existedStage1 = DataTest.CreateStage(
+                    nameFromat: $"stage_1",
+                    keyFormat: $"stageKey_1",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 1);
+
+            var stage2 = DataTest.CreateStage(
+                    nameFromat: $"stage_2",
+                    keyFormat: $"stageKey_2",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 2);
+            var existedStage2 = DataTest.CreateStage(
+                    nameFromat: $"stage_2",
+                    keyFormat: $"stageKey_2",
+                    enable: true,
+                    isDoneStage: false,
+                    index: 2);
+
+            var stage3 = DataTest.CreateStage(
+                    nameFromat: $"stage_3",
+                    keyFormat: $"stageKey_3",
+                    enable: true,
+                    isDoneStage: true,
+                    index: 4);
+            var existedStage3 = DataTest.CreateStage(
+                    nameFromat: $"stage_3",
+                    keyFormat: $"stageKey_3",
+                    enable: true,
+                    isDoneStage: true,
+                    index: 4);
+
+            var newStage = DataTest.CreateStage(
+                    nameFromat: $"stage_4",
+                    keyFormat: $"stageKey_4",
+                    enable: true,
+                    isDoneStage: true,
+                    index: 3);
+
+            model.Stages.Add(stage1);
+            model.Stages.Add(stage2);
+            model.Stages.Add(stage3);
+
+            existedModel.Stages.Add(existedStage1);
+            existedModel.Stages.Add(existedStage2);
+            existedModel.Stages.Add(existedStage3);
+            existedModel.Stages.Add(newStage);
+
+            return new[]
+            {
+                new object[] { model, existedModel },
+            };
+        }
+
         public static IEnumerable<object[]> SimpleFormModelWithEmptyExtendedUserKey()
         {
             var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();

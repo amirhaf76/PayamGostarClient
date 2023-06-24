@@ -286,7 +286,7 @@ namespace PayamGostarClientTest
 
         [Theory]
         [MemberData(nameof(InitDataTestCase.ExistedSimpleFormModelWithAGroupAndAProperty), MemberType = typeof(InitDataTestCase))]
-        public async Task InitAsync_ExistedSimpleFormModelWithAGroupAndAProperty_CreateSuccessfuly(CrmFormModel model, CrmFormModel existedModel)
+        public async Task InitAsync_ExistedSimpleFormModelWithAGroupAndAProperty_AddTheTextPropertySuccessfuly(CrmFormModel model, CrmFormModel existedModel)
         {
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
@@ -334,7 +334,7 @@ namespace PayamGostarClientTest
 
         [Theory]
         [MemberData(nameof(InitDataTestCase.ExistedSimpleFormModelWithAGroupAndAnExtraProperty), MemberType = typeof(InitDataTestCase))]
-        public async Task InitAsync_ExistedSimpleFormModelWithNewTextProperty_CreateSuccessfuly(CrmFormModel model, CrmFormModel existedModel)
+        public async Task InitAsync_ExistedSimpleFormModelWithOldAndNewTextProperty_AddTheTextPropertySuccessfuly(CrmFormModel model, CrmFormModel existedModel)
         {
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
@@ -387,7 +387,7 @@ namespace PayamGostarClientTest
 
         [Theory]
         [MemberData(nameof(InitDataTestCase.ExistedSimpleFormModelWithAGroupAndJustAnExtraProperty), MemberType = typeof(InitDataTestCase))]
-        public async Task InitAsync_ExistedSimpleFormModelWithJustNewTextProperty_CreateSuccessfuly(CrmFormModel model, CrmFormModel existedModel)
+        public async Task InitAsync_ExistedSimpleFormModelWithJustNewTextProperty_AddTheTextPropertySuccessfuly(CrmFormModel model, CrmFormModel existedModel)
         {
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
@@ -453,6 +453,136 @@ namespace PayamGostarClientTest
                     }
                 }
             });
+        }
+
+
+        [Theory]
+        [MemberData(nameof(InitDataTestCase.ExistedSimpleFormModelWithThreeExistedStages), MemberType = typeof(InitDataTestCase))]
+        public async Task InitAsync_ExistedSimpleFormModelWithThreeExistedStage_JustCheckAndDoNothing(CrmFormModel model, CrmFormModel existedModel)
+        {
+            // Arrangement.
+            var crmModelInitializer = CreateCrmObjectModelInitializer();
+
+            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+
+            TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
+            TestOutput.WriteLine($"Code: {model.Code}");
+
+            await crmModelInitializer.InitAsync(model);
+
+            // Action.
+            await crmModelInitializer.InitAsync(existedModel);
+
+            // Assertion After.
+            var searchedObjectAfter = await SearchModel(service, existedModel);
+
+            searchedObjectAfter.Result.Should().HaveCount(1);
+            searchedObjectAfter.Result.FirstOrDefault().Id.Should().NotBeEmpty();
+            searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
+            {
+                Name = existedModel.Name.FirstOrDefault()?.Value,
+                Code = existedModel.Code,
+                CrmOjectTypeIndex = (int)existedModel.Type,
+                Enabled = true,
+            });
+
+            var stagesAssertionData = existedModel.Stages
+                .Select(x => new
+                {
+                    x.Index,
+                    x.Key,
+                    x.IsDoneStage,
+                    Name = x.Name.FirstOrDefault()?.Value,
+                    IsActive = x.Enabled,
+                });
+
+            searchedObjectAfter.Result.FirstOrDefault().Stages.Should().BeEquivalentTo(stagesAssertionData);
+        }
+
+        [Theory]
+        [MemberData(nameof(InitDataTestCase.ExistedSimpleFormModelWithThreeExistedStagesAndNewUnDoneStage), MemberType = typeof(InitDataTestCase))]
+        public async Task InitAsync_ExistedSimpleFormModelWithThreeExistedStageAndNewUnDoneStage_JustNewStageMustBeAdded(CrmFormModel model, CrmFormModel existedModel)
+        {
+            // Arrangement.
+            var crmModelInitializer = CreateCrmObjectModelInitializer();
+
+            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+
+            TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
+            TestOutput.WriteLine($"Code: {model.Code}");
+
+            await crmModelInitializer.InitAsync(model);
+
+            // Action.
+            await crmModelInitializer.InitAsync(existedModel);
+
+            // Assertion After.
+            var searchedObjectAfter = await SearchModel(service, existedModel);
+
+            searchedObjectAfter.Result.Should().HaveCount(1);
+            searchedObjectAfter.Result.FirstOrDefault().Id.Should().NotBeEmpty();
+            searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
+            {
+                Name = existedModel.Name.FirstOrDefault()?.Value,
+                Code = existedModel.Code,
+                CrmOjectTypeIndex = (int)existedModel.Type,
+                Enabled = true,
+            });
+
+            var stagesAssertionData = existedModel.Stages
+                .Select(x => new
+                {
+                    x.Index,
+                    x.Key,
+                    x.IsDoneStage,
+                    Name = x.Name.FirstOrDefault()?.Value,
+                    IsActive = x.Enabled,
+                });
+
+            searchedObjectAfter.Result.FirstOrDefault().Stages.Should().BeEquivalentTo(stagesAssertionData);
+        }
+
+        [Theory]
+        [MemberData(nameof(InitDataTestCase.ExistedSimpleFormModelWithThreeExistedStagesAndNewDoneStage), MemberType = typeof(InitDataTestCase))]
+        public async Task InitAsync_ExistedSimpleFormModelWithThreeExistedStageAndNewDoneStage_JustNewStageMustBeAdded(CrmFormModel model, CrmFormModel existedModel)
+        {
+            // Arrangement.
+            var crmModelInitializer = CreateCrmObjectModelInitializer();
+
+            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+
+            TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
+            TestOutput.WriteLine($"Code: {model.Code}");
+
+            await crmModelInitializer.InitAsync(model);
+
+            // Action.
+            await crmModelInitializer.InitAsync(existedModel);
+
+            // Assertion After.
+            var searchedObjectAfter = await SearchModel(service, existedModel);
+
+            searchedObjectAfter.Result.Should().HaveCount(1);
+            searchedObjectAfter.Result.FirstOrDefault().Id.Should().NotBeEmpty();
+            searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
+            {
+                Name = existedModel.Name.FirstOrDefault()?.Value,
+                Code = existedModel.Code,
+                CrmOjectTypeIndex = (int)existedModel.Type,
+                Enabled = true,
+            });
+
+            var stagesAssertionData = existedModel.Stages
+                .Select(x => new
+                {
+                    x.Index,
+                    x.Key,
+                    x.IsDoneStage,
+                    Name = x.Name.FirstOrDefault()?.Value,
+                    IsActive = x.Enabled,
+                });
+
+            searchedObjectAfter.Result.FirstOrDefault().Stages.Should().BeEquivalentTo(stagesAssertionData);
         }
 
         [Theory]
