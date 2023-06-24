@@ -70,6 +70,7 @@ namespace PayamGostarClient.ApiServices.Extension
                     Key = stage.Key,
                     IsDoneStage = stage.IsDoneStage,
                     IsActive = stage.IsActive,
+                    Index = stage.Index,
                 }),
             };
         }
