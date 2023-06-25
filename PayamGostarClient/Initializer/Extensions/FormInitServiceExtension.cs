@@ -1,6 +1,6 @@
-﻿using PayamGostarClient.ApiServices.Dtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Create;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeFormServiceDtos.Gets;
+﻿using PayamGostarClient.ApiClient.Dtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeFormServiceDtos.Create;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeFormServiceDtos.Gets;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 
 namespace PayamGostarClient.Initializer.Extensions

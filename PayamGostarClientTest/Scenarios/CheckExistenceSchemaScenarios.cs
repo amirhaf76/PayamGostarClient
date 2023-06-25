@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiServices.Factory;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
+using PayamGostarClient.ApiClient.Factory;
 using PayamGostarClient.Initializer;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
@@ -29,7 +29,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             // Assertion Before.
             var searchedObjectBefore = await SearchModel(service, model);
@@ -54,7 +54,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             // Assertion Before.
             var searchedObjectBefore = await SearchModel(service, model);
@@ -79,7 +79,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             // Assertion Before.
             var searchedObjectBefore = await SearchModel(service, model);
@@ -104,7 +104,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
   
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");
@@ -134,7 +134,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");
@@ -164,7 +164,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");
@@ -196,7 +196,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");
@@ -228,7 +228,7 @@ namespace PayamGostarClientTest
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");

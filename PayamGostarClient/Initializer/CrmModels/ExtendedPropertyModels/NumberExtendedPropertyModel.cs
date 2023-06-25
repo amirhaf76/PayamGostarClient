@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+﻿using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
 using System;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
@@ -13,7 +13,7 @@ namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 
         public int? MaxValue { get; set; }
 
-        public int CalculationTypeIndex { get; set; }
+        // public int CalculationTypeIndex { get; set; }
 
         public int DecimalDigits { get; set; }
 

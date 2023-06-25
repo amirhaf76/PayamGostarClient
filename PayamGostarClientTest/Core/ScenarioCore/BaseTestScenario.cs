@@ -1,7 +1,7 @@
-﻿using PayamGostarClient.ApiServices;
-using PayamGostarClient.ApiServices.Abstractions;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiServices.Factory;
+﻿using PayamGostarClient.ApiClient;
+using PayamGostarClient.ApiClient.Abstractions;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
+using PayamGostarClient.ApiClient.Factory;
 using PayamGostarClient.Helper.Net;
 using PayamGostarClient.Initializer;
 using PayamGostarClient.Initializer.CrmModels;
@@ -53,11 +53,11 @@ namespace PayamGostarClientTest
             return initServiceConfig;
         }
 
-        public PayamGostarClientServiceConfig CreatePayamGostarClientServiceConfig()
+        public PayamGostarApiClientConfig CreatePayamGostarClientServiceConfig()
         {
             var setting = TestSettingsDto;
 
-            var receivedSettings = new PayamGostarClientServiceConfig
+            var receivedSettings = new PayamGostarApiClientConfig
             {
                 Url = setting.Url,
                 LanguageCulture = setting.LanguageCulture,
@@ -67,17 +67,17 @@ namespace PayamGostarClientTest
             return receivedSettings;
         }
 
-        public PayamGostarClientServiceFactory CreatePayamGostarClientServiceFactory()
+        public PayamGostarApiClient CreatePayamGostarApiClient()
         {
             var payamGostarClientServiceConfig = CreatePayamGostarClientServiceConfig();
 
-            var apiServiceFactory = new PayamGostarClientServiceFactory(payamGostarClientServiceConfig);
+            var apiServiceFactory = new PayamGostarApiClient(payamGostarClientServiceConfig);
 
-            return apiServiceFactory;
+            return apiServiceFactory; 
         }
 
 
-        public async Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchModel(ICrmObjectTypeService service, BaseCRMModel baseModel)
+        public async Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchModel(IPayamGostarCrmObjectTypeApiClient service, BaseCRMModel baseModel)
         {
             return await service.SearchAsync(new CrmObjectTypeSearchRequestDto { Code = baseModel.Code, CrmOjectTypeIndex = (int)baseModel.Type });
         }

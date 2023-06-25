@@ -23,7 +23,7 @@ namespace PayamGostarClientTest.Scenarios
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");
@@ -83,7 +83,7 @@ namespace PayamGostarClientTest.Scenarios
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");
@@ -144,7 +144,7 @@ namespace PayamGostarClientTest.Scenarios
             // Arrangement.
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
-            var service = CreatePayamGostarClientServiceFactory().CreateCrmObjectTypeService();
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
 
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");

@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiServices.Abstractions;
+﻿using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Extensions;
 using System;
@@ -8,15 +8,13 @@ namespace PayamGostarClient.Initializer.Services
 {
     public class TicketInitService : BaseInitService<CrmTicketModel>
     {
-        public TicketInitService(CrmTicketModel intendedCrmObject, IPayamGostarClientServiceFactory serviceFactory) : base(intendedCrmObject, serviceFactory)
+        public TicketInitService(CrmTicketModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
         {
         }
 
-
-
         protected override async Task<Guid> CreateTypeAsync()
         {
-            var service = ServiceFactory.CreateCrmObjectTypeTicketService();
+            var service = CrmObjectTypeApi.TicketApi;
 
             var request = IntendedCrmObject.ToDto();
 

@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+﻿using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.Initializer.Exceptions;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
@@ -8,7 +8,7 @@ namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
         /// <summary>
         /// Does not work!!! It can not be received by api.
         /// </summary>
-        public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
+        // public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
 
         public string LabelText { get; set; }
 
