@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.ApiClient.Abstractions
 {
-    public interface IPayamGostarApiProviderConfigBuilder
+    internal interface IPayamGostarApiProviderConfigBuilder
     {
         PayamGostarApiProviderConfig Create();
     }

@@ -19,20 +19,6 @@ namespace PayamGostarClient.Initializer.Helpers
                 .All(join => join.Item1 == join.Item2);
         }
 
-        internal static void CheckFieldMatchingTypeProperties<T>(T first, T second, string errorMessage = "")
-        {
-            var type = typeof(T);
-
-            var properties = type.GetProperties();
-
-            foreach (var property in properties)
-            {
-                var message = $"{(!string.IsNullOrEmpty(errorMessage) ? errorMessage : "")}'{type.FullName}':\nProperty {property.Name}:";
-
-                CheckFieldMatching(property.GetValue(first), property.GetValue(second), message);
-            }
-        }
-
         internal static void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
         {
             if (!AreTheFieldsMatched(first, second))

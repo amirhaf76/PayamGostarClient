@@ -40,6 +40,7 @@ namespace PayamGostarClient.Initializer.Services
             PropertyGroupApi = CustomizationApi.PropertyGroupApi;
         }
 
+
         public async Task InitAsync()
         {
             ValidateInitialValidationModel();
@@ -437,7 +438,6 @@ namespace PayamGostarClient.Initializer.Services
 
                 case Gp_ExtendedPropertyType.CrmObjectMultiValue:
                     return propertyModel.ToCrmObjectMultiValueExtendedPropertyCreationDto();
-
 
                 case Gp_ExtendedPropertyType.Time:
                     return propertyModel.ToTimeExtendedPropertyCreationDto();

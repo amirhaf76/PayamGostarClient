@@ -4,7 +4,7 @@ using PayamGostarClient.Helper.Net;
 
 namespace PayamGostarClient.ApiClient.Models
 {
-    public class PayamGostarApiProviderConfigBuilder : IPayamGostarApiProviderConfigBuilder
+    internal class PayamGostarApiProviderConfigBuilder : IPayamGostarApiProviderConfigBuilder
     {
         private readonly PayamGostarApiClientConfig _config;
 
