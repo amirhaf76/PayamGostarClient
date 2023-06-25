@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos
+namespace PayamGostarClient.ApiClient.Enums
 {
     public enum FileSizeType
     {

@@ -1,4 +1,6 @@
-﻿namespace PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies
+﻿using PayamGostarClient.ApiClient.Enums;
+
+namespace PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies
 {
     public class CrmItemIdentityExtendedPropertyCreationDto : CrmItemExtendedPropertyCreationDto
     {

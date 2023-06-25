@@ -2,6 +2,7 @@
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
+using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using PayamGostarClient.Initializer.Exceptions;
 using System;

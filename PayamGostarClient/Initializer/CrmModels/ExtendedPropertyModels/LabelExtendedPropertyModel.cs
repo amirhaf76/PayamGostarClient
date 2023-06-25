@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
+﻿using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Exceptions;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels

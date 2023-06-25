@@ -1,6 +1,4 @@
-﻿using PayamGostarClient.ApiClient.Abstractions;
-
-namespace PayamGostarClient.ApiClient
+﻿namespace PayamGostarClient.ApiClient
 {
     public class PayamGostarApiClientConfig
     {

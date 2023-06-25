@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.MultiValue;
+using PayamGostarClient.ApiClient.Enums;
 using System;
 using System.Collections.Generic;
 

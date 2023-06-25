@@ -37,7 +37,7 @@ namespace PayamGostarClient.ApiClient.Extension
             return new CrmObjectMultiValueExtendedPropertyExtraConfigDto
             {
                 VisibleProperties = config.VisibleProperties,
-                CrmObjectType = (Initializer.CrmModels.Gp_CrmObjectType)config.CrmObjectType,
+                CrmObjectType = (Enums.Gp_CrmObjectType)config.CrmObjectType,
                 SubTypeId = config.SubTypeId,
 
             };
@@ -81,7 +81,7 @@ namespace PayamGostarClient.ApiClient.Extension
             return new FileExtendedPropertyExtraConfigDto
             {
                 Extensions = config.Extensions,
-                FileSizeType = (Dtos.ExtendedPropertyServiceDtos.FileSizeType)config.FileSizeType,
+                FileSizeType = (Enums.FileSizeType)config.FileSizeType,
                 MaxSize = config.MaxSize,
             };
         }

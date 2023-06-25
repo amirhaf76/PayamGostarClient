@@ -1,4 +1,4 @@
-﻿namespace PayamGostarClient.Initializer.CrmModels
+﻿namespace PayamGostarClient.ApiClient.Enums
 {
     public enum Gp_CrmObjectType
     {

@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
+﻿using PayamGostarClient.ApiClient.Enums;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {

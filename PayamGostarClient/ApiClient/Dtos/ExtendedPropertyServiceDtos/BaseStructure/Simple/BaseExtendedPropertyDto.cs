@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiClient.Enums;
 
 namespace PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple
 {

@@ -1,8 +1,8 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.Comparers;
 using PayamGostarClient.Initializer.CrmModels;

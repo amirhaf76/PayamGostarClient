@@ -2,7 +2,6 @@
 using PayamGostarClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiClient.Abstractions.ExtendedPropertyCreation;
 using PayamGostarClient.ApiClient.Dtos;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
@@ -11,6 +10,7 @@ using PayamGostarClient.ApiClient.Extension;
 using PayamGostarClient.Helper.Net;
 using System;
 using System.Threading.Tasks;
+using PayamGostarClient.ApiClient.Enums;
 
 namespace PayamGostarClient.ApiClient.Factory
 {

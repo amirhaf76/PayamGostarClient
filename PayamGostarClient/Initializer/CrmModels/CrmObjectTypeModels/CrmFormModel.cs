@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.Initializer.CrmModels;
+﻿using PayamGostarClient.ApiClient.Enums;
+using PayamGostarClient.Initializer.CrmModels;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {

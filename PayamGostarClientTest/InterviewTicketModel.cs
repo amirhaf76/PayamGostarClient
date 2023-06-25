@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.Initializer.CrmModels;
+﻿using PayamGostarClient.ApiClient.Enums;
+using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System;
@@ -7,23 +8,23 @@ namespace PayamGostarClientTest
 {
     public class InterviewTicketModel
     {
-        public const string FA_LANGUAGE_CULTURE = "fa-IR";
+        public const string FA_LANGUAGE_CULTURE = "fa-ir";
 
-        public static CrmTicketModel Create()
+        public static CrmTicketModel Create(Guid line)
         {
             var model = new CrmTicketModel
             {
                 Name = new ResourceValue[]
                 {
-                    new ResourceValue { LanguageCulture = FA_LANGUAGE_CULTURE,  Value = "1stco- مصاحبه (V. 1.4.2)",},
+                    new ResourceValue { LanguageCulture = FA_LANGUAGE_CULTURE,  Value = "مصاحبه",},
                 },
                 Description = new ResourceValue[]
                 {
                     new ResourceValue { LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty },
                 },
-                Code = $"interview",
+                Code = $"Interview",
                 ResponseTemplate = string.Empty,
-                ListenLineId = Guid.Parse("2b0e6171-e9ff-4aa2-b697-0fb95fa64237"),
+                ListenLineId = line,
                 Enabled = true,
                 PreviewTypeIndex = Gp_PreviewType.WordPreview,
                 PropertyGroups = new System.Collections.Generic.List<PropertyGroup>
@@ -32,10 +33,19 @@ namespace PayamGostarClientTest
                     {
                         Name = new[]
                         {
+                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "اطلاعات متقاضی"},
+                        },
+                        CountOfColumns = 2,
+                        Expanded = true,
+                    },
+                    new PropertyGroup()
+                    {
+                        Name = new[]
+                        {
                             new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "هماهنگی مصاحبه اول"},
                         },
                         CountOfColumns = 2,
-                        Expanded = false,
+                        Expanded = true,
                     },
                     new PropertyGroup()
                     {
@@ -44,7 +54,7 @@ namespace PayamGostarClientTest
                             new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "هماهنگی مصاحبه دوم"},
                         },
                         CountOfColumns = 2,
-                        Expanded = false,
+                        Expanded = true,
                     },
                     new PropertyGroup()
                     {
@@ -53,7 +63,7 @@ namespace PayamGostarClientTest
                             new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "هماهنگی مصاحبه منابع انسانی"},
                         },
                         CountOfColumns = 2,
-                        Expanded = false,
+                        Expanded = true,
                     },
                     new PropertyGroup()
                     {
@@ -62,34 +72,7 @@ namespace PayamGostarClientTest
                             new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "اطلاعات مصاحبه"},
                         },
                         CountOfColumns = 2,
-                        Expanded = false,
-                    },
-                    new PropertyGroup()
-                    {
-                        Name = new[]
-                        {
-                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "اطلاعات متقاضی"},
-                        },
-                        CountOfColumns = 2,
-                        Expanded = false,
-                    },
-                    new PropertyGroup()
-                    {
-                        Name = new[]
-                        {
-                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "بلااستفاده"},
-                        },
-                        CountOfColumns = 2,
-                        Expanded = false,
-                    },
-                    new PropertyGroup()
-                    {
-                        Name = new[]
-                        {
-                            new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "مرتبط با فرآیند"},
-                        },
-                        CountOfColumns = 2,
-                        Expanded = false,
+                        Expanded = true,
                     },
                 },
                 Stages = new System.Collections.Generic.List<Stage>
@@ -259,6 +242,36 @@ namespace PayamGostarClientTest
 
             model.Properties = new System.Collections.Generic.List<BaseExtendedPropertyModel>
             {
+                new TextExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "عنوان آگهی" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[0],
+                    UserKey = "Title", // mj
+                    IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
+                new FileExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "فایل رزومه" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[0],
+                    UserKey = "ResumeFile", // mj
+                    IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
                 new DropDownListExtendedPropertyModel()
                 {
                     Name = new[]
@@ -271,12 +284,68 @@ namespace PayamGostarClientTest
                     },
                     Values = new DropDownListExtendedPropertyValueModel[]
                     {
-                        new DropDownListExtendedPropertyValueModel{ Value = "بله" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "خیر" },
+
+                        new DropDownListExtendedPropertyValueModel{ Value = "Jobinja" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "LinkedIn" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "Coworkers" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "Irantalent" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "Jobvision" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "Quera" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "E-Estekhdam" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "Official Email" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "Email Marketing" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "Social Networks" },
+
                     },
-                    PropertyGroup = model.PropertyGroups[4],
+                    PropertyGroup = model.PropertyGroups[0],
                     UserKey = "Source", // mj
                     IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
+                new PersianDateExtendedPropertyModel()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "تاریخ ارسال رزومه" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[0],
+                    UserKey = "ResumeSendDate", // mj
+                    IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
+                new TextExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "غربال کننده رزومه" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[0],
+                    UserKey = "Approver", // mj
+                    IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
+                new TextExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "توضیحات غربال کننده رزومه" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[0],
+                    UserKey = "ApproverNote", // mj
+                    IsRequired = false,
+                    //IsMultiLine=true,
                     DefaultValue = string.Empty,
                 },
                 new DropDownListExtendedPropertyModel()
@@ -291,50 +360,26 @@ namespace PayamGostarClientTest
                     },
                     Values = new DropDownListExtendedPropertyValueModel[]
                     {
-                        new DropDownListExtendedPropertyValueModel{ Value = "jobinja" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "linkedIn" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "coworkers" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "irantalent" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "jobvision" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "Quera" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "E-Estekhdam" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "ایمیل شرکت" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "Email Marketing" },
-                        new DropDownListExtendedPropertyValueModel{ Value = "شبکه های اجتماعی" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "تایید" },
+                        new DropDownListExtendedPropertyValueModel{ Value = "رد" },
                     },
-                    PropertyGroup = model.PropertyGroups[6],
+                    PropertyGroup = model.PropertyGroups[0],
                     UserKey = "ResumeStatus", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
-
-                new PersianDateExtendedPropertyModel()
+                new TextExtendedPropertyModel
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "تاریخ ارسال روزمه" },
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "دلیل رد در پنل" },
                     },
                     ToolTip = new[]
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[4],
-                    UserKey = "ResumeSendDate", // mj
-                    IsRequired = false,
-                    DefaultValue = string.Empty,
-                },
-                new SecurityItemExtendedPropertyModel()
-                {
-                    Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "Xهماهنگ کننده مصاحبه" },
-                    },
-                    ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                    PropertyGroup = model.PropertyGroups[5],
-                    UserKey = "CoordinatorX", // mj
+                    PropertyGroup = model.PropertyGroups[0],
+                    UserKey = "SourceRejectReason", // mj PlatformRejectReason
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
@@ -348,12 +393,12 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[4],
+                    PropertyGroup = model.PropertyGroups[0],
                     UserKey = "Important", // mj
                     IsRequired = false,
                     DefaultValue = Convert.ToString(true),
                 },
-                new CheckboxExtendedPropertyModel
+                 new CheckboxExtendedPropertyModel
                 {
                     Name = new[]
                     {
@@ -363,7 +408,7 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[6],
+                    PropertyGroup = model.PropertyGroups[0],
                     UserKey = "Obsolete", // mj
                     IsRequired = false,
                     DefaultValue = Convert.ToString(false),
@@ -378,9 +423,25 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[0],
+                    PropertyGroup = model.PropertyGroups[1],
                     UserKey = "FirstAssessor", // mj
                     IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
+                new TextExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "توضیحات مصاحبه کننده اول" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[1],
+                    UserKey = "FirstAssessorDescription", // mj
+                    IsRequired = false,
+                    //IsMultiLine=true,
                     DefaultValue = string.Empty,
                 },
                 new UserExtendedPropertyModel
@@ -393,9 +454,56 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[1],
+                    PropertyGroup = model.PropertyGroups[2],
                     UserKey = "SecondAssessor", // mj
                     IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
+                new TextExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "توضیحات مصاحبه کننده دوم" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[2],
+                    UserKey = "SecondAssessorDescription", // mj
+                    IsRequired = false,
+                    //IsMultiLine=true,
+                    DefaultValue = string.Empty,
+                },
+                new UserExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "مصاحبه کننده منابع انسانی" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[3],
+                    UserKey = "HRAssessor", // mj
+                    IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
+                new TextExtendedPropertyModel
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "توضیحات مصاحبه کننده منابع انسانی" },
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = model.PropertyGroups[3],
+                    UserKey = "HRAssessorDescription", // mj
+                    IsRequired = false,
+                    //IsMultiLine=true,
                     DefaultValue = string.Empty,
                 },
                 new TextExtendedPropertyModel
@@ -408,83 +516,8 @@ namespace PayamGostarClientTest
                     {
                         new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
                     },
-                    PropertyGroup = model.PropertyGroups[4],
+                    PropertyGroup = model.PropertyGroups[0],
                     UserKey = "SourceRefId", // mj
-                    IsRequired = false,
-                    DefaultValue = string.Empty,
-                },
-                new TextExtendedPropertyModel
-                {
-                    Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "یادداشت تایید کننده" },
-                    },
-                    ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                    PropertyGroup = model.PropertyGroups[4],
-                    UserKey = "ApproverNote", // mj
-                    IsRequired = false,
-                    DefaultValue = string.Empty,
-                },
-                new TextExtendedPropertyModel
-                {
-                    Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "دلیل رد در غربالگری1" },
-                    },
-                    ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                    PropertyGroup = model.PropertyGroups[6],
-                    UserKey = "FirstRejectReason", // mj
-                    IsRequired = false,
-                    DefaultValue = string.Empty,
-                },
-                new TextExtendedPropertyModel
-                {
-                    Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "عنوان آگهی" },
-                    },
-                    ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                    PropertyGroup = model.PropertyGroups[4],
-                    UserKey = "Title", // mj
-                    IsRequired = false,
-                    DefaultValue = string.Empty,
-                },
-                new TextExtendedPropertyModel
-                {
-                    Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value =  "تایید کننده رزومه" },
-                    },
-                    ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                    PropertyGroup = model.PropertyGroups[4],
-                    UserKey = "Approver", // mj
-                    IsRequired = false,
-                    DefaultValue = string.Empty,
-                },
-                new FileExtendedPropertyModel
-                {
-                    Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = "فایل رزومه" },
-                    },
-                    ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = FA_LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                    PropertyGroup = model.PropertyGroups[4],
-                    UserKey = "ResumeFile", // mj
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },

@@ -13,4 +13,9 @@ namespace PayamGostarClient.ApiClient.Abstractions
 
         Task<ApiResponse<CrmObjectTypeResultDto>> CreateAsync(CrmObjectTypeTicketCreateRequestDto request);
     }
+
+    public interface IPayamGostarCrmObjectTypeIdentityApiClient
+    {
+        Task<ApiResponse<object>> CreateAsync(object request);
+    }
 }

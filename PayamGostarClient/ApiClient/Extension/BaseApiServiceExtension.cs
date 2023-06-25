@@ -60,20 +60,20 @@ namespace PayamGostarClient.ApiClient.Extension
             };
         }
 
-        private static ExtendedPropertyExtraConfigDto CastOrDefault(this PropertyDefinitionExtraConfigs config, Dtos.Gp_PropertyDisplayType displaytype)
+        private static ExtendedPropertyExtraConfigDto CastOrDefault(this PropertyDefinitionExtraConfigs config, Enums.Gp_PropertyDisplayType displaytype)
         {
             switch (displaytype)
             {
-                case Dtos.Gp_PropertyDisplayType.Number:
+                case Enums.Gp_PropertyDisplayType.Number:
                     return (config as NumericPropertyDefinitionExtraConfigs)?.ToDto() ?? throw new System.Exception();
 
-                case Dtos.Gp_PropertyDisplayType.Label:
+                case Enums.Gp_PropertyDisplayType.Label:
                     return (config as LabelPropertyDefinitionExtraConfig)?.ToDto() ?? throw new System.Exception();
 
-                case Dtos.Gp_PropertyDisplayType.CrmObjectMultiValue:
+                case Enums.Gp_PropertyDisplayType.CrmObjectMultiValue:
                     return (config as CrmObjectMultiValuePropertyDefinitionExtraConfigs)?.ToDto() ?? throw new System.Exception();
 
-                case Dtos.Gp_PropertyDisplayType.CrmObject:
+                case Enums.Gp_PropertyDisplayType.CrmObject:
                     return (config as CrmObjectReferencedTypeExteraConfigs)?.ToDto() ?? throw new System.Exception();
 
                 default:
@@ -98,7 +98,7 @@ namespace PayamGostarClient.ApiClient.Extension
                 PropertyDisplayTypeIndex = extendedProperty.PropertyDisplayTypeIndex,
                 DefaultValue = extendedProperty.DefaultValue,
                 IsRequired = extendedProperty.IsRequired,
-                ExtraConfig = extendedProperty.ExtraConfiguration.CastOrDefault((Dtos.Gp_PropertyDisplayType)extendedProperty.PropertyDisplayTypeIndex),
+                ExtraConfig = extendedProperty.ExtraConfiguration.CastOrDefault((Enums.Gp_PropertyDisplayType)extendedProperty.PropertyDisplayTypeIndex),
             };
         }
 
