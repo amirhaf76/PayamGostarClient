@@ -1,5 +1,7 @@
-﻿using PayamGostarClient.ApiServices.Abstractions;
-using PayamGostarClient.ApiServices.Factory;
+﻿using PayamGostarClient.ApiClient;
+using PayamGostarClient.ApiClient.Abstractions;
+using PayamGostarClient.ApiClient.Enums;
+using PayamGostarClient.ApiClient.Factory;
 using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
@@ -11,11 +13,11 @@ namespace PayamGostarClient.Initializer.Factory
 {
     public class InitServiceFactory : IInitServiceFactory
     {
-        private readonly IPayamGostarClientServiceFactory _serviceFactory;
+        private readonly IPayamGostarApiClient _payamGostarApiClient;
 
         public InitServiceFactory(InitServiceFactoryConfig config)
         {
-            _serviceFactory = CreatePayamGostarClientServiceFactory(config);
+            _payamGostarApiClient = new PayamGostarApiClient(config.ClientService);
 
             BaseInitServiceExtension.LanguageCulture = config.ClientService.LanguageCulture;
         }
@@ -25,17 +27,12 @@ namespace PayamGostarClient.Initializer.Factory
             switch (model.Type)
             {
                 case Gp_CrmObjectType.Form:
-                    return new FormInitService(model as CrmFormModel, _serviceFactory);
+                    return new FormInitService(model as CrmFormModel, _payamGostarApiClient);
                 case Gp_CrmObjectType.Ticket:
-                    return new TicketInitService(model as CrmTicketModel, _serviceFactory);
+                    return new TicketInitService(model as CrmTicketModel, _payamGostarApiClient);
                 default:
                     throw new InvalidGpCrmObjectTypeException();
             }
-        }
-
-        private IPayamGostarClientServiceFactory CreatePayamGostarClientServiceFactory(InitServiceFactoryConfig config)
-        {
-            return new PayamGostarClientServiceFactory(config.ClientService);
         }
 
     }

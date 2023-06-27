@@ -1,7 +1,7 @@
-﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Create;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeTicketServiceDtos.Get;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeTicketServiceDtos.Create;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeTicketServiceDtos.Get;
+using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
-using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System.Linq;
 
 namespace PayamGostarClient.Initializer.Extensions

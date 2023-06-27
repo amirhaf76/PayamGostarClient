@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.Initializer.CrmModels;
+﻿using PayamGostarClient.ApiClient.Enums;
+using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System;
 using System.Collections.Generic;

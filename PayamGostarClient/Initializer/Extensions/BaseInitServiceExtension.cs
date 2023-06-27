@@ -1,8 +1,8 @@
-﻿using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Create;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeStageServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.PropertyGroupServiceDtos;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Create;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeStageServiceDtos;
+using PayamGostarClient.ApiClient.Dtos.PropertyGroupServiceDtos;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;

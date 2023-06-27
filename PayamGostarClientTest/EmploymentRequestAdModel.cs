@@ -1,13 +1,12 @@
 ﻿using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
-using System;
 
 namespace PayamGostarClientTest
 {
     public class EmploymentRequestAdModel : CrmFormModel
     {
-        public const string LANGUAGE_CULTURE = "fa-IR";
+        public const string LANGUAGE_CULTURE = "fa-ir";
 
         public static CrmFormModel Create()
         {
@@ -15,7 +14,7 @@ namespace PayamGostarClientTest
             {
                 Name = new[]
                 {
-                    new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "1stco- آگهی مرتبط با درخواست جذب نیرو"},
+                    new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "آگهی مرتبط با درخواست جذب نیرو"},
                 },
                 Description = new[]
                 {
@@ -29,31 +28,16 @@ namespace PayamGostarClientTest
                     {
                         Name = new[]
                         {
-                            new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "اطلاعات محل انتشار"},
+                            new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "اطلاعات آگهی"},   
                         },
-                        CountOfColumns = 1,
-                        Expanded = false,
+                        CountOfColumns = 2,
+                        Expanded = true,
                     }
                 },
             };
 
             newModel.Properties = new System.Collections.Generic.List<BaseExtendedPropertyModel>
             {
-                new NumberExtendedPropertyModel()
-                {
-                    Name = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "تعداد رزومه دریافتی"},
-                    },
-                    ToolTip = new[]
-                    {
-                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
-                    },
-                    PropertyGroup = newModel.PropertyGroups[0],
-                    UserKey = "TotalResumeCount",
-                    IsRequired = false,
-                    DefaultValue = string.Empty,
-                },
                 new TextExtendedPropertyModel()
                 {
                     Name = new[]
@@ -73,7 +57,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "کد آگهی"},
+                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "کد"},
                     },
                     ToolTip = new[]
                     {
@@ -88,7 +72,7 @@ namespace PayamGostarClientTest
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "منبع انتشار آگهی"},
+                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "منبع انتشار"},
                     },
                     ToolTip = new[]
                     {
@@ -99,11 +83,26 @@ namespace PayamGostarClientTest
                     IsRequired = false,
                     DefaultValue = string.Empty,
                 },
+                new NumberExtendedPropertyModel()
+                {
+                    Name = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "تعداد رزومه دریافتی"},
+                    },
+                    ToolTip = new[]
+                    {
+                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = string.Empty},
+                    },
+                    PropertyGroup = newModel.PropertyGroups[0],
+                    UserKey = "TotalResumeCount",
+                    IsRequired = false,
+                    DefaultValue = string.Empty,
+                },
                 new PersianDateExtendedPropertyModel()
                 {
                     Name = new[]
                     {
-                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "تاریخ آخرین غربالگری"},
+                        new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "تاریخ آخرین غربال"},
                     },
                     ToolTip = new[]
                     {

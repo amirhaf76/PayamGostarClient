@@ -1,4 +1,4 @@
-﻿using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
+﻿using PayamGostarClient.ApiClient.Enums;
 using System;
 using System.Collections.Generic;
 

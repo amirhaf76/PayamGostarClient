@@ -1,8 +1,8 @@
-﻿using PayamGostarClient.ApiServices.Abstractions;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.ApiServices.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+﻿using PayamGostarClient.ApiClient.Abstractions;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.Comparers;
 using PayamGostarClient.Initializer.CrmModels;
@@ -22,25 +22,24 @@ namespace PayamGostarClient.Initializer.Services
     {
         protected T IntendedCrmObject { get; }
 
-        protected IPayamGostarClientServiceFactory ServiceFactory { get; }
+        private IPayamGostarCustomizationApiClient CustomizationApi { get; }
 
-        protected ICrmObjectTypeService CrmObjectTypeService { get; }
-        protected IExtendedPropertyService ExtendedPropertyService { get; }
-        protected IPropertyGroupService PropertyGroupService { get; }
-        protected ICrmObjectTypeStageService CrmObjectTypeStageService { get; }
+        protected IPayamGostarCrmObjectTypeApiClient CrmObjectTypeApi { get; }
+        protected IPayamGostarExtendedPropertyApiClient ExtendedPropertyApi { get; }
+        protected IPayamGostarPropertyGroupApiClient PropertyGroupApi { get; }
 
 
-        protected BaseInitService(T intendedCrmObject, IPayamGostarClientServiceFactory serviceFactory)
+        protected BaseInitService(T intendedCrmObject, IPayamGostarApiClient payamGostarApiClient)
         {
             IntendedCrmObject = intendedCrmObject;
 
-            ServiceFactory = serviceFactory;
+            CustomizationApi = payamGostarApiClient.CustomizationApi;
 
-            CrmObjectTypeService = ServiceFactory.CreateCrmObjectTypeService();
-            ExtendedPropertyService = ServiceFactory.CreateExtendedPropertyService();
-            PropertyGroupService = ServiceFactory.CreatePropertyGroupService();
-            CrmObjectTypeStageService = ServiceFactory.CreateCrmObjectTypeStageService();
+            CrmObjectTypeApi = CustomizationApi.CrmObjectTypeApi;
+            ExtendedPropertyApi = CustomizationApi.ExtendedPropertyApi;
+            PropertyGroupApi = CustomizationApi.PropertyGroupApi;
         }
+
 
         public async Task InitAsync()
         {
@@ -220,7 +219,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             var request = ToCrmObjectTypeSearchRequestDto(IntendedCrmObject);
 
-            Helper.Net.ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>> receivedCrmObjects = await CrmObjectTypeService.SearchAsync(request);
+            Helper.Net.ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>> receivedCrmObjects = await CrmObjectTypeApi.SearchAsync(request);
 
             var receivedCrmObject = receivedCrmObjects.Result.FirstOrDefault();
 
@@ -288,7 +287,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             var stageDto = stage.CreateStageCreationRequest(id);
 
-            var stageCreationResult = await CrmObjectTypeStageService.CreateAsync(stageDto);
+            var stageCreationResult = await CrmObjectTypeApi.StageApi.CreateAsync(stageDto);
 
             stage.Id = stageCreationResult.Result.StageId;
         }
@@ -313,7 +312,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             var groupDto = group.CreatePropertyGroupCreationRequest(id);
 
-            var groupCreationResult = await PropertyGroupService.CreateAsync(groupDto);
+            var groupCreationResult = await PropertyGroupApi.CreateAsync(groupDto);
 
             return groupCreationResult.Result.Id;
         }
@@ -334,7 +333,7 @@ namespace PayamGostarClient.Initializer.Services
 
                 var propertyDto = CreateExtendedPropertyCreationDto(property);
 
-                var response = await ExtendedPropertyService.CreateAsync(propertyDto);
+                var response = await ExtendedPropertyApi.CreateAsync(propertyDto);
 
                 createdPropertiesId.Add(response.Result.Id);
             }
@@ -365,7 +364,7 @@ namespace PayamGostarClient.Initializer.Services
 
                 var propertyDto = CreateExtendedPropertyCreationDto(property);
 
-                var response = await ExtendedPropertyService.CreateAsync(propertyDto);
+                var response = await ExtendedPropertyApi.CreateAsync(propertyDto);
 
                 createdPropertiesId.Add(response.Result.Id);
             }
@@ -439,7 +438,6 @@ namespace PayamGostarClient.Initializer.Services
 
                 case Gp_ExtendedPropertyType.CrmObjectMultiValue:
                     return propertyModel.ToCrmObjectMultiValueExtendedPropertyCreationDto();
-
 
                 case Gp_ExtendedPropertyType.Time:
                     return propertyModel.ToTimeExtendedPropertyCreationDto();

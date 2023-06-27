@@ -1,9 +1,9 @@
-﻿using PayamGostarClient.ApiServices;
+﻿using PayamGostarClient.ApiClient;
 
 namespace PayamGostarClient.Initializer
 {
     public class CrmObjectModelInitializerConfig
     {
-        public PayamGostarClientServiceConfig ClientService { get; set; }
+        public PayamGostarApiClientConfig ClientService { get; set; }
     }
 }

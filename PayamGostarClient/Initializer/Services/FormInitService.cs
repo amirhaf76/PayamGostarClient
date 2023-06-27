@@ -1,6 +1,6 @@
-﻿using PayamGostarClient.ApiServices.Abstractions;
-using PayamGostarClient.ApiServices.Dtos.CrmObjectTypeServiceDtos;
-using PayamGostarClient.ApiServices.Extension;
+﻿using PayamGostarClient.ApiClient.Abstractions;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos;
+using PayamGostarClient.ApiClient.Extension;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
@@ -11,13 +11,13 @@ namespace PayamGostarClient.Initializer.Services
 {
     public class FormInitService : BaseInitService<CrmFormModel>
     {
-        public FormInitService(CrmFormModel crmFormModel, IPayamGostarClientServiceFactory crmObjectTypeApiService) : base(crmFormModel, crmObjectTypeApiService)
+        public FormInitService(CrmFormModel crmFormModel, IPayamGostarApiClient payamGostarApiClient) : base(crmFormModel, payamGostarApiClient)
         {
         }
 
         protected override async Task<Guid> CreateTypeAsync()
         {
-            var service = ServiceFactory.CreateCrmObjectTypeFormService();
+            var service = CrmObjectTypeApi.FormApi;
 
             var creationResult = await service.CreateAsync(IntendedCrmObject.ToDto());
 
