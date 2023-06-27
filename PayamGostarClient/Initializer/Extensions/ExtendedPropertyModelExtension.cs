@@ -31,7 +31,7 @@ namespace PayamGostarClient.Initializer.Extensions
 
             return new FormExtendedPropertyCreationDto
             {
-
+                // todo: DoesPreventSettingParent = model.DoesPreventSettingParent,
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 
@@ -201,6 +201,7 @@ namespace PayamGostarClient.Initializer.Extensions
                 case Gp_ExtendedPropertyType.Text:
                     return new TextExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
                 case Gp_ExtendedPropertyType.Form:
+                    // todo: DoesPreventSettingParent
                     return new FormExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
                 case Gp_ExtendedPropertyType.DropDownList:
                     return new DropDownListExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
@@ -279,7 +280,7 @@ namespace PayamGostarClient.Initializer.Extensions
         {
             return new FormExtendedPropertyModel
             {
-
+                // todo DoesPreventSettingParent = dto.DoesPreventSettingParent,
             }.FillBaseExtendedPropertyModel(dto);
         }
 
