@@ -28,6 +28,11 @@ namespace PayamGostarClient.ApiProvider.Factory
             return CreateClient<ICrmObjectTypeTicketApiClient, CrmObjectTypeTicketApiClient>();
         }
 
+        public ICrmObjectTypeIdentityApiClient CreateCrmObjectTypeIdentityApiClient()
+        {
+            return CreateClient<ICrmObjectTypeIdentityApiClient, CrmObjectTypeIdentityApiClient>();
+        }
+
 
         public ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient()
         {

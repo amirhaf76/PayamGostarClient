@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
-    internal static class CrmObjectTypeTicketServiceExtension
+    internal static class CrmObjectTypeTicketApiClientExtension
     {
         public static CrmObjectTypeTicketCreateRequestVM ToVM(this CrmObjectTypeTicketCreateRequestDto dto)
         {

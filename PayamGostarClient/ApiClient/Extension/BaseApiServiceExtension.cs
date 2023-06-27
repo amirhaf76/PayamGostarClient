@@ -102,7 +102,7 @@ namespace PayamGostarClient.ApiClient.Extension
             };
         }
 
-        public static CrmObjectTypeResultDto ConvertToCrmObjectTypeResultDto(this CrmObjectTypeResultVM vmResult)
+        public static CrmObjectTypeResultDto ToDto(this CrmObjectTypeResultVM vmResult)
         {
             return new CrmObjectTypeResultDto { Id = vmResult.Id };
         }

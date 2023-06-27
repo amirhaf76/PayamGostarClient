@@ -41,7 +41,7 @@ namespace PayamGostarClient.ApiClient.Models
             {
                 var formCreationResult = await _crmObjectFormClient.PostApiV2CrmobjecttypeFormCreateAsync(request.ToVM());
 
-                return formCreationResult.ConvertToApiResponse(result => result.ConvertToCrmObjectTypeResultDto());
+                return formCreationResult.ConvertToApiResponse(result => result.ToDto());
             }
             catch (ApiException e)
             {

@@ -3,7 +3,7 @@ using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeStageServiceDtos;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
-    internal static class CrmObjectTypeStageServiceExtension
+    internal static class CrmObjectTypeStageApiClientExtension
     {
         internal static CrmObjectTypeStageCreateRequestVM ToVM(this CrmObjectTypeStageCreationRequestDto dto)
         {

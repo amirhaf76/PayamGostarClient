@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
-    public static class CrmObjectTypeServiceExtension
+    public static class CrmObjectTypeApiClientExtension
     {
         public static CrmObjectTypeSearchRequestVM ToVM(this CrmObjectTypeSearchRequestDto crmModel)
         {

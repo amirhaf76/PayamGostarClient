@@ -8,6 +8,8 @@
 
         ICrmObjectTypeTicketApiClient CreateCrmObjectTypeTicketApiClient();
 
+        ICrmObjectTypeIdentityApiClient CreateCrmObjectTypeIdentityApiClient();
+
 
         IPropertyDefinitionApiClient CreatePropertyDefinitionApiClient();
 

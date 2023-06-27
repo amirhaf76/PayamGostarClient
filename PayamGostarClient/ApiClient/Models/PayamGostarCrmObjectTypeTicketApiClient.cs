@@ -11,7 +11,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace PayamGostarClient.ApiClient.Models
 {
     internal class PayamGostarCrmObjectTypeTicketApiClient : BaseApiClient, IPayamGostarCrmObjectTypeTicketApiClient
@@ -29,7 +28,7 @@ namespace PayamGostarClient.ApiClient.Models
             {
                 var ticketCreationResult = await _crmObjectTypeTicketApiClient.PostApiV2CrmobjecttypeTicketCreateAsync(request.ToVM());
 
-                return ticketCreationResult.ConvertToApiResponse(result => result.ConvertToCrmObjectTypeResultDto());
+                return ticketCreationResult.ConvertToApiResponse(result => result.ToDto());
             }
             catch (ApiException e)
             {
@@ -62,4 +61,6 @@ namespace PayamGostarClient.ApiClient.Models
             }
         }
     }
+
+
 }

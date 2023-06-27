@@ -8,7 +8,8 @@ using System.Text;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
-    public static class CrmObjectTypeFormServiceExtension
+
+    public static class CrmObjectTypeFormApiClientExtension
     {
         public static CrmObjectTypeFormGetResultDto ToDto(this CrmObjectTypeFormGetResultVM vmResult)
         {

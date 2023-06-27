@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace PayamGostarClient.ApiClient.Exceptions
 {
+    [Serializable]
     public class ApiServiceException : Exception
     {
         public ApiServiceException()
