@@ -13,16 +13,16 @@ namespace PayamGostarClient.Initializer.Extensions
         public static T FillBaseExtendedPropertyDto<T>(this T target, BaseExtendedPropertyModel from)
             where T : BaseExtendedPropertyCreationDto
         {
-            if (string.IsNullOrEmpty(from.CrmObjectTypeId))
+            if (!Guid.TryParse(from.CrmObjectTypeId, out Guid crmObjectTypeId))
             {
-                throw new ExtendedPropertyCreationDtoException("CrmObjectTypeId can not be null.");
+                throw new ExtendedPropertyCreationDtoException($"Parsing crmObjectTypeId was unsuccessful! Userkey: {from.UserKey} CrmObjectTypeId: {from.CrmObjectTypeId}");
             }
 
             target.UserKey = from.UserKey;
             target.PropertyGroupId = from.PropertyGroup.Id;
             target.Name = new SystemResourceValueDto { ResourceValues = from.Name?.Select(r => r.ToDto()) ?? Array.Empty<ResourceValueDto>() };
             target.ToolTip = new SystemResourceValueDto { ResourceValues = from.ToolTip?.Select(r => r.ToDto()) ?? Array.Empty<ResourceValueDto>() };
-            target.CrmObjectTypeId = Guid.Parse(from.CrmObjectTypeId);
+            target.CrmObjectTypeId = crmObjectTypeId;
             target.DefaultValue = from.DefaultValue;
 
             return target;

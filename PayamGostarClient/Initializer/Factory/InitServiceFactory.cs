@@ -31,7 +31,7 @@ namespace PayamGostarClient.Initializer.Factory
                 case Gp_CrmObjectType.Identity:
                     return new IdentityService(model as CrmIdentityModel, _payamGostarApiClient);
                 default:
-                    throw new InvalidGpCrmObjectTypeException();
+                    throw new InvalidGpCrmObjectTypeException($"CrmModel with '{model.Code}' code has unsupported model type! ModelType: '{model.Type}'.");
             }
         }
 

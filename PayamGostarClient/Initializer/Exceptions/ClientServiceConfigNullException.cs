@@ -6,7 +6,7 @@ namespace PayamGostarClient.Initializer.Exceptions
     [Serializable]
     internal class ClientServiceConfigNullException : Exception
     {
-        public ClientServiceConfigNullException()
+        public ClientServiceConfigNullException() 
         {
         }
 

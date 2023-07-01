@@ -232,7 +232,7 @@ namespace PayamGostarClient.Initializer.Extensions
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return new SecurityItemExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
                 default:
-                    throw new NotFoundExtendedPropertyTypeException();
+                    throw new NotFoundExtendedPropertyTypeException($"PropertyDisplayType: '{(Gp_ExtendedPropertyType)dto.PropertyDisplayTypeIndex}'.");
 
             }
         }
