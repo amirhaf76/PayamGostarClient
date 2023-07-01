@@ -11,6 +11,7 @@ namespace PayamGostarClient.ApiClient.Abstractions
         IPayamGostarCrmObjectTypeFormApiClient FormApi { get; }
         IPayamGostarCrmObjectTypeStageApiClient StageApi { get; }
         IPayamGostarCrmObjectTypeTicketApiClient TicketApi { get; }
+        IPayamGostarCrmObjectTypeIdentityApiClient IdentityApi { get; }
 
         Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchAsync(CrmObjectTypeSearchRequestDto request);
     }

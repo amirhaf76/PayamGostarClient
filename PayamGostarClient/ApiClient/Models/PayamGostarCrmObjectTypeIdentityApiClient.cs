@@ -6,6 +6,9 @@ using PayamGostarClient.ApiClient.Extension;
 using PayamGostarClient.Helper.Net;
 using System.Threading.Tasks;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeIdentityApiClientDtos.Create;
+using System.Linq;
+using System.Collections.Generic;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeIdentityApiClientDtos.Get;
 
 namespace PayamGostarClient.ApiClient.Models
 {
@@ -22,13 +25,27 @@ namespace PayamGostarClient.ApiClient.Models
         {
             try
             {
-                var ticketCreationResult = await _identityApiClient.PostApiV2CrmobjecttypeIdentityCreateAsync(request.ToVM());
+                var identityCreationResult = await _identityApiClient.PostApiV2CrmobjecttypeIdentityCreateAsync(request.ToVM());
 
-                return ticketCreationResult.ConvertToApiResponse(result => result.ToDto());
+                return identityCreationResult.ConvertToApiResponse(result => result.ToDto());
             }
             catch (ApiException e)
             {
                 throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(request), e);
+            }
+        }
+
+        public async Task<ApiResponse<IEnumerable<ProfileTypeGetResultDto>>> GetProfileTypeAsync()
+        {
+            try
+            {
+                var identityCreationResult = await _identityApiClient.PostApiV2CrmobjecttypeIdentityGetprofiletypeAsync();
+
+                return identityCreationResult.ConvertToApiResponse(result => result.Select(x => x.ToDto()));
+            }
+            catch (ApiException e)
+            {
+                throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(e);
             }
         }
     }

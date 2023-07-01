@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeIdentityApiClientDtos.Create;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeIdentityApiClientDtos.Get;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeIdentityApiClientDtos.Create;
 using PayamGostarClient.ApiProvider;
 
 namespace PayamGostarClient.ApiClient.Extension
@@ -15,6 +16,22 @@ namespace PayamGostarClient.ApiClient.Extension
                 ProfileTypeId = dto.ProfileTypeId,
 
             }.FillBaseCrmObjectTypeCreateRequestVM(dto);
+        }
+
+        public static ProfileTypeGetResultDto ToDto(this ProfileTypeGetResultVM vm)
+        {
+            return new ProfileTypeGetResultDto
+            {
+                Id = vm.Id,
+                ProfileTypeIndex = vm.ProfileTypeIndex,
+                ProfileTypeName = vm.ProfileTypeName,
+                CanAccessToPortal = vm.CanAccessToPortal,
+                PointCalendarTypeIndex = vm.PointCalendarTypeIndex,
+                PointExpireTypeIndex = vm.PointExpireTypeIndex,
+                PointExpireValue = vm.PointExpireValue,
+                PointReturnValue = vm.PointReturnValue,
+
+            };
         }
     }
 }

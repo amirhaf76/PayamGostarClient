@@ -27,6 +27,8 @@ namespace PayamGostarClient.ApiClient.Models
 
         public IPayamGostarCrmObjectTypeTicketApiClient TicketApi => new PayamGostarCrmObjectTypeTicketApiClient(ApiClientConfig, ApiProviderFactory);
 
+        public IPayamGostarCrmObjectTypeIdentityApiClient IdentityApi => new PayamGostarCrmObjectTypeIdentityApiClient(ApiClientConfig, ApiProviderFactory);
+
         public async Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchAsync(CrmObjectTypeSearchRequestDto request)
         {
             try

@@ -10,7 +10,7 @@ namespace PayamGostarClient.ApiClient.Dtos.CrmObjectTypeIdentityApiClientDtos.Cr
         public int NumberingTemplateId { get; set; }
         public int IdentityTypeIndex { get; set; }
         public int IdentityFunctionIndex { get; set; }
-        public Guid? ProfileTypeId { get; set; }
+        public Guid ProfileTypeId { get; set; }
 
     }
 }
