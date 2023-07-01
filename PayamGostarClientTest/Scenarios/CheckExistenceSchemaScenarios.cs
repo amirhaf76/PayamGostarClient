@@ -1,14 +1,6 @@
 ﻿using FluentAssertions;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiClient.Factory;
-using PayamGostarClient.Initializer;
-using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
-using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
-using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClientTest.DataTestModels.CrmFormDataTests;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -105,7 +97,7 @@ namespace PayamGostarClientTest
             var crmModelInitializer = CreateCrmObjectModelInitializer();
 
             var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
-  
+
             TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
             TestOutput.WriteLine($"Code: {model.Code}");
 
@@ -216,7 +208,7 @@ namespace PayamGostarClientTest
             // Assertion After.
             var searchedObjectAfter = await SearchModel(service, model);
 
-            searchedObjectAfter.Result.Should().HaveCount(1); 
+            searchedObjectAfter.Result.Should().HaveCount(1);
             searchedObjectAfter.Result.FirstOrDefault().Groups.Should().BeEquivalentTo(searchedObjectBefore.Result.FirstOrDefault().Groups);
             searchedObjectAfter.Result.FirstOrDefault().Properties.Should().BeEquivalentTo(searchedObjectBefore.Result.FirstOrDefault().Properties);
         }

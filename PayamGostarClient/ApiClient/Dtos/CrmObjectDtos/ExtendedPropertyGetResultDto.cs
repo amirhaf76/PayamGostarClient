@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get
+namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos
 {
     public class ExtendedPropertyGetResultDto
     {

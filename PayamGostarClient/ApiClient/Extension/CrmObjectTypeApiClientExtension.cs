@@ -1,7 +1,8 @@
-﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Get;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos;
+using PayamGostarClient.ApiProvider;
 using System.Collections.Generic;
 using System.Linq;
 

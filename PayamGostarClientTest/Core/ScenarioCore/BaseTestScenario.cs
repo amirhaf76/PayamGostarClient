@@ -1,10 +1,8 @@
 ﻿using PayamGostarClient.ApiClient;
-using PayamGostarClient.ApiClient.Abstractions;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiClient.Factory;
+using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
 using PayamGostarClient.Helper.Net;
 using PayamGostarClient.Initializer;
-using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClientTest.DataTestModels.CrmFormDataTests;
 using System.Collections.Generic;
@@ -73,7 +71,7 @@ namespace PayamGostarClientTest
 
             var apiServiceFactory = new PayamGostarApiClient(payamGostarClientServiceConfig);
 
-            return apiServiceFactory; 
+            return apiServiceFactory;
         }
 
 

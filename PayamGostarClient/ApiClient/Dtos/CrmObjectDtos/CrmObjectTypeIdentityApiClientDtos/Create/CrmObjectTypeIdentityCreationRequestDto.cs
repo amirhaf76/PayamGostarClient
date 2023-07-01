@@ -1,9 +1,9 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Create;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Create;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayamGostarClient.ApiClient.Dtos.CrmObjectTypeIdentityApiClientDtos.Create
+namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeIdentityApiClientDtos.Create
 {
     public class CrmObjectTypeIdentityCreationRequestDto : BaseCrmObjectTypeCreateRequestDto
     {

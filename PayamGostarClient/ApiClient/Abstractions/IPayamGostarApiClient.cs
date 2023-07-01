@@ -1,4 +1,6 @@
-﻿namespace PayamGostarClient.ApiClient.Abstractions
+﻿using PayamGostarClient.ApiClient.Abstractions.Customization;
+
+namespace PayamGostarClient.ApiClient.Abstractions
 {
     public interface IPayamGostarApiClient
     {

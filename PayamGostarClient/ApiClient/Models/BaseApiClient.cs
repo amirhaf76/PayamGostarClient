@@ -1,5 +1,5 @@
-﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiProvider.Abstractions;
+﻿using PayamGostarClient.ApiClient.ApiProvider.Abstractions;
+using PayamGostarClient.ApiProvider;
 
 namespace PayamGostarClient.ApiClient.Models
 {

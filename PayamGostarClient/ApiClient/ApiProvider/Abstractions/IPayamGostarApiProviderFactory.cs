@@ -1,4 +1,6 @@
-﻿namespace PayamGostarClient.ApiProvider.Abstractions
+﻿using PayamGostarClient.ApiProvider;
+
+namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
 {
     public interface IPayamGostarApiProviderFactory
     {
@@ -9,6 +11,8 @@
         ICrmObjectTypeTicketApiClient CreateCrmObjectTypeTicketApiClient();
 
         ICrmObjectTypeIdentityApiClient CreateCrmObjectTypeIdentityApiClient();
+
+        ICrmObjectTypeInvoiceApiClient CreateCrmObjectTypeInvoiceApiClient();
 
 
         IPropertyDefinitionApiClient CreatePropertyDefinitionApiClient();

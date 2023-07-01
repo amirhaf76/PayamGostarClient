@@ -1,9 +1,7 @@
 ﻿using PayamGostarClient.ApiClient;
 using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.ApiClient.Factory;
 using PayamGostarClient.Initializer.Abstractions;
-using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClient.Initializer.Extensions;

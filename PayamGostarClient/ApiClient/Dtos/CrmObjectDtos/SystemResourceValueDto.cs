@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos
+namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos
 {
     public class SystemResourceValueDto
     {

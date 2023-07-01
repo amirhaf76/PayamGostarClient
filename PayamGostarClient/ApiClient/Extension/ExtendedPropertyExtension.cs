@@ -1,8 +1,8 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
-using PayamGostarClient.ApiClient.Models;
 using System.Linq;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.SimpleExtendedProperies;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiClient.Models.Customization.ExtendedProperty;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
@@ -38,7 +38,7 @@ namespace PayamGostarClient.ApiClient.Extension
             return new CrmItemIdentityPropertyDefinitionCreateVM
             {
                 IsRequired = dto.IsRequired,
-            }.FillCrmItemPropertyDefinitionCreateVM(dto);
+            }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
         internal static CrmItemPropertyDefinitionCreateVM ToVM(this CrmItemExtendedPropertyCreationDto dto)

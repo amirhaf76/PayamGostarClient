@@ -1,7 +1,7 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.SimpleExtendedProperies;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using PayamGostarClient.Initializer.Exceptions;

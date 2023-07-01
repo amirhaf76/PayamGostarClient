@@ -1,11 +1,11 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeIdentityApiClientDtos.Get;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeIdentityApiClientDtos.Create;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeIdentityApiClientDtos.Create;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeIdentityApiClientDtos.Get;
 using PayamGostarClient.Helper.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PayamGostarClient.ApiClient.Abstractions
+namespace PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType
 {
     public interface IPayamGostarCrmObjectTypeIdentityApiClient
     {

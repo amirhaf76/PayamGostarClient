@@ -1,8 +1,9 @@
-﻿using PayamGostarClient.ApiProvider.Abstractions;
-using PayamGostarClient.ApiProvider.ClientModels;
+﻿using PayamGostarClient.ApiClient.ApiProvider.Abstractions;
+using PayamGostarClient.ApiClient.ApiProvider.ClientModels;
+using PayamGostarClient.ApiProvider;
 using System;
 
-namespace PayamGostarClient.ApiProvider.Factory
+namespace PayamGostarClient.ApiClient.ApiProvider.Factory
 {
     public class PayamGostarApiProviderFactory : IPayamGostarApiProviderFactory
     {
@@ -31,6 +32,11 @@ namespace PayamGostarClient.ApiProvider.Factory
         public ICrmObjectTypeIdentityApiClient CreateCrmObjectTypeIdentityApiClient()
         {
             return CreateClient<ICrmObjectTypeIdentityApiClient, CrmObjectTypeIdentityApiClient>();
+        }
+
+        public ICrmObjectTypeInvoiceApiClient CreateCrmObjectTypeInvoiceApiClient()
+        {
+            return CreateClient<ICrmObjectTypeInvoiceApiClient, CrmObjectTypeInvoiceApiClient>();
         }
 
 

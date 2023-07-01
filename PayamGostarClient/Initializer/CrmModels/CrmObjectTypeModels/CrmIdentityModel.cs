@@ -11,9 +11,9 @@ namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 
         public int NumberingTemplateId { get; set; }
 
-        public int IdentityTypeIndex { get; set; }
+        public Gp_IdentityType IdentityTypeIndex { get; set; }
 
-        public int IdentityFunctionIndex { get; set; }
+        public Gp_IdentityFunction IdentityFunctionIndex { get; set; }
 
         public Gp_ProfileType ProfileType { get; set; }
     }

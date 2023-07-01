@@ -1,10 +1,9 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeTicketServiceDtos.Create;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeTicketServiceDtos.Get;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeTicketApiClientDtos.Get;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeTicketApiClientDtos.Create;
 
 namespace PayamGostarClient.ApiClient.Extension
 {

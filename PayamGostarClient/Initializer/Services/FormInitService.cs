@@ -1,11 +1,9 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos;
 using PayamGostarClient.ApiClient.Extension;
-using System;
-using System.Threading.Tasks;
-using System.Linq;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Extensions;
+using System;
+using System.Threading.Tasks;
 
 namespace PayamGostarClient.Initializer.Services
 {

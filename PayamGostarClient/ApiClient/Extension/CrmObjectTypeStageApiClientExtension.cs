@@ -1,5 +1,5 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeStageServiceDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeStageApiClientDtos;
 
 namespace PayamGostarClient.ApiClient.Extension
 {

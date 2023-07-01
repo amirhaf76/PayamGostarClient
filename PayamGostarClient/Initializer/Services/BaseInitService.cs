@@ -1,7 +1,11 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiClient.Abstractions.Customization;
+using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
+using PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty;
+using PayamGostarClient.ApiClient.Abstractions.Customization.PropertyGroup;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.BaseStructure.Simple;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.Comparers;
@@ -456,7 +460,6 @@ namespace PayamGostarClient.Initializer.Services
 
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return propertyModel.ToSecurityItemExtendedPropertyCreationDto();
-
 
                 default:
                     throw new NotFoundExtendedPropertyTypeException();

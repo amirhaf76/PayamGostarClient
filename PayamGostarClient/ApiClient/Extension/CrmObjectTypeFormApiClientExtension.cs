@@ -1,10 +1,6 @@
-﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeFormServiceDtos.Create;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeFormServiceDtos.Gets;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeFormApiClientDtos.Create;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeFormApiClientDtos.Gets;
+using PayamGostarClient.ApiProvider;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
