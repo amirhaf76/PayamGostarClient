@@ -20,7 +20,7 @@ namespace PayamGostarClient.Initializer.Extensions
             {
                 IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
-                // IsMultiline = model.IsMultiLine,
+                IsMultiline = model.IsMultiLine,
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -256,7 +256,7 @@ namespace PayamGostarClient.Initializer.Extensions
         {
             return new TextExtendedPropertyModel
             {
-
+                // todo: Can not get isMultiLine from api.
             }.FillBaseExtendedPropertyModel(dto);
         }
 

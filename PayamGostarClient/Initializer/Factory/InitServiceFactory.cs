@@ -30,6 +30,8 @@ namespace PayamGostarClient.Initializer.Factory
                     return new FormInitService(model as CrmFormModel, _payamGostarApiClient);
                 case Gp_CrmObjectType.Ticket:
                     return new TicketInitService(model as CrmTicketModel, _payamGostarApiClient);
+                case Gp_CrmObjectType.Identity:
+                    return new IdentityService(model as CrmIdentityModel, _payamGostarApiClient);
                 default:
                     throw new InvalidGpCrmObjectTypeException();
             }
