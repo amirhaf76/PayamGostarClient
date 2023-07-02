@@ -22,6 +22,7 @@ namespace PayamGostarClient.ApiClient.Models.ApiProviderConfigBuilder
                 {
                     DomainUrl = _config.Url,
                     JwtToken = _config.JwToken,
+                    BasicParam = _config.BasicParam,
                     // DeviceId
                     // ClientId
                 },

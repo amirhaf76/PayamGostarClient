@@ -6,6 +6,8 @@ namespace PayamGostarClient.Helper.Net
 {
     public class ClientApiIntraction : IClientApiIntraction
     {
+        public virtual string BasicParam { get; set; }
+
         public virtual string JwtToken { get; set; }
 
         public virtual Guid DeviceId { get; set; }
@@ -14,11 +16,16 @@ namespace PayamGostarClient.Helper.Net
 
         public virtual string DomainUrl { get; set; }
 
-        private void AddAccessToken(HttpClient client)
+        private void AddAuthenticationHeader(HttpClient client)
         {
             if (!string.IsNullOrEmpty(JwtToken))
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", JwtToken);
+            }
+
+            if (!string.IsNullOrEmpty(BasicParam))
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", BasicParam);
             }
         }
 
@@ -42,7 +49,7 @@ namespace PayamGostarClient.Helper.Net
         {
             var httpClient = new HttpClient();
 
-            AddAccessToken(httpClient);
+            AddAuthenticationHeader(httpClient);
 
             AddClientId(httpClient);
 
