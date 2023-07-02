@@ -1,6 +1,6 @@
-﻿using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+﻿using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.BaseStructure.Simple;
 
-namespace PayamGostarClient.ApiClient.Abstractions.ExtendedPropertyCreation
+namespace PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty.ExtendedPropertyCreation
 {
     internal interface IExtendedPropertyCreationFactory
     {

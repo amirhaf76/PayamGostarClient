@@ -1,6 +1,6 @@
-﻿using PayamGostarClient.ApiProvider;
+﻿using PayamGostarClient.ApiClient.ApiProvider;
 
-namespace PayamGostarClient.ApiClient.Abstractions
+namespace PayamGostarClient.ApiClient.Abstractions.ApiProviderConfigBuilder
 {
     internal interface IPayamGostarApiProviderConfigBuilder
     {

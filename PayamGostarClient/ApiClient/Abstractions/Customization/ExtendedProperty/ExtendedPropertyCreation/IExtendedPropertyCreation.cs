@@ -2,7 +2,7 @@
 using PayamGostarClient.Helper.Net;
 using System.Threading.Tasks;
 
-namespace PayamGostarClient.ApiClient.Abstractions.ExtendedPropertyCreation
+namespace PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty.ExtendedPropertyCreation
 {
     internal interface IExtendedPropertyCreation
     {

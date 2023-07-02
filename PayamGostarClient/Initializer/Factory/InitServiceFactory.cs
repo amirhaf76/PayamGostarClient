@@ -1,9 +1,7 @@
 ﻿using PayamGostarClient.ApiClient;
 using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.ApiClient.Factory;
 using PayamGostarClient.Initializer.Abstractions;
-using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClient.Initializer.Extensions;
@@ -30,8 +28,10 @@ namespace PayamGostarClient.Initializer.Factory
                     return new FormInitService(model as CrmFormModel, _payamGostarApiClient);
                 case Gp_CrmObjectType.Ticket:
                     return new TicketInitService(model as CrmTicketModel, _payamGostarApiClient);
+                case Gp_CrmObjectType.Identity:
+                    return new IdentityService(model as CrmIdentityModel, _payamGostarApiClient);
                 default:
-                    throw new InvalidGpCrmObjectTypeException();
+                    throw new InvalidGpCrmObjectTypeException($"CrmModel with '{model.Code}' code has unsupported model type! ModelType: '{model.Type}'.");
             }
         }
 

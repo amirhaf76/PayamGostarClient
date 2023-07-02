@@ -8,6 +8,8 @@
 
         public string JwToken { get; set; }
 
+        public string BasicParam { get; set; }
+
     }
 
 }

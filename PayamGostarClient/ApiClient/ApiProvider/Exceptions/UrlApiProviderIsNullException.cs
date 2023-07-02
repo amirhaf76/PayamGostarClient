@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PayamGostarClient.ApiProvider.Exceptions
+namespace PayamGostarClient.ApiClient.ApiProvider.Exceptions
 {
     [Serializable]
     public class UrlApiProviderIsNullException : Exception

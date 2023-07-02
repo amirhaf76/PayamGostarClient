@@ -1,8 +1,8 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiClient.Dtos.PropertyGroupServiceDtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PayamGostarClient.ApiClient.Dtos.PropertyGroupApiClientDtos;
 
 namespace PayamGostarClient.ApiClient.Extension
 {

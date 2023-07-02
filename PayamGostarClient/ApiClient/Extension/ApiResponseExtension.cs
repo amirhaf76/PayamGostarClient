@@ -84,13 +84,12 @@ namespace PayamGostarClient.ApiClient.Extension
                 headers.Add(keyValue.Key, keyValue.Value);
             }
 
-            return new ApiServiceException(e)
-            {
-                StatusCode = (HttpStatusCode)e.StatusCode,
-                Response = e.Response,
-                Headers = new Dictionary<string, IEnumerable<string>>(headers),
-                ApiError = JsonConvert.DeserializeObject<ApiErrorDto>(e.Response)
-            };
+            
+            return ApiServiceException.Create(
+                response: e.Response,
+                statusCode: (HttpStatusCode)e.StatusCode,
+                headers: new Dictionary<string, IEnumerable<string>>(headers),
+                apiError: JsonConvert.DeserializeObject<ApiErrorDto>(e.Response));
         }
 
         public static ApiServiceException CreateApiExceptionDtoFromApiException(string message, ApiException e)
@@ -102,13 +101,12 @@ namespace PayamGostarClient.ApiClient.Extension
                 headers.Add(keyValue.Key, keyValue.Value);
             }
 
-            return new ApiServiceException(message, e)
-            {
-                StatusCode = (HttpStatusCode)e.StatusCode,
-                Response = e.Response,
-                Headers = new Dictionary<string, IEnumerable<string>>(headers),
-                ApiError = JsonConvert.DeserializeObject<ApiErrorDto>(e.Response)
-            };
+            return ApiServiceException.Create(
+                message: message,
+                response: e.Response,
+                statusCode: (HttpStatusCode)e.StatusCode,
+                headers: new Dictionary<string, IEnumerable<string>>(headers),
+                apiError: JsonConvert.DeserializeObject<ApiErrorDto>(e.Response));
         }
 
     }

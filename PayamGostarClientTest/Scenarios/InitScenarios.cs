@@ -599,7 +599,7 @@ namespace PayamGostarClientTest
             });
 
             // Assertion.
-            await initAction.Should().ThrowExactlyAsync<NullNameException>();
+            await initAction.Should().ThrowExactlyAsync<EmptyNameException>();
         }
 
         [Theory]

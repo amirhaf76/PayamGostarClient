@@ -1,5 +1,5 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeTicketServiceDtos.Create;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeTicketServiceDtos.Get;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeTicketApiClientDtos.Create;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeTicketApiClientDtos.Get;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using System.Linq;
 

@@ -1,9 +1,9 @@
-﻿using PayamGostarClient.ApiProvider.Exceptions;
+﻿using PayamGostarClient.ApiClient.ApiProvider.Exceptions;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PayamGostarClient.ApiProvider.ClientModels
+namespace PayamGostarClient.ApiClient.ApiProvider.ClientModels
 {
     internal abstract class PayamGostarBaseClient
     {

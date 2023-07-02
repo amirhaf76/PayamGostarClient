@@ -10,10 +10,7 @@ namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
         /// </summary>
         // public int CalculationTypeIndex { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
 
-        /// <summary>
-        /// Does not work!!! It can not be received by api.
-        /// </summary>
-        // public bool IsMultiLine { get => throw new NotSupportedByApiException(); set => throw new NotSupportedByApiException(); }
+        public bool IsMultiLine { get; set; }
 
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Text;
     }

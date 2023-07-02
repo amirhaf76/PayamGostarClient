@@ -20,6 +20,7 @@ namespace PayamGostarClient.Helper.Api
             apiBase.ClientId = clientApiIntraction.ClientId;
             apiBase.DeviceId = clientApiIntraction.DeviceId;
             apiBase.JwtToken = clientApiIntraction.JwtToken;
+            apiBase.BasicParam = clientApiIntraction.BasicParam;
 
             return apiBase;
         }

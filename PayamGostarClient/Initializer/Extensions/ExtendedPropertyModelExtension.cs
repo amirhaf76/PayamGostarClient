@@ -1,7 +1,7 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.MultiValueExtendedProperies;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.SimpleExtendedProperies;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.SimpleExtendedProperies;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using PayamGostarClient.Initializer.Exceptions;
@@ -20,7 +20,7 @@ namespace PayamGostarClient.Initializer.Extensions
             {
                 IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
-                // IsMultiline = model.IsMultiLine,
+                IsMultiline = model.IsMultiLine,
 
             }.FillBaseExtendedPropertyDto(baseModel);
         }
@@ -31,7 +31,7 @@ namespace PayamGostarClient.Initializer.Extensions
 
             return new FormExtendedPropertyCreationDto
             {
-
+                // todo: DoesPreventSettingParent = model.DoesPreventSettingParent,
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 
@@ -130,7 +130,6 @@ namespace PayamGostarClient.Initializer.Extensions
             }.FillBaseExtendedPropertyDto(baseModel);
         }
 
-
         public static TimeExtendedPropertyCreationDto ToTimeExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
             var model = (TimeExtendedPropertyModel)baseModel;
@@ -192,6 +191,19 @@ namespace PayamGostarClient.Initializer.Extensions
             }.FillBaseExtendedPropertyDto(model);
         }
 
+        public static AutoNumberExtendedPropertyCreationDto ToAutoNumberExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (AutoNumberExtendedPropertyModel)baseModel;
+
+            return new AutoNumberExtendedPropertyCreationDto
+            {
+                Prefix = model.Prefix,
+                Postfix = model.Postfix,
+                Seed = model.Seed,
+                AutoNumLength = model.AutoNumLength,
+
+            }.FillBaseExtendedPropertyDto(model);
+        }
 
         public static BaseExtendedPropertyModel ToModel(this ExtendedPropertyGetResultDto dto)
         {
@@ -201,6 +213,7 @@ namespace PayamGostarClient.Initializer.Extensions
                 case Gp_ExtendedPropertyType.Text:
                     return new TextExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
                 case Gp_ExtendedPropertyType.Form:
+                    // todo: DoesPreventSettingParent
                     return new FormExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
                 case Gp_ExtendedPropertyType.DropDownList:
                     return new DropDownListExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
@@ -230,9 +243,10 @@ namespace PayamGostarClient.Initializer.Extensions
                     return new AppointmentExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return new SecurityItemExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
+                case Gp_ExtendedPropertyType.AutoNumber:
+                    return new AutoNumberExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
                 default:
-                    throw new NotFoundExtendedPropertyTypeException();
-
+                    throw new NotFoundExtendedPropertyTypeException($"PropertyDisplayType: '{(Gp_ExtendedPropertyType)dto.PropertyDisplayTypeIndex}'.");
             }
         }
 
@@ -255,7 +269,7 @@ namespace PayamGostarClient.Initializer.Extensions
         {
             return new TextExtendedPropertyModel
             {
-
+                // todo: Can not get isMultiLine from api.
             }.FillBaseExtendedPropertyModel(dto);
         }
 
@@ -279,7 +293,7 @@ namespace PayamGostarClient.Initializer.Extensions
         {
             return new FormExtendedPropertyModel
             {
-
+                // todo DoesPreventSettingParent = dto.DoesPreventSettingParent,
             }.FillBaseExtendedPropertyModel(dto);
         }
 
@@ -374,6 +388,20 @@ namespace PayamGostarClient.Initializer.Extensions
 
             }.FillBaseExtendedPropertyModel(dto);
         }
+        public static AutoNumberExtendedPropertyModel ToAutoNumberExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
+        {
+            var extraConfig = (AutoNumberExtendedPropertyExtraConfigDto)dto.ExtraConfig;
+
+            return new AutoNumberExtendedPropertyModel
+            {
+                Prefix = extraConfig.Prefix,
+                Postfix = extraConfig.Postfix,
+                Seed = extraConfig.Seed,
+                AutoNumLength = extraConfig.Length,
+
+            }.FillBaseExtendedPropertyModel(dto);
+        }
+
 
 
         public static ExtendedPropertyIdWrapperDto ToDto(this PropertyDefinitionIdWrapperModel model)

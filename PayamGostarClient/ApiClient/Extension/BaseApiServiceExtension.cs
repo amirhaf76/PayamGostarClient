@@ -1,10 +1,11 @@
 ﻿using PayamGostarClient.ApiProvider;
 using PayamGostarClient.ApiClient.Dtos;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Create;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
 using PayamGostarClient.Initializer.CrmModels;
 using System.Linq;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Get;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Create;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
@@ -102,7 +103,7 @@ namespace PayamGostarClient.ApiClient.Extension
             };
         }
 
-        public static CrmObjectTypeResultDto ConvertToCrmObjectTypeResultDto(this CrmObjectTypeResultVM vmResult)
+        public static CrmObjectTypeResultDto ToDto(this CrmObjectTypeResultVM vmResult)
         {
             return new CrmObjectTypeResultDto { Id = vmResult.Id };
         }
@@ -113,6 +114,16 @@ namespace PayamGostarClient.ApiClient.Extension
             {
                 Id = result.Id,
             };
+        }
+
+        public static CrmObjectTypeSignatureFilePathVM ToVM(this CrmObjectTypeSignatureFilePathDto dto)
+        {
+            return new CrmObjectTypeSignatureFilePathVM { FilePath = dto.FilePath };
+        }
+
+        public static CrmObjectTypeSignatureFilePathDto ToDto(this CrmObjectTypeSignatureFilePathVM vm)
+        {
+            return new CrmObjectTypeSignatureFilePathDto { FilePath = vm.FilePath };
         }
 
 

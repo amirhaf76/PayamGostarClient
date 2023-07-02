@@ -16,7 +16,7 @@ namespace PayamGostarClient.Initializer
 
             if (config.ClientService == null)
             {
-                throw new ClientServiceConfigNullException();
+                throw new ClientServiceConfigNullException("CrmObjectModelInitializerConfig.ClientService must be set!");
             }
         }
 

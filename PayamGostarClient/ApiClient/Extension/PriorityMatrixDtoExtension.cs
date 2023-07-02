@@ -1,7 +1,6 @@
 ﻿using PayamGostarClient.ApiProvider;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeTicketServiceDtos.Create;
 using System.Linq;
-
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeTicketApiClientDtos.Create;
 
 namespace PayamGostarClient.ApiClient.Extension
 {

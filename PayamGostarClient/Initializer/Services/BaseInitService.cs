@@ -1,7 +1,11 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Get;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectTypeServiceDtos.Search;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyServiceDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiClient.Abstractions.Customization;
+using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
+using PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty;
+using PayamGostarClient.ApiClient.Abstractions.Customization.PropertyGroup;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.BaseStructure.Simple;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.Comparers;
@@ -60,14 +64,14 @@ namespace PayamGostarClient.Initializer.Services
 
         private void ValidateInitialValidationModel()
         {
-            if (string.IsNullOrEmpty(IntendedCrmObject.Code))
+            if (string.IsNullOrWhiteSpace(IntendedCrmObject.Code))
             {
-                throw new NullCrmCodeException();
+                throw new NullCrmCodeException($"CrmObjectModel must have a unique code!");
             }
 
             if (!IntendedCrmObject.Name.Any())
             {
-                throw new NullNameException();
+                throw new EmptyNameException($"A CrmObject model with '{IntendedCrmObject.Code}' code doesn't have any names!");
             }
 
             ValidateExtendedProperites();
@@ -78,9 +82,9 @@ namespace PayamGostarClient.Initializer.Services
 
         private void ValidateStages()
         {
-            if (!IntendedCrmObject.Stages.All(s => !string.IsNullOrEmpty(s.Key)))
+            if (!IntendedCrmObject.Stages.All(s => !string.IsNullOrWhiteSpace(s.Key)))
             {
-                throw new NullStageKeyExcpetion();
+                throw new NullStageKeyExcpetion("CrmObjectModel stage must have a key!");
             }
 
             var stageKeyGroups = IntendedCrmObject.Stages.GroupBy(s => s.Key);
@@ -89,7 +93,7 @@ namespace PayamGostarClient.Initializer.Services
             {
                 if (stageKeyGroup.Count() > 1)
                 {
-                    throw new NonUniqeStageKeyException($"There is more than one property with \"{stageKeyGroup.Key}\".");
+                    throw new NonUniqeStageKeyException($"In the crmObject with '{IntendedCrmObject.Code}', there are more than one stage with '{stageKeyGroup.Key}'!");
                 }
             }
         }
@@ -100,7 +104,7 @@ namespace PayamGostarClient.Initializer.Services
                 (IntendedCrmObject.Properties?.Any() ?? false) &&
                 (IntendedCrmObject.PropertyGroups == null || !IntendedCrmObject.PropertyGroups.Any()))
             {
-                throw new InvalidGroupCountException("CrmObject needs atleast a group for its extended properties.");
+                throw new InvalidGroupCountException($"The crmObject with '{IntendedCrmObject.Code}' needs atleast a group for its extended properties.");
             }
 
             if (!IntendedCrmObject.Properties?.All(p => p.PropertyGroup != null) ?? false)
@@ -116,9 +120,9 @@ namespace PayamGostarClient.Initializer.Services
             {
                 var errorMessage = IntendedCrmObject.Properties
                     .Where(p => string.IsNullOrEmpty(p.UserKey))
-                    .Select(p => p.Name);
+                    .Select(p => p.Name.FirstOrDefault().Value);
 
-                throw new NullPropertyUserKeyExcpetion($"Some properties don't have userkey. their first re are: {errorMessage}");
+                throw new NullPropertyUserKeyExcpetion($"Some properties don't have userkey. their first names are: {errorMessage}");
             }
 
             var propertyKeyGroups = IntendedCrmObject.Properties.GroupBy(p => p.UserKey);
@@ -127,7 +131,7 @@ namespace PayamGostarClient.Initializer.Services
             {
                 if (propertyKeyGroup.Count() > 1)
                 {
-                    throw new NonUniqeUserKeyException($"There is more than one property with \"{propertyKeyGroup.Key}\".");
+                    throw new NonUniqeUserKeyException($"In the crmObject with '{IntendedCrmObject.Code}', there are more than one userKey with \"{propertyKeyGroup.Key}\".");
                 }
             }
         }
@@ -257,7 +261,7 @@ namespace PayamGostarClient.Initializer.Services
 
             if (aFinalStage == null)
             {
-                throw new NotFoundAtleastAFinalStageException();
+                throw new NotFoundAtleastAFinalStageException($"In creation of crm object type, final stage is mandatory! the invalid crmObject has '{IntendedCrmObject.Code}' code.");
             }
 
             stages.Sort(StagePriorityComparer.GetInstance());
@@ -409,6 +413,9 @@ namespace PayamGostarClient.Initializer.Services
         {
             switch (propertyModel.Type)
             {
+                case Gp_ExtendedPropertyType.AutoNumber:
+                    return propertyModel.ToAutoNumberExtendedPropertyCreationDto();
+
                 case Gp_ExtendedPropertyType.Text:
                     return propertyModel.ToTextExtendedPropertyCreationDto();
 
@@ -457,9 +464,8 @@ namespace PayamGostarClient.Initializer.Services
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return propertyModel.ToSecurityItemExtendedPropertyCreationDto();
 
-
                 default:
-                    throw new NotFoundExtendedPropertyTypeException();
+                    throw new NotFoundExtendedPropertyTypeException($"PropertyDisplayType: '{propertyModel.Type}'.");
             }
         }
 

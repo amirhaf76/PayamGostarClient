@@ -1,6 +1,6 @@
 ﻿using PayamGostarClient.Helper.Net;
 
-namespace PayamGostarClient.ApiProvider
+namespace PayamGostarClient.ApiClient.ApiProvider
 {
     public class PayamGostarApiProviderConfig
     {
