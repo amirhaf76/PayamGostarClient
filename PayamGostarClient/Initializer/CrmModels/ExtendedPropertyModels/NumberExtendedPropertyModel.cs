@@ -3,7 +3,7 @@ using System;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {
-    public class NumberExtendedPropertyModel : BaseExtendedPropertyModel
+    public class NumberExtendedPropertyModel : BaseRequireableExtendedPropertyModel
     {
         public int? MinDigits { get; set; }
 

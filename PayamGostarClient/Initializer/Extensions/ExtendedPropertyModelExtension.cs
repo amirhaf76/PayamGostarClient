@@ -18,11 +18,10 @@ namespace PayamGostarClient.Initializer.Extensions
 
             return new TextExtendedPropertyCreationDto
             {
-                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 IsMultiline = model.IsMultiLine,
 
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static FormExtendedPropertyCreationDto ToFormExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -41,14 +40,13 @@ namespace PayamGostarClient.Initializer.Extensions
 
             return new DropDownListExtendedPropertyCreationDto
             {
-                IsRequired = model.IsRequired,
                 Values = model.Values?.Select(v => new DropDownListExtendedPropertyValueCreationDto
                 {
                     PropertyDefinitionId = v.PropertyDefinitionId,
                     Value = v.Value
                 }) ?? Array.Empty<DropDownListExtendedPropertyValueCreationDto>(),
 
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static UserExtendedPropertyCreationDto ToUserExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -58,9 +56,7 @@ namespace PayamGostarClient.Initializer.Extensions
             return new UserExtendedPropertyCreationDto
             {
                 //ShowDeactiveMembersOption = model.ShowDeactiveMembersOption,
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillSecurityItemExtendedPropertyCreationDto(baseModel);
         }
 
         public static NumberExtendedPropertyCreationDto ToNumberExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -73,43 +69,25 @@ namespace PayamGostarClient.Initializer.Extensions
                 MaxDigits = model.MaxDigits,
                 MinValue = model.MinValue,
                 MaxValue = model.MaxValue,
-                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 DecimalDigits = model.DecimalDigits,
 
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static DepartmentExtendedPropertyCreationDto ToDepartmentExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (DepartmentExtendedPropertyModel)baseModel;
-
-            return new DepartmentExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(baseModel);
+            return new DepartmentExtendedPropertyCreationDto().FillSecurityItemExtendedPropertyCreationDto(baseModel);
         }
 
         public static PositionExtendedPropertyCreationDto ToPositionExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (PositionExtendedPropertyModel)baseModel;
-
-            return new PositionExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(baseModel);
+            return new PositionExtendedPropertyCreationDto().FillSecurityItemExtendedPropertyCreationDto(baseModel);
         }
 
         public static PersianDateExtendedPropertyCreationDto ToPersianDateExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (PersianDateExtendedPropertyModel)baseModel;
-
-            return new PersianDateExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-            }.FillBaseExtendedPropertyDto(baseModel);
+            return new PersianDateExtendedPropertyCreationDto().FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static LabelExtendedPropertyCreationDto ToLabelExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -132,13 +110,7 @@ namespace PayamGostarClient.Initializer.Extensions
 
         public static TimeExtendedPropertyCreationDto ToTimeExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (TimeExtendedPropertyModel)baseModel;
-
-            return new TimeExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(model);
+            return new TimeExtendedPropertyCreationDto().FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static CurrencyExtendedPropertyCreationDto ToCurrencyExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -184,11 +156,7 @@ namespace PayamGostarClient.Initializer.Extensions
         {
             var model = (SecurityItemExtendedPropertyModel)baseModel;
 
-            return new SecurityItemExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(model);
+            return new SecurityItemExtendedPropertyCreationDto().FillSecurityItemExtendedPropertyCreationDto(model);
         }
 
         public static AutoNumberExtendedPropertyCreationDto ToAutoNumberExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)

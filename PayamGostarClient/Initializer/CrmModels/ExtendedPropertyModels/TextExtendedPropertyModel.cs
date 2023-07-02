@@ -3,7 +3,7 @@ using PayamGostarClient.Initializer.Exceptions;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {
-    public class TextExtendedPropertyModel : BaseExtendedPropertyModel
+    public class TextExtendedPropertyModel : BaseRequireableExtendedPropertyModel
     {
         /// <summary>
         /// Does not work!!! It can not be received by api.
