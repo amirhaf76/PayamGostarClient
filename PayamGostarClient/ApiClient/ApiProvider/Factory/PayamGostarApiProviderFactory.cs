@@ -39,6 +39,11 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
             return CreateClient<ICrmObjectTypeInvoiceApiClient, CrmObjectTypeInvoiceApiClient>();
         }
 
+        public ICrmObjectTypeQuoteApiClient CreateCrmObjectTypeQuoteApiClient()
+        {
+            return CreateClient<ICrmObjectTypeQuoteApiClient, CrmObjectTypeQuoteApiClient>();
+        }
+
 
         public ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient()
         {
