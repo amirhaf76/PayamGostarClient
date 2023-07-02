@@ -6,6 +6,7 @@ using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Create;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypePaymentApiClientDtos.Create;
 
 namespace PayamGostarClient.ApiClient.Extension
 {
@@ -162,6 +163,20 @@ namespace PayamGostarClient.ApiClient.Extension
             to.IsActive = from.Enabled;
 
             return to;
+        }
+
+        public static TTo FillCrmObjectTypePaymentCreateRequestVM<TFrom, TTo>(this TTo to, TFrom from)
+            where TTo : CrmObjectTypePaymentCreateRequestVM
+            where TFrom : CrmObjectTypeBasePaymentCreateRequestDto
+        {
+            to.NumberingTemplateId = from.NumberingTemplateId;
+            to.NeedApproval = from.NeedApproval;
+            to.NeedNumbering = from.NeedNumbering;
+            to.ChangeToStatePendingOnUpdate = from.ChangeToStatePendingOnUpdate;
+            to.CustomerPaymentType = from.CustomerPaymentType;
+            to.Signature = from.Signature?.ToVM();
+
+            return to.FillBaseCrmObjectTypeCreateRequestVM(from);
         }
 
     }

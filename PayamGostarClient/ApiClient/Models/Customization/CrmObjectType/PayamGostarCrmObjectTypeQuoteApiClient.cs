@@ -14,18 +14,18 @@ namespace PayamGostarClient.ApiClient.Models.Customization.CrmObjectType
 {
     public class PayamGostarCrmObjectTypeQuoteApiClient : BaseApiClient, IPayamGostarCrmObjectTypeQuoteApiClient
     {
-        private readonly ICrmObjectTypeQuoteApiClient _quoteApiClient;
+        private readonly ICrmObjectTypeQuoteApiClient _saleQuoteApiClient;
 
         public PayamGostarCrmObjectTypeQuoteApiClient(PayamGostarApiClientConfig apiClientConfig, IPayamGostarApiProviderFactory apiProviderFactory) : base(apiClientConfig, apiProviderFactory)
         {
-            _quoteApiClient = apiProviderFactory.CreateCrmObjectTypeQuoteApiClient();
+            _saleQuoteApiClient = apiProviderFactory.CreateCrmObjectTypeQuoteApiClient();
         }
 
         public async Task<ApiResponse<CrmObjectTypeResultDto>> CreateAsync(CrmObjectTypeQuoteCreateRequestDto request)
         {
             try
             {
-                var quoteCreationResult = await _quoteApiClient.PostApiV2CrmobjecttypeQuoteCreateAsync(request.ToVM());
+                var quoteCreationResult = await _saleQuoteApiClient.PostApiV2CrmobjecttypeQuoteCreateAsync(request.ToVM());
 
                 return quoteCreationResult.ConvertToApiResponse(result => result.ToDto());
             }

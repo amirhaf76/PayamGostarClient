@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeInvoiceApiClientDtos.Create
 {
-    public class CrmObjectTypeInvoiceCreateRequestDto : BaseCrmObjectTypeInvoiceCreateRequestDto
+    public class CrmObjectTypeInvoiceCreateRequestDto : CrmObjectTypeBaseInvoiceCreateRequestDto
     {
         public bool AutoGenerateInventoryTransaction { get; set; }
 
