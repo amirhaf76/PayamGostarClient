@@ -142,6 +142,11 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
             return CreateClient<ISecurityItemPropertyDefinitionApiClient, SecurityItemPropertyDefinitionApiClient>();
         }
 
+        public IAutoNumberPropertyDefinitionApiClient CreateAutoNumberPropertyDefinitionApiClient()
+        {
+            return CreateClient<IAutoNumberPropertyDefinitionApiClient, AutoNumberPropertyDefinitionApiClient>();
+        }
+
 
 
         private TAbstractClient CreateClient<TAbstractClient, TClient>()

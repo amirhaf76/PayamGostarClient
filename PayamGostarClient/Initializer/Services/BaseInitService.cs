@@ -413,6 +413,9 @@ namespace PayamGostarClient.Initializer.Services
         {
             switch (propertyModel.Type)
             {
+                case Gp_ExtendedPropertyType.AutoNumber:
+                    return propertyModel.ToAutoNumberExtendedPropertyCreationDto();
+
                 case Gp_ExtendedPropertyType.Text:
                     return propertyModel.ToTextExtendedPropertyCreationDto();
 

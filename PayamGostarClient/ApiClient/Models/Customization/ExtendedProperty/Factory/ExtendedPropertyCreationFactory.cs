@@ -1,16 +1,16 @@
-﻿using PayamGostarClient.ApiProvider;
+﻿using PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty.ExtendedPropertyCreation;
+using PayamGostarClient.ApiClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiClient.Dtos;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.MultiValueExtendedProperies;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.SimpleExtendedProperies;
+using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.ApiClient.Exceptions;
 using PayamGostarClient.ApiClient.Extension;
+using PayamGostarClient.ApiProvider;
 using PayamGostarClient.Helper.Net;
 using System;
 using System.Threading.Tasks;
-using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.SimpleExtendedProperies;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.BaseStructure.Simple;
-using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.MultiValueExtendedProperies;
-using PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty.ExtendedPropertyCreation;
-using PayamGostarClient.ApiClient.ApiProvider.Abstractions;
 
 namespace PayamGostarClient.ApiClient.Models.Customization.ExtendedProperty.Factory
 {
@@ -58,7 +58,6 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ExtendedProperty.Fact
                 case Gp_ExtendedPropertyType.CrmObjectMultiValue:
                     return CreateExtendedPropertyCreation<CrmObjectMultiValueExtendedPropertyCreation, CrmObjectMultiValueExtendedPropertyCreationDto>(baseProperty);
 
-
                 case Gp_ExtendedPropertyType.Time:
                     return CreateExtendedPropertyCreation<TimeExtendedPropertyCreation, TimeExtendedPropertyCreationDto>(baseProperty);
 
@@ -76,6 +75,9 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ExtendedProperty.Fact
 
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return CreateExtendedPropertyCreation<SecurityItemExtendedPropertyCreation, SecurityItemExtendedPropertyCreationDto>(baseProperty);
+
+                case Gp_ExtendedPropertyType.AutoNumber:
+                    return CreateExtendedPropertyCreation<AutoNumberExtendedPropertyCreation, AutoNumberExtendedPropertyCreationDto>(baseProperty);
 
                 default:
                     throw new ExtendedPropertyTypeNotFoundException();
@@ -458,6 +460,27 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ExtendedProperty.Fact
                     var clientApi = ClientFactory.CreateSecurityItemPropertyDefinitionApiClient();
 
                     return await clientApi.PostApiV2SecurityitempropertydefinitionCreateAsync(Property.ToVM());
+                }
+                catch (ApiException e)
+                {
+                    throw ApiResponseExtension.CreateApiExceptionDtoFromApiException(Helper.Helper.GetStringsFromProperties(Property), e);
+                }
+                throw new NotImplementedException();
+            }
+        }
+        private class AutoNumberExtendedPropertyCreation : BaseExtendedPropertyCreation<AutoNumberExtendedPropertyCreationDto>
+        {
+            public AutoNumberExtendedPropertyCreation(AutoNumberExtendedPropertyCreationDto property, IPayamGostarApiProviderFactory clientFactory) : base(property, clientFactory)
+            {
+            }
+
+            public override async Task<SwaggerResponse<PropertyDefinitionPostResultVM>> CreatePropertyCreationActionAsync()
+            {
+                try
+                {
+                    var clientApi = ClientFactory.CreateAutoNumberPropertyDefinitionApiClient();
+
+                    return await clientApi.PostApiV2AutonumberpropertydefinitionCreateAsync(Property.ToVM());
                 }
                 catch (ApiException e)
                 {

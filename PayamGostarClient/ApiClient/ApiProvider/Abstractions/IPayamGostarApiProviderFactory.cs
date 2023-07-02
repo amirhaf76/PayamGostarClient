@@ -42,6 +42,8 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
         ICheckboxPropertyDefinitionApiClient CreateCheckboxPropertyDefinitionApiClient();
         IAppointmentPropertyDefinitionApiClient CreateAppointmentPropertyDefinitionApiClient();
         ISecurityItemPropertyDefinitionApiClient CreateSecurityItemPropertyDefinitionApiClient();
+        IAutoNumberPropertyDefinitionApiClient CreateAutoNumberPropertyDefinitionApiClient();
+
 
     }
 }
