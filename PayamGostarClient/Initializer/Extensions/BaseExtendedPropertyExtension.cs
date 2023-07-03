@@ -29,6 +29,17 @@ namespace PayamGostarClient.Initializer.Extensions
             return target;
         }
 
+        public static T FillCrmItemExtendedPropertyCreationDto<T>(this T target, BaseExtendedPropertyModel from)
+            where T : CrmItemExtendedPropertyCreationDto
+        {
+            var crmObjectModel = (CrmObjectExtendedPropertyModel)from;
+
+            target.PreventSettingContainerCrmobjectAsParent = crmObjectModel.PreventSettingContainerCrmobjectAsParent;
+            target.ReferencedItemCrmObjectTypeId = crmObjectModel.ReferencedItemCrmObjectTypeId;
+
+            return target.FillBaseExtendedPropertyDto(from);
+        }
+
         public static T FillGeneralTypeExtendedPropertyCreationDto<T>(this T target, BaseExtendedPropertyModel from)
             where T : GeneralTypeExtendedPropertyCreationDto
         {

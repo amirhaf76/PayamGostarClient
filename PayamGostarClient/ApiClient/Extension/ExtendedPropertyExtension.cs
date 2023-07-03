@@ -43,10 +43,7 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static CrmItemPropertyDefinitionCreateVM ToVM(this CrmItemExtendedPropertyCreationDto dto)
         {
-            return new CrmItemPropertyDefinitionCreateVM
-            {
-
-            }.FillCrmItemPropertyDefinitionCreateVM(dto);
+            return new CrmItemPropertyDefinitionCreateVM().FillCrmItemPropertyDefinitionCreateVM(dto);
         }
 
         internal static CrmObjectMultiValuePropertyDefinitionCreateVM ToVM(this CrmObjectMultiValueExtendedPropertyCreationDto dto)

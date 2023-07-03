@@ -17,16 +17,5 @@ namespace PayamGostarClient.Initializer.Extensions
 
             }.FillBaseCrmObjectTypeCreateRequestDto(model);
         }
-
-        internal static CrmTicketModel ToModel(this CrmObjectTypeTicketGetResultDto dto)
-        {
-            return new CrmTicketModel
-            {
-                ResponseTemplate = dto.ResponseTemplate,
-                ListenLineId = dto.ListenLineId,
-                PriorityMatrix = dto.PriorityMatrix?.ToModel(),
-
-            }.FillBaseCRMModel(dto);
-        }
     }
 }

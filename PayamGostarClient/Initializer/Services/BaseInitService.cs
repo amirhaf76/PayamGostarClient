@@ -148,7 +148,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
-            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties?.Select(x => x.ToModel()), currentCrmObject.Groups);
+            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties, currentCrmObject.Groups);
 
             await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
         }
@@ -157,7 +157,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
-            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentCrmObject.Properties?.Select(x => x.ToModel()));
+            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentCrmObject.Properties);
 
             if (newProperties.Any())
             {
@@ -211,7 +211,7 @@ namespace PayamGostarClient.Initializer.Services
         }
 
 
-        private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> currentExtendedProperties, IEnumerable<PropertyGroupGetResultDto> groups)
+        private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<ExtendedPropertyGetResultDto> currentExtendedProperties, IEnumerable<PropertyGroupGetResultDto> groups)
         {
             var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentExtendedProperties);
 
@@ -379,15 +379,15 @@ namespace PayamGostarClient.Initializer.Services
 
         private void CheckBaseCrmObjectMatching(CrmObjectTypeSearchResultDto currentCrmObj)
         {
-            CheckFieldMatching(IntendedCrmObject.Type, (Gp_CrmObjectType)currentCrmObj.CrmOjectTypeIndex, "BaseCrmObj:Type -> ");
             CheckFieldMatching(IntendedCrmObject.Code, currentCrmObj.Code, "BaseCrmObj:Code -> ");
+            CheckFieldMatching(IntendedCrmObject.Type, (Gp_CrmObjectType)currentCrmObj.CrmOjectTypeIndex, "BaseCrmObj:Type -> ");
         }
 
 
         protected abstract Task<Guid> CreateTypeAsync();
 
 
-        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<BaseExtendedPropertyModel> currentProperties)
+        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<ExtendedPropertyGetResultDto> currentProperties)
         {
             var detectedPair = IntendedCrmObject.Properties.Join(
                 currentProperties,
@@ -398,15 +398,11 @@ namespace PayamGostarClient.Initializer.Services
 
             foreach (var pair in detectedPair)
             {
-                CheckExtendedProperty(pair.Item1, pair.Item2);
+                CheckFieldMatching(pair.Item1.UserKey, pair.Item2.UserKey, "BaseExtendedPropertyModel:UserKey -> ");
+                CheckFieldMatching(pair.Item1.Type, (Gp_ExtendedPropertyType)pair.Item2.PropertyDisplayTypeIndex, "BaseExtendedPropertyModel:Type -> ");
             }
 
             return IntendedCrmObject.Properties.Except(detectedPair.Select(d => d.Item1));
-        }
-
-        private void CheckExtendedProperty(BaseExtendedPropertyModel item1, BaseExtendedPropertyModel item2)
-        {
-            new GeneralExtendedPropertyModelEqualityComparer().Checks(item1, item2);
         }
 
         private BaseExtendedPropertyCreationDto CreateExtendedPropertyCreationDto(BaseExtendedPropertyModel propertyModel)

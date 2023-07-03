@@ -22,31 +22,26 @@ namespace PayamGostarClient.ApiClient.Extension
         public static T FillBasePropertyDefinitionCreateVM<T>(this T target, BaseExtendedPropertyCreationDto from)
             where T : BasePropertyDefinitionCreateVM
         {
-            target = target.FillBasePropertyDefinitionVM(from);
-
             target.CrmObjectTypeId = from.CrmObjectTypeId;
 
-            return target;
+            return target.FillBasePropertyDefinitionVM(from);
         }
         public static T FillCrmItemPropertyDefinitionCreateVM<T>(this T target, CrmItemExtendedPropertyCreationDto from)
             where T : CrmItemPropertyDefinitionCreateVM
         {
-            target = target.FillBasePropertyDefinitionVM(from);
+            target.ReferencedItemCrmObjectTypeId = from.ReferencedItemCrmObjectTypeId;
+            target.PreventSettingContainerCrmobjectAsParent = from.PreventSettingContainerCrmobjectAsParent;
 
-            target.CrmObjectTypeId = from.CrmObjectTypeId;
-
-            return target;
+            return target.FillBasePropertyDefinitionCreateVM(from);
         }
 
         public static T FillGeneralTypePropertyDefinitionCreateVM<T>(this T target, GeneralTypeExtendedPropertyCreationDto from)
             where T : GeneralTypePropertyDefinitionCreateVM
         {
-            target = target.FillBasePropertyDefinitionCreateVM(from);
-
             target.IsRequired = from.IsRequired;
             target.CalculationTypeIndex = from.CalculationTypeIndex;
 
-            return target;
+            return target.FillBasePropertyDefinitionCreateVM(from);
         }
 
         public static T FillBaseMultiValuePropertyDefinitionVM<T>(this T target, BaseMultiValueExtendedPropertyDto from)
@@ -63,11 +58,9 @@ namespace PayamGostarClient.ApiClient.Extension
         public static T CopyGeneralMultiValuePropertyDefinitionCreateVM<T>(this T target, GeneralMultiValueExtendedPropertyCreationDto from)
             where T : GeneralMultiValuePropertyDefinitionCreateVM
         {
-            target = target.FillBaseMultiValuePropertyDefinitionVM(from);
-
             target.CrmObjectTypeId = from.CrmObjectTypeId;
 
-            return target;
+            return target.FillBaseMultiValuePropertyDefinitionVM(from);
         }
     }
 }
