@@ -173,7 +173,7 @@ namespace PayamGostarClient.ApiClient.Extension
             to.NeedApproval = from.NeedApproval;
             to.NeedNumbering = from.NeedNumbering;
             to.ChangeToStatePendingOnUpdate = from.ChangeToStatePendingOnUpdate;
-            to.CustomerPaymentType = from.CustomerPaymentType;
+            to.CustomerPaymentType = from.CustomerPaymentType.Cast<Gp_PaymentType>();
             to.Signature = from.Signature?.ToVM();
 
             return to.FillBaseCrmObjectTypeCreateRequestVM(from);
