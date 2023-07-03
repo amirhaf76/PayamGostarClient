@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
 using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.BaseStructure.Simple;
+using PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.SimpleExtendedProperies;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using PayamGostarClient.Initializer.Exceptions;
@@ -24,10 +25,37 @@ namespace PayamGostarClient.Initializer.Extensions
             target.ToolTip = new SystemResourceValueDto { ResourceValues = from.ToolTip?.Select(r => r.ToDto()) ?? Array.Empty<ResourceValueDto>() };
             target.CrmObjectTypeId = crmObjectTypeId;
             target.DefaultValue = from.DefaultValue;
-
+            
             return target;
         }
 
+        public static T FillCrmItemExtendedPropertyCreationDto<T>(this T target, BaseExtendedPropertyModel from)
+            where T : CrmItemExtendedPropertyCreationDto
+        {
+            var crmObjectModel = (CrmObjectExtendedPropertyModel)from;
+
+            target.PreventSettingContainerCrmobjectAsParent = crmObjectModel.PreventSettingContainerCrmobjectAsParent;
+            target.ReferencedItemCrmObjectTypeId = crmObjectModel.ReferencedItemCrmObjectTypeId;
+
+            return target.FillBaseExtendedPropertyDto(from);
+        }
+
+        public static T FillGeneralTypeExtendedPropertyCreationDto<T>(this T target, BaseExtendedPropertyModel from)
+            where T : GeneralTypeExtendedPropertyCreationDto
+        {
+            target.IsRequired = ((BaseRequireableExtendedPropertyModel)from).IsRequired;
+
+            return target.FillBaseExtendedPropertyDto(from);
+        }
+
+        public static T FillSecurityItemExtendedPropertyCreationDto<T>(this T target, BaseExtendedPropertyModel from)
+            where T : SecurityItemExtendedPropertyCreationDto
+        {
+            target.IsRequired = ((BaseSequrityExtendedPropertyModel)from).IsRequired;
+
+            return target.FillBaseExtendedPropertyDto(from);
+        }
+        
         public static T FillBaseExtendedPropertyModel<T>(this T target, ExtendedPropertyGetResultDto from)
             where T : BaseExtendedPropertyModel
         {
@@ -36,10 +64,18 @@ namespace PayamGostarClient.Initializer.Extensions
             target.ToolTip = BaseInitServiceExtension.ToResourceValues(from.Tooltip);
             target.CrmObjectTypeId = from.CrmObjectTypeId.ToString();
             target.DefaultValue = from.DefaultValue;
-            target.IsRequired = from.IsRequired;
+            //target.IsRequired = from.IsRequired;
             target.DefaultValue = from.DefaultValue;
 
             return target;
+        }
+
+        public static T FillBaseRequireableExtendedPropertyModel<T>(this T target, ExtendedPropertyGetResultDto from)
+            where T : BaseRequireableExtendedPropertyModel
+        {
+            target.IsRequired = from.IsRequired;
+
+            return target.FillBaseExtendedPropertyModel(from);
         }
 
         public static ResourceValueDto ToDto(this ResourceValue resourceValue)

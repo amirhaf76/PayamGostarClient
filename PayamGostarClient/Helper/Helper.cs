@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -8,44 +8,79 @@ namespace PayamGostarClient.Helper
 {
     public class Helper
     {
-        public static string GetStringsFromProperties(Type type, object obj, int depth = 1)
+        private const int MAX_GET_STRINGS_FROM_PROPERTIES_DEPTH = 2;
+
+        public static string GetStringsFromProperties(Type type, object obj, int depth = MAX_GET_STRINGS_FROM_PROPERTIES_DEPTH)
         {
-            var properties = type.GetProperties();
-   
-            var messages = new List<string>();
-
-            if (obj != null)
+            if (obj == null)
             {
-                foreach (var property in properties)
+                return "null";
+            }
+            else if (IsSimpleTypeOrNullableSimpleType(type))
+            {
+                return $"{obj}";
+            }
+            else if (IsEnumerable(type, out Type genericArgument))
+            {
+                if (depth <= 0)
                 {
-                    var value = property.GetValue(obj);
+                    return $"[{type.FullName}]";
+                }
+                else
+                {
+                    var messages = new List<string>();
 
-                    if (IsSimpleTypeOrNullableSimpleType(property.PropertyType))
+                    foreach (var item in (IEnumerable)obj)
                     {
-                        messages.Add($"{property.Name}: {(value ?? "null")}");
-                    }
-                    else
-                    {
-                        if (depth <= 0)
-                        {
-                            messages.Add($"{property.Name}: <{property.PropertyType.FullName}>");
-                        }
-                        else
-                        {
-                            var subType = GetStringsFromProperties(property.PropertyType, value, depth - 1);
+                        var subType = GetStringsFromProperties(item.GetType(), item, depth - 1);
 
-                            messages.Add($"{property.Name}"+subType);
-                        }
+                        messages.Add(subType);
                     }
+
+                    var message = string.Join(",\n", messages);
+
+                    return WriteAsIEnumerable($"[{genericArgument.FullName}]:", message);
                 }
             }
+            else
+            {
+                if (depth <= 0)
+                {
+                    return $"<{type.FullName}>";
+                }
+                else
+                {
+                    var properties = type.GetProperties();
 
-            var message = obj != null ? string.Join(",\n", messages) : "null";
+                    var messages = new List<string>();
 
-            return WriteAsObject($"<{type.FullName}>:", message);
+                    foreach (var property in properties)
+                    {
+                        try
+                        {
+                            if (!type.GetProperty(property.Name).GetIndexParameters().Any())
+                            {
+                                var value = property.GetValue(obj);
+
+                                var subType = GetStringsFromProperties(property.PropertyType, value, depth - 1);
+
+                                messages.Add($"{property.Name}: " + subType);
+                            }
+                        }
+                        catch 
+                        {
+                            messages.Add($"{property.Name}: <exception during reading>");
+                        }
+                    }
+
+                    var message = string.Join(",\n", messages);
+
+                    return WriteAsObject($"<{type.FullName}>:", message);
+                }
+            }
         }
 
-        public static string GetStringsFromProperties<T>(T obj, int depth = 1) where T : class
+        public static string GetStringsFromProperties<T>(T obj, int depth = MAX_GET_STRINGS_FROM_PROPERTIES_DEPTH) where T : class
         {
             var type = typeof(T);
 
@@ -58,9 +93,9 @@ namespace PayamGostarClient.Helper
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static bool IsSimpleTypeOrNullableSimpleType(Type type)
+        public static bool IsSimpleTypeOrNullableSimpleType(Type type)
         {
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (type.IsGenericType && !type.IsGenericTypeDefinition && type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 var genericArgument = type.GetGenericArguments().FirstOrDefault() ?? typeof(object);
 
@@ -70,13 +105,13 @@ namespace PayamGostarClient.Helper
             return IsSimpleType(type);
         }
 
-        private static bool IsEnumerableOfSimpleType(Type type, out Type genericArgument)
+        public static bool IsEnumerable(Type type, out Type genericArgument)
         {
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+            if (type.IsGenericType && !type.IsGenericTypeDefinition && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
             {
                 genericArgument = type.GetGenericArguments().FirstOrDefault() ?? typeof(object);
 
-                return IsSimpleType(genericArgument);
+                return true;
             }
 
             genericArgument = null;
@@ -89,7 +124,7 @@ namespace PayamGostarClient.Helper
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static bool IsSimpleType(Type type)
+        public static bool IsSimpleType(Type type)
         {
             return
                 type.IsPrimitive ||
@@ -102,10 +137,10 @@ namespace PayamGostarClient.Helper
                 type.IsEnum;
         }
 
-        private static string AddIndentation(string str, int count)
+        public static string AddIndentation(string str, int count)
         {
-            var separators = new char[]{ '\r', '\n' };
-  
+            var separators = new char[] { '\r', '\n' };
+
             var indentation = new string('\t', count);
 
             var strBuilder = new StringBuilder(indentation);
@@ -116,15 +151,15 @@ namespace PayamGostarClient.Helper
 
             strBuilder = strBuilder.Append(string.Join(lineSeparator, lines));
 
-            return strBuilder.ToString(); 
+            return strBuilder.ToString();
         }
 
-        private static string WriteAsObject(string head, string body)
+        public static string WriteAsObject(string head, string body)
         {
             return $"{head}\n{{\n{AddIndentation(body, 1)}\n}}";
         }
 
-        private static string WriteAsIEnumerable(string head, string body)
+        public static string WriteAsIEnumerable(string head, string body)
         {
             return $"{head}\n[\n{AddIndentation(body, 1)}\n]";
         }

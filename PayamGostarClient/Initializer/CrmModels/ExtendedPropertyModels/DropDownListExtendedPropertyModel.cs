@@ -3,7 +3,7 @@ using System;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {
-    public class DropDownListExtendedPropertyModel : BaseExtendedPropertyModel
+    public class DropDownListExtendedPropertyModel : BaseRequireableExtendedPropertyModel
     {
         /// <summary>
         /// Does not work!!! It can not be received by api.

@@ -4,15 +4,15 @@ namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientD
 {
     public class CrmObjectTypeSearchRequestDto
     {
-        public int CrmOjectTypeIndex { get; set; }
+        public int? CrmOjectTypeIndex { get; set; }
 
         public string Code { get; set; }
 
         public string Name { get; set; }
 
-        public int PageSiz { get; set; }
+        public int? PageSiz { get; set; }
 
-        public int PageNumber { get; set; }
+        public int? PageNumber { get; set; }
 
     }
 

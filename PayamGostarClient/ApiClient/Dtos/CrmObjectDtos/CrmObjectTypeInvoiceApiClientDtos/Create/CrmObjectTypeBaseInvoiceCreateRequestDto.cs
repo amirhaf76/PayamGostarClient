@@ -3,7 +3,7 @@ using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.
 
 namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeInvoiceApiClientDtos.Create
 {
-    public abstract class BaseCrmObjectTypeInvoiceCreateRequestDto : BaseCrmObjectTypeCreateRequestDto
+    public abstract class CrmObjectTypeBaseInvoiceCreateRequestDto : BaseCrmObjectTypeCreateRequestDto
     {
         public int NumberingTemplateId { get; set; }
         public int Vat { get; set; }

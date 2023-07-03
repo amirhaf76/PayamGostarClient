@@ -18,21 +18,15 @@ namespace PayamGostarClient.Initializer.Extensions
 
             return new TextExtendedPropertyCreationDto
             {
-                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 IsMultiline = model.IsMultiLine,
 
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static FormExtendedPropertyCreationDto ToFormExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (FormExtendedPropertyModel)baseModel;
-
-            return new FormExtendedPropertyCreationDto
-            {
-                // todo: DoesPreventSettingParent = model.DoesPreventSettingParent,
-            }.FillBaseExtendedPropertyDto(baseModel);
+            return new FormExtendedPropertyCreationDto().FillCrmItemExtendedPropertyCreationDto(baseModel);
         }
 
         public static DropDownListExtendedPropertyCreationDto ToDropDownListExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -41,14 +35,13 @@ namespace PayamGostarClient.Initializer.Extensions
 
             return new DropDownListExtendedPropertyCreationDto
             {
-                IsRequired = model.IsRequired,
                 Values = model.Values?.Select(v => new DropDownListExtendedPropertyValueCreationDto
                 {
                     PropertyDefinitionId = v.PropertyDefinitionId,
                     Value = v.Value
                 }) ?? Array.Empty<DropDownListExtendedPropertyValueCreationDto>(),
 
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static UserExtendedPropertyCreationDto ToUserExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -58,9 +51,7 @@ namespace PayamGostarClient.Initializer.Extensions
             return new UserExtendedPropertyCreationDto
             {
                 //ShowDeactiveMembersOption = model.ShowDeactiveMembersOption,
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillSecurityItemExtendedPropertyCreationDto(baseModel);
         }
 
         public static NumberExtendedPropertyCreationDto ToNumberExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -73,43 +64,25 @@ namespace PayamGostarClient.Initializer.Extensions
                 MaxDigits = model.MaxDigits,
                 MinValue = model.MinValue,
                 MaxValue = model.MaxValue,
-                IsRequired = model.IsRequired,
                 // CalculationTypeIndex = model.CalculationTypeIndex,
                 DecimalDigits = model.DecimalDigits,
 
-            }.FillBaseExtendedPropertyDto(baseModel);
+            }.FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static DepartmentExtendedPropertyCreationDto ToDepartmentExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (DepartmentExtendedPropertyModel)baseModel;
-
-            return new DepartmentExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(baseModel);
+            return new DepartmentExtendedPropertyCreationDto().FillSecurityItemExtendedPropertyCreationDto(baseModel);
         }
 
         public static PositionExtendedPropertyCreationDto ToPositionExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (PositionExtendedPropertyModel)baseModel;
-
-            return new PositionExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(baseModel);
+            return new PositionExtendedPropertyCreationDto().FillSecurityItemExtendedPropertyCreationDto(baseModel);
         }
 
         public static PersianDateExtendedPropertyCreationDto ToPersianDateExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (PersianDateExtendedPropertyModel)baseModel;
-
-            return new PersianDateExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-            }.FillBaseExtendedPropertyDto(baseModel);
+            return new PersianDateExtendedPropertyCreationDto().FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static LabelExtendedPropertyCreationDto ToLabelExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -132,13 +105,7 @@ namespace PayamGostarClient.Initializer.Extensions
 
         public static TimeExtendedPropertyCreationDto ToTimeExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
-            var model = (TimeExtendedPropertyModel)baseModel;
-
-            return new TimeExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(model);
+            return new TimeExtendedPropertyCreationDto().FillGeneralTypeExtendedPropertyCreationDto(baseModel);
         }
 
         public static CurrencyExtendedPropertyCreationDto ToCurrencyExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -177,18 +144,14 @@ namespace PayamGostarClient.Initializer.Extensions
         {
             var model = (AppointmentExtendedPropertyModel)baseModel;
 
-            return new AppointmentExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(model);
+            return new AppointmentExtendedPropertyCreationDto().FillCrmItemExtendedPropertyCreationDto(model);
         }
 
         public static SecurityItemExtendedPropertyCreationDto ToSecurityItemExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
         {
             var model = (SecurityItemExtendedPropertyModel)baseModel;
 
-            return new SecurityItemExtendedPropertyCreationDto
-            {
-                IsRequired = model.IsRequired,
-
-            }.FillBaseExtendedPropertyDto(model);
+            return new SecurityItemExtendedPropertyCreationDto().FillSecurityItemExtendedPropertyCreationDto(model);
         }
 
         public static AutoNumberExtendedPropertyCreationDto ToAutoNumberExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
@@ -204,205 +167,6 @@ namespace PayamGostarClient.Initializer.Extensions
 
             }.FillBaseExtendedPropertyDto(model);
         }
-
-        public static BaseExtendedPropertyModel ToModel(this ExtendedPropertyGetResultDto dto)
-        {
-
-            switch ((Gp_ExtendedPropertyType)dto.PropertyDisplayTypeIndex)
-            {
-                case Gp_ExtendedPropertyType.Text:
-                    return new TextExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Form:
-                    // todo: DoesPreventSettingParent
-                    return new FormExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.DropDownList:
-                    return new DropDownListExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.User:
-                    return new UserExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Number:
-                    return new NumberExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Department:
-                    return new DepartmentExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Position:
-                    return new PositionExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Date:
-                    return new PersianDateExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Label:
-                    return new LabelExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.CrmObjectMultiValue:
-                    return new CrmObjectMultiValueExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Time:
-                    return new TimeExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Currency:
-                    return new CurrencyExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.File:
-                    return new FileExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Checkbox:
-                    return new CheckboxExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.Appointment:
-                    return new AppointmentExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.SecurityItem:
-                    return new SecurityItemExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                case Gp_ExtendedPropertyType.AutoNumber:
-                    return new AutoNumberExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-                default:
-                    throw new NotFoundExtendedPropertyTypeException($"PropertyDisplayType: '{(Gp_ExtendedPropertyType)dto.PropertyDisplayTypeIndex}'.");
-            }
-        }
-
-        public static NumberExtendedPropertyModel ToNumberExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            var extraConfig = (NumericExtendedPropertyExtraConfigDto)dto.ExtraConfig;
-
-            return new NumberExtendedPropertyModel
-            {
-                MinDigits = extraConfig.MinDigits,
-                MaxDigits = extraConfig.MaxDigits,
-                MinValue = extraConfig.MinValue,
-                MaxValue = extraConfig.MaxValue,
-                DecimalDigits = extraConfig.DecimalDigits,
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static TextExtendedPropertyModel ToTextExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new TextExtendedPropertyModel
-            {
-                // todo: Can not get isMultiLine from api.
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static DropDownListExtendedPropertyModel ToDropDownListExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new DropDownListExtendedPropertyModel
-            {
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static UserExtendedPropertyModel ToUserExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new UserExtendedPropertyModel
-            {
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static FormExtendedPropertyModel ToFormExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new FormExtendedPropertyModel
-            {
-                // todo DoesPreventSettingParent = dto.DoesPreventSettingParent,
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static DepartmentExtendedPropertyModel ToDepartmentExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new DepartmentExtendedPropertyModel
-            {
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static PositionExtendedPropertyModel ToPositionExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new PositionExtendedPropertyModel
-            {
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static PersianDateExtendedPropertyModel ToPersianDateExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new PersianDateExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static LabelExtendedPropertyModel ToLabelExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            var extraConfig = (LabelExtendedPropertyExtraConfigDto)dto.ExtraConfig;
-
-            return new LabelExtendedPropertyModel
-            {
-                // ColorId = extraConfig.ColorIndex,
-                IconName = extraConfig.IconName,
-                LabelText = extraConfig.LabelText,
-
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static CrmObjectMultiValueExtendedPropertyModel ToCrmObjectMultiValueExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            var extraConfig = (CrmObjectMultiValueExtendedPropertyExtraConfigDto)dto.ExtraConfig;
-
-            return new CrmObjectMultiValueExtendedPropertyModel
-            {
-                ShowInGridProps = extraConfig.VisibleProperties.Select(g => new PropertyDefinitionIdWrapperModel { Id = g.ToString() }).ToArray(),
-                CrmObjectTypeIndex = extraConfig.CrmObjectType,
-                SubTypeId = extraConfig.SubTypeId?.ToString(),
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-        public static TimeExtendedPropertyModel ToTimeExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new TimeExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-        }
-        public static CurrencyExtendedPropertyModel ToCurrencyExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            var extraConfig = (CurrencyExtendedPropertyExtraConfigDto)dto.ExtraConfig;
-
-            return new CurrencyExtendedPropertyModel
-            {
-                IsBalance = extraConfig.IsBalance,
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-        public static FileExtendedPropertyModel ToFileExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            var extraConfig = (FileExtendedPropertyExtraConfigDto)dto.ExtraConfig;
-
-            return new FileExtendedPropertyModel
-            {
-                Extensions = extraConfig.Extensions?.ToArray(),
-                MaxFileSize = extraConfig.MaxSize,
-                FileSizeTypeIndex = extraConfig.FileSizeType,
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-        public static CheckboxExtendedPropertyModel ToCheckboxExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new CheckboxExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-        }
-        public static AppointmentExtendedPropertyModel ToAppointmentExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            return new AppointmentExtendedPropertyModel().FillBaseExtendedPropertyModel(dto);
-        }
-        public static SecurityItemExtendedPropertyModel ToSecurityItemExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            var extraConfig = (SecurityItemExtendedPropertyExtraConfigDto)dto.ExtraConfig;
-
-            return new SecurityItemExtendedPropertyModel
-            {
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-        public static AutoNumberExtendedPropertyModel ToAutoNumberExtendedPropertyModel(this ExtendedPropertyGetResultDto dto)
-        {
-            var extraConfig = (AutoNumberExtendedPropertyExtraConfigDto)dto.ExtraConfig;
-
-            return new AutoNumberExtendedPropertyModel
-            {
-                Prefix = extraConfig.Prefix,
-                Postfix = extraConfig.Postfix,
-                Seed = extraConfig.Seed,
-                AutoNumLength = extraConfig.Length,
-
-            }.FillBaseExtendedPropertyModel(dto);
-        }
-
-
 
         public static ExtendedPropertyIdWrapperDto ToDto(this PropertyDefinitionIdWrapperModel model)
         {

@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {
-    public class CurrencyExtendedPropertyModel : BaseExtendedPropertyModel
+    public class CurrencyExtendedPropertyModel : BaseRequireableExtendedPropertyModel
     {
         public bool IsBalance { get; internal set; }
 

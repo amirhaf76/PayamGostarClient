@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {
-    public class UserExtendedPropertyModel : BaseExtendedPropertyModel
+    public class UserExtendedPropertyModel : BaseSequrityExtendedPropertyModel
     {
         //public bool ShowDeactiveMembersOption { get; set; }
 

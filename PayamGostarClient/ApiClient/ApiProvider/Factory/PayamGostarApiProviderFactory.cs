@@ -39,6 +39,42 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
             return CreateClient<ICrmObjectTypeInvoiceApiClient, CrmObjectTypeInvoiceApiClient>();
         }
 
+        public ICrmObjectTypeQuoteApiClient CreateCrmObjectTypeQuoteApiClient()
+        {
+            return CreateClient<ICrmObjectTypeQuoteApiClient, CrmObjectTypeQuoteApiClient>();
+        }
+
+        public ICrmObjectTypeReturnPurchaseInvoiceApiClient CreateCrmObjectTypeReturnPurchaseInvoiceApiClient()
+        {
+            return CreateClient<ICrmObjectTypeReturnPurchaseInvoiceApiClient, CrmObjectTypeReturnPurchaseInvoiceApiClient>();
+        }
+
+        public ICrmObjectTypePurchaseInvoiceApiClient CreateCrmObjectTypePurchaseInvoiceApiClient()
+        {
+            return CreateClient<ICrmObjectTypePurchaseInvoiceApiClient, CrmObjectTypePurchaseInvoiceApiClient>();
+        }
+
+        public ICrmObjectTypePurchaseQuoteApiClient CreateCrmObjectTypePurchaseQuoteApiClient()
+        {
+            return CreateClient<ICrmObjectTypePurchaseQuoteApiClient, CrmObjectTypePurchaseQuoteApiClient>();
+        }
+
+        public ICrmObjectTypeReturnSaleInvoiceApiClient CreateCrmObjectTypeReturnSaleInvoiceApiClient()
+        {
+            return CreateClient<ICrmObjectTypeReturnSaleInvoiceApiClient, CrmObjectTypeReturnSaleInvoiceApiClient>();
+        }
+
+        public ICrmObjectTypeReceiptApiClient CreateCrmObjectTypeReceiptApiClient()
+        {
+            return CreateClient<ICrmObjectTypeReceiptApiClient, CrmObjectTypeReceiptApiClient>();
+        }
+
+        public ICrmObjectTypePaymentApiClient CreateCrmObjectTypePaymentApiClient()
+        {
+            return CreateClient<ICrmObjectTypePaymentApiClient, CrmObjectTypePaymentApiClient>();
+        }
+
+
 
         public ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient()
         {

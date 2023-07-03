@@ -230,8 +230,17 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
 
             baseModel.Name = CreateResourceValues(nameFromat);
             baseModel.ToolTip = CreateResourceValues(toolTipFormat);
+            
+            if (baseModel is BaseRequireableExtendedPropertyModel baseRequireableModel)
+            {
+                baseRequireableModel.IsRequired = dto.IsRequired;
+            }
 
-            baseModel.IsRequired = dto.IsRequired;
+            if (baseModel is BaseSequrityExtendedPropertyModel baseSequrityModel)
+            {
+                baseSequrityModel.IsRequired = dto.IsRequired;
+            }
+
             baseModel.DefaultValue = dto.DefaultValue;
             baseModel.PropertyGroup = dto.Group;
 

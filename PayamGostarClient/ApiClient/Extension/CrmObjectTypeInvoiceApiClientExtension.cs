@@ -39,7 +39,7 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static TTo FillBaseCrmObjectTypeInvoiceCreateRequestVM<TFrom, TTo>(this TTo to, TFrom from)
             where TTo : BaseCrmObjectTypeInvoiceCreateRequestVM
-            where TFrom : BaseCrmObjectTypeInvoiceCreateRequestDto
+            where TFrom : CrmObjectTypeBaseInvoiceCreateRequestDto
         {
             to.NumberingTemplateId = from.NumberingTemplateId;
             to.Vat = from.Vat;
@@ -62,7 +62,7 @@ namespace PayamGostarClient.ApiClient.Extension
             to.AdditionalCosts = from.AdditionalCosts;
             to.BasePriceFormula = from.BasePriceFormula;
             to.CanMultipleCloneInvoice = from.CanMultipleCloneInvoice;
-            to.Signature = from.Signature.ToVM();
+            to.Signature = from.Signature?.ToVM();
 
             return to.FillBaseCrmObjectTypeCreateRequestVM(from);
         } 

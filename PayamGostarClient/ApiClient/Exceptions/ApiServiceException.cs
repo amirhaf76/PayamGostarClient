@@ -44,26 +44,26 @@ namespace PayamGostarClient.ApiClient.Exceptions
         {
             var strBuilder = new StringBuilder();
 
-            strBuilder.AppendLine($"Message:\n{{\n\t{message}\n}}");
+            strBuilder.AppendLine(Helper.Helper.WriteAsObject("Message:", message));
 
-            strBuilder.AppendLine($"StatusCode: {statusCode}");
+            strBuilder.AppendLine(Helper.Helper.AddIndentation($"StatusCode: {statusCode}", 1));
 
             if (headers == null)
             {
                 headers = new Dictionary<string, IEnumerable<string>>();
             }
-            strBuilder.AppendLine($"Headers:\n{{");
+
+            var headerStrBuilder = new StringBuilder();
 
             foreach (var header in headers)
             {
-                strBuilder.AppendLine($"\t{header.Key}: {header.Value}");
+                headerStrBuilder.AppendLine($"\t{header.Key}: {string.Join(", ", header.Value)}");
             }
 
-            strBuilder.AppendLine("}");
+            strBuilder.AppendLine(Helper.Helper.WriteAsObject("Header:", $"{headerStrBuilder}"));
+            strBuilder.AppendLine(Helper.Helper.WriteAsObject("Response:", $"{response}"));
+            strBuilder.AppendLine(Helper.Helper.WriteAsObject("ApiError:", $"{apiError}"));
 
-            strBuilder.AppendLine($"Response:\n{{\n\t{response}\n}}");
-
-            strBuilder.AppendLine($"ApiError:\n{{\n\t{apiError}\n}}");
 
             return new ApiServiceException(strBuilder.ToString());
         }

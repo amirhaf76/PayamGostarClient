@@ -25,30 +25,5 @@ namespace PayamGostarClient.Initializer.Extensions
             }.FillBaseCrmObjectTypeCreateRequestDto(model);
 
         }
-
-        internal static CrmFormModel ToModel(this CrmObjectTypeFormGetResultDto crmModel)
-        {
-            var crmForm = new CrmFormModel
-            {
-                Prefix = crmModel.Prefix,
-                Postfix = crmModel.Postfix,
-                StartFrom = crmModel.StartFrom,
-                DigitCount = crmModel.DigitCount,
-
-            }.FillBaseCRMModel(crmModel);
-
-            if (crmModel.IsPublicForm)
-            {
-                crmForm.PublicForm = new CrmFormModel.PublicFormLogicModel
-                {
-                    FlushFormAfterSave = crmModel.FlushFormAfterSave,
-                    IsAutoSubject = crmModel.IsAutoSubject,
-                    SubmitMessage = crmModel.SubmitMessage,
-                    RedirectAfterSuccessUrl = crmModel.RedirectAfterSuccessUrl,
-                };
-            }
-
-            return crmForm;
-        }
     }
 }

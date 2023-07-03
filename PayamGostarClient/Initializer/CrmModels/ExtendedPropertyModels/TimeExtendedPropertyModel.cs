@@ -2,7 +2,7 @@
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {
-    public class TimeExtendedPropertyModel : BaseExtendedPropertyModel
+    public class TimeExtendedPropertyModel : BaseRequireableExtendedPropertyModel
     {
         //public int CalculationTypeIndex { get; set; }
 

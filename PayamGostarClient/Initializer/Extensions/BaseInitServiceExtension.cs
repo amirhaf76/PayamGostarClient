@@ -15,23 +15,6 @@ namespace PayamGostarClient.Initializer.Extensions
     {
         internal static string LanguageCulture { get; set; } = "fa-IR";
 
-
-        internal static TTarget FillBaseCRMModel<TFrom, TTarget>(this TTarget target, TFrom from)
-            where TTarget : BaseCRMModel
-            where TFrom : BaseCrmObjectTypeGetResultDto
-        {
-            target.Code = from.Code;
-            target.Enabled = from.Enabled;
-            target.Name = ToResourceValues(from.Name);
-            target.Description = ToResourceValues(from.Description);
-            target.Properties = from.Properties?.Select(p => p.ToBaseExtendedPropertyModel()).ToList();
-            target.PropertyGroups = from.Groups?.Select(g => g.ToPropertyGroup()).ToList();
-            target.Stages = from.Stages?.Select(p => p.ToStage()).ToList();
-
-
-            return target;
-        }
-
         internal static TTarget FillBaseCrmObjectTypeCreateRequestDto<TFrom, TTarget>(this TTarget target, TFrom from)
             where TTarget : BaseCrmObjectTypeCreateRequestDto
             where TFrom : BaseCRMModel
@@ -65,11 +48,6 @@ namespace PayamGostarClient.Initializer.Extensions
                 Id = group.Id,
                 //ResouceKey = (!string.IsNullOrEmpty(group.NameResourceKey)) ? Guid.Parse(group.NameResourceKey) : Guid.Empty,
             };
-        }
-
-        internal static BaseExtendedPropertyModel ToBaseExtendedPropertyModel(this ExtendedPropertyGetResultDto property)
-        {
-            return property.ToModel();
         }
 
         internal static BaseExtendedPropertyModel FillBaseExtendedPropertyModel<TTarget, TFrom>(this BaseExtendedPropertyModel target, ExtendedPropertyGetResultDto from)

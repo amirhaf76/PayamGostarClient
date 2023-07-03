@@ -14,6 +14,20 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
 
         ICrmObjectTypeInvoiceApiClient CreateCrmObjectTypeInvoiceApiClient();
 
+        ICrmObjectTypeQuoteApiClient CreateCrmObjectTypeQuoteApiClient();
+
+        ICrmObjectTypePurchaseInvoiceApiClient CreateCrmObjectTypePurchaseInvoiceApiClient();
+
+        ICrmObjectTypePurchaseQuoteApiClient CreateCrmObjectTypePurchaseQuoteApiClient();
+
+        ICrmObjectTypeReturnPurchaseInvoiceApiClient CreateCrmObjectTypeReturnPurchaseInvoiceApiClient();
+
+        ICrmObjectTypeReturnSaleInvoiceApiClient CreateCrmObjectTypeReturnSaleInvoiceApiClient();
+
+        ICrmObjectTypeReceiptApiClient CreateCrmObjectTypeReceiptApiClient();
+
+        ICrmObjectTypePaymentApiClient CreateCrmObjectTypePaymentApiClient();
+
 
         IPropertyDefinitionApiClient CreatePropertyDefinitionApiClient();
 
