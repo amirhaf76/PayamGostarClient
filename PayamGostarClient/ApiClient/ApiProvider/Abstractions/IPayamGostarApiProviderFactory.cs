@@ -59,5 +59,6 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
         IAutoNumberPropertyDefinitionApiClient CreateAutoNumberPropertyDefinitionApiClient();
 
 
+        INumberingTemplateApiClient CreateNumberingTemplateApiClient();
     }
 }
