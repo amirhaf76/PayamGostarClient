@@ -2,11 +2,9 @@
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
-    public class CrmReceiptModel : BaseCRMModel
+    public class CrmReceiptModel : CrmBasePaymentModel
     {
         public override Gp_CrmObjectType Type => Gp_CrmObjectType.Receipt;
     }
-
-
 
 }

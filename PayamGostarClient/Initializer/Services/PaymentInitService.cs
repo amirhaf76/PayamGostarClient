@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClient.Initializer.Extensions;
 using System;
 using System.Threading.Tasks;
 
@@ -12,9 +13,15 @@ namespace PayamGostarClient.Initializer.Services
             throw new NotImplementedException("PaymentInitService is not Implemented");
         }
 
-        protected override Task<Guid> CreateTypeAsync()
+        protected override async Task<Guid> CreateTypeAsync()
         {
-            throw new NotImplementedException();
+            var service = CrmObjectTypeApi.PaymentApi;
+
+            var request = IntendedCrmObject.ToDto();
+
+            var creationTicketResult = await service.CreateAsync(request);
+
+            return creationTicketResult.Result.Id;
         }
     }
 
