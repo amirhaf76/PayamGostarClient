@@ -150,7 +150,7 @@ namespace PayamGostarClient.Initializer.Services
 
             await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties, currentCrmObject.Groups);
 
-            await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
+            // await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
         }
 
         public void CheckCrmObjectTypeBelongs(CrmObjectTypeSearchResultDto currentCrmObject)
@@ -178,7 +178,7 @@ namespace PayamGostarClient.Initializer.Services
 
             await CreateExtendedPropertiesAsync(id);
 
-            await CreateStagesAsync(id);
+            // await CreateStagesAsync(id);
         }
 
 
@@ -266,8 +266,12 @@ namespace PayamGostarClient.Initializer.Services
 
             stages.Sort(StagePriorityComparer.GetInstance());
 
+            var index = 1;
+
             foreach (var stage in stages)
             {
+                stage.Index = index++;
+
                 await CreateStageAsync(id, stage);
             }
         }
@@ -281,8 +285,12 @@ namespace PayamGostarClient.Initializer.Services
 
             stages.Sort(StagePriorityComparer.GetInstance());
 
+            var maxStage = stages.Max(x => x.Index) + 1;
+
             foreach (var stage in stages)
             {
+                stage.Index = maxStage++;
+
                 await CreateStageAsync(id, stage);
             }
         }
