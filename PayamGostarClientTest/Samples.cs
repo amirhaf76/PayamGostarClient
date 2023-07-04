@@ -1,14 +1,9 @@
-﻿using PayamGostarClient.CrmObjectModelInitServiceModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.CrmObjectTypeModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.CrmObjectModels.ExtendedPropertyModels;
-using PayamGostarClient.CrmObjectModelInitServiceModels.ServiceModels;
-using System;
+﻿using PayamGostarClient.Initializer;
+using PayamGostarClient.Initializer.CrmModels;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace PayamGostarClientTest
 {
@@ -17,9 +12,9 @@ namespace PayamGostarClientTest
         public async Task InitAsync_FormModel_SimpleFormWithGroupAndTextProperty()
         {
             // Set up config.
-            var initServiceConfig = new CrmObjectModelInitServiceConfig
+            var initServiceConfig = new CrmObjectModelInitializerConfig
             {
-                ClientService = new PayamGostarClient.ApiServices.PayamGostarClientServiceConfig
+                ClientService = new PayamGostarClient.ApiClient.PayamGostarApiClientConfig
                 {
                     Url = "<Url>",
                     LanguageCulture = "<LanguageCulture>",
@@ -27,7 +22,7 @@ namespace PayamGostarClientTest
                 }
             };
 
-            var crmModelService = new CrmObjectModelInitService(initServiceConfig);
+            var crmModelService = new CrmObjectModelInitializer(initServiceConfig);
 
             // Define a model.
             var model = new CrmFormModel
