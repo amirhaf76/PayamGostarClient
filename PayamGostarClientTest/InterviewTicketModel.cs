@@ -269,7 +269,6 @@ namespace PayamGostarClientTest
                     },
                     PropertyGroup = model.PropertyGroups[0],
                     UserKey = "ResumeFile", // mj
-                    IsRequired = false,
                     DefaultValue = string.Empty,
                 },
                 new DropDownListExtendedPropertyModel()
