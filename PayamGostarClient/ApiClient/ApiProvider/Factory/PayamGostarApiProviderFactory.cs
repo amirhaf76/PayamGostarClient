@@ -184,6 +184,11 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
         }
 
 
+        public INumberingTemplateApiClient CreateNumberingTemplateApiClient()
+        {
+            return CreateClient<INumberingTemplateApiClient, NumberingTemplateApiClient>();
+        }
+
 
         private TAbstractClient CreateClient<TAbstractClient, TClient>()
             where TClient : PayamGostarBaseClient, TAbstractClient

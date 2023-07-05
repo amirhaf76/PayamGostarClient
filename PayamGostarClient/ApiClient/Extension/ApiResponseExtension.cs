@@ -49,7 +49,7 @@ namespace PayamGostarClient.ApiClient.Extension
                 }
                 catch (ApiException e)
                 {
-                    throw CreateApiExceptionDtoFromApiException(e);
+                    throw CreateApiServiceException(e);
                 }
             }
 
@@ -68,14 +68,14 @@ namespace PayamGostarClient.ApiClient.Extension
                 }
                 catch (ApiException e)
                 {
-                    throw CreateApiExceptionDtoFromApiException(e);
+                    throw CreateApiServiceException(e);
                 }
             }
 
             return DoElseThrowApiServiceException();
         }
 
-        public static ApiServiceException CreateApiExceptionDtoFromApiException(ApiException e)
+        public static ApiServiceException CreateApiServiceException(this ApiException e)
         {
             var headers = new Dictionary<string, IEnumerable<string>>();
 
@@ -92,7 +92,7 @@ namespace PayamGostarClient.ApiClient.Extension
                 apiError: JsonConvert.DeserializeObject<ApiErrorDto>(e.Response));
         }
 
-        public static ApiServiceException CreateApiExceptionDtoFromApiException(string message, ApiException e)
+        public static ApiServiceException CreateApiServiceException(this ApiException e, string message)
         {
             var headers = new Dictionary<string, IEnumerable<string>>();
 
