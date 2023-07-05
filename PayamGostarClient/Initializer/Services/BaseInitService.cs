@@ -61,6 +61,30 @@ namespace PayamGostarClient.Initializer.Services
             }
         }
 
+        public async Task<bool> CheckExistenceSchemaAsync()
+        {
+            ValidateInitialValidationModel();
+
+            var searchedCrmObject = await SearchCrmObjectAsync();
+
+            if (searchedCrmObject == null)
+            {
+                return false;
+            }
+            else
+            {
+                try
+                {
+                    CheckCrmObjectTypeBelongs(searchedCrmObject);
+
+                    return true;
+                }
+                catch (MisMatchException)
+                {
+                    return false;
+                }
+            }
+        }
 
         private void ValidateInitialValidationModel()
         {
@@ -164,12 +188,12 @@ namespace PayamGostarClient.Initializer.Services
                 throw new MisMatchException("There are some new properties.");
             }
 
-            var newStages = CheckStagesAndGetNewStages(currentCrmObject.Stages?.Select(x => x.ToStage()));
+            //var newStages = CheckStagesAndGetNewStages(currentCrmObject.Stages?.Select(x => x.ToStage()));
 
-            if (newStages.Any())
-            {
-                throw new MisMatchException("There are some new stages.");
-            }
+            //if (newStages.Any())
+            //{
+            //    throw new MisMatchException("There are some new stages.");
+            //}
         }
 
         private async Task CreateCrmObjectTypeBelongs(Guid id)
@@ -356,18 +380,29 @@ namespace PayamGostarClient.Initializer.Services
         private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> properties, IEnumerable<PropertyGroupGetResultDto> groups)
         {
             var createdPropertiesId = new List<Guid>();
+            var groupContainer = groups.ToList();
 
             foreach (var property in properties)
             {
                 property.CrmObjectTypeId = id.ToString();
 
                 //fetch group by name
-                var group = groups.Where(g => property.PropertyGroup.Name.Any(xx => xx.Value == g.Name)).FirstOrDefault();
+                var group = groupContainer.Where(g => property.PropertyGroup.Name.Any(xx => xx.Value == g.Name)).FirstOrDefault();
+
                 if (group == null)
                 {
                     // create group if not exist
                     var gId = await CreateGroupPropetiesAsync(id, property.PropertyGroup);
+
                     property.PropertyGroup.Id = gId;
+
+                    groupContainer.Add(new PropertyGroupGetResultDto
+                    {
+                        Id = property.PropertyGroup.Id,
+                        CountOfColumns = property.PropertyGroup.CountOfColumns,
+                        ExpandForView = property.PropertyGroup.Expanded,
+                        Name = property.PropertyGroup.Name?.FirstOrDefault()?.Value,
+                    });
                 }
                 else
                 {
@@ -478,29 +513,6 @@ namespace PayamGostarClient.Initializer.Services
             ModelChecker.CheckFieldMatching(first, second, errorMessage);
         }
 
-        public async Task<bool> CheckExistenceSchemaAsync()
-        {
-            ValidateInitialValidationModel();
-
-            var searchedCrmObject = await SearchCrmObjectAsync();
-
-            if (searchedCrmObject == null)
-            {
-                return false;
-            }
-            else
-            {
-                try
-                {
-                    CheckCrmObjectTypeBelongs(searchedCrmObject);
-
-                    return true;
-                }
-                catch (MisMatchException)
-                {
-                    return false;
-                }
-            }
-        }
+        
     }
 }
