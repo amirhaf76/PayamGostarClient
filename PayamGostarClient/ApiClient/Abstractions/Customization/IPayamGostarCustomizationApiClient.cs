@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
 using PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty;
+using PayamGostarClient.ApiClient.Abstractions.Customization.NumberTemplate;
 using PayamGostarClient.ApiClient.Abstractions.Customization.PropertyGroup;
 
 namespace PayamGostarClient.ApiClient.Abstractions.Customization
@@ -12,6 +13,8 @@ namespace PayamGostarClient.ApiClient.Abstractions.Customization
         IPayamGostarPropertyGroupApiClient PropertyGroupApi { get; }
 
         IPayamGostarCrmObjectTypeApiClient CrmObjectTypeApi { get; }
+
+        IPayamGostarNumberingTemplateApiClient NumberingTemplateApi { get; }
     }
 
 

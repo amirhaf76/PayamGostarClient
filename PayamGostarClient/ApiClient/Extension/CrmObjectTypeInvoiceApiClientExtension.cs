@@ -37,34 +37,34 @@ namespace PayamGostarClient.ApiClient.Extension
             };
         }
 
-        internal static TTo FillBaseCrmObjectTypeInvoiceCreateRequestVM<TFrom, TTo>(this TTo to, TFrom from)
+        internal static TTo FillBaseCrmObjectTypeInvoiceCreateRequestVM<TFrom, TTo>(this TTo target, TFrom from)
             where TTo : BaseCrmObjectTypeInvoiceCreateRequestVM
             where TFrom : CrmObjectTypeBaseInvoiceCreateRequestDto
         {
-            to.NumberingTemplateId = from.NumberingTemplateId;
-            to.Vat = from.Vat;
-            to.Toll = from.Toll;
-            to.NeedApproval = from.NeedApproval;
-            to.NeedNumbering = from.NeedNumbering;
-            to.ChangeToStatePendingOnUpdate = from.ChangeToStatePendingOnUpdate;
-            to.DisableDecimalCalculation = from.DisableDecimalCalculation;
-            to.CanChangeTotalDiscount = from.CanChangeTotalDiscount;
-            to.CanChangeTotalTax = from.CanChangeTotalTax;
-            to.CanChangeTotalToll = from.CanChangeTotalToll;
-            to.CountDecimalDigits = from.CountDecimalDigits;
-            to.AllowDuplicateProductIdsInDetails = from.AllowDuplicateProductIdsInDetails;
-            to.HasAdditionalCosts = from.HasAdditionalCosts;
-            to.AdditionalCostsPlacementTypeIndex = from.AdditionalCostsPlacementTypeIndex;
-            to.AdditionalCostsTitle = from.AdditionalCostsTitle;
-            to.AdditionalCostIncludedTax = from.AdditionalCostIncludedTax;
-            to.AdditionalCostIncludedToll = from.AdditionalCostIncludedToll;
-            to.AdditionalCostsTypeIndex = from.AdditionalCostsTypeIndex;
-            to.AdditionalCosts = from.AdditionalCosts;
-            to.BasePriceFormula = from.BasePriceFormula;
-            to.CanMultipleCloneInvoice = from.CanMultipleCloneInvoice;
-            to.Signature = from.Signature?.ToVM();
+            target.NumberingTemplateId = from.NumberingTemplateId;
+            target.Vat = from.Vat;
+            target.Toll = from.Toll;
+            target.NeedApproval = from.NeedApproval;
+            target.NeedNumbering = from.NeedNumbering;
+            target.ChangeToStatePendingOnUpdate = from.ChangeToStatePendingOnUpdate;
+            target.DisableDecimalCalculation = from.DisableDecimalCalculation;
+            target.CanChangeTotalDiscount = from.CanChangeTotalDiscount;
+            target.CanChangeTotalTax = from.CanChangeTotalTax;
+            target.CanChangeTotalToll = from.CanChangeTotalToll;
+            target.CountDecimalDigits = from.CountDecimalDigits;
+            target.AllowDuplicateProductIdsInDetails = from.AllowDuplicateProductIdsInDetails;
+            target.HasAdditionalCosts = from.HasAdditionalCosts;
+            target.AdditionalCostsPlacementTypeIndex = from.AdditionalCostsPlacementTypeIndex;
+            target.AdditionalCostsTitle = from.AdditionalCostsTitle;
+            target.AdditionalCostIncludedTax = from.AdditionalCostIncludedTax;
+            target.AdditionalCostIncludedToll = from.AdditionalCostIncludedToll;
+            target.AdditionalCostsTypeIndex = from.AdditionalCostsTypeIndex;
+            target.AdditionalCosts = from.AdditionalCosts;
+            target.BasePriceFormula = from.BasePriceFormula;
+            target.CanMultipleCloneInvoice = from.CanMultipleCloneInvoice;
+            target.Signature = from.Signature?.ToVM();
 
-            return to.FillBaseCrmObjectTypeCreateRequestVM(from);
+            return target.FillBaseCrmObjectTypeCreateRequestVM(from);
         } 
     }
 }

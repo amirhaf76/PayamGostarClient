@@ -40,7 +40,7 @@ namespace PayamGostarClient.ApiClient.Models.Customization.CrmObjectType
         {
             try
             {
-                var ticketGettingResult = await _crmObjectTypeTicketApiClient.PostApiV2CrmobjecttypeTicketGetAsync(request.ConvertToCrmObjectTypeGetRequestVM());
+                var ticketGettingResult = await _crmObjectTypeTicketApiClient.PostApiV2CrmobjecttypeTicketGetAsync(request.ToVM());
 
                 var ticketMatrixResult = await _crmObjectTypeTicketApiClient.PostApiV2CrmobjecttypeTicketGetprioritymatrixAsync(new CrmObjectTypeTicketPriorityMatrixGetRequestVM
                 {
