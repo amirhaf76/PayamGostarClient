@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Create;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Get;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeStageApiClientDtos;
@@ -19,14 +20,36 @@ namespace PayamGostarClient.Initializer.Extensions
             where TTarget : BaseCrmObjectTypeCreateRequestDto
             where TFrom : BaseCRMModel
         {
-            target.Name = new SystemResourceValueDto();
-            target.Description = new SystemResourceValueDto();
+            target.Name = new SystemResourceValueDto
+            {
+                ResourceValues = from.Name?.Select(n => n.ToDto())
+            };
 
-            target.Name.ResourceValues = from.Name.Select(n => n.ToDto());
-            target.Description.ResourceValues = from.Description.Select(d => d.ToDto());
+            target.Description = new SystemResourceValueDto
+            {
+                ResourceValues = from.Description?.Select(d => d.ToDto())
+            };
+
             target.Code = from.Code;
             target.Enabled = from.Enabled ?? true;
             target.PreviewTypeIndex = (int)from.PreviewTypeIndex;
+
+            target.AssignCustomerNumberOnApprove = from.AssignCustomerNumberOnApprove;
+            target.CreateByCustomer = from.CreateByCustomer;
+            target.CustomerCanViewExtendedProps = from.CustomerCanViewExtendedProps;
+            target.IsUnderProcess = from.IsUnderProcess;
+            target.LimitAccessToProcessUsers = from.LimitAccessToProcessUsers;
+            target.ShowToCustomer = from.ShowToCustomer;
+            target.ViewOnlyToOwner = from.ViewOnlyToOwner;
+
+            target.SortType = from.SortType;
+            target.AllowedDeleteDuration = from.AllowedDeleteDuration;
+            target.AllowedEditDuration = from.AllowedEditDuration;
+
+            target.WebhookAddress = from.WebhookAddress;
+            target.Content = new CrmObjectTypeContentFilePathDto { FilePath = from.ContentFilePath };
+
+            target.EventTypes = from.EventTypes;
 
             return target;
         }

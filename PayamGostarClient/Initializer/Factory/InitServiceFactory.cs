@@ -30,6 +30,8 @@ namespace PayamGostarClient.Initializer.Factory
                     return new TicketInitService(model as CrmTicketModel, _payamGostarApiClient);
                 case Gp_CrmObjectType.Identity:
                     return new IdentityService(model as CrmIdentityModel, _payamGostarApiClient);
+                case Gp_CrmObjectType.Invoice:
+                    return new InvoiceInitService(model as CrmInvoiceModel, _payamGostarApiClient);
                 default:
                     throw new InvalidGpCrmObjectTypeException($"CrmModel with '{model.Code}' code has unsupported model type! ModelType: '{model.Type}'.");
             }
