@@ -488,7 +488,6 @@ namespace PayamGostarClientTest
                     },
                     PropertyGroup = newModel.PropertyGroups[2],
                     UserKey = "EmploymentRequestAds",
-                    IsRequired = false,
                     DefaultValue = string.Empty,
                     CrmObjectTypeIndex = Gp_CrmObjectType.Form,
                 },

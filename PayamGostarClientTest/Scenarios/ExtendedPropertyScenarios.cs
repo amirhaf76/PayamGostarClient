@@ -203,5 +203,70 @@ namespace PayamGostarClientTest.Scenarios
                 }
             });
         }
+
+
+        [Theory]
+        [MemberData(nameof(ExtendedPropertyDataTest.ASimpleCrmFormWithGroupAndASimpleFormExtendedProperty), MemberType = typeof(ExtendedPropertyDataTest))]
+        public async Task ExtendedProperty_FromExtendedPropertyInSimpleForm_MustBeCreatedSuccessfuly(CrmFormModel model)
+        {
+            // Arrangement.
+            var crmModelInitializer = CreateCrmObjectModelInitializer();
+
+            var service = CreatePayamGostarApiClient().CustomizationApi.CrmObjectTypeApi;
+
+            TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
+            TestOutput.WriteLine($"Code: {model.Code}");
+
+            // Assertion Before.
+            model.Properties.FirstOrDefault().Should().BeAssignableTo<FormExtendedPropertyModel>();
+
+            var searchedObjectBefore = await SearchModel(service, model);
+
+            searchedObjectBefore.Result.Should().HaveCount(0);
+
+            // Action.
+            await crmModelInitializer.InitAsync(model);
+
+            // Assertion After.
+            var searchedObjectAfter = await SearchModel(service, model);
+
+            var theExtendedProperty = (FormExtendedPropertyModel)model.Properties.FirstOrDefault();
+
+            searchedObjectAfter.Result.Should().HaveCount(1);
+            searchedObjectAfter.Result.FirstOrDefault()?.Id.Should().NotBeEmpty();
+            searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
+            {
+                Name = model.Name.FirstOrDefault()?.Value,
+                Code = model.Code,
+                CrmOjectTypeIndex = (int)model.Type,
+                Enabled = true,
+                Groups = new[]
+                {
+                    new
+                    {
+                        Name = model.PropertyGroups.FirstOrDefault()?.Name.FirstOrDefault()?.Value,
+                        CountOfColumns = 2,
+                        ExpandForView = false,
+                    }
+                },
+                Properties = new[]
+                {
+                    new
+                    {
+                        PropertyDisplayTypeIndex = (int)theExtendedProperty.Type,
+                        UserKey = theExtendedProperty.UserKey,
+                        DefaultValue = theExtendedProperty.DefaultValue,
+                        Tooltip = theExtendedProperty.ToolTip.FirstOrDefault().Value,
+                        Name = theExtendedProperty.Name.FirstOrDefault()?.Value,
+                        ExtraConfig = new
+                        {
+                            CrmObjectTypeId = theExtendedProperty.ReferencedItemCrmObjectTypeId,
+                            PreventSettingContainerCrmobjectAsParent = theExtendedProperty.PreventSettingContainerCrmobjectAsParent,
+
+                        }
+                    }
+                }
+            });
+        }
     }
 }
