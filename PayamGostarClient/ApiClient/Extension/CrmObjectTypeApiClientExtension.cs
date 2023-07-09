@@ -66,6 +66,8 @@ namespace PayamGostarClient.ApiClient.Extension
                 Groups = groupDictionary.Values.AsEnumerable(),
                 Stages = viewModel.Stages.Select(stage => new StageGetResultDto
                 {
+                    Id = stage.Id,
+                    CrmObjectTypeId = stage.CrmObjectTypeId,
                     Name = stage.Name,
                     NameResourceKey = stage.NameResourceKey,
                     Key = stage.Key,

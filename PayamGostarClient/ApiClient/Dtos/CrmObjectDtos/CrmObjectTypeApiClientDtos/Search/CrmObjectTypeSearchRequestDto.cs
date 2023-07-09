@@ -14,6 +14,8 @@ namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientD
 
         public int? PageNumber { get; set; }
 
+        public bool? IsAbstract { get; set; }
+
     }
 
 

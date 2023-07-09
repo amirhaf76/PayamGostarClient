@@ -1,4 +1,5 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeStageApiClientDtos;
+﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeStageApiClientDtos;
 using PayamGostarClient.Helper.Net;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType
     {
         Task<ApiResponse<CrmObjectTypeStageCreationResultDto>> CreateAsync(CrmObjectTypeStageCreationRequestDto request);
 
-        Task<ApiResponse<IEnumerable<CrmObjectTypeStageGetResultDto>>> GetStagesAsync(Guid crmObjectId);
+        Task<ApiResponse<IEnumerable<StageGetResultDto>>> GetStagesAsync(Guid crmObjectId);
     }
 }

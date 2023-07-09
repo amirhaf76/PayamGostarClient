@@ -51,6 +51,8 @@ namespace PayamGostarClient.ApiClient.Extension
             {
                 NameResourceKey = stage.NameResourceKey,
                 Name = stage.Name,
+                Id = stage.Id,
+                CrmObjectTypeId = stage.CrmObjectTypeId,
                 IsActive = stage.IsActive,
                 IsDoneStage = stage.IsDoneStage,
                 Key = stage.Key,
