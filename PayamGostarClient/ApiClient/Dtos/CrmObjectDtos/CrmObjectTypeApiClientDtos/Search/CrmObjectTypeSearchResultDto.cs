@@ -14,7 +14,7 @@ namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientD
         public int? NumberingTemplateId { get; set; }
         public bool IsAbstract { get; set; }
         public bool IsUnderProcess { get; set; }
-        public bool IsActive { get; set; }
+        public bool Enabled { get; set; }
 
         public IEnumerable<PropertyGroupGetResultDto> Groups { get; set; }
 

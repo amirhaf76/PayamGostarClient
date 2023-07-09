@@ -63,7 +63,6 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             {
                 Name = CreateResourceValues(nameFromat),
                 Enabled = enable,
-                Index = index,
                 IsDoneStage = isDoneStage,
                 Key = keyFormat,
             };
