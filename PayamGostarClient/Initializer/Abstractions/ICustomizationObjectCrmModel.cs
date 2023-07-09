@@ -4,7 +4,8 @@ using System.Text;
 
 namespace PayamGostarClient.Initializer.Abstractions
 {
-    public interface ICustomizationObjectCrmModel
+    public interface ICustomizationCrmModel
     {
+        CustomizationCrmType CustomizationCrmType { get; }
     }
 }

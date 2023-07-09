@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
-    public abstract class BaseCRMModel : ICustomizationObjectCrmModel
+    public abstract class BaseCRMModel : ICustomizationCrmModel
     {
         public BaseCRMModel()
         {
@@ -55,5 +55,8 @@ namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
         public IEnumerable<WebhookEventType> EventTypes { get; set; }
 
         public string ContentFilePath { get; set; }
+
+
+        public CustomizationCrmType CustomizationCrmType => CustomizationCrmType.CrmObjectType;
     }
 }

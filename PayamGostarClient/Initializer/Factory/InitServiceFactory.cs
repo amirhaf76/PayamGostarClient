@@ -2,6 +2,7 @@
 using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClient.Initializer.Extensions;
@@ -20,21 +21,41 @@ namespace PayamGostarClient.Initializer.Factory
             BaseInitServiceExtension.LanguageCulture = config.ClientService.LanguageCulture;
         }
 
-        public IInitService Create(BaseCRMModel model)
+        private IInitService Create(BaseCRMModel model)
         {
             switch (model.Type)
             {
                 case Gp_CrmObjectType.Form:
-                    return new FormInitService(model as CrmFormModel, _payamGostarApiClient);
+                    return new FormInitService((CrmFormModel)model, _payamGostarApiClient);
                 case Gp_CrmObjectType.Ticket:
-                    return new TicketInitService(model as CrmTicketModel, _payamGostarApiClient);
+                    return new TicketInitService((CrmTicketModel)model, _payamGostarApiClient);
                 case Gp_CrmObjectType.Identity:
-                    return new IdentityService(model as CrmIdentityModel, _payamGostarApiClient);
+                    return new IdentityService((CrmIdentityModel)model, _payamGostarApiClient);
                 case Gp_CrmObjectType.Invoice:
-                    return new InvoiceInitService(model as CrmInvoiceModel, _payamGostarApiClient);
+                    return new InvoiceInitService((CrmInvoiceModel)model, _payamGostarApiClient);
                 default:
                     throw new InvalidGpCrmObjectTypeException($"CrmModel with '{model.Code}' code has unsupported model type! ModelType: '{model.Type}'.");
             }
+        }
+
+        public IInitService Create(ICustomizationCrmModel model)
+        {
+            switch (model.CustomizationCrmType)
+            {
+                case CustomizationCrmType.CrmObjectType:
+                    return Create((BaseCRMModel)model);
+
+                case CustomizationCrmType.NumberingTemplate:
+                    return new NumberingTemplateInitService((NumberingTemplateModel)model, _payamGostarApiClient);
+
+                case CustomizationCrmType.GeneralCrmObjectType:
+                    return new CrmGeneralModelInitService((CrmGeneralModel)model, _payamGostarApiClient);
+
+                default:
+                    break;
+            }
+
+            return null;
         }
 
     }

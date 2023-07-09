@@ -73,33 +73,6 @@ namespace PayamGostarClient.Initializer.Extensions
             };
         }
 
-        internal static BaseExtendedPropertyModel FillBaseExtendedPropertyModel<TTarget, TFrom>(this BaseExtendedPropertyModel target, ExtendedPropertyGetResultDto from)
-            where TTarget : BaseExtendedPropertyModel
-            where TFrom : ExtendedPropertyGetResultDto
-        {
-            target.UserKey = from.UserKey;
-            target.Name = ToResourceValues(from.Name);
-            target.ToolTip = ToResourceValues(from.Tooltip);
-            target.PropertyGroup = from.Group.ToPropertyGroup();
-
-            return target;
-        }
-
-        internal static Stage ToStage(this StageGetResultDto stage)
-        {
-            return new Stage
-            {
-                Id = stage.Id,
-                CrmObjectTypeId = stage.CrmObjectTypeId,
-                // todo: resource key
-                Name = ToResourceValues(stage.Name),
-                Enabled = stage.IsActive,
-                IsDoneStage = stage.IsDoneStage,
-                Key = stage.Key,
-                Index = stage.Index,
-            };
-        }
-
         internal static CrmObjectPropertyGroupCreationRequestDto CreatePropertyGroupCreationRequest(this PropertyGroup group, Guid crmObjectTypeId)
         {
             return new CrmObjectPropertyGroupCreationRequestDto
@@ -141,6 +114,7 @@ namespace PayamGostarClient.Initializer.Extensions
                 Name = ToResourceValues(dto.Name),
                 Key = dto.Key,
                 IsDoneStage = dto.IsDoneStage,
+                IsDeleted = dto.IsDeleted,
                 Enabled = dto.IsActive,
                 Index = dto.Index,
             };

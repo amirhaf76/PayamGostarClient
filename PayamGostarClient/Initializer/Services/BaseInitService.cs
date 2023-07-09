@@ -7,6 +7,7 @@ using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions;
+using PayamGostarClient.Initializer.Comparers;
 using PayamGostarClient.Initializer.CreationStrategies;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
@@ -28,15 +29,13 @@ namespace PayamGostarClient.Initializer.Services
         private readonly IExtendedPropertyCreationStrategy _propertyCreationStrategy;
         private readonly IGroupCreationStrategy _groupCreationStrategy;
         private readonly IStageCreationStrategy _stageCreationStrategy;
-
+        private readonly IMatchingValidator _matchingValidator;
 
         private IPayamGostarCustomizationApiClient CustomizationApi { get; }
 
         protected IPayamGostarCrmObjectTypeApiClient CrmObjectTypeApi { get; }
         protected IPayamGostarExtendedPropertyApiClient ExtendedPropertyApi { get; }
         protected IPayamGostarPropertyGroupApiClient PropertyGroupApi { get; }
-
-
 
 
         protected BaseInitService(T intendedCrmObject, IPayamGostarApiClient payamGostarApiClient)
@@ -52,6 +51,8 @@ namespace PayamGostarClient.Initializer.Services
             _groupCreationStrategy = new GroupCreationStrategy(PropertyGroupApi);
             _propertyCreationStrategy = new ExtendedPropertyCreationStrategy(ExtendedPropertyApi, _groupCreationStrategy);
             _stageCreationStrategy = new StageCreationStrategy(CrmObjectTypeApi.StageApi);
+
+            _matchingValidator = new MatchingValidator();
         }
 
 
@@ -95,6 +96,7 @@ namespace PayamGostarClient.Initializer.Services
                 }
             }
         }
+
 
         private void ValidateInitialValidationModel()
         {
@@ -218,31 +220,11 @@ namespace PayamGostarClient.Initializer.Services
 
         private async Task CheckStagesAndUpdateUnexistedStagesAsync(Guid id, IEnumerable<Stage> currentStages)
         {
-            List<Stage> newStages = CheckStagesAndGetNewStages(currentStages);
+            List<Stage> newStages = CheckStagesAndGetNewStages(currentStages.Where(s => !s.IsDeleted));
 
             await UpdateStagesAsync(id, newStages, currentStages.Max(x => x.Index) + 1);
         }
 
-        private List<Stage> CheckStagesAndGetNewStages(IEnumerable<Stage> currentStages)
-        {
-            var detectedPair = IntendedCrmObject.Stages.Join(
-                            currentStages,
-                            intendedStage => intendedStage.Key,
-                            currentStage => currentStage.Key,
-                            (intendedStage, currentStage) => Tuple.Create(intendedStage, currentStage)
-                            );
-
-            foreach (var pair in detectedPair)
-            {
-                CheckFieldMatching(pair.Item1.IsDoneStage, pair.Item2.IsDoneStage, "CheckingStage:IsDoneStage -> ");
-            }
-
-            var newStages = IntendedCrmObject.Stages
-                .Except(detectedPair.Select(d => d.Item1))
-                .ToList();
-
-            return newStages;
-        }
 
 
         private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<ExtendedPropertyGetResultDto> currentExtendedProperties, IEnumerable<PropertyGroupGetResultDto> groups)
@@ -320,39 +302,44 @@ namespace PayamGostarClient.Initializer.Services
         }
 
 
-        private void CheckBaseCrmObjectMatching(CrmObjectTypeSearchResultDto currentCrmObj)
+        private void CheckBaseCrmObjectMatching(CrmObjectTypeSearchResultDto existedCrmObj)
         {
-            CheckFieldMatching(IntendedCrmObject.Code, currentCrmObj.Code, "BaseCrmObj:Code -> ");
-            CheckFieldMatching(IntendedCrmObject.Type, (Gp_CrmObjectType)currentCrmObj.CrmOjectTypeIndex, "BaseCrmObj:Type -> ");
+            try
+            {
+                _matchingValidator.CheckMatchingBaseCrmObject(IntendedCrmObject, existedCrmObj);
+            }
+            catch (MisMatchException e)
+            {
+                throw new MisMatchException($"Mismatch in crm model with '{IntendedCrmObject.Code}' code!", e);
+            }
+        }
+
+        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<ExtendedPropertyGetResultDto> existedProperties)
+        {
+            try
+            {
+                return _matchingValidator.CheckMatchingAndGetNewExtendedProperties(IntendedCrmObject.Properties, existedProperties);
+            }
+            catch (MisMatchException e)
+            {
+                throw new MisMatchException($"Mismatch in crm model with '{IntendedCrmObject.Code}' code!", e);
+            }
+        }
+
+        private List<Stage> CheckStagesAndGetNewStages(IEnumerable<Stage> existedStages)
+        {
+            try
+            {
+                return _matchingValidator.CheckMatchingAndGetNewStages(IntendedCrmObject.Stages, existedStages);
+            }
+            catch (MisMatchException e)
+            {
+                throw new MisMatchException($"Mismatch in crm model with '{IntendedCrmObject.Code}' code!", e);
+            }
         }
 
 
         protected abstract Task<Guid> CreateTypeAsync();
 
-
-        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<ExtendedPropertyGetResultDto> currentProperties)
-        {
-            var detectedPair = IntendedCrmObject.Properties.Join(
-                currentProperties,
-                intendedProperty => intendedProperty.UserKey,
-                currentProperty => currentProperty.UserKey,
-                (intendedProperty, currentProperty) => Tuple.Create(intendedProperty, currentProperty)
-                );
-
-            foreach (var pair in detectedPair)
-            {
-                CheckFieldMatching(pair.Item1.UserKey, pair.Item2.UserKey, "BaseExtendedPropertyModel:UserKey -> ");
-                CheckFieldMatching(pair.Item1.Type, (Gp_ExtendedPropertyType)pair.Item2.PropertyDisplayTypeIndex, "BaseExtendedPropertyModel:Type -> ");
-            }
-
-            return IntendedCrmObject.Properties.Except(detectedPair.Select(d => d.Item1));
-        }
-
-        protected void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
-        {
-            ModelChecker.CheckFieldMatching(first, second, errorMessage);
-        }
-
-        
     }
 }

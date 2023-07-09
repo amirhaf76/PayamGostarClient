@@ -18,6 +18,8 @@ namespace PayamGostarClient.Initializer.CrmModels
 
         internal int Index { get; set; }
 
+        internal bool IsDeleted { get; set; }
+
 
         public ResourceValue[] Name { get; set; }
 

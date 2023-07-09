@@ -11,9 +11,9 @@ namespace PayamGostarClient.Initializer.Extensions
             target.AdditionalCostIncludedTax = model.AdditionalCostIncludedTax;
             target.AdditionalCostIncludedToll = model.AdditionalCostIncludedToll;
             target.AdditionalCosts = model.AdditionalCosts;
-            target.AdditionalCostsPlacementTypeIndex = model.AdditionalCostsPlacementTypeIndex;
+            target.AdditionalCostsPlacementTypeIndex = (int)model.AdditionalCostsPlacement;
             target.AdditionalCostsTitle = model.AdditionalCostsTitle;
-            target.AdditionalCostsTypeIndex = model.AdditionalCostsTypeIndex;
+            target.AdditionalCostsTypeIndex = (int)model.InvoiceAdditionalCost;
             target.AllowDuplicateProductIdsInDetails = model.AllowDuplicateProductIdsInDetails;
             target.BasePriceFormula = model.BasePriceFormula;
             target.CanChangeTotalDiscount = model.CanChangeTotalDiscount;

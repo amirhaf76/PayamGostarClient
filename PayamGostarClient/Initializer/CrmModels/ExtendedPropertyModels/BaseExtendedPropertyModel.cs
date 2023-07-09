@@ -15,16 +15,23 @@ namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 
         public abstract Gp_ExtendedPropertyType Type { get; }
 
-        public string UserKey { get; set; }
-
-        public ResourceValue[] Name { get; set; }
-        public ResourceValue[] ToolTip { get; set; }
-
-        public PropertyGroup PropertyGroup { get; set; }
+        internal Guid Id { get; set; }
 
         internal string CrmObjectTypeId { get; set; }
 
+        internal int PropertyTypeIndex { get; set; }
+
+
+        public string UserKey { get; set; }
+
         public string DefaultValue { get; set; }
+
+        public ResourceValue[] Name { get; set; }
+
+        public ResourceValue[] ToolTip { get; set; }
+
+
+        public PropertyGroup PropertyGroup { get; set; }
 
     }
 }

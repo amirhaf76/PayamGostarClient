@@ -1,4 +1,6 @@
-﻿namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
+﻿using PayamGostarClient.ApiClient.Enums;
+
+namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
     public abstract class CrmBaseInvoiceModel : BaseCRMModel
     {
@@ -21,8 +23,9 @@
         public int NumberingTemplateId { get; set; }
         public int Toll { get; set; }
         public int Vat { get; set; }
-        public int? AdditionalCostsPlacementTypeIndex { get; set; }
-        public int? AdditionalCostsTypeIndex { get; set; }
+
+        public Gp_AdditionalCostsPlacementType? AdditionalCostsPlacement { get; set; }
+        public Gp_InvoiceAdditionalCostType? InvoiceAdditionalCost { get; set; }
 
         public string AdditionalCostsTitle { get; set; }
         public string BasePriceFormula { get; set; }

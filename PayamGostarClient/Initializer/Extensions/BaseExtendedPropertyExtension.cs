@@ -59,13 +59,14 @@ namespace PayamGostarClient.Initializer.Extensions
         public static T FillBaseExtendedPropertyModel<T>(this T target, ExtendedPropertyGetResultDto from)
             where T : BaseExtendedPropertyModel
         {
+            target.Id = from.Id;
+            target.CrmObjectTypeId = from.CrmObjectTypeId.ToString();
+            target.PropertyTypeIndex = from.PropertyTypeIndex;
+
             target.UserKey = from.UserKey;
+            target.DefaultValue = from.DefaultValue;
             target.Name = BaseInitServiceExtension.ToResourceValues(from.Name);
             target.ToolTip = BaseInitServiceExtension.ToResourceValues(from.Tooltip);
-            target.CrmObjectTypeId = from.CrmObjectTypeId.ToString();
-            target.DefaultValue = from.DefaultValue;
-            //target.IsRequired = from.IsRequired;
-            target.DefaultValue = from.DefaultValue;
 
             return target;
         }

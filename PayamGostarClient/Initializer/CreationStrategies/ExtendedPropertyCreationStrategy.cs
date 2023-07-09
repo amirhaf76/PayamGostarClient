@@ -27,11 +27,11 @@ namespace PayamGostarClient.Initializer.CreationStrategies
         }
 
 
-        public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> properties)
+        public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> newProperties)
         {
             var createdPropertiesId = new List<Guid>();
 
-            foreach (var property in properties)
+            foreach (var property in newProperties)
             {
                 property.CrmObjectTypeId = crmObjectTypeId.ToString();
 
@@ -45,11 +45,11 @@ namespace PayamGostarClient.Initializer.CreationStrategies
             return createdPropertiesId;
         }
 
-        public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> properties, IEnumerable<PropertyGroupGetResultDto> existedGroups)
+        public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> newProperties, IEnumerable<PropertyGroupGetResultDto> existedGroups)
         {
             var createdPropertiesId = new List<Guid>();
 
-            var groupedPropertiesAndGroups = properties.GroupBy(p => p.PropertyGroup);
+            var groupedPropertiesAndGroups = newProperties.GroupBy(p => p.PropertyGroup);
 
             foreach (var groupedPropertiesAndGroup in groupedPropertiesAndGroups)
             {
