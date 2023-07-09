@@ -1,12 +1,12 @@
 ﻿using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.Initializer.CrmModels;
+using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System;
 using System.Collections.Generic;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
-    public abstract class BaseCRMModel
+    public abstract class BaseCRMModel : ICustomizationObjectCrmModel
     {
         public BaseCRMModel()
         {

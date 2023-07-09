@@ -89,6 +89,9 @@ namespace PayamGostarClient.Initializer.Extensions
         {
             return new Stage
             {
+                Id = stage.Id,
+                CrmObjectTypeId = stage.CrmObjectTypeId,
+                // todo: resource key
                 Name = ToResourceValues(stage.Name),
                 Enabled = stage.IsActive,
                 IsDoneStage = stage.IsDoneStage,
@@ -111,11 +114,11 @@ namespace PayamGostarClient.Initializer.Extensions
             };
         }
 
-        internal static CrmObjectTypeStageCreationRequestDto CreateStageCreationRequest(this Stage stage, Guid crmObjectTypeId)
+        internal static CrmObjectTypeStageCreationRequestDto CreateStageCreationRequest(this Stage stage)
         {
             return new CrmObjectTypeStageCreationRequestDto
             {
-                CrmObjectTypeId = crmObjectTypeId,
+                CrmObjectTypeId = stage.Id,
                 Enabled = stage.Enabled,
                 Index = stage.Index,
                 IsDoneStage = stage.IsDoneStage,
@@ -128,11 +131,12 @@ namespace PayamGostarClient.Initializer.Extensions
             };
         }
 
-        internal static Stage ToModel(this CrmObjectTypeStageGetResultDto dto)
+        internal static Stage ToModel(this StageGetResultDto dto)
         {
             return new Stage
             {
                 Id = dto.Id,
+                CrmObjectTypeId = dto.CrmObjectTypeId,
                 ResouceKey = !string.IsNullOrEmpty(dto.NameResourceKey) ? (Guid?)Guid.Parse(dto.NameResourceKey) : null,
                 Name = ToResourceValues(dto.Name),
                 Key = dto.Key,
