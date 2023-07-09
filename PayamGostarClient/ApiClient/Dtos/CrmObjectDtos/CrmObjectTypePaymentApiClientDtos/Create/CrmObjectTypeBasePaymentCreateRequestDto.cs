@@ -1,6 +1,6 @@
 ﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Create;
-using PayamGostarClient.ApiProvider;
+using PayamGostarClient.ApiClient.Enums;
 using System.Collections.Generic;
 
 namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypePaymentApiClientDtos.Create

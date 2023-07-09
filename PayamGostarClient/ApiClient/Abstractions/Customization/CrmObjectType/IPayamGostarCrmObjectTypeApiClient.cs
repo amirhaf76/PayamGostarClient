@@ -13,6 +13,18 @@ namespace PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType
         IPayamGostarCrmObjectTypeTicketApiClient TicketApi { get; }
         IPayamGostarCrmObjectTypeIdentityApiClient IdentityApi { get; }
 
+        IPayamGostarCrmObjectTypeInvoiceApiClient InvoiceApi { get; }
+        IPayamGostarCrmObjectTypePurchaseInvoiceApiClient PurchaseInvoiceApi { get; }
+
+        IPayamGostarCrmObjectTypeReturnInvoiceApiClient ReturnInvoiceApi { get; }
+        IPayamGostarCrmObjectTypeReturnPurchaseInvoiceApiClient ReturnPurchaseInvoiceApi { get; }
+
+        IPayamGostarCrmObjectTypeQuoteApiClient QuoteApi { get; }
+        IPayamGostarCrmObjectTypePurchaseQuoteApiClient PurchaseQuoteApi { get; }
+
+        IPayamGostarCrmObjectTypeReceiptApiClient ReceiptApi { get; }
+        IPayamGostarCrmObjectTypePaymentApiClient PaymentApi { get; }
+
         Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchAsync(CrmObjectTypeSearchRequestDto request);
     }
 }

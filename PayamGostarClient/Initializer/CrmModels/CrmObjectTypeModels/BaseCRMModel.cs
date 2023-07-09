@@ -36,5 +36,24 @@ namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 
         public List<Stage> Stages { get; set; }
 
+
+        public bool AssignCustomerNumberOnApprove { get; set; }
+        public bool CreateByCustomer { get; set; }
+        public bool CustomerCanViewExtendedProps { get; set; }
+        public bool IsUnderProcess { get; set; }
+        public bool LimitAccessToProcessUsers { get; set; }
+        public bool ShowToCustomer { get; set; }
+        public bool ViewOnlyToOwner { get; set; }
+
+        public byte SortType { get; set; }
+
+        public int? AllowedDeleteDuration { get; set; }
+        public int? AllowedEditDuration { get; set; }
+
+        public string WebhookAddress { get; set; }
+
+        public IEnumerable<WebhookEventType> EventTypes { get; set; }
+
+        public string ContentFilePath { get; set; }
     }
 }

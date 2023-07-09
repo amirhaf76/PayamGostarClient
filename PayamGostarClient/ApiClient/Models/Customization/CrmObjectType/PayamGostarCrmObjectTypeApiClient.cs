@@ -28,6 +28,23 @@ namespace PayamGostarClient.ApiClient.Models.Customization.CrmObjectType
 
         public IPayamGostarCrmObjectTypeIdentityApiClient IdentityApi => new PayamGostarCrmObjectTypeIdentityApiClient(ApiClientConfig, ApiProviderFactory);
 
+        public IPayamGostarCrmObjectTypeInvoiceApiClient InvoiceApi => new PayamGostarCrmObjectTypeInvoiceApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarCrmObjectTypePurchaseInvoiceApiClient PurchaseInvoiceApi => new PayamGostarCrmObjectTypePurchaseInvoiceApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarCrmObjectTypeReturnInvoiceApiClient ReturnInvoiceApi => new PayamGostarCrmObjectTypeReturnInvoiceApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarCrmObjectTypeReturnPurchaseInvoiceApiClient ReturnPurchaseInvoiceApi => new PayamGostarCrmObjectTypeReturnPurchaseInvoiceApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarCrmObjectTypeQuoteApiClient QuoteApi => new PayamGostarCrmObjectTypeQuoteApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarCrmObjectTypePurchaseQuoteApiClient PurchaseQuoteApi => new PayamGostarCrmObjectTypePurchaseQuoteApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarCrmObjectTypeReceiptApiClient ReceiptApi => new PayamGostarCrmObjectTypeReceiptApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarCrmObjectTypePaymentApiClient PaymentApi => new PayamGostarCrmObjectTypePaymentApiClient(ApiClientConfig, ApiProviderFactory);
+
+
         public async Task<ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>>> SearchAsync(CrmObjectTypeSearchRequestDto request)
         {
             try

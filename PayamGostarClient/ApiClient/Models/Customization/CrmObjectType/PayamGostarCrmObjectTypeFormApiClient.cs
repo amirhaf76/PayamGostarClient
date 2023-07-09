@@ -25,7 +25,7 @@ namespace PayamGostarClient.ApiClient.Models.Customization.CrmObjectType
         {
             try
             {
-                var gettingFormResult = await _crmObjectFormClient.PostApiV2CrmobjecttypeFormGetAsync(request.ConvertToCrmObjectTypeGetRequestVM());
+                var gettingFormResult = await _crmObjectFormClient.PostApiV2CrmobjecttypeFormGetAsync(request.ToVM());
 
                 return gettingFormResult.ConvertToApiResponse(result => result.ToDto());
             }

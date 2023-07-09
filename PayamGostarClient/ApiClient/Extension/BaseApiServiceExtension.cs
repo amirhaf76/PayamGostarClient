@@ -12,11 +12,6 @@ namespace PayamGostarClient.ApiClient.Extension
 {
     public static class BaseApiServiceExtension
     {
-        public static ResourceValueDto ConvertToResourceValueDto(this ResourceValue resourceValue)
-        {
-            return new ResourceValueDto { Value = resourceValue.Value, LanguageCulture = resourceValue.LanguageCulture };
-        }
-
         public static SystemResourceValueVM ToSystemResourceValueVM(this SystemResourceValueDto systemRecource)
         {
             return new SystemResourceValueVM
@@ -26,17 +21,18 @@ namespace PayamGostarClient.ApiClient.Extension
             };
         }
 
-        public static LocalizedResourceValueDto ToDto(this ResourceValueDto resource)
-        {
-            return new LocalizedResourceValueDto { Value = resource.Value, LanguageCulture = resource.LanguageCulture };
-        }
-
         public static LocalizedResourceDto ToLocalizedResourceDto(this SystemResourceValueDto resource)
         {
             return new LocalizedResourceDto { ResourceKey = resource.ResourceKey, ResourceValues = resource.ResourceValues.Select(r => r.ToDto()) };
         }
 
-        public static PropertyGroupGetResultDto ConvertToPropertyGroupGetResultDto(this CrmObjectPropertyGroupGetResultVM group)
+
+        public static LocalizedResourceValueDto ToDto(this ResourceValueDto resource)
+        {
+            return new LocalizedResourceValueDto { Value = resource.Value, LanguageCulture = resource.LanguageCulture };
+        }
+
+        public static PropertyGroupGetResultDto ToDto(this CrmObjectPropertyGroupGetResultVM group)
         {
             return new PropertyGroupGetResultDto
             {
@@ -49,7 +45,7 @@ namespace PayamGostarClient.ApiClient.Extension
 
         }
 
-        public static StageGetResultDto ConvertToStageGetResultDto(this CrmObjectTypeStageGetResultVM stage)
+        public static StageGetResultDto ToDto(this CrmObjectTypeStageGetResultVM stage)
         {
             return new StageGetResultDto
             {
@@ -138,9 +134,9 @@ namespace PayamGostarClient.ApiClient.Extension
             to.Name = from.Name;
             to.Description = from.Description;
 
-            to.Stages = from.Stages.Select(s => s.ConvertToStageGetResultDto());
-            to.Groups = from.Groups.Select(g => g.ConvertToPropertyGroupGetResultDto());
-            to.Properties = from.Properties.Select(p =>
+            to.Stages = from.Stages?.Select(s => ToDto(s));
+            to.Groups = from.Groups?.Select(g => g.ToDto());
+            to.Properties = from.Properties?.Select(p =>
             {
                 var theProperty = p.ToDto();
 
@@ -156,27 +152,35 @@ namespace PayamGostarClient.ApiClient.Extension
             where TTo : BaseCrmObjectTypeCreateRequestVM
             where TFrom : BaseCrmObjectTypeCreateRequestDto
         {
+            to.AllowedDeleteDuration = from.AllowedDeleteDuration;
+            to.AllowedEditDuration = from.AllowedEditDuration;
+            to.AssignCustomerNumberOnApprove = from.AssignCustomerNumberOnApprove;
             to.Code = from.Code;
-            to.Name = from.Name.ToSystemResourceValueVM();
-            to.Description = from.Description.ToSystemResourceValueVM();
-            to.PreviewTypeIndex = from.PreviewTypeIndex;
+            to.Content = from.Content?.ToVM();
+            to.CreateByCustomer = from.CreateByCustomer;
+            to.CustomerCanViewExtendedProps = from.CustomerCanViewExtendedProps;
+            to.DefaultRelatedToIdentityTypeId = from.DefaultRelatedToIdentityTypeId;
+            to.Description = from.Description?.ToSystemResourceValueVM();
+            to.EventTypes = from.EventTypes?.Select(x => (WebhookEventType)x);
             to.IsActive = from.Enabled;
+            to.IsUnderProcess = from.IsUnderProcess;
+            to.LimitAccessToProcessUsers = from.LimitAccessToProcessUsers;
+            to.Name = from.Name?.ToSystemResourceValueVM();
+            to.OwnerId = from.OwnerId;
+            to.PreviewTypeIndex = from.PreviewTypeIndex;
+            to.ShowToCustomer = from.ShowToCustomer;
+            to.SortType = from.SortType;
+            to.ViewOnlyToOwner = from.ViewOnlyToOwner;
+            to.WebhookAddress = from.WebhookAddress;
 
             return to;
         }
 
-        public static TTo FillCrmObjectTypePaymentCreateRequestVM<TFrom, TTo>(this TTo to, TFrom from)
-            where TTo : CrmObjectTypePaymentCreateRequestVM
-            where TFrom : CrmObjectTypeBasePaymentCreateRequestDto
-        {
-            to.NumberingTemplateId = from.NumberingTemplateId;
-            to.NeedApproval = from.NeedApproval;
-            to.NeedNumbering = from.NeedNumbering;
-            to.ChangeToStatePendingOnUpdate = from.ChangeToStatePendingOnUpdate;
-            to.CustomerPaymentType = from.CustomerPaymentType;
-            to.Signature = from.Signature?.ToVM();
 
-            return to.FillBaseCrmObjectTypeCreateRequestVM(from);
+
+        public static CrmObjectTypeContentFilePathVM ToVM(this CrmObjectTypeContentFilePathDto dto) 
+        {
+            return new CrmObjectTypeContentFilePathVM { FilePath = dto.FilePath };
         }
 
     }
