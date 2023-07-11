@@ -10,7 +10,6 @@ namespace PayamGostarClient.Initializer.Services
     {
         public QuoteInitService(CrmQuoteModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
         {
-            throw new NotImplementedException("QuoteInitService is not Implemented");
         }
 
         protected override async Task<Guid> CreateTypeAsync()

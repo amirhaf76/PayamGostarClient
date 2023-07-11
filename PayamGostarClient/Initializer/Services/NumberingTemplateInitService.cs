@@ -53,6 +53,10 @@ namespace PayamGostarClient.Initializer.Services
                 var numberingTemplateCreationResult = await _numberingTemplateApiClient.CreateAsync(_numberingTemplateModel.ToDto());
 
                 _numberingTemplateModel.Id = numberingTemplateCreationResult.Result.NumberingTemplateId;
+            } 
+            else
+            {
+                _numberingTemplateModel.Id = numberingTemplatesResponse.Result.FirstOrDefault()?.Id;
             }
         }
 

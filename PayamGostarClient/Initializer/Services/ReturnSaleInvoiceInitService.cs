@@ -10,7 +10,6 @@ namespace PayamGostarClient.Initializer.Services
     {
         public ReturnSaleInvoiceInitService(CrmReturnSaleInvoiceModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
         {
-            throw new NotImplementedException("ReturnSaleInvoiceInitService is not Implemented");
         }
 
         protected override async Task<Guid> CreateTypeAsync()

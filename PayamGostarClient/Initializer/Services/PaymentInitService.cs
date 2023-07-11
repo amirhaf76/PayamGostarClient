@@ -10,7 +10,6 @@ namespace PayamGostarClient.Initializer.Services
     {
         public PaymentInitService(CrmPaymentModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
         {
-            throw new NotImplementedException("PaymentInitService is not Implemented");
         }
 
         protected override async Task<Guid> CreateTypeAsync()

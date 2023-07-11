@@ -1,11 +1,18 @@
 ﻿using PayamGostarClient.ApiClient.Enums;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 using System.Collections.Generic;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
     public abstract class CrmBasePaymentModel : BaseCRMModel
     {
-        public int NumberingTemplateId { get; set; }
+        public CrmBasePaymentModel()
+        {
+            CustomerPaymentType = new List<Gp_PaymentType>();
+            NumberingTemplate = new NumberingTemplateModel();
+        }
+
+        public NumberingTemplateModel NumberingTemplate { get; set; }
 
         public bool NeedApproval { get; set; }
 

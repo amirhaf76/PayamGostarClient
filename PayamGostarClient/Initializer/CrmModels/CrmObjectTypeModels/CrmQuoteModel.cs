@@ -6,5 +6,7 @@ namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
     {
         public override Gp_CrmObjectType Type => Gp_CrmObjectType.Quote;
 
+        public bool CanMultipleCloneInvoice { get; set; }
+
     }
 }

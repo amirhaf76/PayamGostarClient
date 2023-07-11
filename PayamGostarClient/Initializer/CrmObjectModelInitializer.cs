@@ -8,17 +8,20 @@ namespace PayamGostarClient.Initializer
 {
     public class CrmObjectModelInitializer : ICrmObjectModelInitializer
     {
-        private readonly CrmObjectModelInitializerConfig _config;
+        private readonly IInitServiceFactory _initServiceFactory;
 
         public CrmObjectModelInitializer(CrmObjectModelInitializerConfig config)
         {
-            _config = config;
-
             if (config.ClientService == null)
             {
                 throw new ClientServiceConfigNullException("CrmObjectModelInitializerConfig.ClientService must be set!");
             }
+
+            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = config.ClientService };
+
+            _initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
         }
+
 
 
         //public async Task<bool> CheckExistenceSchemaAsync(params BaseCRMModel[] crmModels)
@@ -61,13 +64,9 @@ namespace PayamGostarClient.Initializer
 
         public async Task<bool> CheckExistenceSchemaAsync(params ICustomizationCrmModel[] models)
         {
-            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = _config.ClientService };
-
-            var initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
-
             foreach (var crmModel in models)
             {
-                var initService = initServiceFactory.Create(crmModel);
+                var initService = _initServiceFactory.Create(crmModel);
 
                 var isMatched = await initService.CheckExistenceSchemaAsync();
 
@@ -84,13 +83,9 @@ namespace PayamGostarClient.Initializer
 
         public async Task InitAsync(params ICustomizationCrmModel[] models)
         {
-            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = _config.ClientService };
-
-            var initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
-
             foreach (var model in models)
             {
-                var initService = initServiceFactory.Create(model);
+                var initService = _initServiceFactory.Create(model);
 
                 await initService.InitAsync();
             }

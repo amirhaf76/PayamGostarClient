@@ -7,7 +7,11 @@ namespace PayamGostarClient.Initializer.Extensions
     {
         internal static CrmObjectTypePurchaseQuoteCreateRequestDto ToDto(this CrmPurchaseQuoteModel model)
         {
-            return new CrmObjectTypePurchaseQuoteCreateRequestDto().FillCrmObjectTypeBaseInvoiceCreateRequestDto(model);
+            return new CrmObjectTypePurchaseQuoteCreateRequestDto
+            {
+                CanMultipleCloneInvoice = model.CanMultipleCloneInvoice,
+
+            }.FillCrmObjectTypeBaseInvoiceCreateRequestDto(model);
         }
     }
 }

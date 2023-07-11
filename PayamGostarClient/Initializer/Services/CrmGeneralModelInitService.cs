@@ -1,6 +1,7 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
+using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.Comparers;
 using PayamGostarClient.Initializer.CreationStrategies;
@@ -41,7 +42,7 @@ namespace PayamGostarClient.Initializer.Services
 
                 var newExtendedProperties = _matchingValidator.CheckMatchingAndGetNewExtendedProperties(
                     intentedProperties: _intentedCrmGeneralModel.Properties,
-                    existedProperties: receivedAbstractCrmObject.Properties);
+                    existedProperties: GetExtendedValueProperties(receivedAbstractCrmObject));
 
                 if (newExtendedProperties.Any())
                 {
@@ -62,7 +63,7 @@ namespace PayamGostarClient.Initializer.Services
 
             var newExtendedProperties = _matchingValidator.CheckMatchingAndGetNewExtendedProperties(
                 intentedProperties: _intentedCrmGeneralModel.Properties,
-                existedProperties: receivedAbstractCrmObject.Properties);
+                existedProperties: GetExtendedValueProperties(receivedAbstractCrmObject));
 
             await _extendedProperty.CreateExtendedPropertiesAsync(
                 crmObjectTypeId: receivedAbstractCrmObject.Id,
@@ -89,6 +90,12 @@ namespace PayamGostarClient.Initializer.Services
             }
 
             return receivedAbstractCrmObject;
+        }
+
+        private static System.Collections.Generic.IEnumerable<ApiClient.Dtos.CrmObjectDtos.ExtendedPropertyGetResultDto> GetExtendedValueProperties(CrmObjectTypeSearchResultDto receivedAbstractCrmObject)
+        {
+            return receivedAbstractCrmObject.Properties
+                .Where(p => p.PropertyTypeIndex == (int)Gp_PropertyType.ExtendedValue);
         }
     }
 }

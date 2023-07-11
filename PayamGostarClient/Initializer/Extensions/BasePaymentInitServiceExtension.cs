@@ -12,8 +12,12 @@ namespace PayamGostarClient.Initializer.Extensions
             target.CustomerPaymentType = model.CustomerPaymentType;
             target.NeedApproval = model.NeedApproval;
             target.NeedNumbering = model.NeedNumbering;
-            target.NumberingTemplateId = model.NumberingTemplateId;;
             target.Signature = new CrmObjectTypeSignatureFilePathDto { FilePath = model.SignaturePath };
+
+            if (model.NumberingTemplate?.Id.HasValue ?? false)
+            {
+                target.NumberingTemplateId = model.NumberingTemplate.Id.Value;
+            }
 
             return target.FillBaseCrmObjectTypeCreateRequestDto(model);
         }
