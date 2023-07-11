@@ -73,6 +73,9 @@ namespace PayamGostarClient.Initializer.Utilities.Factory
                 case CustomizationCrmType.GeneralCrmObjectType:
                     return new CrmGeneralModelInitService((CrmGeneralModel)model, _payamGostarApiClient);
 
+                case CustomizationCrmType.Category:
+                    return new CategoryInitService((CategoryModel)model, _payamGostarApiClient);
+
                 default:
                     throw new InvalidCustomizationCrmTypeException($"There is no CustomizationCrmType like '{model.CustomizationCrmType}'");
             }

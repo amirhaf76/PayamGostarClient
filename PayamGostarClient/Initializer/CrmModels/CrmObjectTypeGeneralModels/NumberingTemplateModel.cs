@@ -1,6 +1,5 @@
 ﻿using PayamGostarClient.Initializer.Abstractions.CrmModel;
 using PayamGostarClient.Initializer.Enums;
-using System;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels
 {
