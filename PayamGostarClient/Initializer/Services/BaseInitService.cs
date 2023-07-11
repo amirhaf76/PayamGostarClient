@@ -5,16 +5,15 @@ using PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty;
 using PayamGostarClient.ApiClient.Abstractions.Customization.PropertyGroup;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
-using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.Initializer.Abstractions;
-using PayamGostarClient.Initializer.Comparers;
-using PayamGostarClient.Initializer.CreationStrategies;
+using PayamGostarClient.Initializer.Abstractions.InitServices;
+using PayamGostarClient.Initializer.Abstractions.Utilities.Strategies;
+using PayamGostarClient.Initializer.Abstractions.Utilities.Validator;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using PayamGostarClient.Initializer.Exceptions;
-using PayamGostarClient.Initializer.Extensions;
-using PayamGostarClient.Initializer.Helpers;
+using PayamGostarClient.Initializer.Utilities.CreationStrategies;
+using PayamGostarClient.Initializer.Utilities.Validator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -220,9 +219,9 @@ namespace PayamGostarClient.Initializer.Services
 
         private async Task CheckStagesAndUpdateUnexistedStagesAsync(Guid id, IEnumerable<Stage> currentStages)
         {
-            List<Stage> newStages = CheckStagesAndGetNewStages(currentStages.Where(s => !s.IsDeleted));
+            List<Stage> newStages = CheckStagesAndGetNewStages(currentStages);
 
-            await UpdateStagesAsync(id, newStages, currentStages.Max(x => x.Index) + 1);
+            await UpdateStagesAsync(id, newStages, currentStages);
         }
 
 
@@ -279,9 +278,9 @@ namespace PayamGostarClient.Initializer.Services
             }
         }
 
-        private async Task UpdateStagesAsync(Guid id, List<Stage> stages, int startIndex)
+        private async Task UpdateStagesAsync(Guid id, List<Stage> stages, IEnumerable<Stage> existedStages)
         {
-            await _stageCreationStrategy.UpdateStagesAsync(id, stages, startIndex);
+            await _stageCreationStrategy.UpdateStagesAsync(id, stages, existedStages);
         }
 
 

@@ -1,7 +1,5 @@
 ﻿using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.Initializer.Helpers;
 using System;
-using System.Collections.Generic;
 
 namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 {

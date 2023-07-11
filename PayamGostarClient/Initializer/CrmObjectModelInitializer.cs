@@ -1,7 +1,8 @@
 ﻿using PayamGostarClient.Initializer.Abstractions;
-using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClient.Initializer.Abstractions.CrmModel;
+using PayamGostarClient.Initializer.Abstractions.Utilities.Factories;
 using PayamGostarClient.Initializer.Exceptions;
-using PayamGostarClient.Initializer.Factory;
+using PayamGostarClient.Initializer.Utilities.Factory;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.Initializer
@@ -9,6 +10,7 @@ namespace PayamGostarClient.Initializer
     public class CrmObjectModelInitializer : ICrmObjectModelInitializer
     {
         private readonly IInitServiceFactory _initServiceFactory;
+
 
         public CrmObjectModelInitializer(CrmObjectModelInitializerConfig config)
         {
@@ -21,45 +23,6 @@ namespace PayamGostarClient.Initializer
 
             _initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
         }
-
-
-
-        //public async Task<bool> CheckExistenceSchemaAsync(params BaseCRMModel[] crmModels)
-        //{
-        //    var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = _config.ClientService };
-
-        //    var initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
-
-        //    foreach (var crmModel in crmModels)
-        //    {
-        //        var initService = initServiceFactory.Create(crmModel);
-
-        //        var isMatched = await initService.CheckExistenceSchemaAsync();
-
-        //        if (!isMatched) return false;
-        //    }
-
-        //    return true;
-        //}
-
-        //public void Init(params BaseCRMModel[] crmModels)
-        //{
-        //    SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => InitAsync(crmModels));
-        //}
-
-        //public async Task InitAsync(params BaseCRMModel[] crmModels)
-        //{
-        //    var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = _config.ClientService };
-
-        //    var initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
-
-        //    foreach (var crmModel in crmModels)
-        //    {
-        //        var initService = initServiceFactory.Create(crmModel);
-
-        //        await initService.InitAsync();
-        //    }
-        //}
 
 
         public async Task<bool> CheckExistenceSchemaAsync(params ICustomizationCrmModel[] models)
@@ -76,11 +39,6 @@ namespace PayamGostarClient.Initializer
             return true;
         }
 
-        public void Init(params ICustomizationCrmModel[] models)
-        {
-            SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => InitAsync(models));
-        }
-
         public async Task InitAsync(params ICustomizationCrmModel[] models)
         {
             foreach (var model in models)
@@ -89,6 +47,12 @@ namespace PayamGostarClient.Initializer
 
                 await initService.InitAsync();
             }
+        }
+
+
+        public void Init(params ICustomizationCrmModel[] models)
+        {
+            SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => InitAsync(models));
         }
     }
 

@@ -2,11 +2,13 @@
 using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
 using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.Initializer.Abstractions;
-using PayamGostarClient.Initializer.Comparers;
-using PayamGostarClient.Initializer.CreationStrategies;
+using PayamGostarClient.Initializer.Abstractions.InitServices;
+using PayamGostarClient.Initializer.Abstractions.Utilities.Strategies;
+using PayamGostarClient.Initializer.Abstractions.Utilities.Validator;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 using PayamGostarClient.Initializer.Exceptions;
+using PayamGostarClient.Initializer.Utilities.CreationStrategies;
+using PayamGostarClient.Initializer.Utilities.Validator;
 using System.Linq;
 using System.Threading.Tasks;
 

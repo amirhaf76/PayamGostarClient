@@ -4,7 +4,7 @@ using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.ApiClient.Extension;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Exceptions;
-using PayamGostarClient.Initializer.Extensions;
+using PayamGostarClient.Initializer.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

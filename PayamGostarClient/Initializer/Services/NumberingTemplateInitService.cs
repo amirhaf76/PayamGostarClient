@@ -2,10 +2,10 @@
 using PayamGostarClient.ApiClient.Abstractions.Customization.NumberTemplate;
 using PayamGostarClient.ApiClient.Dtos.NumberingTemplateDtos.Search;
 using PayamGostarClient.Helper.Net;
-using PayamGostarClient.Initializer.Abstractions;
+using PayamGostarClient.Initializer.Abstractions.InitServices;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 using PayamGostarClient.Initializer.Exceptions;
-using PayamGostarClient.Initializer.Extensions;
+using PayamGostarClient.Initializer.Utilities.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,7 +53,7 @@ namespace PayamGostarClient.Initializer.Services
                 var numberingTemplateCreationResult = await _numberingTemplateApiClient.CreateAsync(_numberingTemplateModel.ToDto());
 
                 _numberingTemplateModel.Id = numberingTemplateCreationResult.Result.NumberingTemplateId;
-            } 
+            }
             else
             {
                 _numberingTemplateModel.Id = numberingTemplatesResponse.Result.FirstOrDefault()?.Id;
