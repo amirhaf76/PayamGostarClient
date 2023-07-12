@@ -1,4 +1,5 @@
 ﻿using PayamGostarClient.Initializer.Abstractions.CrmModel;
+using System;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.Initializer.Abstractions
@@ -10,5 +11,7 @@ namespace PayamGostarClient.Initializer.Abstractions
         Task InitAsync(params ICustomizationCrmModel[] crmModels);
 
         Task<bool> CheckExistenceSchemaAsync(params ICustomizationCrmModel[] crmModels);
+
+        Task InitAsync(Action<ICustomizationCrmModel> callBack, params ICustomizationCrmModel[] models);
     }
 }

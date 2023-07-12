@@ -3,6 +3,7 @@ using PayamGostarClient.Initializer.Abstractions.CrmModel;
 using PayamGostarClient.Initializer.Abstractions.Utilities.Factories;
 using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClient.Initializer.Utilities.Factory;
+using System;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.Initializer
@@ -39,16 +40,22 @@ namespace PayamGostarClient.Initializer
             return true;
         }
 
-        public async Task InitAsync(params ICustomizationCrmModel[] models)
+        public async Task InitAsync(Action<ICustomizationCrmModel> callBack, params ICustomizationCrmModel[] models)
         {
             foreach (var model in models)
             {
                 var initService = _initServiceFactory.Create(model);
 
                 await initService.InitAsync();
+
+                callBack?.Invoke(model);
             }
         }
 
+        public async Task InitAsync(params ICustomizationCrmModel[] models)
+        {
+            await InitAsync(null, models);
+        }
 
         public void Init(params ICustomizationCrmModel[] models)
         {
