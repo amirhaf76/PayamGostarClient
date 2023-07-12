@@ -67,6 +67,8 @@ namespace PayamGostarClient.Initializer.Services
             {
                 Name = model.Name,
                 Prefix = model.Prefix,
+                InitialSeed = model.InitialSeed,
+                LastNumber = model.LastNumber,
             });
         }
 
