@@ -28,7 +28,7 @@ namespace PayamGostarClient.Initializer.Services
         private readonly IExtendedPropertyCreationStrategy _propertyCreationStrategy;
         private readonly IGroupCreationStrategy _groupCreationStrategy;
         private readonly IStageCreationStrategy _stageCreationStrategy;
-        private readonly IMatchingValidator _matchingValidator;
+        private readonly IModelMatchingValidator _matchingValidator;
 
         private IPayamGostarCustomizationApiClient CustomizationApi { get; }
 
@@ -51,7 +51,7 @@ namespace PayamGostarClient.Initializer.Services
             _propertyCreationStrategy = new ExtendedPropertyCreationStrategy(ExtendedPropertyApi, _groupCreationStrategy);
             _stageCreationStrategy = new StageCreationStrategy(CrmObjectTypeApi.StageApi);
 
-            _matchingValidator = new MatchingValidator();
+            _matchingValidator = new ModelMatchingValidator();
         }
 
 

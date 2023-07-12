@@ -19,7 +19,7 @@ namespace PayamGostarClient.Initializer.Services
         private readonly IPayamGostarCrmObjectTypeApiClient _crmObjectType;
         private readonly IGroupCreationStrategy _groupCreation;
         private readonly IExtendedPropertyCreationStrategy _extendedProperty;
-        private readonly IMatchingValidator _matchingValidator;
+        private readonly IModelMatchingValidator _matchingValidator;
         private readonly CrmGeneralModel _intentedCrmGeneralModel;
 
 
@@ -32,7 +32,7 @@ namespace PayamGostarClient.Initializer.Services
             _groupCreation = new GroupCreationStrategy(payamGostarApiClient.CustomizationApi.PropertyGroupApi);
             _extendedProperty = new ExtendedPropertyCreationStrategy(payamGostarApiClient.CustomizationApi.ExtendedPropertyApi, _groupCreation);
 
-            _matchingValidator = new MatchingValidator();
+            _matchingValidator = new ModelMatchingValidator();
         }
 
 

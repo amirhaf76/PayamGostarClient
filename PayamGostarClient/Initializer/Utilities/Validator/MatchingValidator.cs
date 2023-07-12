@@ -1,74 +1,46 @@
-﻿using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
-using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.Initializer.Abstractions.Utilities.Validator;
-using PayamGostarClient.Initializer.CrmModels;
-using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
-using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
-using PayamGostarClient.Initializer.Utilities.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using PayamGostarClient.Initializer.Abstractions.Utilities.Validator;
+using PayamGostarClient.Initializer.Exceptions;
 
 namespace PayamGostarClient.Initializer.Utilities.Validator
 {
-    public class MatchingValidator : IMatchingValidator
+    internal class MatchingValidator : IMatchingValidator
     {
-        public void CheckMatchingBaseCrmObject(BaseCRMModel baseCRMModel, CrmObjectTypeSearchResultDto existedCrmObj)
+        public void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
         {
-            CheckFieldMatching(baseCRMModel.Code, existedCrmObj.Code, "BaseCrmObj:Code -> ");
-            CheckFieldMatching(baseCRMModel.Type, (Gp_CrmObjectType)existedCrmObj.CrmOjectTypeIndex, "BaseCrmObj:Type -> ");
+            if (!AreTheFieldsMatched(first, second))
+            {
+                throw CreateMisMatchException(first, second, errorMessage);
+            }
         }
 
-        public List<Stage> CheckMatchingAndGetNewStages(IEnumerable<Stage> intentedStages, IEnumerable<Stage> existedStages)
+        internal bool AreTheFieldsMatched<TField>(TField first, TField second)
         {
-            existedStages = existedStages.Where(s => !s.IsDeleted);
-
-            var detectedPair = intentedStages.Join(
-                            existedStages,
-                            intendedStage => intendedStage.Key,
-                            currentStage => currentStage.Key,
-                            (intendedStage, currentStage) => Tuple.Create(intendedStage, currentStage)
-                            );
-
-            foreach (var pair in detectedPair)
+            if (typeof(TField) == typeof(string))
             {
-                CheckFieldMatching(pair.Item1.IsDoneStage, pair.Item2.IsDoneStage, "CheckingStage:IsDoneStage -> ");
+                if (
+                    string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string) ||
+                    !string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
+                {
+                    return false;
+                }
+
+                if (string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
+                {
+                    return true;
+                }
             }
 
-            var newStages = intentedStages
-                .Except(detectedPair.Select(d => d.Item1))
-                .ToList();
-
-            return newStages;
-        }
-
-        public IEnumerable<BaseExtendedPropertyModel> CheckMatchingAndGetNewExtendedProperties(
-            IEnumerable<BaseExtendedPropertyModel> intentedProperties,
-            IEnumerable<ExtendedPropertyGetResultDto> existedProperties)
-        {
-            var detectedPair = intentedProperties.Join(
-                existedProperties,
-                intendedProperty => intendedProperty.UserKey,
-                currentProperty => currentProperty.UserKey,
-                (intendedProperty, currentProperty) => Tuple.Create(intendedProperty, currentProperty)
-                );
-
-            foreach (var pair in detectedPair)
+            if (first == null && second == null)
             {
-                CheckFieldMatching(pair.Item1.UserKey, pair.Item2.UserKey, "BaseExtendedPropertyModel:UserKey -> ");
-                CheckFieldMatching(pair.Item1.Type, (Gp_ExtendedPropertyType)pair.Item2.PropertyDisplayTypeIndex, "BaseExtendedPropertyModel:Type -> ");
+                return true;
             }
 
-            return intentedProperties.Except(detectedPair.Select(d => d.Item1));
+            return first.Equals(second);
         }
 
-
-        private void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
+        private static MisMatchException CreateMisMatchException<TField>(TField first, TField second, string errorMessage)
         {
-            ModelChecker.CheckFieldMatching(first, second, errorMessage);
+            return new MisMatchException($"{(!string.IsNullOrEmpty(errorMessage) ? errorMessage : "")}\nExpected: {first} != Actually: {second}");
         }
-
-
     }
 }
