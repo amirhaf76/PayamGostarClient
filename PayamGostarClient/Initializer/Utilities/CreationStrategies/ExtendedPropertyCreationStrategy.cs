@@ -146,6 +146,62 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return propertyModel.ToSecurityItemExtendedPropertyCreationDto();
 
+
+                case Gp_ExtendedPropertyType.Identity:
+                    return propertyModel.ToCrmItemIdentityExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.GeneralProperty:
+                    return propertyModel.ToGpExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.GregorianDate:
+                    return propertyModel.ToGregorianDateExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Html:
+                    return propertyModel.ToHTMLExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Image:
+                    return propertyModel.ToImageExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Link:
+                    return propertyModel.ToLinkExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.MarketingCampaign:
+                    return propertyModel.ToMarketingCampaignExtendedPropertyCreationDto();
+
+
+                case Gp_ExtendedPropertyType.CurrencyMultiValue:
+                    return propertyModel.ToCurrencyMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.FileMultiValue:
+                    return propertyModel.ToFileMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.GregorianDateMultiValue:
+                    return propertyModel.ToGregorianDateMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.IdentityMultiValue:
+                    return propertyModel.ToIdentityMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.LinkMultiValue:
+                    return propertyModel.ToLinkMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.NumberMultiValue:
+                    return propertyModel.ToNumberMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.PersianDateMultiValue:
+                    return propertyModel.ToPersianDateMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.ProductList:
+                    return propertyModel.ToProductMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.SecurityItemMultiValue:
+                    return propertyModel.ToSecurityItemMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.TextMultiValue:
+                    return propertyModel.ToTextMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.UserMultiValue:
+                    return propertyModel.ToUserMultiValueExtendedPropertyCreationDto();
+
                 default:
                     throw new NotFoundExtendedPropertyTypeException($"PropertyDisplayType: '{propertyModel.Type}'.");
             }
