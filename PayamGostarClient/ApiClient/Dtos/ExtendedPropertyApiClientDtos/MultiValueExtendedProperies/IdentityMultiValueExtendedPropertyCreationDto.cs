@@ -7,6 +7,11 @@ namespace PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.MultiVa
 {
     public class IdentityMultiValueExtendedPropertyCreationDto : GeneralMultiValueExtendedPropertyCreationDto
     {
+        public IdentityMultiValueExtendedPropertyCreationDto()
+        {
+            ShowInGridProps = new List<ExtendedPropertyIdWrapperDto>();
+        }
+
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.IdentityMultiValue;
 
         public IEnumerable<ExtendedPropertyIdWrapperDto> ShowInGridProps { get; set; }
