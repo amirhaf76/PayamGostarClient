@@ -12,7 +12,13 @@ namespace PayamGostarClient.Initializer.CrmModels
 
         internal Guid Id { get; set; }
 
+        internal Guid CrmObjectTypeId { get; set; }
+
         internal Guid? ResouceKey { get; set; }
+
+        internal int Index { get; set; }
+
+        internal bool IsDeleted { get; set; }
 
 
         public ResourceValue[] Name { get; set; }
@@ -23,7 +29,6 @@ namespace PayamGostarClient.Initializer.CrmModels
 
         public bool Enabled { get; set; }
 
-        public int Index { get; set; }
     }
 
 

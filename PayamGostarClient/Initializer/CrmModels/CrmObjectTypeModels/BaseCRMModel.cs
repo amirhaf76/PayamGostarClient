@@ -1,12 +1,13 @@
 ﻿using PayamGostarClient.ApiClient.Enums;
-using PayamGostarClient.Initializer.CrmModels;
+using PayamGostarClient.Initializer.Abstractions.CrmModel;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
+using PayamGostarClient.Initializer.Enums;
 using System;
 using System.Collections.Generic;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
-    public abstract class BaseCRMModel
+    public abstract class BaseCRMModel : ICustomizationCrmModel
     {
         public BaseCRMModel()
         {
@@ -55,5 +56,8 @@ namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
         public IEnumerable<WebhookEventType> EventTypes { get; set; }
 
         public string ContentFilePath { get; set; }
+
+
+        public CustomizationCrmType CustomizationCrmType => CustomizationCrmType.CrmObjectType;
     }
 }

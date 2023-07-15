@@ -15,6 +15,7 @@ namespace PayamGostarClient.ApiClient.Extension
             return new CrmObjectTypeSearchRequestVM
             {
                 Code = crmModel.Code,
+                IsAbstract = crmModel.IsAbstract,
                 CrmObjectTypeIndex = crmModel.CrmOjectTypeIndex,
                 PageNumber = crmModel.PageNumber,
                 PageSize = crmModel.PageSiz,
@@ -62,15 +63,22 @@ namespace PayamGostarClient.ApiClient.Extension
                 Name = viewModel.Name,
                 CrmOjectTypeIndex = viewModel.CrmOjectTypeIndex,
                 Description = viewModel.Description,
+                ParentId = viewModel.ParentId,
+                OwnerId = viewModel.OwnerId,
+                IsAbstract = viewModel.IsAbstract,
+                IsUnderProcess = viewModel.IsUnderProcess,
                 Properties = properties,
                 Groups = groupDictionary.Values.AsEnumerable(),
                 Stages = viewModel.Stages.Select(stage => new StageGetResultDto
                 {
+                    Id = stage.Id,
+                    CrmObjectTypeId = stage.CrmObjectTypeId,
                     Name = stage.Name,
                     NameResourceKey = stage.NameResourceKey,
                     Key = stage.Key,
                     IsDoneStage = stage.IsDoneStage,
                     IsActive = stage.IsActive,
+                    IsDeleted = stage.IsDeleted,
                     Index = stage.Index,
                 }),
             };

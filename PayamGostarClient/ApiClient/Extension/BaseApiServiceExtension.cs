@@ -51,7 +51,10 @@ namespace PayamGostarClient.ApiClient.Extension
             {
                 NameResourceKey = stage.NameResourceKey,
                 Name = stage.Name,
+                Id = stage.Id,
+                CrmObjectTypeId = stage.CrmObjectTypeId,
                 IsActive = stage.IsActive,
+                IsDeleted = stage.IsDeleted,
                 IsDoneStage = stage.IsDoneStage,
                 Key = stage.Key,
                 Index = stage.Index,
@@ -85,17 +88,25 @@ namespace PayamGostarClient.ApiClient.Extension
         {
             return new ExtendedPropertyGetResultDto
             {
-                Id = extendedProperty.Id,
                 CrmObjectTypeId = extendedProperty.CrmObjectTypeId,
+                DefaultValue = extendedProperty.DefaultValue,
+                Id = extendedProperty.Id,
+                IsRequired = extendedProperty.IsRequired,
                 Name = extendedProperty.Name,
                 NameResourceKey = extendedProperty.NameResourceKey,
+                ParentId = extendedProperty.ParentId,
+                PropertyDisplayIndex = extendedProperty.PropertyDisplayIndex,
+                PropertyDisplayTypeIndex = extendedProperty.PropertyDisplayTypeIndex,
+                PropertyDisplayTypeName = extendedProperty.PropertyDisplayTypeName,
+                PropertyGroupId = extendedProperty.PropertyGroupId,
+                PropertyGroupName = extendedProperty.PropertyGroupName,
+                PropertyGroupNameResourceKey = extendedProperty.PropertyGroupNameResourceKey,
+                PropertyTypeIndex = extendedProperty.PropertyTypeIndex,
+                PropertyTypeName = extendedProperty.PropertyTypeName,
                 Tooltip = extendedProperty.Tooltip,
                 TooltipResourceKey = extendedProperty.TooltipResourceKey,
                 UserKey = extendedProperty.UserKey,
-                PropertyGroupId = extendedProperty.PropertyGroupId,
-                PropertyDisplayTypeIndex = extendedProperty.PropertyDisplayTypeIndex,
-                DefaultValue = extendedProperty.DefaultValue,
-                IsRequired = extendedProperty.IsRequired,
+
                 ExtraConfig = extendedProperty.ExtraConfiguration.CastOrDefault((Enums.Gp_PropertyDisplayType)extendedProperty.PropertyDisplayTypeIndex),
             };
         }
@@ -124,28 +135,55 @@ namespace PayamGostarClient.ApiClient.Extension
         }
 
 
-        public static TTo FillBaseCrmObjectTypeGetResultDto<TFrom, TTo>(this TTo to, TFrom from)
+        public static TTo FillBaseCrmObjectTypeGetResultDto<TFrom, TTo>(this TTo target, TFrom from)
             where TTo : BaseCrmObjectTypeGetResultDto
             where TFrom : BaseCrmObjectTypeGetResultVM
         {
-            to.CrmOjectTypeIndex = from.CrmOjectTypeIndex;
-            to.Code = from.Code;
-            to.Enabled = from.IsActive;
-            to.Name = from.Name;
-            to.Description = from.Description;
+            target.AllowedDeleteDuration = from.AllowedDeleteDuration;
+            target.AllowedEditDuration = from.AllowedEditDuration;
+            target.Code = from.Code;
+            target.ContentFileId = from.ContentFileId;
+            target.ContentTypeIndex = from.ContentTypeIndex;
+            target.ContentTypeName = from.ContentTypeName;
+            target.CreateByCustomer = from.CreateByCustomer;
+            target.CrmObjectTypeName = from.CrmObjectTypeName;
+            target.CrmOjectTypeIndex = from.CrmOjectTypeIndex;
+            target.CustomerCanViewExtendedProps = from.CustomerCanViewExtendedProps;
+            target.DefaultRelatedToIdentityTypeId = from.DefaultRelatedToIdentityTypeId;
+            target.Description = from.Description;
+            target.DescriptionResourceKey = from.DescriptionResourceKey;
+            target.Enabled = from.IsActive;
+            target.EventTypes = from.EventTypes;
+            target.Id = from.Id;
+            target.IsAbstract = from.IsAbstract;
+            target.IsActive = from.IsActive;
+            target.IsBillable = from.IsBillable;
+            target.IsUnderProcess = from.IsUnderProcess;
+            target.LimitAccessToProcessUsers = from.LimitAccessToProcessUsers;
+            target.Name = from.Name;
+            target.NameResourceKey = from.NameResourceKey;
+            target.OwnerId = from.OwnerId;
+            target.ParentId = from.ParentId;
+            target.PreviewTypeIndex = from.PreviewTypeIndex;
+            target.PreviewTypeName = from.PreviewTypeName;
+            target.RankPropertyId = from.RankPropertyId;
+            target.ShowToCustomer = from.ShowToCustomer;
+            target.SortType = from.SortType;
+            target.ViewOnlyToOwner = from.ViewOnlyToOwner;
+            target.WebhookAddress = from.WebhookAddress;
 
-            to.Stages = from.Stages?.Select(s => ToDto(s));
-            to.Groups = from.Groups?.Select(g => g.ToDto());
-            to.Properties = from.Properties?.Select(p =>
+            target.Stages = from.Stages?.Select(s => ToDto(s));
+            target.Groups = from.Groups?.Select(g => g.ToDto());
+            target.Properties = from.Properties?.Select(p =>
             {
                 var theProperty = p.ToDto();
 
-                theProperty.Group = to.Groups.Where(g => g.Id == theProperty.PropertyGroupId).FirstOrDefault();
+                theProperty.Group = target.Groups.Where(g => g.Id == theProperty.PropertyGroupId).FirstOrDefault();
 
                 return theProperty;
             });
 
-            return to;
+            return target;
         }
 
         public static TTo FillBaseCrmObjectTypeCreateRequestVM<TFrom, TTo>(this TTo to, TFrom from)

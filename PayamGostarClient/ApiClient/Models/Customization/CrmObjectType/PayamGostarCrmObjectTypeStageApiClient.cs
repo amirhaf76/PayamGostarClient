@@ -1,13 +1,14 @@
-﻿using PayamGostarClient.ApiProvider;
+﻿using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
+using PayamGostarClient.ApiClient.ApiProvider.Abstractions;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeStageApiClientDtos;
 using PayamGostarClient.ApiClient.Extension;
+using PayamGostarClient.ApiProvider;
 using PayamGostarClient.Helper.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
-using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeStageApiClientDtos;
-using PayamGostarClient.ApiClient.ApiProvider.Abstractions;
 
 namespace PayamGostarClient.ApiClient.Models.Customization.CrmObjectType
 {
@@ -35,7 +36,7 @@ namespace PayamGostarClient.ApiClient.Models.Customization.CrmObjectType
 
         }
 
-        public async Task<ApiResponse<IEnumerable<CrmObjectTypeStageGetResultDto>>> GetStagesAsync(Guid crmObjectId)
+        public async Task<ApiResponse<IEnumerable<StageGetResultDto>>> GetStagesAsync(Guid crmObjectId)
         {
             var request = new CrmObjectTypeStageGetCollectionRequestVM
             {

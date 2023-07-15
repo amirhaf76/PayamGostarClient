@@ -60,5 +60,7 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
 
 
         INumberingTemplateApiClient CreateNumberingTemplateApiClient();
+
+        ICategoryClient CreateCategoryClient();
     }
 }

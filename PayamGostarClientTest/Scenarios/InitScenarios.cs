@@ -181,7 +181,6 @@ namespace PayamGostarClientTest
             var stagesAssertionData = model.Stages
                 .Select(x => new
                 {
-                    x.Index,
                     x.Key,
                     x.IsDoneStage,
                     Name = x.Name.FirstOrDefault()?.Value,
@@ -489,7 +488,6 @@ namespace PayamGostarClientTest
             var stagesAssertionData = existedModel.Stages
                 .Select(x => new
                 {
-                    x.Index,
                     x.Key,
                     x.IsDoneStage,
                     Name = x.Name.FirstOrDefault()?.Value,
@@ -532,7 +530,6 @@ namespace PayamGostarClientTest
             var stagesAssertionData = existedModel.Stages
                 .Select(x => new
                 {
-                    x.Index,
                     x.Key,
                     x.IsDoneStage,
                     Name = x.Name.FirstOrDefault()?.Value,
@@ -575,7 +572,6 @@ namespace PayamGostarClientTest
             var stagesAssertionData = existedModel.Stages
                 .Select(x => new
                 {
-                    x.Index,
                     x.Key,
                     x.IsDoneStage,
                     Name = x.Name.FirstOrDefault()?.Value,

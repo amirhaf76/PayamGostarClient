@@ -1,12 +1,18 @@
 ﻿using PayamGostarClient.ApiClient.Enums;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
     public class CrmIdentityModel : BaseCRMModel
     {
+        public CrmIdentityModel()
+        {
+            NumberingTemplate = new NumberingTemplateModel();
+        }
+
         public override Gp_CrmObjectType Type => Gp_CrmObjectType.Identity;
 
-        public int NumberingTemplateId { get; set; }
+        public NumberingTemplateModel NumberingTemplate { get; set; }
 
         public Gp_IdentityType IdentityTypeIndex { get; set; }
 

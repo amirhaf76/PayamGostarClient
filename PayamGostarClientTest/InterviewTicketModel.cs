@@ -85,7 +85,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 1,
                         Key = "Filtering"
                     },
                     new Stage()
@@ -96,7 +95,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 2,
                         Key = "FirstArrangement"
                     },
                     new Stage()
@@ -107,7 +105,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 3,
                         Key = "FirstInterview"
                     },
                     new Stage()
@@ -118,7 +115,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 4,
                         Key = "SecondArrangement"
                     },
                     new Stage()
@@ -129,7 +125,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 5,
                         Key = "SecondInterview"
                     },
                     new Stage()
@@ -140,7 +135,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 6,
                         Key = "HRInterviewArrangement"
                     },
                     new Stage()
@@ -151,7 +145,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = false,
                         Enabled = true,
-                        Index = 7,
                         Key = "HRInterview"
                     },
                     new Stage()
@@ -162,7 +155,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = true,
                         Enabled = true,
-                        Index = 8,
                         Key = "Hired",
                     },
                     new Stage()
@@ -173,7 +165,6 @@ namespace PayamGostarClientTest
                         },
                         IsDoneStage = true,
                         Enabled = true,
-                        Index = 9,
                         Key = "Rejected"
                     },
                 },

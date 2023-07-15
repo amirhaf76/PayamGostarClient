@@ -14,8 +14,6 @@ namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos
 
         public bool IsRequired { get; set; }
 
-
-
         public int PropertyDisplayTypeIndex { get; set; }
 
         public int? PropertyGroupId { get; set; }
@@ -31,8 +29,16 @@ namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos
 
         public string UserKey { get; set; }
 
-        public PropertyGroupGetResultDto Group { get; set; }
 
+        public Guid? ParentId { get; set; }
+        public string PropertyGroupName { get; set; }
+        public string PropertyGroupNameResourceKey { get; set; }
+        public int PropertyDisplayIndex { get; set; }
+        public int PropertyTypeIndex { get; set; }
+        public string PropertyTypeName { get; set; }
+        public string PropertyDisplayTypeName { get; set; }
+
+        public PropertyGroupGetResultDto Group { get; set; }
 
         public ExtendedPropertyExtraConfigDto ExtraConfig { get; set; }
     }
