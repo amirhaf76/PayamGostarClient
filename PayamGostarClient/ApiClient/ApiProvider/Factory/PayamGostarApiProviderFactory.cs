@@ -183,6 +183,90 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
             return CreateClient<IAutoNumberPropertyDefinitionApiClient, AutoNumberPropertyDefinitionApiClient>();
         }
 
+        public IGregorianDatePropertyDefinitionApiClient CreateGregorianDatePropertyDefinitionApiClient()
+        {
+            return CreateClient<IGregorianDatePropertyDefinitionApiClient, GregorianDatePropertyDefinitionApiClient>();
+        }
+
+        public IIdentityPropertyDefinitionApiClient CreateIdentityPropertyDefinitionApiClient()
+        {
+            return CreateClient<IIdentityPropertyDefinitionApiClient, IdentityPropertyDefinitionApiClient>();
+        }
+
+        public IGpPropertyDefinitionApiClient CreateGpPropertyDefinitionApiClient()
+        {
+            return CreateClient<IGpPropertyDefinitionApiClient, GpPropertyDefinitionApiClient>();
+        }
+
+        public IHTMLPropertyDefinitionApiClient CreateHTMLPropertyDefinitionApiClient()
+        {
+            return CreateClient<IHTMLPropertyDefinitionApiClient, HTMLPropertyDefinitionApiClient>();
+        }
+
+        public IImagePropertyDefinitionApiClient CreateImagePropertyDefinitionApiClient()
+        {
+            return CreateClient<IImagePropertyDefinitionApiClient, ImagePropertyDefinitionApiClient>();
+        }
+
+        public ILinkPropertyDefinitionApiClient CreateLinkPropertyDefinitionApiClient()
+        {
+            return CreateClient<ILinkPropertyDefinitionApiClient, LinkPropertyDefinitionApiClient>();
+        }
+
+        public IMarketingCampaignPropertyDefinitionApiClient CreateMarketingCampaignPropertyDefinitionApiClient()
+        {
+            return CreateClient<IMarketingCampaignPropertyDefinitionApiClient, MarketingCampaignPropertyDefinitionApiClient>();
+        }
+
+
+        public ICurrencyMultiValuePropertyDefintionApiClient CreateCurrencyMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<ICurrencyMultiValuePropertyDefintionApiClient, CurrencyMultiValuePropertyDefintionApiClient>();
+        }
+        public IFileMultiValuePropertyDefinitionApiClient CreateFileMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<IFileMultiValuePropertyDefinitionApiClient, FileMultiValuePropertyDefinitionApiClient>();
+        }
+        public IGregorianDateMultiValuePropertyDefintionApiClient CreateGregorianDateMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<IGregorianDateMultiValuePropertyDefintionApiClient, GregorianDateMultiValuePropertyDefintionApiClient>();
+        }
+        public IIdentityMultiValuePropertyDefinitionApiClient CreateIdentityMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<IIdentityMultiValuePropertyDefinitionApiClient, IdentityMultiValuePropertyDefinitionApiClient>();
+        }
+        public ILinkMultiValuePropertyDefinitionApiClient CreateLinkMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<ILinkMultiValuePropertyDefinitionApiClient, LinkMultiValuePropertyDefinitionApiClient>();
+        }
+        public INumberMultiValuePropertyDefinitionApiClient CreateNumberMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<INumberMultiValuePropertyDefinitionApiClient, NumberMultiValuePropertyDefinitionApiClient>();
+        }
+        public IPersianDateMultiValuePropertyDefinitionApiClient CreatePersianDateMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<IPersianDateMultiValuePropertyDefinitionApiClient, PersianDateMultiValuePropertyDefinitionApiClient>();
+        }
+        public IProductMultiValuePropertyDefinitionApiClient CreateProductMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<IProductMultiValuePropertyDefinitionApiClient, ProductMultiValuePropertyDefinitionApiClient>();
+        }
+        public ISecurityItemMultiValuePropertyDefinitionApiClient CreateSecurityItemMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<ISecurityItemMultiValuePropertyDefinitionApiClient, SecurityItemMultiValuePropertyDefinitionApiClient>();
+        }
+        public ITextMultiValuePropertyDefinitionApiClient CreateTextMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<ITextMultiValuePropertyDefinitionApiClient, TextMultiValuePropertyDefinitionApiClient>();
+        }
+        public IUserMultiValuePropertyDefinitionApiClient CreateUserMultiValuePropertyDefinitionApiClient()
+        {
+            return CreateClient<IUserMultiValuePropertyDefinitionApiClient, UserMultiValuePropertyDefinitionApiClient>();
+        }
+
+
+
+
 
         public INumberingTemplateApiClient CreateNumberingTemplateApiClient()
         {
