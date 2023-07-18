@@ -8,8 +8,6 @@ namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels
     {
         public string Name { get; set; }
 
-        public Guid? ParentId { get; set; }
-
         public CustomizationCrmType CustomizationCrmType => CustomizationCrmType.ProductGroup;
     }
 }
