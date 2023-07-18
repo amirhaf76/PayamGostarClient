@@ -219,17 +219,17 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
         }
 
 
-        public ICurrencyMultiValuePropertyDefintionApiClient CreateCurrencyMultiValuePropertyDefinitionApiClient()
+        public ICurrencyMultiValuePropertyDefinitionApiClient CreateCurrencyMultiValuePropertyDefinitionApiClient()
         {
-            return CreateClient<ICurrencyMultiValuePropertyDefintionApiClient, CurrencyMultiValuePropertyDefintionApiClient>();
+            return CreateClient<ICurrencyMultiValuePropertyDefinitionApiClient, CurrencyMultiValuePropertyDefinitionApiClient>();
         }
         public IFileMultiValuePropertyDefinitionApiClient CreateFileMultiValuePropertyDefinitionApiClient()
         {
             return CreateClient<IFileMultiValuePropertyDefinitionApiClient, FileMultiValuePropertyDefinitionApiClient>();
         }
-        public IGregorianDateMultiValuePropertyDefintionApiClient CreateGregorianDateMultiValuePropertyDefinitionApiClient()
+        public IGregorianDateMultiValuePropertyDefinitionApiClient CreateGregorianDateMultiValuePropertyDefinitionApiClient()
         {
-            return CreateClient<IGregorianDateMultiValuePropertyDefintionApiClient, GregorianDateMultiValuePropertyDefintionApiClient>();
+            return CreateClient<IGregorianDateMultiValuePropertyDefinitionApiClient, GregorianDateMultiValuePropertyDefinitionApiClient>();
         }
         public IIdentityMultiValuePropertyDefinitionApiClient CreateIdentityMultiValuePropertyDefinitionApiClient()
         {
@@ -276,6 +276,11 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
         public ICategoryClient CreateCategoryClient()
         {
             return CreateClient<ICategoryClient, CategoryClient>();
+        }
+
+        public IProductGroupClient CreateProductGroupClient()
+        {
+            return CreateClient<IProductGroupClient, ProductGroupClient>();
         }
 
 

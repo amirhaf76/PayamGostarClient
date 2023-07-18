@@ -10,12 +10,6 @@ namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels
 
         public string UserKey { get; set; }
 
-        public bool AddedByUser { get; set; }
-
-        public Guid? OwnerUserId { get; set; }
-
-        public Guid? ParentId { get; set; }
-
         public CustomizationCrmType CustomizationCrmType => CustomizationCrmType.Category;
     }
 

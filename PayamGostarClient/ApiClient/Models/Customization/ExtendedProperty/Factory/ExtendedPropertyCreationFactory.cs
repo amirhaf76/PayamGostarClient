@@ -746,7 +746,7 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ExtendedProperty.Fact
                 {
                     var clientApi = ClientFactory.CreateGregorianDateMultiValuePropertyDefinitionApiClient();
 
-                    return await clientApi.PostApiV2GregoriandatemultivaluepropertydefintionCreateAsync(Property.ToVM());
+                    return await clientApi.PostApiV2GregoriandatemultivaluepropertydefinitionCreateAsync(Property.ToVM());
                 }
                 catch (ApiException e)
                 {
