@@ -38,7 +38,10 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
 
         INumberingTemplateApiClient CreateNumberingTemplateApiClient();
 
+
         ICategoryClient CreateCategoryClient();
+
+        IProductGroupClient CreateProductGroupClient();
 
 
         IAppointmentPropertyDefinitionApiClient CreateAppointmentPropertyDefinitionApiClient();
@@ -67,9 +70,9 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
         IUserPropertyDefinitionApiClient CreateUserPropertyDefinitionApiClient();
 
         ICrmObjectMultiValuePropertyDefinitionApiClient CreateCrmObjectMultiValuePropertyDefinitionApiClient();
-        ICurrencyMultiValuePropertyDefintionApiClient CreateCurrencyMultiValuePropertyDefinitionApiClient();
+        ICurrencyMultiValuePropertyDefinitionApiClient CreateCurrencyMultiValuePropertyDefinitionApiClient();
         IFileMultiValuePropertyDefinitionApiClient CreateFileMultiValuePropertyDefinitionApiClient();
-        IGregorianDateMultiValuePropertyDefintionApiClient CreateGregorianDateMultiValuePropertyDefinitionApiClient();
+        IGregorianDateMultiValuePropertyDefinitionApiClient CreateGregorianDateMultiValuePropertyDefinitionApiClient();
         IIdentityMultiValuePropertyDefinitionApiClient CreateIdentityMultiValuePropertyDefinitionApiClient();
         ILinkMultiValuePropertyDefinitionApiClient CreateLinkMultiValuePropertyDefinitionApiClient();
         INumberMultiValuePropertyDefinitionApiClient CreateNumberMultiValuePropertyDefinitionApiClient();
