@@ -79,9 +79,6 @@ namespace PayamGostarClient.Initializer.Services
             {
                 Name = model.Name,
                 UserKey = model.UserKey,
-                ParentId = model.ParentId,
-                OwnerUserId = model.OwnerUserId,
-                AddedByUser = model.AddedByUser,
             };
         }
     }
