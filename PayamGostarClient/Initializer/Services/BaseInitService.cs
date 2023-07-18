@@ -6,6 +6,7 @@ using PayamGostarClient.ApiClient.Abstractions.Customization.PropertyGroup;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
 using PayamGostarClient.Initializer.Abstractions.InitServices;
+using PayamGostarClient.Initializer.Abstractions.Utilities.AbstractFactories;
 using PayamGostarClient.Initializer.Abstractions.Utilities.Strategies;
 using PayamGostarClient.Initializer.Abstractions.Utilities.Validator;
 using PayamGostarClient.Initializer.CrmModels;
@@ -28,7 +29,10 @@ namespace PayamGostarClient.Initializer.Services
         private readonly IExtendedPropertyCreationStrategy _propertyCreationStrategy;
         private readonly IGroupCreationStrategy _groupCreationStrategy;
         private readonly IStageCreationStrategy _stageCreationStrategy;
-        private readonly IModelMatchingValidator _matchingValidator;
+
+        private readonly IStageMatchingValidator _stageMatchingValidator;
+        private readonly IExtendedPropertyMatchingValidator _extendedPropertyMatchingValidator;
+        private readonly ICrmModelMatchingValidator _crmModelMatchingValidator;
 
         private IPayamGostarCustomizationApiClient CustomizationApi { get; }
 
@@ -37,7 +41,7 @@ namespace PayamGostarClient.Initializer.Services
         protected IPayamGostarPropertyGroupApiClient PropertyGroupApi { get; }
 
 
-        protected BaseInitService(T intendedCrmObject, IPayamGostarApiClient payamGostarApiClient)
+        internal BaseInitService(T intendedCrmObject, IPayamGostarApiClient payamGostarApiClient)
         {
             IntendedCrmObject = intendedCrmObject;
 
@@ -51,7 +55,30 @@ namespace PayamGostarClient.Initializer.Services
             _propertyCreationStrategy = new ExtendedPropertyCreationStrategy(ExtendedPropertyApi, _groupCreationStrategy);
             _stageCreationStrategy = new StageCreationStrategy(CrmObjectTypeApi.StageApi);
 
-            _matchingValidator = new ModelMatchingValidator();
+            _stageMatchingValidator = new StageMatchingValidator();
+            _extendedPropertyMatchingValidator = new ExtendedPropertyMatchingValidator();
+            _crmModelMatchingValidator = new CrmModelMatchingValidator();
+
+        }
+
+        internal BaseInitService(T intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory)
+        {
+            IntendedCrmObject = intendedCrmObject;
+
+            CustomizationApi = payamGostarApiClient.CustomizationApi;
+
+            CrmObjectTypeApi = CustomizationApi.CrmObjectTypeApi;
+            ExtendedPropertyApi = CustomizationApi.ExtendedPropertyApi;
+            PropertyGroupApi = CustomizationApi.PropertyGroupApi;
+
+            _groupCreationStrategy = factory.CreateGroupCreationStrategy();
+            _propertyCreationStrategy = factory.CreateExtendedPropertyCreationStrategy();
+            _stageCreationStrategy = factory.CreateStageCreationStrategy();
+
+            _stageMatchingValidator = factory.CreateStageMatchingValidator();
+            _extendedPropertyMatchingValidator = factory.CreateExtendedPropertyMatchingValidator();
+            _crmModelMatchingValidator = factory.CreateCrmModelMatchingValidator();
+
         }
 
 
@@ -305,7 +332,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             try
             {
-                _matchingValidator.CheckMatchingBaseCrmObject(IntendedCrmObject, existedCrmObj);
+                _crmModelMatchingValidator.CheckMatchingBaseCrmObject(IntendedCrmObject, existedCrmObj);
             }
             catch (MisMatchException e)
             {
@@ -317,7 +344,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             try
             {
-                return _matchingValidator.CheckMatchingAndGetNewExtendedProperties(IntendedCrmObject.Properties, existedProperties);
+                return _extendedPropertyMatchingValidator.CheckMatchingAndGetNewExtendedProperties(IntendedCrmObject.Properties, existedProperties);
             }
             catch (MisMatchException e)
             {
@@ -329,7 +356,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             try
             {
-                return _matchingValidator.CheckMatchingAndGetNewStages(IntendedCrmObject.Stages, existedStages);
+                return _stageMatchingValidator.CheckMatchingAndGetNewStages(IntendedCrmObject.Stages, existedStages);
             }
             catch (MisMatchException e)
             {

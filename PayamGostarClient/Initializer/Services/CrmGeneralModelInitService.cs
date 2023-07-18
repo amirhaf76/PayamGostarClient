@@ -19,7 +19,7 @@ namespace PayamGostarClient.Initializer.Services
         private readonly IPayamGostarCrmObjectTypeApiClient _crmObjectType;
         private readonly IGroupCreationStrategy _groupCreation;
         private readonly IExtendedPropertyCreationStrategy _extendedProperty;
-        private readonly IModelMatchingValidator _matchingValidator;
+        private readonly IExtendedPropertyMatchingValidator _extendedPropertyMatchingValidator;
         private readonly CrmGeneralModel _intentedCrmGeneralModel;
 
 
@@ -32,7 +32,7 @@ namespace PayamGostarClient.Initializer.Services
             _groupCreation = new GroupCreationStrategy(payamGostarApiClient.CustomizationApi.PropertyGroupApi);
             _extendedProperty = new ExtendedPropertyCreationStrategy(payamGostarApiClient.CustomizationApi.ExtendedPropertyApi, _groupCreation);
 
-            _matchingValidator = new ModelMatchingValidator();
+            _extendedPropertyMatchingValidator = new ExtendedPropertyMatchingValidator();
         }
 
 
@@ -42,7 +42,7 @@ namespace PayamGostarClient.Initializer.Services
             {
                 var receivedAbstractCrmObject = await GetAbstractCrmObjectAsync();
 
-                var newExtendedProperties = _matchingValidator.CheckMatchingAndGetNewExtendedProperties(
+                var newExtendedProperties = _extendedPropertyMatchingValidator.CheckMatchingAndGetNewExtendedProperties(
                     intentedProperties: _intentedCrmGeneralModel.Properties,
                     existedProperties: GetExtendedValueProperties(receivedAbstractCrmObject));
 
@@ -63,7 +63,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             var receivedAbstractCrmObject = await GetAbstractCrmObjectAsync();
 
-            var newExtendedProperties = _matchingValidator.CheckMatchingAndGetNewExtendedProperties(
+            var newExtendedProperties = _extendedPropertyMatchingValidator.CheckMatchingAndGetNewExtendedProperties(
                 intentedProperties: _intentedCrmGeneralModel.Properties,
                 existedProperties: GetExtendedValueProperties(receivedAbstractCrmObject));
 
