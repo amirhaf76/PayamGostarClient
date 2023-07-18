@@ -1,16 +1,15 @@
 ﻿using PayamGostarClient.ApiClient.Dtos.ProductDtos.Create;
 using PayamGostarClient.ApiClient.Dtos.ProductDtos.Get;
-using System;
+using PayamGostarClient.Helper.Net;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.ApiClient.Abstractions.Customization.Product
 {
     public interface IPayamGostarProductGroupApiClient
     {
-        Task<IEnumerable<ProductGroupGetResponseDto>> GetAsync(ProductGroupGetRequestDto request);
+        Task<ApiResponse<IEnumerable<ProductGroupGetResponseDto>>> GetAsync(ProductGroupGetRequestDto request);
 
-        Task<IEnumerable<ProductGroupCreationResponseDto>> CreateAsync(ProductGroupCreationRequestDto request);
+        Task<ApiResponse<ProductGroupCreationResponseDto>> CreateAsync(ProductGroupCreationRequestDto request);
     }
 }

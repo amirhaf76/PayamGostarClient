@@ -3,12 +3,14 @@ using PayamGostarClient.ApiClient.Abstractions.Customization.Category;
 using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
 using PayamGostarClient.ApiClient.Abstractions.Customization.ExtendedProperty;
 using PayamGostarClient.ApiClient.Abstractions.Customization.NumberTemplate;
+using PayamGostarClient.ApiClient.Abstractions.Customization.Product;
 using PayamGostarClient.ApiClient.Abstractions.Customization.PropertyGroup;
 using PayamGostarClient.ApiClient.ApiProvider.Abstractions;
 using PayamGostarClient.ApiClient.Models.Customization.Category;
 using PayamGostarClient.ApiClient.Models.Customization.CrmObjectType;
 using PayamGostarClient.ApiClient.Models.Customization.ExtendedProperty;
 using PayamGostarClient.ApiClient.Models.Customization.NumberTemplate;
+using PayamGostarClient.ApiClient.Models.Customization.ProductGroup;
 using PayamGostarClient.ApiClient.Models.Customization.PropertyGroup;
 
 namespace PayamGostarClient.ApiClient.Models.Customization
@@ -28,6 +30,8 @@ namespace PayamGostarClient.ApiClient.Models.Customization
         public IPayamGostarNumberingTemplateApiClient NumberingTemplateApi => new PayamGostarNumberingTemplateApiClient(ApiClientConfig, ApiProviderFactory);
 
         public IPayamGostarCategoryApiClient CategoryApi => new PayamGostarCategoryApiClient(ApiClientConfig, ApiProviderFactory);
+
+        public IPayamGostarProductGroupApiClient ProductGroupApi => new PayamGostarProductGroupApiClient(ApiClientConfig, ApiProviderFactory);
     }
 
 

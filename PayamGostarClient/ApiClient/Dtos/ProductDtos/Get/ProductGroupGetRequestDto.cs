@@ -6,5 +6,9 @@ namespace PayamGostarClient.ApiClient.Dtos.ProductDtos.Get
 {
     public class ProductGroupGetRequestDto
     {
+        public Guid? ParentGroupId { get; set; }
+
+        public string Name { get; set; }
+
     }
 }
