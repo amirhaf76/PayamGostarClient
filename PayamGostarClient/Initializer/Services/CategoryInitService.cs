@@ -5,6 +5,7 @@ using PayamGostarClient.ApiClient.Dtos.CategoryDtos.Search;
 using PayamGostarClient.Helper.Net;
 using PayamGostarClient.Initializer.Abstractions.InitServices;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
+using PayamGostarClient.Initializer.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,15 +30,24 @@ namespace PayamGostarClient.Initializer.Services
         {
             var categorySearchedResult = await SearchCategoryAsync();
 
+            if (categorySearchedResult.Result.Count() > 1)
+            {
+                return false;
+            }
+
             return categorySearchedResult.Result.Any();
         }
-
 
         public async Task InitAsync()
         {
             var categorySearchedResult = await SearchCategoryAsync();
 
-            if (!categorySearchedResult.Result.Any())
+            if (categorySearchedResult.Result.Count() > 1)
+            {
+                throw new MisMatchException($"There are more than one category group with '{_categoryModel.UserKey}' key!");
+            }
+
+            if (categorySearchedResult.Result.Count() != 1)
             {
                 var createRequest = CreateCreationRequest(_categoryModel);
 
@@ -59,7 +69,7 @@ namespace PayamGostarClient.Initializer.Services
             return new CategorySearchRequestDto
             {
                 Key = model.UserKey,
-                Name = model.Name,
+                // Name = model.Name,
             };
         }
 
