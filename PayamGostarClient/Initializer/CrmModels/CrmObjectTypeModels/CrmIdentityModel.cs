@@ -1,9 +1,10 @@
 ﻿using PayamGostarClient.ApiClient.Enums;
+using PayamGostarClient.Initializer.Abstractions.CrmModel;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
-    public class CrmIdentityModel : BaseCRMModel
+    public class CrmIdentityModel : BaseCRMModel, INumericalCrmModel
     {
         public CrmIdentityModel()
         {
