@@ -12,6 +12,7 @@ using PayamGostarClient.Helper.Net;
 using PayamGostarClient.Initializer.Abstractions.Utilities.Strategies;
 using PayamGostarClient.Initializer.Abstractions.Utilities.Validator;
 using PayamGostarClient.Initializer.CrmModels;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using PayamGostarClient.Initializer.Utilities.Comparers;
@@ -164,6 +165,7 @@ namespace PayamGostarClientTest.Scenarios.Unit
                 });
 
             // Assertion.
+            mockGroupClient.Verify(x => x.CreateGroupPropetyAsync(It.IsAny<Guid>(), It.IsAny<PropertyGroup>()), times: Times.Once);
             mockGroupClient.VerifyNoOtherCalls();
         }
 
@@ -342,7 +344,7 @@ namespace PayamGostarClientTest.Scenarios.Unit
         }
 
         [Fact]
-        public void CheckMatchingBaseCrmObject_ASimpleCrmObjectModel_()
+        public void CheckCrmMatchingBaseCrmObject_ASimpleCrmObjectModel_JustTypeAndCodeMustBeCalled()
         {
             // Arrangement
             var testId = Guid.NewGuid();
@@ -363,7 +365,7 @@ namespace PayamGostarClientTest.Scenarios.Unit
             mockChecker
                 .Setup(x => x.CheckFieldMatching(It.IsAny<It.IsAnyType>(), It.IsAny<It.IsAnyType>(), It.IsAny<string>()));
 
-            var validator = new ModelMatchingValidator(mockChecker.Object);
+            var validator = new CrmModelMatchingValidator(mockChecker.Object);
 
             // Action.
             validator.CheckMatchingBaseCrmObject(mockCrmFormModel, mockCrmObjectTypeSearchResultDto);
@@ -371,6 +373,94 @@ namespace PayamGostarClientTest.Scenarios.Unit
             // Assertion.
             mockChecker.Verify(
                 x => x.CheckFieldMatching(testId.ToString(), testId.ToString(), It.IsAny<string>()),
+                times: Times.Once);
+
+            mockChecker.Verify(
+                x => x.CheckFieldMatching(
+                    mockCrmFormModel.Type, (Gp_CrmObjectType)mockCrmObjectTypeSearchResultDto.CrmOjectTypeIndex, It.IsAny<string>()),
+                times: Times.Once);
+
+            mockChecker.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void CheckNumberingMatchingBaseCrmObject_ASimpleCrmObjectModel_JustTypeAndCodeMustBeCalled()
+        {
+            // Arrangement
+            var testId = Guid.NewGuid();
+
+            var mockCrmFormModel = new CrmFormModel
+            {
+                Code = testId.ToString()
+            };
+
+            var mockCrmObjectTypeSearchResultDto = new CrmObjectTypeSearchResultDto
+            {
+                Code = testId.ToString(),
+                CrmOjectTypeIndex = (int)mockCrmFormModel.Type,
+            };
+
+            var mockChecker = new Mock<IMatchingValidator>(MockBehavior.Strict);
+
+            mockChecker
+                .Setup(x => x.CheckFieldMatching(It.IsAny<It.IsAnyType>(), It.IsAny<It.IsAnyType>(), It.IsAny<string>()));
+
+            var validator = new NumericCrmModelMatchingValidator(mockChecker.Object);
+
+            // Action.
+            validator.CheckMatchingBaseCrmObject(mockCrmFormModel, mockCrmObjectTypeSearchResultDto);
+
+            // Assertion.
+            mockChecker.Verify(
+                x => x.CheckFieldMatching(testId.ToString(), testId.ToString(), It.IsAny<string>()),
+                times: Times.Once);
+
+            mockChecker.Verify(
+                x => x.CheckFieldMatching(
+                    mockCrmFormModel.Type, (Gp_CrmObjectType)mockCrmObjectTypeSearchResultDto.CrmOjectTypeIndex, It.IsAny<string>()),
+                times: Times.Once);
+
+            mockChecker.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void CheckNumberingMatchingBaseCrmObject_ASimpleInvoiceCrmObjectModel_JustTypeAndCodeMustBeCalled()
+        {
+            // Arrangement
+            var testId = Guid.NewGuid();
+            var numberingTemplateId = 9;
+
+            var mockCrmFormModel = new CrmInvoiceModel
+            {
+                Code = testId.ToString(),
+                NumberingTemplate = new NumberingTemplateModel { Id = numberingTemplateId }
+            };
+
+            var mockCrmObjectTypeSearchResultDto = new CrmObjectTypeSearchResultDto
+            {
+                Code = testId.ToString(),
+                CrmOjectTypeIndex = (int)mockCrmFormModel.Type,
+                NumberingTemplateId = numberingTemplateId,
+            };
+
+            var mockChecker = new Mock<IMatchingValidator>(MockBehavior.Strict);
+
+            mockChecker
+                .Setup(x => x.CheckFieldMatching(It.IsAny<It.IsAnyType>(), It.IsAny<It.IsAnyType>(), It.IsAny<string>()));
+
+            var validator = new NumericCrmModelMatchingValidator(mockChecker.Object);
+
+            // Action.
+            validator.CheckMatchingBaseCrmObject(mockCrmFormModel, mockCrmObjectTypeSearchResultDto);
+
+            // Assertion.
+            mockChecker.Verify(
+                x => x.CheckFieldMatching(testId.ToString(), testId.ToString(), It.IsAny<string>()),
+                times: Times.Once);
+
+            mockChecker.Verify(
+                x => x.CheckFieldMatching(
+                    mockCrmFormModel.NumberingTemplate.Id, mockCrmObjectTypeSearchResultDto.NumberingTemplateId, It.IsAny<string>()),
                 times: Times.Once);
 
             mockChecker.Verify(
