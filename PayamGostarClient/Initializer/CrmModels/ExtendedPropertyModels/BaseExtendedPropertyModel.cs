@@ -19,6 +19,7 @@ namespace PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels
 
         internal int PropertyTypeIndex { get; set; }
 
+        public bool DoesBelongToSuperCrmObjectType { get; set; }
 
         public string UserKey { get; set; }
 
