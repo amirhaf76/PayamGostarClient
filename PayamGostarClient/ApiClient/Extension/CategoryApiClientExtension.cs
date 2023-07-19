@@ -11,7 +11,7 @@ namespace PayamGostarClient.ApiClient.Extension
             return new CategoryCreationRequestVM
             {
                 Name = dto.Name,
-                UserKey = dto.Name,
+                UserKey = dto.UserKey,
                 ParentId = dto.ParentId,
                 OwnerUserId = dto.OwnerUserId,
                 AddedByUser = dto.AddedByUser,
