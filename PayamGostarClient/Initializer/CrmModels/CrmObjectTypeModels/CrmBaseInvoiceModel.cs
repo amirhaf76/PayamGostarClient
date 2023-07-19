@@ -1,8 +1,9 @@
-﻿using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
+﻿using PayamGostarClient.Initializer.Abstractions.CrmModel;
+using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels
 {
-    public abstract class CrmBaseInvoiceModel : BaseCRMModel
+    public abstract class CrmBaseInvoiceModel : BaseCRMModel, INumericalCrmModel
     {
         public CrmBaseInvoiceModel()
         {

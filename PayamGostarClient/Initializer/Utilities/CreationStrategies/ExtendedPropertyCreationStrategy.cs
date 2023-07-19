@@ -29,20 +29,7 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
 
         public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> newProperties)
         {
-            var createdPropertiesId = new List<Guid>();
-
-            foreach (var property in newProperties)
-            {
-                property.CrmObjectTypeId = crmObjectTypeId.ToString();
-
-                var propertyDto = CreateExtendedPropertyCreationDto(property);
-
-                var response = await _extendedPropertyApi.CreateAsync(propertyDto);
-
-                createdPropertiesId.Add(response.Result.Id);
-            }
-
-            return createdPropertiesId;
+            return await CreateExtendedPropertiesAsync(crmObjectTypeId, newProperties, Array.Empty<PropertyGroupGetResultDto>());
         }
 
         public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> newProperties, IEnumerable<PropertyGroupGetResultDto> existedGroups)
@@ -53,7 +40,7 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
 
             foreach (var groupedPropertiesAndGroup in groupedPropertiesAndGroups)
             {
-                await CheckAndCreateGroupIfDoesNotExist(crmObjectTypeId, existedGroups, groupedPropertiesAndGroup);
+                await CheckAndCreateGroupIfDoesNotExistAsync(crmObjectTypeId, existedGroups, groupedPropertiesAndGroup.Key);
 
                 foreach (var property in groupedPropertiesAndGroup)
                 {
@@ -71,24 +58,24 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
         }
 
 
-        private async Task<PropertyGroup> CheckAndCreateGroupIfDoesNotExist(Guid crmObjectTypeId, IEnumerable<PropertyGroupGetResultDto> existedGroups, IGrouping<PropertyGroup, BaseExtendedPropertyModel> groupedPropertiesAndGroup)
+        private async Task<PropertyGroup> CheckAndCreateGroupIfDoesNotExistAsync(Guid crmObjectTypeId, IEnumerable<PropertyGroupGetResultDto> existedGroups, PropertyGroup newPropertyGroup)
         {
             //fetch group by name
-            var theGroup = existedGroups.Where(g => groupedPropertiesAndGroup.Key.Name.Any(xx => xx.Value == g.Name)).FirstOrDefault();
+            var theGroup = existedGroups.Where(g => newPropertyGroup.Name.Any(xx => xx.Value == g.Name)).FirstOrDefault();
 
             if (theGroup == null)
             {
                 // create group if not exist
-                var gId = await _groupCreationStrategy.CreateGroupPropetyAsync(crmObjectTypeId, groupedPropertiesAndGroup.Key);
+                var gId = await _groupCreationStrategy.CreateGroupPropetyAsync(crmObjectTypeId, newPropertyGroup);
 
-                groupedPropertiesAndGroup.Key.Id = gId;
+                newPropertyGroup.Id = gId;
             }
             else
             {
-                groupedPropertiesAndGroup.Key.Id = theGroup.Id;
+                newPropertyGroup.Id = theGroup.Id;
             }
 
-            return groupedPropertiesAndGroup.Key;
+            return newPropertyGroup;
         }
 
         private BaseExtendedPropertyCreationDto CreateExtendedPropertyCreationDto(BaseExtendedPropertyModel propertyModel)
@@ -145,6 +132,62 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
 
                 case Gp_ExtendedPropertyType.SecurityItem:
                     return propertyModel.ToSecurityItemExtendedPropertyCreationDto();
+
+
+                case Gp_ExtendedPropertyType.Identity:
+                    return propertyModel.ToCrmItemIdentityExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.GeneralProperty:
+                    return propertyModel.ToGpExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.GregorianDate:
+                    return propertyModel.ToGregorianDateExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Html:
+                    return propertyModel.ToHTMLExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Image:
+                    return propertyModel.ToImageExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.Link:
+                    return propertyModel.ToLinkExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.MarketingCampaign:
+                    return propertyModel.ToMarketingCampaignExtendedPropertyCreationDto();
+
+
+                case Gp_ExtendedPropertyType.CurrencyMultiValue:
+                    return propertyModel.ToCurrencyMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.FileMultiValue:
+                    return propertyModel.ToFileMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.GregorianDateMultiValue:
+                    return propertyModel.ToGregorianDateMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.IdentityMultiValue:
+                    return propertyModel.ToIdentityMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.LinkMultiValue:
+                    return propertyModel.ToLinkMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.NumberMultiValue:
+                    return propertyModel.ToNumberMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.PersianDateMultiValue:
+                    return propertyModel.ToPersianDateMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.ProductList:
+                    return propertyModel.ToProductMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.SecurityItemMultiValue:
+                    return propertyModel.ToSecurityItemMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.TextMultiValue:
+                    return propertyModel.ToTextMultiValueExtendedPropertyCreationDto();
+
+                case Gp_ExtendedPropertyType.UserMultiValue:
+                    return propertyModel.ToUserMultiValueExtendedPropertyCreationDto();
 
                 default:
                     throw new NotFoundExtendedPropertyTypeException($"PropertyDisplayType: '{propertyModel.Type}'.");

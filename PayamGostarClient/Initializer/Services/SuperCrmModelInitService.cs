@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.ApiClient.Abstractions.Customization.CrmObjectType;
+using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos;
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.Search;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer.Abstractions.InitServices;
@@ -9,21 +10,22 @@ using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels;
 using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClient.Initializer.Utilities.CreationStrategies;
 using PayamGostarClient.Initializer.Utilities.Validator;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PayamGostarClient.Initializer.Services
 {
-    public class CrmGeneralModelInitService : IInitService
+    public class SuperCrmModelInitService : IInitService
     {
         private readonly IPayamGostarCrmObjectTypeApiClient _crmObjectType;
         private readonly IGroupCreationStrategy _groupCreation;
         private readonly IExtendedPropertyCreationStrategy _extendedProperty;
-        private readonly IModelMatchingValidator _matchingValidator;
-        private readonly CrmGeneralModel _intentedCrmGeneralModel;
+        private readonly IExtendedPropertyMatchingValidator _extendedPropertyMatchingValidator;
+        private readonly SuperCrmModel _intentedCrmGeneralModel;
 
 
-        public CrmGeneralModelInitService(CrmGeneralModel intentedCrmGeneralModel, IPayamGostarApiClient payamGostarApiClient)
+        public SuperCrmModelInitService(SuperCrmModel intentedCrmGeneralModel, IPayamGostarApiClient payamGostarApiClient)
         {
             _intentedCrmGeneralModel = intentedCrmGeneralModel;
 
@@ -32,7 +34,7 @@ namespace PayamGostarClient.Initializer.Services
             _groupCreation = new GroupCreationStrategy(payamGostarApiClient.CustomizationApi.PropertyGroupApi);
             _extendedProperty = new ExtendedPropertyCreationStrategy(payamGostarApiClient.CustomizationApi.ExtendedPropertyApi, _groupCreation);
 
-            _matchingValidator = new ModelMatchingValidator();
+            _extendedPropertyMatchingValidator = new ExtendedPropertyMatchingValidator();
         }
 
 
@@ -42,7 +44,7 @@ namespace PayamGostarClient.Initializer.Services
             {
                 var receivedAbstractCrmObject = await GetAbstractCrmObjectAsync();
 
-                var newExtendedProperties = _matchingValidator.CheckMatchingAndGetNewExtendedProperties(
+                var newExtendedProperties = _extendedPropertyMatchingValidator.CheckMatchingAndGetNewExtendedProperties(
                     intentedProperties: _intentedCrmGeneralModel.Properties,
                     existedProperties: GetExtendedValueProperties(receivedAbstractCrmObject));
 
@@ -63,7 +65,7 @@ namespace PayamGostarClient.Initializer.Services
         {
             var receivedAbstractCrmObject = await GetAbstractCrmObjectAsync();
 
-            var newExtendedProperties = _matchingValidator.CheckMatchingAndGetNewExtendedProperties(
+            var newExtendedProperties = _extendedPropertyMatchingValidator.CheckMatchingAndGetNewExtendedProperties(
                 intentedProperties: _intentedCrmGeneralModel.Properties,
                 existedProperties: GetExtendedValueProperties(receivedAbstractCrmObject));
 
@@ -94,7 +96,7 @@ namespace PayamGostarClient.Initializer.Services
             return receivedAbstractCrmObject;
         }
 
-        private static System.Collections.Generic.IEnumerable<ApiClient.Dtos.CrmObjectDtos.ExtendedPropertyGetResultDto> GetExtendedValueProperties(CrmObjectTypeSearchResultDto receivedAbstractCrmObject)
+        private static IEnumerable<ExtendedPropertyGetResultDto> GetExtendedValueProperties(CrmObjectTypeSearchResultDto receivedAbstractCrmObject)
         {
             return receivedAbstractCrmObject.Properties
                 .Where(p => p.PropertyTypeIndex == (int)Gp_PropertyType.ExtendedValue);

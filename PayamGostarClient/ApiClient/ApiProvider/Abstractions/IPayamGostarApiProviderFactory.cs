@@ -6,6 +6,7 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
     {
         ICrmObjectTypeApiClient CreateCrmObjectTypeApiClient();
 
+
         ICrmObjectTypeFormApiClient CreateCrmObjectTypeFormApiClient();
 
         ICrmObjectTypeTicketApiClient CreateCrmObjectTypeTicketApiClient();
@@ -31,36 +32,54 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
 
         IPropertyDefinitionApiClient CreatePropertyDefinitionApiClient();
 
-
         IPropertyGroupApiClient CreatePropertyGroupApiClient();
 
         ICrmObjectTypeStageApiClient CreateCrmObjectTypeStageApiClient();
 
-
-        ITextPropertyDefinitionApiClient CreateTextPropertyDefinitionApiClient();
-        IFormPropertyDefinitionApiClient CreateFormPropertyDefinitionApiClient();
-        IDropDownListPropertyDefinitionApiClient CreateDropDownListPropertyDefinitionApiClient();
-        IDropDownListPropertyDefinitionValueApiClient CreateDropDownListPropertyDefinitionValueApiClient();
-        IUserPropertyDefinitionApiClient CreateUserPropertyDefinitionApiClient();
-        INumberPropertyDefinitionApiClient CreateNumberPropertyDefinitionApiClient();
-        IDepartmentPropertyDefinitionApiClient CreateDepartmentPropertyDefinitionApiClient();
-        IPositionPropertyDefinitionApiClient CreatePositionPropertyDefinitionApiClient();
-        IPersianDatePropertyDefinitionApiClient CreatePersianDatePropertyDefinitionApiClient();
-        ILabelPropertyDefinitionApiClient CreateLabelPropertyDefinitionApiClient();
-        ICrmObjectMultiValuePropertyDefinitionApiClient CreateCrmObjectMultiValuePropertyDefinitionApiClient();
-
-
-        ITimePropertyDefinitionApiClient CreateTimePropertyDefinitionApiClient();
-        ICurrencyPropertyDefinitionApiClient CreateCurrencyPropertyDefinitionApiClient();
-        IFilePropertyDefinitionApiClient CreateFilePropertyDefinitionApiClient();
-        ICheckboxPropertyDefinitionApiClient CreateCheckboxPropertyDefinitionApiClient();
-        IAppointmentPropertyDefinitionApiClient CreateAppointmentPropertyDefinitionApiClient();
-        ISecurityItemPropertyDefinitionApiClient CreateSecurityItemPropertyDefinitionApiClient();
-        IAutoNumberPropertyDefinitionApiClient CreateAutoNumberPropertyDefinitionApiClient();
-
-
         INumberingTemplateApiClient CreateNumberingTemplateApiClient();
 
+
         ICategoryClient CreateCategoryClient();
+
+        IProductGroupClient CreateProductGroupClient();
+
+
+        IAppointmentPropertyDefinitionApiClient CreateAppointmentPropertyDefinitionApiClient();
+        IAutoNumberPropertyDefinitionApiClient CreateAutoNumberPropertyDefinitionApiClient();
+        ICheckboxPropertyDefinitionApiClient CreateCheckboxPropertyDefinitionApiClient();
+        ICurrencyPropertyDefinitionApiClient CreateCurrencyPropertyDefinitionApiClient();
+        IDepartmentPropertyDefinitionApiClient CreateDepartmentPropertyDefinitionApiClient();
+        IDropDownListPropertyDefinitionApiClient CreateDropDownListPropertyDefinitionApiClient();
+        IDropDownListPropertyDefinitionValueApiClient CreateDropDownListPropertyDefinitionValueApiClient();
+        IFilePropertyDefinitionApiClient CreateFilePropertyDefinitionApiClient();
+        IFormPropertyDefinitionApiClient CreateFormPropertyDefinitionApiClient();
+        IGpPropertyDefinitionApiClient CreateGpPropertyDefinitionApiClient();
+        IGregorianDatePropertyDefinitionApiClient CreateGregorianDatePropertyDefinitionApiClient();
+        IHTMLPropertyDefinitionApiClient CreateHTMLPropertyDefinitionApiClient();
+        IIdentityPropertyDefinitionApiClient CreateIdentityPropertyDefinitionApiClient();
+        IImagePropertyDefinitionApiClient CreateImagePropertyDefinitionApiClient();
+        ILabelPropertyDefinitionApiClient CreateLabelPropertyDefinitionApiClient();
+        ILinkPropertyDefinitionApiClient CreateLinkPropertyDefinitionApiClient();
+        IMarketingCampaignPropertyDefinitionApiClient CreateMarketingCampaignPropertyDefinitionApiClient();
+        INumberPropertyDefinitionApiClient CreateNumberPropertyDefinitionApiClient();
+        IPersianDatePropertyDefinitionApiClient CreatePersianDatePropertyDefinitionApiClient();
+        IPositionPropertyDefinitionApiClient CreatePositionPropertyDefinitionApiClient();
+        ISecurityItemPropertyDefinitionApiClient CreateSecurityItemPropertyDefinitionApiClient();
+        ITextPropertyDefinitionApiClient CreateTextPropertyDefinitionApiClient();
+        ITimePropertyDefinitionApiClient CreateTimePropertyDefinitionApiClient();
+        IUserPropertyDefinitionApiClient CreateUserPropertyDefinitionApiClient();
+
+        ICrmObjectMultiValuePropertyDefinitionApiClient CreateCrmObjectMultiValuePropertyDefinitionApiClient();
+        ICurrencyMultiValuePropertyDefinitionApiClient CreateCurrencyMultiValuePropertyDefinitionApiClient();
+        IFileMultiValuePropertyDefinitionApiClient CreateFileMultiValuePropertyDefinitionApiClient();
+        IGregorianDateMultiValuePropertyDefinitionApiClient CreateGregorianDateMultiValuePropertyDefinitionApiClient();
+        IIdentityMultiValuePropertyDefinitionApiClient CreateIdentityMultiValuePropertyDefinitionApiClient();
+        ILinkMultiValuePropertyDefinitionApiClient CreateLinkMultiValuePropertyDefinitionApiClient();
+        INumberMultiValuePropertyDefinitionApiClient CreateNumberMultiValuePropertyDefinitionApiClient();
+        IPersianDateMultiValuePropertyDefinitionApiClient CreatePersianDateMultiValuePropertyDefinitionApiClient();
+        IProductMultiValuePropertyDefinitionApiClient CreateProductMultiValuePropertyDefinitionApiClient();
+        ISecurityItemMultiValuePropertyDefinitionApiClient CreateSecurityItemMultiValuePropertyDefinitionApiClient();
+        ITextMultiValuePropertyDefinitionApiClient CreateTextMultiValuePropertyDefinitionApiClient();
+        IUserMultiValuePropertyDefinitionApiClient CreateUserMultiValuePropertyDefinitionApiClient();
     }
 }

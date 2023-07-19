@@ -55,7 +55,7 @@ namespace PayamGostarClient.ApiClient.Extension
             return target;
         }
 
-        public static T CopyGeneralMultiValuePropertyDefinitionCreateVM<T>(this T target, GeneralMultiValueExtendedPropertyCreationDto from)
+        public static T FillGeneralMultiValuePropertyDefinitionCreateVM<T>(this T target, GeneralMultiValueExtendedPropertyCreationDto from)
             where T : GeneralMultiValuePropertyDefinitionCreateVM
         {
             target.CrmObjectTypeId = from.CrmObjectTypeId;

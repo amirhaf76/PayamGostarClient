@@ -6,7 +6,13 @@ namespace PayamGostarClient.ApiClient.Dtos.ExtendedPropertyApiClientDtos.SimpleE
 {
     public class ImageExtendedPropertyCreationDto : BaseExtendedPropertyCreationDto
     {
+        public ImageExtendedPropertyCreationDto()
+        {
+            SupportedExtensions = new List<string>();
+        }
+
         public override Gp_ExtendedPropertyType Type => Gp_ExtendedPropertyType.Image;
+
         public IEnumerable<string> SupportedExtensions { get; set; }
 
         public int? MaxSize { get; set; }

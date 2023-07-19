@@ -60,7 +60,7 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static CurrencyMultiValuePropertyDefinitionCreateVM ToVM(this CurrencyMultiValueExtendedPropertyCreationDto dto)
         {
-            return new CurrencyMultiValuePropertyDefinitionCreateVM();
+            return new CurrencyMultiValuePropertyDefinitionCreateVM().FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static CurrencyPropertyDefinitionCreateVM ToVM(this CurrencyExtendedPropertyCreationDto dto)
@@ -90,7 +90,13 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static FileMultiValuePropertyDefinitionCreateVM ToVM(this FileMultiValueExtendedPropertyCreationDto dto)
         {
-            return new FileMultiValuePropertyDefinitionCreateVM();
+            return new FileMultiValuePropertyDefinitionCreateVM
+            {
+                MaxFileSize = dto.MaxFileSize,
+                FileSizeTypeIndex = dto.FileSizeTypeIndex,
+                FileExtensions = dto.FileExtensions,
+
+            }.FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static FilePropertyDefinitionCreateVM ToVM(this FileExtendedPropertyCreationDto dto)
@@ -106,32 +112,51 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static GpPropertyDefinitionCreateVM ToVM(this GpExtendedPropertyCreationDto dto)
         {
-            return new GpPropertyDefinitionCreateVM();
+            return new GpPropertyDefinitionCreateVM
+            {
+                GpKey = dto.GpKey,
+
+            }.FillGeneralTypePropertyDefinitionCreateVM(dto);
         }
 
         internal static GregorianDateMultiValuePropertyDefinitionCreateVM ToVM(this GregorianDateMultiValueExtendedPropertyCreationDto dto)
         {
-            return new GregorianDateMultiValuePropertyDefinitionCreateVM();
+            return new GregorianDateMultiValuePropertyDefinitionCreateVM().FillBaseMultiValuePropertyDefinitionVM(dto);
         }
 
         internal static GregorianDatePropertyDefinitionCreateVM ToVM(this GregorianDateExtendedPropertyCreationDto dto)
         {
-            return new GregorianDatePropertyDefinitionCreateVM();
+            return new GregorianDatePropertyDefinitionCreateVM().FillGeneralTypePropertyDefinitionCreateVM(dto);
         }
 
         internal static HTMLPropertyDefinitionCreateVM ToVM(this HTMLExtendedPropertyCreationDto dto)
         {
-            return new HTMLPropertyDefinitionCreateVM();
+            return new HTMLPropertyDefinitionCreateVM
+            {
+                IsRequired = dto.IsRequired,
+
+            }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
         internal static IdentityMultiValuePropertyDefinitionCreateVM ToVM(this IdentityMultiValueExtendedPropertyCreationDto dto)
         {
-            return new IdentityMultiValuePropertyDefinitionCreateVM();
+            return new IdentityMultiValuePropertyDefinitionCreateVM
+            {
+                ShowInGridProps = dto.ShowInGridProps?.Select(x => x.ToVM()),
+
+            }.FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static ImagePropertyDefinitionCreateVM ToVM(this ImageExtendedPropertyCreationDto dto)
         {
-            return new ImagePropertyDefinitionCreateVM();
+            return new ImagePropertyDefinitionCreateVM
+            {
+                MaxSize = dto.MaxSize,
+                ImageWidth = dto.ImageWidth,
+                ImageHeight = dto.ImageHeight,
+                FileSizeTypeIndex = dto.FileSizeTypeIndex,
+
+            }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
         internal static LabelPropertyDefinitionCreateVM ToVM(this LabelExtendedPropertyCreationDto dto)
@@ -148,22 +173,26 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static LinkMultiValuePropertyDefinitionCreateVM ToVM(this LinkMultiValueExtendedPropertyCreationDto dto)
         {
-            return new LinkMultiValuePropertyDefinitionCreateVM();
+            return new LinkMultiValuePropertyDefinitionCreateVM().FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static LinkPropertyDefinitionCreateVM ToVM(this LinkExtendedPropertyCreationDto dto)
         {
-            return new LinkPropertyDefinitionCreateVM();
+            return new LinkPropertyDefinitionCreateVM().FillGeneralTypePropertyDefinitionCreateVM(dto);
         }
 
         internal static MarketingCampaignPropertyDefinitionCreateVM ToVM(this MarketingCampaignExtendedPropertyCreationDto dto)
         {
-            return new MarketingCampaignPropertyDefinitionCreateVM();
+            return new MarketingCampaignPropertyDefinitionCreateVM
+            {
+                IsRequired = dto.IsRequired,
+
+            }.FillBasePropertyDefinitionCreateVM(dto);
         }
 
         internal static NumberMultiValuePropertyDefinitionCreateVM ToVM(this NumberMultiValueExtendedPropertyCreationDto dto)
         {
-            return new NumberMultiValuePropertyDefinitionCreateVM();
+            return new NumberMultiValuePropertyDefinitionCreateVM().FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static NumberPropertyDefinitionCreateVM ToVM(this NumberExtendedPropertyCreationDto dto)
@@ -181,7 +210,7 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static PersianDateMultiValuePropertyDefinitionCreateVM ToVM(this PersianDateMultiValueExtendedPropertyCreationDto dto)
         {
-            return new PersianDateMultiValuePropertyDefinitionCreateVM();
+            return new PersianDateMultiValuePropertyDefinitionCreateVM().FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static PersianDatePropertyDefinitionCreateVM ToVM(this PersianDateExtendedPropertyCreationDto dto)
@@ -191,12 +220,20 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static ProductMultiValuePropertyDefinitionCreateVM ToVM(this ProductMultiValueExtendedPropertyCreationDto dto)
         {
-            return new ProductMultiValuePropertyDefinitionCreateVM();
+            return new ProductMultiValuePropertyDefinitionCreateVM
+            {
+                FractionLength = dto.FractionLength,
+                ShowAmountColumn = dto.ShowAmountColumn,
+                ShowDiscountColumn = dto.ShowDiscountColumn,
+                ShowUnitPriceColumn = dto.ShowUnitPriceColumn,
+                ShowFinalPriceColumn = dto.ShowFinalPriceColumn,
+
+            }.FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static SecurityItemMultiValuePropertyDefinitionCreateVM ToVM(this SecurityItemMultiValueExtendedPropertyCreationDto dto)
         {
-            return new SecurityItemMultiValuePropertyDefinitionCreateVM();
+            return new SecurityItemMultiValuePropertyDefinitionCreateVM().FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static SecurityItemPropertyDefinitionCreateVM ToVM(this SecurityItemExtendedPropertyCreationDto dto)
@@ -210,7 +247,7 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static TextMultiValuePropertyDefinitionCreateVM ToVM(this TextMultiValueExtendedPropertyCreationDto dto)
         {
-            return new TextMultiValuePropertyDefinitionCreateVM();
+            return new TextMultiValuePropertyDefinitionCreateVM().FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static TextPropertyDefinitionCreateVM ToVM(this TextExtendedPropertyCreationDto dto)
@@ -228,7 +265,11 @@ namespace PayamGostarClient.ApiClient.Extension
 
         internal static UserMultiValuePropertyDefinitionCreateVM ToVM(this UserMultiValueExtendedPropertyCreationDto dto)
         {
-            return new UserMultiValuePropertyDefinitionCreateVM();
+            return new UserMultiValuePropertyDefinitionCreateVM
+            {
+                ShowDeactiveMembersOption = dto.ShowDeactiveMembersOption,
+
+            }.FillGeneralMultiValuePropertyDefinitionCreateVM(dto);
         }
 
         internal static UserPropertyDefinitionCreateVM ToVM(this UserExtendedPropertyCreationDto dto)

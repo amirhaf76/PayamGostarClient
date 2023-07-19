@@ -165,6 +165,136 @@ namespace PayamGostarClient.Initializer.Utilities.Extensions
             }.FillBaseExtendedPropertyDto(model);
         }
 
+        public static CrmItemIdentityExtendedPropertyCreationDto ToCrmItemIdentityExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new CrmItemIdentityExtendedPropertyCreationDto().FillSecurityItemExtendedPropertyCreationDto(baseModel);
+        }
+        public static GpExtendedPropertyCreationDto ToGpExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (GpExtendedPropertyModel)baseModel;
+
+            return new GpExtendedPropertyCreationDto
+            {
+                GpKey = model.GpKey,
+
+            }.FillGeneralTypeExtendedPropertyCreationDto(baseModel);
+        }
+        public static GregorianDateExtendedPropertyCreationDto ToGregorianDateExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new GregorianDateExtendedPropertyCreationDto().FillGeneralTypeExtendedPropertyCreationDto(baseModel);
+        }
+        public static HTMLExtendedPropertyCreationDto ToHTMLExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (HtmlExtendedPropertyModel)baseModel;
+
+            return new HTMLExtendedPropertyCreationDto
+            {
+                IsRequired = model.IsRequired,
+
+            }.FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static ImageExtendedPropertyCreationDto ToImageExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (ImageExtendedPropertyModel)baseModel;
+
+            return new ImageExtendedPropertyCreationDto
+            {
+                SupportedExtensions = model.SupportedExtensions,
+                MaxSize = model.MaxSize,
+                ImageWidth = model.ImageWidth,
+                ImageHeight = model.ImageHeight,
+                FileSizeTypeIndex = (int)model.FileSizeType,
+
+            }.FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static LinkExtendedPropertyCreationDto ToLinkExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new LinkExtendedPropertyCreationDto().FillGeneralTypeExtendedPropertyCreationDto(baseModel);
+        }
+        public static MarketingCampaignExtendedPropertyCreationDto ToMarketingCampaignExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (MarketingCampaignExtendedPropertyModel)baseModel;
+
+            return new MarketingCampaignExtendedPropertyCreationDto
+            {
+                IsRequired = model.IsRequired,
+
+            }.FillBaseExtendedPropertyDto(baseModel);
+        }
+
+
+        public static CurrencyMultiValueExtendedPropertyCreationDto ToCurrencyMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new CurrencyMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static FileMultiValueExtendedPropertyCreationDto ToFileMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new FileMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static GregorianDateMultiValueExtendedPropertyCreationDto ToGregorianDateMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new GregorianDateMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static IdentityMultiValueExtendedPropertyCreationDto ToIdentityMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new IdentityMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static LinkMultiValueExtendedPropertyCreationDto ToLinkMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new LinkMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static NumberMultiValueExtendedPropertyCreationDto ToNumberMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (NumberMultiValueExtendedPropertyModel)baseModel;
+
+            return new NumberMultiValueExtendedPropertyCreationDto
+            {
+                DecimalDigits = model.DecimalDigits,
+                MinDigit = model.MinDigit,
+                MaxDigit = model.MaxDigit,
+                MinValue = model.MinValue,
+                MaxValue = model.MaxValue,
+
+            }.FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static PersianDateMultiValueExtendedPropertyCreationDto ToPersianDateMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new PersianDateMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static ProductMultiValueExtendedPropertyCreationDto ToProductMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (ProductMultiValueExtendedPropertyModel)baseModel;
+
+            return new ProductMultiValueExtendedPropertyCreationDto
+            {
+                FractionLength = model.FractionLength,
+                ShowAmountColumn = model.ShowAmountColumn,
+                ShowDiscountColumn = model.ShowDiscountColumn,
+                ShowUnitPriceColumn = model.ShowUnitPriceColumn,
+                ShowFinalPriceColumn = model.ShowFinalColumn,
+
+            };
+        }
+        public static SecurityItemMultiValueExtendedPropertyCreationDto ToSecurityItemMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new SecurityItemMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static TextMultiValueExtendedPropertyCreationDto ToTextMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            return new TextMultiValueExtendedPropertyCreationDto().FillBaseExtendedPropertyDto(baseModel);
+        }
+        public static UserMultiValueExtendedPropertyCreationDto ToUserMultiValueExtendedPropertyCreationDto(this BaseExtendedPropertyModel baseModel)
+        {
+            var model = (UserMultiValueExtendedPropertyModel)baseModel;
+            
+            return new UserMultiValueExtendedPropertyCreationDto
+            {
+                ShowDeactiveMembersOption = model.ShowDeactiveMembersOption,
+                
+            }.FillBaseExtendedPropertyDto(baseModel);
+        }
+
+
         public static ExtendedPropertyIdWrapperDto ToDto(this PropertyDefinitionIdWrapperModel model)
         {
             return new ExtendedPropertyIdWrapperDto { Id = Guid.Parse(model.Id) };
