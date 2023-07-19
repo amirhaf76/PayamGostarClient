@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace PayamGostarClient.Initializer.CrmModels.CrmObjectTypeGeneralModels
 {
-    public class CrmGeneralModel : ICustomizationCrmModel
+    public class SuperCrmModel : ICustomizationCrmModel
     {
-        public CrmGeneralModel()
+        public SuperCrmModel()
         {
             Properties = new List<BaseExtendedPropertyModel>();
             PropertyGroups = new List<PropertyGroup>();
