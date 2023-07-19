@@ -6,7 +6,7 @@ namespace PayamGostarClient.Initializer.Abstractions.Utilities.AbstractFactories
 {
     internal class NumericalInitServiceAbstractFactory : BaseInitServiceAbstractFactory
     {
-        protected NumericalInitServiceAbstractFactory(IPayamGostarApiClient payamGostarApiClient, IMatchingValidator matchingValidator) : base(payamGostarApiClient, matchingValidator)
+        internal NumericalInitServiceAbstractFactory(IPayamGostarApiClient payamGostarApiClient, IMatchingValidator matchingValidator) : base(payamGostarApiClient, matchingValidator)
         {
         }
 

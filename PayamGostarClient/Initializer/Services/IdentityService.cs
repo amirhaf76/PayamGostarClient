@@ -2,6 +2,7 @@
 using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeIdentityApiClientDtos.Get;
 using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.ApiClient.Extension;
+using PayamGostarClient.Initializer.Abstractions.Utilities.AbstractFactories;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClient.Initializer.Utilities.Extensions;
@@ -19,6 +20,10 @@ namespace PayamGostarClient.Initializer.Services
         public IdentityService(CrmIdentityModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
         {
 
+        }
+
+        internal IdentityService(CrmIdentityModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory) : base(intendedCrmObject, payamGostarApiClient, factory)
+        {
         }
 
         protected override async Task<Guid> CreateTypeAsync()

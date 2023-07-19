@@ -86,15 +86,19 @@ namespace PayamGostarClient.Initializer.Services
         {
             ValidateInitialValidationModel();
 
-            var searchedCrmObject = await SearchCrmObjectAsync();
+            var searchedCrmObject = await SearchCrmObjectTypeAsync();
 
             if (searchedCrmObject == null)
             {
                 await CreateCrmObjectAndSetItsBelongsAsync();
+
+                await CreateSuperCrmObjectTypeBelongs();
             }
             else
             {
                 await CheckCrmObjectTypeBelongsAndInsert(searchedCrmObject);
+
+                await CheckSuperCrmObjectTypeBelongsAndInsert();
             }
         }
 
@@ -102,7 +106,8 @@ namespace PayamGostarClient.Initializer.Services
         {
             ValidateInitialValidationModel();
 
-            var searchedCrmObject = await SearchCrmObjectAsync();
+            var searchedCrmObject = await SearchCrmObjectTypeAsync();
+            var searchedSuperCrmObject = await SearchSuperCrmObjectTypeAsync();
 
             if (searchedCrmObject == null)
             {
@@ -113,6 +118,8 @@ namespace PayamGostarClient.Initializer.Services
                 try
                 {
                     CheckCrmObjectTypeBelongs(searchedCrmObject);
+
+                    CheckSuperCrmObjectTypeBelongs(searchedSuperCrmObject);
 
                     return true;
                 }
@@ -196,6 +203,16 @@ namespace PayamGostarClient.Initializer.Services
                     throw new NonUniqeUserKeyException($"In the crmObject with '{IntendedCrmObject.Code}', there are more than one userKey with \"{propertyKeyGroup.Key}\".");
                 }
             }
+
+            var isValidSuperModelGroups = IntendedCrmObject.Properties
+                .GroupBy(property => property.PropertyGroup)
+                .All(groupAndItsProperties => groupAndItsProperties.GroupBy(property => property.DoesBelongToSuperCrmObjectType).Count() == 1);
+
+            if (!isValidSuperModelGroups)
+            {
+                var message = $"In the crmObject with '{IntendedCrmObject.Code}' code, there is atleast a group which have some super crm model type properites and some instance crm model type properites.";
+                throw new InvalidSupserCrmModelGroupException(message);
+            }
         }
 
 
@@ -210,16 +227,48 @@ namespace PayamGostarClient.Initializer.Services
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
-            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(currentCrmObject.Id, currentCrmObject.Properties, currentCrmObject.Groups);
+            await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(
+                currentCrmObject.Id,
+                GetNonSuperCrmModelProperties(),
+                currentCrmObject.Properties,
+                currentCrmObject.Groups);
 
             // await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
+        }
+
+        private async Task CheckSuperCrmObjectTypeBelongsAndInsert()
+        {
+            var superCrmModelProperties = GetSuperCrmModelProperties();
+
+            if (superCrmModelProperties.Any())
+            {
+                var searchedSuperCrmObjectType = await SearchSuperCrmObjectTypeAsync();
+
+                await CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(
+                    searchedSuperCrmObjectType.Id,
+                    superCrmModelProperties,
+                    searchedSuperCrmObjectType.Properties,
+                    searchedSuperCrmObjectType.Groups);
+            }
+        }
+
+        private IEnumerable<BaseExtendedPropertyModel> GetSuperCrmModelProperties()
+        {
+            return IntendedCrmObject.Properties.Where(x => x.DoesBelongToSuperCrmObjectType);
+        }
+
+        private IEnumerable<BaseExtendedPropertyModel> GetNonSuperCrmModelProperties()
+        {
+            return IntendedCrmObject.Properties.Where(x => !x.DoesBelongToSuperCrmObjectType);
         }
 
         private void CheckCrmObjectTypeBelongs(CrmObjectTypeSearchResultDto currentCrmObject)
         {
             CheckBaseCrmObjectMatching(currentCrmObject);
 
-            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentCrmObject.Properties);
+            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(
+                GetNonSuperCrmModelProperties(),
+                currentCrmObject.Properties);
 
             if (newProperties.Any())
             {
@@ -234,15 +283,38 @@ namespace PayamGostarClient.Initializer.Services
             //}
         }
 
+        private void CheckSuperCrmObjectTypeBelongs(CrmObjectTypeSearchResultDto superCrmObject)
+        {
+            CheckBaseCrmObjectMatching(superCrmObject);
+
+            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(
+                GetSuperCrmModelProperties(),
+                superCrmObject.Properties);
+
+            if (newProperties.Any())
+            {
+                throw new MisMatchException("There are some new properties which belong to super crm object type.");
+            }
+        }
+
         private async Task CreateCrmObjectTypeBelongs(Guid id)
         {
-            await CreateGroupPropetiesAsync(id);
-
-            await CreateExtendedPropertiesAsync(id);
+            await CreateExtendedPropertiesAsync(id, GetNonSuperCrmModelProperties());
 
             // await CreateStagesAsync(id);
         }
 
+        private async Task CreateSuperCrmObjectTypeBelongs()
+        {
+            var superCrmModelProperties = GetSuperCrmModelProperties();
+
+            if (superCrmModelProperties.Any())
+            {
+                var searchedSuperCrmObject = await SearchSuperCrmObjectTypeAsync();
+
+                await CreateExtendedPropertiesAsync(searchedSuperCrmObject.Id, superCrmModelProperties);
+            }
+        }
 
         private async Task CheckStagesAndUpdateUnexistedStagesAsync(Guid id, IEnumerable<Stage> currentStages)
         {
@@ -253,18 +325,30 @@ namespace PayamGostarClient.Initializer.Services
 
 
 
-        private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<ExtendedPropertyGetResultDto> currentExtendedProperties, IEnumerable<PropertyGroupGetResultDto> groups)
+        private async Task CheckExtendedPropertiesAndCreateUnexistedExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> propertyModels, IEnumerable<ExtendedPropertyGetResultDto> currentExtendedProperties, IEnumerable<PropertyGroupGetResultDto> groups)
         {
-            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(currentExtendedProperties);
+            var newProperties = CheckExtendedPropertiesAndGetUnexistedExtendedProperties(propertyModels, currentExtendedProperties);
 
             await CreateExtendedPropertiesAsync(id, newProperties, groups);
         }
 
 
-        private async Task<CrmObjectTypeSearchResultDto> SearchCrmObjectAsync()
+        private async Task<CrmObjectTypeSearchResultDto> SearchCrmObjectTypeAsync()
         {
-            var request = ToCrmObjectTypeSearchRequestDto(IntendedCrmObject);
+            var request = CreateCrmObjectSubTypeRequestDto(IntendedCrmObject);
 
+            return await SearchCrmObjectTypeAsync(request);
+        }
+
+        private async Task<CrmObjectTypeSearchResultDto> SearchSuperCrmObjectTypeAsync()
+        {
+            var request = CreateSuperCrmObjectTypeSearchRequestDto(IntendedCrmObject);
+
+            return await SearchCrmObjectTypeAsync(request);
+        }
+
+        private async Task<CrmObjectTypeSearchResultDto> SearchCrmObjectTypeAsync(CrmObjectTypeSearchRequestDto request)
+        {
             Helper.Net.ApiResponse<IEnumerable<CrmObjectTypeSearchResultDto>> receivedCrmObjects = await CrmObjectTypeApi.SearchAsync(request);
 
             var receivedCrmObject = receivedCrmObjects.Result.FirstOrDefault();
@@ -272,12 +356,22 @@ namespace PayamGostarClient.Initializer.Services
             return receivedCrmObject;
         }
 
-        private static CrmObjectTypeSearchRequestDto ToCrmObjectTypeSearchRequestDto(BaseCRMModel crmMode)
+
+        private static CrmObjectTypeSearchRequestDto CreateCrmObjectSubTypeRequestDto(BaseCRMModel crmMode)
         {
             return new CrmObjectTypeSearchRequestDto
             {
                 Code = crmMode.Code,
                 CrmOjectTypeIndex = (int)crmMode.Type,
+            };
+        }
+
+        private static CrmObjectTypeSearchRequestDto CreateSuperCrmObjectTypeSearchRequestDto(BaseCRMModel crmMode)
+        {
+            return new CrmObjectTypeSearchRequestDto
+            {
+                CrmOjectTypeIndex = (int)crmMode.Type,
+                IsAbstract = true,
             };
         }
 
@@ -311,15 +405,9 @@ namespace PayamGostarClient.Initializer.Services
         }
 
 
-        private async Task CreateGroupPropetiesAsync(Guid id)
+        private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> properties)
         {
-            await _groupCreationStrategy.CreateGroupPropetiesAsync(id, IntendedCrmObject.PropertyGroups);
-        }
-
-
-        private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id)
-        {
-            return await _propertyCreationStrategy.CreateExtendedPropertiesAsync(id, IntendedCrmObject.Properties);
+            return await _propertyCreationStrategy.CreateExtendedPropertiesAsync(id, properties);
         }
 
         private async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid id, IEnumerable<BaseExtendedPropertyModel> properties, IEnumerable<PropertyGroupGetResultDto> groups)
@@ -340,11 +428,11 @@ namespace PayamGostarClient.Initializer.Services
             }
         }
 
-        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<ExtendedPropertyGetResultDto> existedProperties)
+        private IEnumerable<BaseExtendedPropertyModel> CheckExtendedPropertiesAndGetUnexistedExtendedProperties(IEnumerable<BaseExtendedPropertyModel> propertyModels, IEnumerable<ExtendedPropertyGetResultDto> existedProperties)
         {
             try
             {
-                return _extendedPropertyMatchingValidator.CheckMatchingAndGetNewExtendedProperties(IntendedCrmObject.Properties, existedProperties);
+                return _extendedPropertyMatchingValidator.CheckMatchingAndGetNewExtendedProperties(propertyModels, existedProperties);
             }
             catch (MisMatchException e)
             {

@@ -29,20 +29,7 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
 
         public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> newProperties)
         {
-            var createdPropertiesId = new List<Guid>();
-
-            foreach (var property in newProperties)
-            {
-                property.CrmObjectTypeId = crmObjectTypeId.ToString();
-
-                var propertyDto = CreateExtendedPropertyCreationDto(property);
-
-                var response = await _extendedPropertyApi.CreateAsync(propertyDto);
-
-                createdPropertiesId.Add(response.Result.Id);
-            }
-
-            return createdPropertiesId;
+            return await CreateExtendedPropertiesAsync(crmObjectTypeId, newProperties, Array.Empty<PropertyGroupGetResultDto>());
         }
 
         public async Task<IEnumerable<Guid>> CreateExtendedPropertiesAsync(Guid crmObjectTypeId, IEnumerable<BaseExtendedPropertyModel> newProperties, IEnumerable<PropertyGroupGetResultDto> existedGroups)
@@ -53,7 +40,7 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
 
             foreach (var groupedPropertiesAndGroup in groupedPropertiesAndGroups)
             {
-                await CheckAndCreateGroupIfDoesNotExist(crmObjectTypeId, existedGroups, groupedPropertiesAndGroup);
+                await CheckAndCreateGroupIfDoesNotExistAsync(crmObjectTypeId, existedGroups, groupedPropertiesAndGroup.Key);
 
                 foreach (var property in groupedPropertiesAndGroup)
                 {
@@ -71,24 +58,24 @@ namespace PayamGostarClient.Initializer.Utilities.CreationStrategies
         }
 
 
-        private async Task<PropertyGroup> CheckAndCreateGroupIfDoesNotExist(Guid crmObjectTypeId, IEnumerable<PropertyGroupGetResultDto> existedGroups, IGrouping<PropertyGroup, BaseExtendedPropertyModel> groupedPropertiesAndGroup)
+        private async Task<PropertyGroup> CheckAndCreateGroupIfDoesNotExistAsync(Guid crmObjectTypeId, IEnumerable<PropertyGroupGetResultDto> existedGroups, PropertyGroup newPropertyGroup)
         {
             //fetch group by name
-            var theGroup = existedGroups.Where(g => groupedPropertiesAndGroup.Key.Name.Any(xx => xx.Value == g.Name)).FirstOrDefault();
+            var theGroup = existedGroups.Where(g => newPropertyGroup.Name.Any(xx => xx.Value == g.Name)).FirstOrDefault();
 
             if (theGroup == null)
             {
                 // create group if not exist
-                var gId = await _groupCreationStrategy.CreateGroupPropetyAsync(crmObjectTypeId, groupedPropertiesAndGroup.Key);
+                var gId = await _groupCreationStrategy.CreateGroupPropetyAsync(crmObjectTypeId, newPropertyGroup);
 
-                groupedPropertiesAndGroup.Key.Id = gId;
+                newPropertyGroup.Id = gId;
             }
             else
             {
-                groupedPropertiesAndGroup.Key.Id = theGroup.Id;
+                newPropertyGroup.Id = theGroup.Id;
             }
 
-            return groupedPropertiesAndGroup.Key;
+            return newPropertyGroup;
         }
 
         private BaseExtendedPropertyCreationDto CreateExtendedPropertyCreationDto(BaseExtendedPropertyModel propertyModel)

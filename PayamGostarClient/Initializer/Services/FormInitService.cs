@@ -1,5 +1,6 @@
 ﻿using PayamGostarClient.ApiClient.Abstractions;
 using PayamGostarClient.ApiClient.Extension;
+using PayamGostarClient.Initializer.Abstractions.Utilities.AbstractFactories;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Utilities.Extensions;
 using System;
@@ -10,6 +11,10 @@ namespace PayamGostarClient.Initializer.Services
     public class FormInitService : BaseInitService<CrmFormModel>
     {
         public FormInitService(CrmFormModel crmFormModel, IPayamGostarApiClient payamGostarApiClient) : base(crmFormModel, payamGostarApiClient)
+        {
+        }
+
+        internal FormInitService(CrmFormModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory) : base(intendedCrmObject, payamGostarApiClient, factory)
         {
         }
 
