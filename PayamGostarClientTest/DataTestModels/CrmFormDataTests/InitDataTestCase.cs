@@ -65,6 +65,31 @@ namespace PayamGostarClientTest.DataTestModels.CrmFormDataTests
             };
         }
 
+        public static IEnumerable<object[]> SimpleFormModelWithAGroupAndATextPropertyAndASuperTextProperty()
+        {
+            var model = DataTest.CreateAnCrmFormWithNewGeneratedCodeAndName();
+
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup(nameFromat: "group1"));
+            model.PropertyGroups.Add(DataTest.CreateASimplePropertyGroup(nameFromat: "group2"));
+
+            var property = DataTest.CreateExtendedPropertyWithDefaultDto<TextExtendedPropertyModel>(model.PropertyGroups[0]);
+            var superModelProperty = DataTest.CreateExtendedPropertyWithDefaultDto<TextExtendedPropertyModel>(model.PropertyGroups[1]);
+
+            property.DoesBelongToSuperCrmObjectType = false;
+            superModelProperty.DoesBelongToSuperCrmObjectType = true;
+
+            property.UserKey = "userKey1";
+            superModelProperty.UserKey = "userKey2";
+
+            model.Properties.Add(property);
+            model.Properties.Add(superModelProperty);
+
+            return new[]
+            {
+                new object[] { model },
+            };
+        }
+
         public static IEnumerable<object[]> SimpleFormModelWithStages()
         {
             const int NORMAL_STAGE_COUNT = 3;

@@ -17,7 +17,7 @@ namespace PayamGostarClientTest.Scenarios
         }
 
         [Theory]
-        [MemberData(nameof(ExtendedPropertyDataTest.ASimpleCrmFormWithGroupAndTextExtendedProperty), MemberType = typeof(ExtendedPropertyDataTest))]
+        [MemberData(nameof(ExtendedPropertyDataTestCase.ASimpleCrmFormWithGroupAndTextExtendedProperty), MemberType = typeof(ExtendedPropertyDataTestCase))]
         public async Task ExtendedProperty_TextExtendedPropertyInSimpleForm_MustBeCreatedSuccessfuly(CrmFormModel model)
         {
             // Arrangement.
@@ -77,7 +77,7 @@ namespace PayamGostarClientTest.Scenarios
 
 
         [Theory]
-        [MemberData(nameof(ExtendedPropertyDataTest.ASimpleCrmFormWithGroupAndASimpleDropDownListExtendedProperty), MemberType = typeof(ExtendedPropertyDataTest))]
+        [MemberData(nameof(ExtendedPropertyDataTestCase.ASimpleCrmFormWithGroupAndASimpleDropDownListExtendedProperty), MemberType = typeof(ExtendedPropertyDataTestCase))]
         public async Task ExtendedProperty_DropDownListExtendedPropertyInSimpleForm_MustBeCreatedSuccessfuly(CrmFormModel model)
         {
             // Arrangement.
@@ -138,7 +138,7 @@ namespace PayamGostarClientTest.Scenarios
 
 
         [Theory]
-        [MemberData(nameof(ExtendedPropertyDataTest.ASimpleCrmFormWithGroupAndASimpleNumberExtendedProperty), MemberType = typeof(ExtendedPropertyDataTest))]
+        [MemberData(nameof(ExtendedPropertyDataTestCase.ASimpleCrmFormWithGroupAndASimpleNumberExtendedProperty), MemberType = typeof(ExtendedPropertyDataTestCase))]
         public async Task ExtendedProperty_NumberExtendedPropertyInSimpleForm_MustBeCreatedSuccessfuly(CrmFormModel model)
         {
             // Arrangement.
@@ -206,7 +206,7 @@ namespace PayamGostarClientTest.Scenarios
 
 
         [Theory]
-        [MemberData(nameof(ExtendedPropertyDataTest.ASimpleCrmFormWithGroupAndASimpleFormExtendedProperty), MemberType = typeof(ExtendedPropertyDataTest))]
+        [MemberData(nameof(ExtendedPropertyDataTestCase.ASimpleCrmFormWithGroupAndASimpleFormExtendedProperty), MemberType = typeof(ExtendedPropertyDataTestCase))]
         public async Task ExtendedProperty_FromExtendedPropertyInSimpleForm_MustBeCreatedSuccessfuly(CrmFormModel model)
         {
             // Arrangement.

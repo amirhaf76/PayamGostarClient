@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using PayamGostarClient.ApiClient.Enums;
-
 using PayamGostarClient.Initializer;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
@@ -102,7 +101,7 @@ namespace PayamGostarClientTest
                     new ResourceValue(){ LanguageCulture = LanguageCulture.FA_LANGUAGE_CULTURE, Value = string.Empty },
                 },
                 Code = "Identity",
-                NumberingTemplateId = 32,
+
                 IdentityTypeIndex = Gp_IdentityType.Person,
                 IdentityFunctionIndex = Gp_IdentityFunction.Contact,
                 ProfileType = Gp_ProfileType.Customer,
