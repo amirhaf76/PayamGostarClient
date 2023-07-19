@@ -5,42 +5,42 @@ namespace PayamGostarClient.Initializer.Utilities.Validator
 {
     internal class MatchingValidator : IMatchingValidator
     {
-        public void CheckFieldMatching<TField>(TField first, TField second, string errorMessage = "")
+        public void CheckFieldMatching<TField>(TField expected, TField actually, string errorMessage = "")
         {
-            if (!AreTheFieldsMatched(first, second))
+            if (!AreTheFieldsMatched(expected, actually))
             {
-                throw CreateMisMatchException(first, second, errorMessage);
+                throw CreateMisMatchException(expected, actually, errorMessage);
             }
         }
 
-        internal bool AreTheFieldsMatched<TField>(TField first, TField second)
+        internal bool AreTheFieldsMatched<TField>(TField expected, TField actually)
         {
             if (typeof(TField) == typeof(string))
             {
                 if (
-                    string.IsNullOrEmpty(first as string) && !string.IsNullOrEmpty(second as string) ||
-                    !string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
+                    string.IsNullOrEmpty(expected as string) && !string.IsNullOrEmpty(actually as string) ||
+                    !string.IsNullOrEmpty(expected as string) && string.IsNullOrEmpty(actually as string))
                 {
                     return false;
                 }
 
-                if (string.IsNullOrEmpty(first as string) && string.IsNullOrEmpty(second as string))
+                if (string.IsNullOrEmpty(expected as string) && string.IsNullOrEmpty(actually as string))
                 {
                     return true;
                 }
             }
 
-            if (first == null && second == null)
+            if (expected == null && actually == null)
             {
                 return true;
             }
 
-            return first.Equals(second);
+            return expected.Equals(actually);
         }
 
-        private static MisMatchException CreateMisMatchException<TField>(TField first, TField second, string errorMessage)
+        private static MisMatchException CreateMisMatchException<TField>(TField expected, TField actually, string errorMessage)
         {
-            return new MisMatchException($"{(!string.IsNullOrEmpty(errorMessage) ? errorMessage : "")}\nExpected: {first} != Actually: {second}");
+            return new MisMatchException($"{(!string.IsNullOrEmpty(errorMessage) ? errorMessage : "")}\nExpected: {expected} != Actually: {actually}");
         }
     }
 }

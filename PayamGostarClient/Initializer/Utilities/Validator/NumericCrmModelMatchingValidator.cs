@@ -21,7 +21,7 @@ namespace PayamGostarClient.Initializer.Utilities.Validator
 
             if (baseCRMModel is INumericalCrmModel numericalModel)
             {
-                _modelChecker.CheckFieldMatching(numericalModel.NumberingTemplate.Id, existedCrmObj.NumberingTemplateId, "BaseCrmObj:NumberingTemplateId -> ");
+                _modelChecker.CheckFieldMatching(existedCrmObj.NumberingTemplateId, numericalModel.NumberingTemplate.Id, "BaseCrmObj:NumberingTemplateId -> ");
             }
         }
     }
