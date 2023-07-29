@@ -278,9 +278,9 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Factory
             return CreateClient<ICategoryClient, CategoryClient>();
         }
 
-        public IProductGroupClient CreateProductGroupClient()
+        public IProductCategoryClient CreateProductGroupClient()
         {
-            return CreateClient<IProductGroupClient, ProductGroupClient>();
+            return CreateClient<IProductCategoryClient, ProductCategoryClient>();
         }
 
 

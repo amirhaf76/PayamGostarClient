@@ -15,12 +15,12 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ProductGroup
 {
     public class PayamGostarProductGroupApiClient : BaseApiClient, IPayamGostarProductGroupApiClient
     {
-        private readonly IProductGroupClient _productGroupClient;
+        private readonly IProductCategoryClient _productCategoryClient;
 
 
         public PayamGostarProductGroupApiClient(PayamGostarApiClientConfig apiClientConfig, IPayamGostarApiProviderFactory apiProviderFactory) : base(apiClientConfig, apiProviderFactory)
         {
-            _productGroupClient = ApiProviderFactory.CreateProductGroupClient();
+            _productCategoryClient = ApiProviderFactory.CreateProductGroupClient();
         }
 
 
@@ -28,7 +28,7 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ProductGroup
         {
             try
             {
-                var productGroupCreationResult = await _productGroupClient.PostApiV2ProductgroupCreateAsync(request.ToVM());
+                var productGroupCreationResult = await _productCategoryClient.PostApiV2ProductCategoryCreateAsync(request.ToVM());
 
                 return productGroupCreationResult.ConvertToApiResponse(result => result.ToDto());
             }
@@ -39,11 +39,11 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ProductGroup
             }
         }
 
-        public async Task<ApiResponse<IEnumerable<ProductGroupGetResponseDto>>> GetAsync(ProductGroupGetRequestDto request)
+        public async Task<ApiResponse<IEnumerable<ProductGroupSearchResponseDto>>> SearchAsync(ProductGroupSearchRequestDto request)
         {
             try
             {
-                var gettingProductGroupResult = await _productGroupClient.PostApiV2ProductgroupGetAsync(request.ToVM());
+                var gettingProductGroupResult = await _productCategoryClient.PostApiV2ProductCategorySearchAsync(request.ToVM());
 
                 return gettingProductGroupResult.ConvertToApiResponse(result => result.Select(x => x.ToDto()));
             }

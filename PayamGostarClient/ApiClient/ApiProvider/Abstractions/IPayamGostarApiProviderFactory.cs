@@ -41,7 +41,7 @@ namespace PayamGostarClient.ApiClient.ApiProvider.Abstractions
 
         ICategoryClient CreateCategoryClient();
 
-        IProductGroupClient CreateProductGroupClient();
+        IProductCategoryClient CreateProductGroupClient();
 
 
         IAppointmentPropertyDefinitionApiClient CreateAppointmentPropertyDefinitionApiClient();

@@ -8,7 +8,7 @@ namespace PayamGostarClient.ApiClient.Abstractions.Customization.Product
 {
     public interface IPayamGostarProductGroupApiClient
     {
-        Task<ApiResponse<IEnumerable<ProductGroupGetResponseDto>>> GetAsync(ProductGroupGetRequestDto request);
+        Task<ApiResponse<IEnumerable<ProductGroupSearchResponseDto>>> SearchAsync(ProductGroupSearchRequestDto request);
 
         Task<ApiResponse<ProductGroupCreationResponseDto>> CreateAsync(ProductGroupCreationRequestDto request);
     }

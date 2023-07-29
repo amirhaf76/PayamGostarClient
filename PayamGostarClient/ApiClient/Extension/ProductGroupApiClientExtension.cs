@@ -9,16 +9,16 @@ namespace PayamGostarClient.ApiClient.Extension
 {
     internal static class ProductGroupApiClientExtension
     {
-        internal static ProductGroupCreationRequestVM ToVM(this ProductGroupCreationRequestDto dto)
+        internal static ProductCategoryCreationRequestVM ToVM(this ProductGroupCreationRequestDto dto)
         {
-            return new ProductGroupCreationRequestVM
+            return new ProductCategoryCreationRequestVM
             {
                 Name = dto.Name,
                 ParentGroupId = dto.ParentGroupId,
             };
         }
 
-        internal static ProductGroupCreationResponseDto ToDto(this ProductGroupCreationResponseVM vm)
+        internal static ProductGroupCreationResponseDto ToDto(this ProductCategoryCreationResultVM vm)
         {
             return new ProductGroupCreationResponseDto
             {
@@ -28,18 +28,18 @@ namespace PayamGostarClient.ApiClient.Extension
             };
         }
 
-        internal static ProductGroupFilterRequestVM ToVM(this ProductGroupGetRequestDto dto)
+        internal static ProductCategoryFilterRequestVM ToVM(this ProductGroupSearchRequestDto dto)
         {
-            return new ProductGroupFilterRequestVM
+            return new ProductCategoryFilterRequestVM
             {
                 Name = dto.Name,
                 ParentGroupId = dto.ParentGroupId,
             };
         }
 
-        internal static ProductGroupGetResponseDto ToDto(this ProductGroupResponseVM vm)
+        internal static ProductGroupSearchResponseDto ToDto(this ProductCategoryResultVM vm)
         {
-            return new ProductGroupGetResponseDto
+            return new ProductGroupSearchResponseDto
             {
                 Id = vm.Id,
                 Name = vm.Name,
