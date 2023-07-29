@@ -40,6 +40,11 @@ namespace PayamGostarClient.Initializer
             return true;
         }
 
+        public bool CheckExistenceSchema(params ICustomizationCrmModel[] models)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CheckExistenceSchemaAsync(models));
+        }
+
         public async Task InitAsync(Action<ICustomizationCrmModel> callBack, params ICustomizationCrmModel[] models)
         {
             foreach (var model in models)
@@ -59,7 +64,12 @@ namespace PayamGostarClient.Initializer
 
         public void Init(params ICustomizationCrmModel[] models)
         {
-            SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => InitAsync(models));
+            Init(null, models);
+        }
+
+        public void Init(Action<ICustomizationCrmModel> callBack, params ICustomizationCrmModel[] models)
+        {
+            SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => InitAsync(callBack, models));
         }
     }
 

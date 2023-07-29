@@ -63,11 +63,11 @@ namespace PayamGostarClient.Initializer.Services
             return matchedProductGroupCount;
         }
 
-        private async Task<IEnumerable<ProductGroupGetResponseDto>> SearchProductGroupAsync()
+        private async Task<IEnumerable<ProductGroupSearchResponseDto>> SearchProductGroupAsync()
         {
             var request = CreateGettingProductGroupRequest();
 
-            var gettingResult = await _productGroupApi.GetAsync(request);
+            var gettingResult = await _productGroupApi.SearchAsync(request);
 
             return gettingResult.Result;
         }
@@ -82,9 +82,9 @@ namespace PayamGostarClient.Initializer.Services
         }
 
 
-        private ProductGroupGetRequestDto CreateGettingProductGroupRequest()
+        private ProductGroupSearchRequestDto CreateGettingProductGroupRequest()
         {
-            return new ProductGroupGetRequestDto
+            return new ProductGroupSearchRequestDto
             {
                 Name = _productGroupModel.Name,
             };

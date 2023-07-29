@@ -143,6 +143,13 @@ namespace PayamGostarClient.Initializer.Services
                 throw new EmptyNameException($"A CrmObject model with '{IntendedCrmObject.Code}' code doesn't have any names!");
             }
 
+            var languageCultures = IntendedCrmObject.Name.Select(n => n.LanguageCulture.Trim().ToLower());
+
+            if (languageCultures.Count() != languageCultures.Distinct().Count())
+            {
+                throw new CultureNamesException($"The crmObject model with '{IntendedCrmObject.Code}' has more than one recource value for one culture!");
+            }
+
             ValidateExtendedProperites();
 
             ValidateStages();
@@ -194,7 +201,7 @@ namespace PayamGostarClient.Initializer.Services
                 throw new NullPropertyUserKeyExcpetion($"Some properties don't have userkey. their first names are: {errorMessage}");
             }
 
-            var propertyKeyGroups = IntendedCrmObject.Properties.GroupBy(p => p.UserKey);
+            var propertyKeyGroups = IntendedCrmObject.Properties?.GroupBy(p => p.UserKey);
 
             foreach (var propertyKeyGroup in propertyKeyGroups)
             {
@@ -204,14 +211,14 @@ namespace PayamGostarClient.Initializer.Services
                 }
             }
 
-            var isValidSuperModelGroups = IntendedCrmObject.Properties
+            var isValidSuperModelGroups = IntendedCrmObject.Properties?
                 .GroupBy(property => property.PropertyGroup)
-                .All(groupAndItsProperties => groupAndItsProperties.GroupBy(property => property.DoesBelongToSuperCrmObjectType).Count() == 1);
+                .All(groupAndItsProperties => groupAndItsProperties.GroupBy(property => property.DoesBelongToSuperCrmObjectType).Count() == 1) ?? true;
 
             if (!isValidSuperModelGroups)
             {
                 var message = $"In the crmObject with '{IntendedCrmObject.Code}' code, there is atleast a group which have some super crm model type properites and some instance crm model type properites.";
-                throw new InvalidSupserCrmModelGroupException(message);
+                throw new InvalidSuperCrmModelGroupException(message);
             }
         }
 

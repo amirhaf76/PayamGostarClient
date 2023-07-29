@@ -79,6 +79,7 @@ namespace PayamGostarClient.Initializer.Services
             {
                 Name = model.Name,
                 UserKey = model.UserKey,
+                AddedByUser = true,
             };
         }
     }
