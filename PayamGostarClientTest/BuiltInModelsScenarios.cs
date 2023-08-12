@@ -3,6 +3,8 @@ using PayamGostarClient.ApiClient.Enums;
 using PayamGostarClient.Initializer;
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClientTest.BuildInCrmObjectModels;
+using PayamGostarClientTest.Constants;
 using System;
 using System.Threading.Tasks;
 using Xunit;

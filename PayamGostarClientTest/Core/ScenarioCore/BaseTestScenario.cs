@@ -4,13 +4,14 @@ using PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientDtos.
 using PayamGostarClient.Helper.Net;
 using PayamGostarClient.Initializer;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClientTest.Core.Settings;
 using PayamGostarClientTest.DataTestModels.CrmFormDataTests;
 using System.Collections.Generic;
 
 using System.Threading.Tasks;
 using Xunit.Abstractions;
 
-namespace PayamGostarClientTest
+namespace PayamGostarClientTest.Core.ScenarioCore
 {
     public class BaseTestScenario
     {

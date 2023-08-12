@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.Exceptions;
+using PayamGostarClientTest.Core.ScenarioCore;
 using PayamGostarClientTest.DataTestModels.CrmFormDataTests;
 using System;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace PayamGostarClientTest
+namespace PayamGostarClientTest.Scenarios.IntegrationTest
 {
     public class InitScenarios : BaseTestScenario
     {
@@ -44,7 +45,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault().Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
             });
@@ -79,7 +80,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
                 Groups = new[]
@@ -122,7 +123,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
                 Groups = new[]
@@ -139,7 +140,7 @@ namespace PayamGostarClientTest
                     new
                     {
                         Name = model.Properties.FirstOrDefault()?.Name.FirstOrDefault()?.Value,
-                        UserKey = model.Properties.FirstOrDefault()?.UserKey,
+                        model.Properties.FirstOrDefault()?.UserKey,
                     }
                 }
             });
@@ -173,7 +174,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
             });
@@ -308,7 +309,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
                 Groups = new[]
@@ -325,7 +326,7 @@ namespace PayamGostarClientTest
                     new
                     {
                         Name = model.Properties.FirstOrDefault()?.Name.FirstOrDefault()?.Value,
-                        UserKey = model.Properties.FirstOrDefault()?.UserKey,
+                        model.Properties.FirstOrDefault()?.UserKey,
                     }
                 }
             });
@@ -356,7 +357,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = existedModel.Name.FirstOrDefault()?.Value,
-                Code = existedModel.Code,
+                existedModel.Code,
                 CrmOjectTypeIndex = (int)existedModel.Type,
                 Enabled = true,
                 Groups = new[]
@@ -373,12 +374,12 @@ namespace PayamGostarClientTest
                     new
                     {
                         Name = existedModel.Properties.ElementAtOrDefault(0)?.Name.FirstOrDefault()?.Value,
-                        UserKey = existedModel.Properties.ElementAtOrDefault(0)?.UserKey,
+                        existedModel.Properties.ElementAtOrDefault(0)?.UserKey,
                     },
                     new
                     {
                         Name = existedModel.Properties.ElementAtOrDefault(1)?.Name.FirstOrDefault()?.Value,
-                        UserKey = existedModel.Properties.ElementAtOrDefault(1)?.UserKey,
+                        existedModel.Properties.ElementAtOrDefault(1)?.UserKey,
                     }
                 }
             });
@@ -426,7 +427,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = existedModel.Name.FirstOrDefault()?.Value,
-                Code = existedModel.Code,
+                existedModel.Code,
                 CrmOjectTypeIndex = (int)existedModel.Type,
                 Enabled = true,
                 Groups = new[]
@@ -443,12 +444,12 @@ namespace PayamGostarClientTest
                     new
                     {
                         Name = model.Properties.FirstOrDefault()?.Name.FirstOrDefault()?.Value,
-                        UserKey = model.Properties.FirstOrDefault()?.UserKey,
+                        model.Properties.FirstOrDefault()?.UserKey,
                     },
                     new
                     {
                         Name = existedModel.Properties.FirstOrDefault()?.Name.FirstOrDefault()?.Value,
-                        UserKey = existedModel.Properties.FirstOrDefault()?.UserKey,
+                        existedModel.Properties.FirstOrDefault()?.UserKey,
                     }
                 }
             });
@@ -480,7 +481,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = existedModel.Name.FirstOrDefault()?.Value,
-                Code = existedModel.Code,
+                existedModel.Code,
                 CrmOjectTypeIndex = (int)existedModel.Type,
                 Enabled = true,
             });
@@ -522,7 +523,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = existedModel.Name.FirstOrDefault()?.Value,
-                Code = existedModel.Code,
+                existedModel.Code,
                 CrmOjectTypeIndex = (int)existedModel.Type,
                 Enabled = true,
             });
@@ -564,7 +565,7 @@ namespace PayamGostarClientTest
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = existedModel.Name.FirstOrDefault()?.Value,
-                Code = existedModel.Code,
+                existedModel.Code,
                 CrmOjectTypeIndex = (int)existedModel.Type,
                 Enabled = true,
             });

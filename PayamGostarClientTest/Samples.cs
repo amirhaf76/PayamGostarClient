@@ -2,6 +2,7 @@
 using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
+using PayamGostarClientTest.Constants;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

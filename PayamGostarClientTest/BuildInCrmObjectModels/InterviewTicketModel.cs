@@ -4,7 +4,7 @@ using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 using System;
 
-namespace PayamGostarClientTest
+namespace PayamGostarClientTest.BuildInCrmObjectModels
 {
     public class InterviewTicketModel
     {

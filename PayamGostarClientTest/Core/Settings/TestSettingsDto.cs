@@ -1,4 +1,4 @@
-﻿namespace PayamGostarClientTest
+﻿namespace PayamGostarClientTest.Core.Settings
 {
     public class TestSettingsDto
     {

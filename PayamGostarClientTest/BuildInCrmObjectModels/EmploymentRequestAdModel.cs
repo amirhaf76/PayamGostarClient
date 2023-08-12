@@ -2,7 +2,7 @@
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 
-namespace PayamGostarClientTest
+namespace PayamGostarClientTest.BuildInCrmObjectModels
 {
     public class EmploymentRequestAdModel : CrmFormModel
     {
@@ -28,7 +28,7 @@ namespace PayamGostarClientTest
                     {
                         Name = new[]
                         {
-                            new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "اطلاعات آگهی"},   
+                            new ResourceValue(){ LanguageCulture = LANGUAGE_CULTURE, Value = "اطلاعات آگهی"},
                         },
                         CountOfColumns = 2,
                         Expanded = true,

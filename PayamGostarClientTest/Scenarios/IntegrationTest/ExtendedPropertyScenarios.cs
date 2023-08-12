@@ -1,13 +1,14 @@
 ﻿using FluentAssertions;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
+using PayamGostarClientTest.Core.ScenarioCore;
 using PayamGostarClientTest.DataTestModels.CrmFormDataTests;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace PayamGostarClientTest.Scenarios
+namespace PayamGostarClientTest.Scenarios.IntegrationTest
 {
     public class ExtendedPropertyScenarios : BaseTestScenario
     {
@@ -48,7 +49,7 @@ namespace PayamGostarClientTest.Scenarios
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
                 Groups = new[]
@@ -65,9 +66,9 @@ namespace PayamGostarClientTest.Scenarios
                     new
                     {
                         PropertyDisplayTypeIndex = (int)theExtendedProperty.Type,
-                        UserKey = theExtendedProperty.UserKey,
-                        IsRequired = theExtendedProperty.IsRequired,
-                        DefaultValue = theExtendedProperty.DefaultValue,
+                        theExtendedProperty.UserKey,
+                        theExtendedProperty.IsRequired,
+                        theExtendedProperty.DefaultValue,
                         Tooltip = theExtendedProperty.ToolTip.FirstOrDefault().Value,
                         Name = theExtendedProperty.Name.FirstOrDefault()?.Value,
                     }
@@ -108,7 +109,7 @@ namespace PayamGostarClientTest.Scenarios
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
                 Groups = new[]
@@ -125,9 +126,9 @@ namespace PayamGostarClientTest.Scenarios
                     new
                     {
                         PropertyDisplayTypeIndex = (int)theExtendedProperty.Type,
-                        UserKey = theExtendedProperty.UserKey,
-                        IsRequired = theExtendedProperty.IsRequired,
-                        DefaultValue = theExtendedProperty.DefaultValue,
+                        theExtendedProperty.UserKey,
+                        theExtendedProperty.IsRequired,
+                        theExtendedProperty.DefaultValue,
                         Tooltip = theExtendedProperty.ToolTip.FirstOrDefault().Value,
                         Name = theExtendedProperty.Name.FirstOrDefault()?.Value,
                         //Values = theExtendedProperty.Values,
@@ -169,7 +170,7 @@ namespace PayamGostarClientTest.Scenarios
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
                 Groups = new[]
@@ -186,9 +187,9 @@ namespace PayamGostarClientTest.Scenarios
                     new
                     {
                         PropertyDisplayTypeIndex = (int)theExtendedProperty.Type,
-                        UserKey = theExtendedProperty.UserKey,
-                        IsRequired = theExtendedProperty.IsRequired,
-                        DefaultValue = theExtendedProperty.DefaultValue,
+                        theExtendedProperty.UserKey,
+                        theExtendedProperty.IsRequired,
+                        theExtendedProperty.DefaultValue,
                         Tooltip = theExtendedProperty.ToolTip.FirstOrDefault().Value,
                         Name = theExtendedProperty.Name.FirstOrDefault()?.Value,
                         ExtraConfig = new
@@ -237,7 +238,7 @@ namespace PayamGostarClientTest.Scenarios
             searchedObjectAfter.Result.FirstOrDefault().Should().BeEquivalentTo(new
             {
                 Name = model.Name.FirstOrDefault()?.Value,
-                Code = model.Code,
+                model.Code,
                 CrmOjectTypeIndex = (int)model.Type,
                 Enabled = true,
                 Groups = new[]
@@ -254,14 +255,14 @@ namespace PayamGostarClientTest.Scenarios
                     new
                     {
                         PropertyDisplayTypeIndex = (int)theExtendedProperty.Type,
-                        UserKey = theExtendedProperty.UserKey,
-                        DefaultValue = theExtendedProperty.DefaultValue,
+                        theExtendedProperty.UserKey,
+                        theExtendedProperty.DefaultValue,
                         Tooltip = theExtendedProperty.ToolTip.FirstOrDefault().Value,
                         Name = theExtendedProperty.Name.FirstOrDefault()?.Value,
                         ExtraConfig = new
                         {
                             CrmObjectTypeId = theExtendedProperty.ReferencedItemCrmObjectTypeId,
-                            PreventSettingContainerCrmobjectAsParent = theExtendedProperty.PreventSettingContainerCrmobjectAsParent,
+                            theExtendedProperty.PreventSettingContainerCrmobjectAsParent,
 
                         }
                     }

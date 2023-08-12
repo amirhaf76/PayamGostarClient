@@ -1,4 +1,4 @@
-﻿namespace PayamGostarClientTest
+﻿namespace PayamGostarClientTest.Constants
 {
     internal class LanguageCulture
     {

@@ -1,12 +1,13 @@
 ﻿using FluentAssertions;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
+using PayamGostarClientTest.Core.ScenarioCore;
 using PayamGostarClientTest.DataTestModels.CrmFormDataTests;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace PayamGostarClientTest
+namespace PayamGostarClientTest.Scenarios.IntegrationTest
 {
     public class CheckExistenceSchemaScenarios : BaseTestScenario
     {
@@ -247,7 +248,7 @@ namespace PayamGostarClientTest
                 new
                 {
                     Name = existedModel.Properties.FirstOrDefault()?.Name.FirstOrDefault()?.Value,
-                    UserKey = existedModel.Properties.FirstOrDefault()?.UserKey,
+                    existedModel.Properties.FirstOrDefault()?.UserKey,
                 },
             });
         }

@@ -3,7 +3,7 @@ using PayamGostarClient.Initializer.CrmModels;
 using PayamGostarClient.Initializer.CrmModels.CrmObjectTypeModels;
 using PayamGostarClient.Initializer.CrmModels.ExtendedPropertyModels;
 
-namespace PayamGostarClientTest
+namespace PayamGostarClientTest.BuildInCrmObjectModels
 {
     public class EmploymentRequestModel : CrmFormModel
     {
@@ -440,7 +440,7 @@ namespace PayamGostarClientTest
                     UserKey = "SecondAssessor",
                     IsRequired = false,
                     DefaultValue = string.Empty,
-                },               
+                },
                 new UserExtendedPropertyModel()
                 {
                     Name = new[]

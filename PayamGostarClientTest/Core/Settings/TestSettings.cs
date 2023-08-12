@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 
-namespace PayamGostarClientTest
+namespace PayamGostarClientTest.Core.Settings
 {
-    public class TestSettings 
-    { 
+    public class TestSettings
+    {
         public TestSettingsDto GetSettings(string name = "testsettings.json")
         {
             var config = new ConfigurationBuilder()
