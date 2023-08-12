@@ -4,6 +4,13 @@ namespace PayamGostarClient.ApiClient.Dtos.CrmObjectDtos.CrmObjectTypeApiClientD
 {
     public class CrmObjectTypeSearchResultDto
     {
+        public CrmObjectTypeSearchResultDto()
+        {
+            Groups = new List<PropertyGroupGetResultDto>();
+            Stages = new List<StageGetResultDto>();
+            Properties = new List<ExtendedPropertyGetResultDto>();
+
+        }
         public System.Guid Id { get; set; }
         public System.Guid? ParentId { get; set; }
         public System.Guid? OwnerId { get; set; }

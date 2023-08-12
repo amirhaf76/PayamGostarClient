@@ -22,13 +22,20 @@ namespace PayamGostarClient.Initializer.Utilities.Factory
         private readonly IPayamGostarApiClient _payamGostarApiClient;
         private readonly IMatchingValidator _matchingValidator;
 
+        public InitServiceFactory(IMatchingValidator matchingValidator, IPayamGostarApiClient payamGostarApiClient, string languageCulture = "fa-IR")
+        {
+            _matchingValidator = matchingValidator;
+            _payamGostarApiClient = payamGostarApiClient;
+
+            BaseInitServiceExtension.LanguageCulture = languageCulture;
+        }
+
         public InitServiceFactory(InitServiceFactoryConfig config)
         {
             _payamGostarApiClient = new PayamGostarApiClient(config.ClientService);
-
-            BaseInitServiceExtension.LanguageCulture = config.ClientService.LanguageCulture;
-
             _matchingValidator = new MatchingValidator();
+
+            BaseInitServiceExtension.LanguageCulture = config.LanguageCulture;
         }
 
 

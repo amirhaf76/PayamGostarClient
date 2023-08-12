@@ -20,7 +20,7 @@ namespace PayamGostarClient.Initializer
                 throw new ClientServiceConfigNullException("CrmObjectModelInitializerConfig.ClientService must be set!");
             }
 
-            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = config.ClientService };
+            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = config.ClientService, LanguageCulture = config.ClientService.LanguageCulture };
 
             _initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
         }
