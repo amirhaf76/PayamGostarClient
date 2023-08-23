@@ -28,7 +28,7 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ProductGroup
         {
             try
             {
-                var productGroupCreationResult = await _productCategoryClient.PostApiV2ProductCategoryCreateAsync(request.ToVM());
+                var productGroupCreationResult = await _productCategoryClient.PostApiV2ProductcategoryCreateAsync(request.ToVM());
 
                 return productGroupCreationResult.ConvertToApiResponse(result => result.ToDto());
             }
@@ -43,7 +43,7 @@ namespace PayamGostarClient.ApiClient.Models.Customization.ProductGroup
         {
             try
             {
-                var gettingProductGroupResult = await _productCategoryClient.PostApiV2ProductCategorySearchAsync(request.ToVM());
+                var gettingProductGroupResult = await _productCategoryClient.PostApiV2ProductcategorySearchAsync(request.ToVM());
 
                 return gettingProductGroupResult.ConvertToApiResponse(result => result.Select(x => x.ToDto()));
             }
