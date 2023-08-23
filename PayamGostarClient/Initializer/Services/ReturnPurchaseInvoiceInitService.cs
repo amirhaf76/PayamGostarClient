@@ -9,10 +9,6 @@ namespace PayamGostarClient.Initializer.Services
 {
     public class ReturnPurchaseInvoiceInitService : BaseInitService<CrmReturnPurchaseInvoiceModel>
     {
-        public ReturnPurchaseInvoiceInitService(CrmReturnPurchaseInvoiceModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
-        {
-        }
-
         internal ReturnPurchaseInvoiceInitService(CrmReturnPurchaseInvoiceModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory) : base(intendedCrmObject, payamGostarApiClient, factory)
         {
         }

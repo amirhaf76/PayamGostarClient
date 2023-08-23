@@ -9,10 +9,6 @@ namespace PayamGostarClient.Initializer.Services
 {
     public class PaymentInitService : BaseInitService<CrmPaymentModel>
     {
-        public PaymentInitService(CrmPaymentModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
-        {
-        }
-
         internal PaymentInitService(CrmPaymentModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory) : base(intendedCrmObject, payamGostarApiClient, factory)
         {
         }

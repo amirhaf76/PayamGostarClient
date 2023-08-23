@@ -17,11 +17,6 @@ namespace PayamGostarClient.Initializer.Services
     {
         private IEnumerable<ProfileTypeGetResultDto> _profiles;
 
-        public IdentityService(CrmIdentityModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
-        {
-
-        }
-
         internal IdentityService(CrmIdentityModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory) : base(intendedCrmObject, payamGostarApiClient, factory)
         {
         }

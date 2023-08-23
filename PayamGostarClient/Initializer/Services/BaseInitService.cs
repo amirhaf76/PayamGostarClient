@@ -27,7 +27,6 @@ namespace PayamGostarClient.Initializer.Services
         protected T IntendedCrmObject { get; }
 
         private readonly IExtendedPropertyCreationStrategy _propertyCreationStrategy;
-        private readonly IGroupCreationStrategy _groupCreationStrategy;
         private readonly IStageCreationStrategy _stageCreationStrategy;
 
         private readonly IStageMatchingValidator _stageMatchingValidator;
@@ -37,29 +36,7 @@ namespace PayamGostarClient.Initializer.Services
         private IPayamGostarCustomizationApiClient CustomizationApi { get; }
 
         protected IPayamGostarCrmObjectTypeApiClient CrmObjectTypeApi { get; }
-        protected IPayamGostarExtendedPropertyApiClient ExtendedPropertyApi { get; }
-        protected IPayamGostarPropertyGroupApiClient PropertyGroupApi { get; }
 
-
-        internal BaseInitService(T intendedCrmObject, IPayamGostarApiClient payamGostarApiClient)
-        {
-            IntendedCrmObject = intendedCrmObject;
-
-            CustomizationApi = payamGostarApiClient.CustomizationApi;
-
-            CrmObjectTypeApi = CustomizationApi.CrmObjectTypeApi;
-            ExtendedPropertyApi = CustomizationApi.ExtendedPropertyApi;
-            PropertyGroupApi = CustomizationApi.PropertyGroupApi;
-
-            _groupCreationStrategy = new GroupCreationStrategy(PropertyGroupApi);
-            _propertyCreationStrategy = new ExtendedPropertyCreationStrategy(ExtendedPropertyApi, _groupCreationStrategy);
-            _stageCreationStrategy = new StageCreationStrategy(CrmObjectTypeApi.StageApi);
-
-            _stageMatchingValidator = new StageMatchingValidator();
-            _extendedPropertyMatchingValidator = new ExtendedPropertyMatchingValidator();
-            _crmModelMatchingValidator = new CrmModelMatchingValidator();
-
-        }
 
         internal BaseInitService(T intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory)
         {
@@ -68,10 +45,7 @@ namespace PayamGostarClient.Initializer.Services
             CustomizationApi = payamGostarApiClient.CustomizationApi;
 
             CrmObjectTypeApi = CustomizationApi.CrmObjectTypeApi;
-            ExtendedPropertyApi = CustomizationApi.ExtendedPropertyApi;
-            PropertyGroupApi = CustomizationApi.PropertyGroupApi;
 
-            _groupCreationStrategy = factory.CreateGroupCreationStrategy();
             _propertyCreationStrategy = factory.CreateExtendedPropertyCreationStrategy();
             _stageCreationStrategy = factory.CreateStageCreationStrategy();
 

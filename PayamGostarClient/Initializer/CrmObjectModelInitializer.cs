@@ -1,8 +1,10 @@
-﻿using PayamGostarClient.Initializer.Abstractions;
+﻿using PayamGostarClient.ApiClient;
+using PayamGostarClient.Initializer.Abstractions;
 using PayamGostarClient.Initializer.Abstractions.CrmModel;
 using PayamGostarClient.Initializer.Abstractions.Utilities.Factories;
 using PayamGostarClient.Initializer.Exceptions;
 using PayamGostarClient.Initializer.Utilities.Factory;
+using PayamGostarClient.Initializer.Utilities.Validator;
 using System;
 using System.Threading.Tasks;
 
@@ -12,6 +14,10 @@ namespace PayamGostarClient.Initializer
     {
         private readonly IInitServiceFactory _initServiceFactory;
 
+        public CrmObjectModelInitializer(IInitServiceFactory initServiceFactory)
+        {
+            _initServiceFactory = initServiceFactory;
+        }
 
         public CrmObjectModelInitializer(CrmObjectModelInitializerConfig config)
         {
@@ -20,9 +26,7 @@ namespace PayamGostarClient.Initializer
                 throw new ClientServiceConfigNullException("CrmObjectModelInitializerConfig.ClientService must be set!");
             }
 
-            var initServiceFactoryConfig = new InitServiceFactoryConfig { ClientService = config.ClientService, LanguageCulture = config.ClientService.LanguageCulture };
-
-            _initServiceFactory = new InitServiceFactory(initServiceFactoryConfig);
+            _initServiceFactory = new InitServiceFactory(new MatchingValidator(), new PayamGostarApiClient(config.ClientService));
         }
 
 

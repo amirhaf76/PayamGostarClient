@@ -9,10 +9,6 @@ namespace PayamGostarClient.Initializer.Services
 {
     public class QuoteInitService : BaseInitService<CrmQuoteModel>
     {
-        public QuoteInitService(CrmQuoteModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
-        {
-        }
-
         internal QuoteInitService(CrmQuoteModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory) : base(intendedCrmObject, payamGostarApiClient, factory)
         {
         }

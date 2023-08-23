@@ -9,10 +9,6 @@ namespace PayamGostarClient.Initializer.Services
 {
     public class ReceiptInitService : BaseInitService<CrmReceiptModel>
     {
-        public ReceiptInitService(CrmReceiptModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient) : base(intendedCrmObject, payamGostarApiClient)
-        {
-        }
-
         internal ReceiptInitService(CrmReceiptModel intendedCrmObject, IPayamGostarApiClient payamGostarApiClient, IInitServiceAbstractFactory factory) : base(intendedCrmObject, payamGostarApiClient, factory)
         {
         }
