@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeptaPay.PayamGostarClient.Initializer.Core", "PayamGostarClient\SeptaPay.PayamGostarClient.Initializer.Core.csproj", "{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeptaPay.PayamGostarClient.Initializer.Core", "SeptaPay.PayamGostarClient.Initializer.Core\SeptaPay.PayamGostarClient.Initializer.Core.csproj", "{40DD655E-EB05-473B-B5ED-DDD2CDD9093D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayamGostarClientTest", "PayamGostarClientTest\PayamGostarClientTest.csproj", "{B07622D9-5DCF-446C-BF32-142044CD4BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeptaPay.PayamGostarClient.RestApi", "SeptaPay.PayamGostarClient.RestApi\SeptaPay.PayamGostarClient.RestApi.csproj", "{AF89D3D5-71AA-4115-B7C0-F521A0E8F86E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeptaPay.PayamGostarClient.Initializer.Service.Api", "SeptaPay.PayamGostarClient.Initializer.Service.Api\SeptaPay.PayamGostarClient.Initializer.Service.Api.csproj", "{DDF7B24D-14BE-4319-A1D6-20187B881120}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeptaPay.PayamGostarClient.Initializer.Test", "SeptaPay.PayamGostarClient.Initializer.Test\SeptaPay.PayamGostarClient.Initializer.Test.csproj", "{F2C807E5-2D85-4203-A4C5-EBAECF236F9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeptaPay.PayamGostarClient.Initializer", "SeptaPay.PayamGostarClient.Initializer\SeptaPay.PayamGostarClient.Initializer.csproj", "{AC51D23E-D1CF-4404-980B-5947459C5A05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B564DD1F-56B2-4D3C-A14D-903C632D5A9E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B07622D9-5DCF-446C-BF32-142044CD4BCB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDF7B24D-14BE-4319-A1D6-20187B881120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDF7B24D-14BE-4319-A1D6-20187B881120}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DDF7B24D-14BE-4319-A1D6-20187B881120}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DDF7B24D-14BE-4319-A1D6-20187B881120}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DD655E-EB05-473B-B5ED-DDD2CDD9093D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DD655E-EB05-473B-B5ED-DDD2CDD9093D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DD655E-EB05-473B-B5ED-DDD2CDD9093D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DD655E-EB05-473B-B5ED-DDD2CDD9093D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF89D3D5-71AA-4115-B7C0-F521A0E8F86E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF89D3D5-71AA-4115-B7C0-F521A0E8F86E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF89D3D5-71AA-4115-B7C0-F521A0E8F86E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF89D3D5-71AA-4115-B7C0-F521A0E8F86E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C807E5-2D85-4203-A4C5-EBAECF236F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C807E5-2D85-4203-A4C5-EBAECF236F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C807E5-2D85-4203-A4C5-EBAECF236F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C807E5-2D85-4203-A4C5-EBAECF236F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC51D23E-D1CF-4404-980B-5947459C5A05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC51D23E-D1CF-4404-980B-5947459C5A05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC51D23E-D1CF-4404-980B-5947459C5A05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC51D23E-D1CF-4404-980B-5947459C5A05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
