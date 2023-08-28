@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ApiProvider\**" />
+    <EmbeddedResource Remove="ApiProvider\**" />
+    <None Remove="ApiProvider\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Septa.PayamGostarClient.Initializer.Core\Septa.PayamGostarClient.Initializer.Core.csproj" />
+    <ProjectReference Include="..\Septa.PayamGostarClient.RestApi\Septa.PayamGostarClient.RestApi.csproj" />
+  </ItemGroup>
+
+</Project>
