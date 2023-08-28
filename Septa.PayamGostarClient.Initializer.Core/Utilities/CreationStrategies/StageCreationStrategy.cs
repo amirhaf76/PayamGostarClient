@@ -1,5 +1,6 @@
 ﻿using Septa.PayamGostarClient.Initializer.Core.Abstractions.Utilities.Strategies;
 using Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customization.CrmObjectType;
+using Septa.PayamGostarClient.Initializer.Core.APIs.Dtos.CrmObjectDtos;
 using Septa.PayamGostarClient.Initializer.Core.CrmModels;
 using Septa.PayamGostarClient.Initializer.Core.Exceptions;
 using Septa.PayamGostarClient.Initializer.Core.Utilities.Comparers;
@@ -21,6 +22,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.Utilities.CreationStrategies
             _stageApiClient = stageApiClient;
         }
 
+
         public async Task CreateStagesAsync(Guid id, List<Stage> stages)
         {
             if (!stages.Any())
@@ -39,17 +41,11 @@ namespace Septa.PayamGostarClient.Initializer.Core.Utilities.CreationStrategies
 
             var index = 1;
 
-            foreach (var stage in stages)
-            {
-                stage.Index = index++;
-
-                stage.CrmObjectTypeId = id;
-
-                await CreateStageAsync(stage);
-            }
+            index = await CreateStagesAndGetNextIndex(id, stages, index);
         }
 
-        public async Task UpdateStagesAsync(Guid id, List<Stage> newStages, IEnumerable<Stage> existedStages)
+
+        public async Task UpdateStagesAsync(Guid id, List<Stage> newStages, IEnumerable<StageGetResultDto> existedStages)
         {
             if (!newStages.Any())
             {
@@ -67,17 +63,11 @@ namespace Septa.PayamGostarClient.Initializer.Core.Utilities.CreationStrategies
 
             newStages.Sort(StagePriorityComparer.GetInstance());
 
-            var startIndex = existedStages.Max(s => s.Index) + 1;
+            var startIndex = existedStages.Any() ? existedStages.Max(s => s.Index) + 1 : 1;
 
-            foreach (var stage in newStages)
-            {
-                stage.Index = startIndex++;
-
-                stage.CrmObjectTypeId = id;
-
-                await CreateStageAsync(stage);
-            }
+            await CreateStagesAndGetNextIndex(id, newStages, startIndex);
         }
+
 
         private async Task CreateStageAsync(Stage stage)
         {
@@ -86,6 +76,20 @@ namespace Septa.PayamGostarClient.Initializer.Core.Utilities.CreationStrategies
             var stageCreationResult = await _stageApiClient.CreateAsync(stageDto);
 
             stage.Id = stageCreationResult.StageId;
+        }
+
+        private async Task<int> CreateStagesAndGetNextIndex(Guid id, List<Stage> stages, int index)
+        {
+            foreach (var stage in stages)
+            {
+                stage.Index = index++;
+
+                stage.CrmObjectTypeId = id;
+
+                await CreateStageAsync(stage);
+            }
+
+            return index;
         }
 
     }

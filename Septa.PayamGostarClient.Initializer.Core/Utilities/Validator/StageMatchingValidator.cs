@@ -1,4 +1,5 @@
 ﻿using Septa.PayamGostarClient.Initializer.Core.Abstractions.Utilities.Validator;
+using Septa.PayamGostarClient.Initializer.Core.APIs.Dtos.CrmObjectDtos;
 using Septa.PayamGostarClient.Initializer.Core.CrmModels;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.Utilities.Validator
             _modelChecker = modelChecker;
         }
 
-
-        public List<Stage> CheckMatchingAndGetNewStages(IEnumerable<Stage> intentedStages, IEnumerable<Stage> existedStages)
+        public List<Stage> CheckMatchingAndGetNewStages(IEnumerable<Stage> intentedStages, IEnumerable<StageGetResultDto> existedStages)
         {
             existedStages = existedStages.Where(s => !s.IsDeleted);
 

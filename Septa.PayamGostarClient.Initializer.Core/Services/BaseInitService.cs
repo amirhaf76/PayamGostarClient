@@ -207,7 +207,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.Services
                 currentCrmObject.Properties,
                 currentCrmObject.Groups);
 
-            // await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages?.Select(x => x.ToStage()));
+            await CheckStagesAndUpdateUnexistedStagesAsync(currentCrmObject.Id, currentCrmObject.Stages);
         }
 
         private async Task CheckSuperCrmObjectTypeBelongsAndInsert()
@@ -249,12 +249,12 @@ namespace Septa.PayamGostarClient.Initializer.Core.Services
                 throw new MisMatchException("There are some new properties.");
             }
 
-            //var newStages = CheckStagesAndGetNewStages(currentCrmObject.Stages?.Select(x => x.ToStage()));
+            var newStages = CheckStagesAndGetNewStages(currentCrmObject.Stages);
 
-            //if (newStages.Any())
-            //{
-            //    throw new MisMatchException("There are some new stages.");
-            //}
+            if (newStages.Any())
+            {
+                throw new MisMatchException("There are some new stages.");
+            }
         }
 
         private void CheckSuperCrmObjectTypeBelongs(CrmObjectTypeSearchResultDto superCrmObject)
@@ -275,7 +275,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.Services
         {
             await CreateExtendedPropertiesAsync(id, GetNonSuperCrmModelProperties());
 
-            // await CreateStagesAsync(id);
+            await CreateStagesAsync(id);
         }
 
         private async Task CreateSuperCrmObjectTypeBelongs()
@@ -290,7 +290,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.Services
             }
         }
 
-        private async Task CheckStagesAndUpdateUnexistedStagesAsync(Guid id, IEnumerable<Stage> currentStages)
+        private async Task CheckStagesAndUpdateUnexistedStagesAsync(Guid id, IEnumerable<StageGetResultDto> currentStages)
         {
             List<Stage> newStages = CheckStagesAndGetNewStages(currentStages);
 
@@ -369,13 +369,20 @@ namespace Septa.PayamGostarClient.Initializer.Core.Services
             }
             catch (NotFoundAtleastAFinalStageException e)
             {
-                throw new StageCreationException($"A exception in creation of the model with '{IntendedCrmObject.Code}' code.", e);
+                throw new NotFoundAtleastAFinalStageException($"A exception in creation of the model with '{IntendedCrmObject.Code}' code.", e);
             }
         }
 
-        private async Task UpdateStagesAsync(Guid id, List<Stage> stages, IEnumerable<Stage> existedStages)
+        private async Task UpdateStagesAsync(Guid id, List<Stage> stages, IEnumerable<StageGetResultDto> existedStages)
         {
-            await _stageCreationStrategy.UpdateStagesAsync(id, stages, existedStages);
+            try
+            {
+                await _stageCreationStrategy.UpdateStagesAsync(id, stages, existedStages);
+            }
+            catch (NotFoundAtleastAFinalStageException e)
+            {
+                throw new NotFoundAtleastAFinalStageException($"A exception in creation of the model with '{IntendedCrmObject.Code}' code.", e);
+            }
         }
 
 
@@ -426,7 +433,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.Services
             }
         }
 
-        private List<Stage> CheckStagesAndGetNewStages(IEnumerable<Stage> existedStages)
+        private List<Stage> CheckStagesAndGetNewStages(IEnumerable<StageGetResultDto> existedStages)
         {
             try
             {

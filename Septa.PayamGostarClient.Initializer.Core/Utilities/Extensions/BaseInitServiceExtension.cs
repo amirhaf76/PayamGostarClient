@@ -89,7 +89,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.Utilities.Extensions
         {
             return new CrmObjectTypeStageCreationRequestDto
             {
-                CrmObjectTypeId = stage.Id,
+                CrmObjectTypeId = stage.CrmObjectTypeId,
                 Enabled = stage.Enabled,
                 Index = stage.Index,
                 IsDoneStage = stage.IsDoneStage,
