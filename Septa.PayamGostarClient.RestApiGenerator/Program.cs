@@ -1,4 +1,5 @@
 ﻿using PayamGosterApiGenerator.Core;
+using Septa.PayamGostarClient.RestApi;
 
 var paths = new List<string>();
 
@@ -10,20 +11,23 @@ paths.ForEach(e => Console.WriteLine(e));
 
 static async Task<string> CreateSampleSwaggerClientAsync()
 {
-    const string NAME_SPACE = "PayamGostarClient.ApiProvider";
-    const string FILE_NAME = "PayamGostarClient";
+    var baseType = typeof(PayamGostarBaseClient);
+    var configType = typeof(PayamGostarRestApiConfig);
+
+    var nameSpace = baseType.Namespace ?? "GeneratedRestApi";
+    var fileName = baseType.Name.Replace("Base", null);
 
     var swaggerJsonUrl = "http://pgonline-dev.com/swagger/v2/swagger.json";
 
     return await ApiClientGeneratorConfig
-        .CreateDefaultApiClientGeneratorConfigWithDefaultGeneratorSetting(NAME_SPACE, FILE_NAME)
+        .CreateDefaultApiClientGeneratorConfigWithDefaultGeneratorSetting(nameSpace, fileName)
         .ConfigGeneratorSettings(setting =>
         {
             // add your configuration.
-            setting.ClientBaseClass = "PayamGostarBaseClient";
+            setting.ClientBaseClass = baseType.Name;
 
             // An interface is used here for dependency injection.
-            setting.ConfigurationClass = "PayamGostarApiProviderConfig";
+            setting.ConfigurationClass = configType.Name;
             setting.UseHttpClientCreationMethod = true;
 
             setting.CSharpGeneratorSettings.ArrayType = "IEnumerable";

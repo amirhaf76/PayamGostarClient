@@ -13,4 +13,8 @@
     <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.17.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Septa.PayamGostarClient.RestApi\Septa.PayamGostarClient.RestApi.csproj" />
+  </ItemGroup>
+
 </Project>
