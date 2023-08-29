@@ -101,20 +101,18 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
                     nameFromat: $"stage_{NORMAL_STAGE_COUNT + 1}",
                     keyFormat: $"stageKey_{NORMAL_STAGE_COUNT + 1}",
                     enable: true,
-                    isDoneStage: true,
-                    index: NORMAL_STAGE_COUNT + 1));
+                    isDoneStage: true));
 
             model.Stages.Add(
                 DataTest.CreateStage(
                     nameFromat: $"stage_{NORMAL_STAGE_COUNT + 2}",
                     keyFormat: $"stageKey_{NORMAL_STAGE_COUNT + 2}",
                     enable: true,
-                    isDoneStage: true,
-                    index: NORMAL_STAGE_COUNT + 2));
+                    isDoneStage: true));
 
             for (int i = 1; i <= NORMAL_STAGE_COUNT; i++)
             {
-                model.Stages.Add(DataTest.CreateStage(nameFromat: $"stage_{i}", keyFormat: $"stageKey_{i}", enable: true, isDoneStage: false, index: i));
+                model.Stages.Add(DataTest.CreateStage(nameFromat: $"stage_{i}", keyFormat: $"stageKey_{i}", enable: true, isDoneStage: false));
             }
 
             return new[]
@@ -134,20 +132,18 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
                     nameFromat: $"stage_{NORMAL_STAGE_COUNT + 1}",
                     keyFormat: $"stageKey_{NORMAL_STAGE_COUNT + 1}",
                     enable: true,
-                    isDoneStage: false,
-                    index: NORMAL_STAGE_COUNT + 1));
+                    isDoneStage: false));
 
             model.Stages.Add(
                 DataTest.CreateStage(
                     nameFromat: $"stage_{NORMAL_STAGE_COUNT + 2}",
                     keyFormat: $"stageKey_{NORMAL_STAGE_COUNT + 2}",
                     enable: true,
-                    isDoneStage: false,
-                    index: NORMAL_STAGE_COUNT + 2));
+                    isDoneStage: false));
 
             for (int i = 1; i <= NORMAL_STAGE_COUNT; i++)
             {
-                model.Stages.Add(DataTest.CreateStage(nameFromat: $"stage_{i}", keyFormat: $"stageKey_{i}", enable: true, isDoneStage: false, index: i));
+                model.Stages.Add(DataTest.CreateStage(nameFromat: $"stage_{i}", keyFormat: $"stageKey_{i}", enable: true, isDoneStage: false));
             }
 
             return new[]
@@ -164,22 +160,19 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
                     nameFromat: $"stage_1",
                     keyFormat: $"stageKey_1",
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
 
             var stage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: $"stageKey_2",
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
 
             var stage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 3);
+                    isDoneStage: true);
 
             stage2.Key = string.Empty;
 
@@ -203,22 +196,19 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
                     nameFromat: $"stage_1",
                     keyFormat: commonKey,
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
 
             var stage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: commonKey,
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
 
             var stage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 3);
+                    isDoneStage: true);
 
             model.Stages.Add(stage1);
             model.Stages.Add(stage2);
@@ -270,40 +260,34 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
                     nameFromat: $"stage_1",
                     keyFormat: $"stageKey_1",
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
             var existedStage1 = DataTest.CreateStage(
                     nameFromat: $"stage_1",
                     keyFormat: $"stageKey_1",
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
 
             var stage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: $"stageKey_2",
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
             var existedStage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: $"stageKey_2",
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
 
             var stage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 3);
+                    isDoneStage: true);
             var existedStage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 3);
+                    isDoneStage: true);
 
             model.Stages.Add(stage1);
             model.Stages.Add(stage2);
@@ -333,47 +317,40 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
                     nameFromat: $"stage_1",
                     keyFormat: $"stageKey_1",
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
             var existedStage1 = DataTest.CreateStage(
                     nameFromat: $"stage_1",
                     keyFormat: $"stageKey_1",
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
 
             var stage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: $"stageKey_2",
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
             var existedStage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: $"stageKey_2",
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
 
             var stage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 4);
+                    isDoneStage: true);
             var existedStage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 4);
+                    isDoneStage: true);
 
             var newStage = DataTest.CreateStage(
                     nameFromat: $"stage_4",
                     keyFormat: $"stageKey_4",
                     enable: true,
-                    isDoneStage: false,
-                    index: 3);
+                    isDoneStage: false);
 
             model.Stages.Add(stage1);
             model.Stages.Add(stage2);
@@ -404,47 +381,40 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
                     nameFromat: $"stage_1",
                     keyFormat: $"stageKey_1",
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
             var existedStage1 = DataTest.CreateStage(
                     nameFromat: $"stage_1",
                     keyFormat: $"stageKey_1",
                     enable: true,
-                    isDoneStage: false,
-                    index: 1);
+                    isDoneStage: false);
 
             var stage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: $"stageKey_2",
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
             var existedStage2 = DataTest.CreateStage(
                     nameFromat: $"stage_2",
                     keyFormat: $"stageKey_2",
                     enable: true,
-                    isDoneStage: false,
-                    index: 2);
+                    isDoneStage: false);
 
             var stage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 4);
+                    isDoneStage: true);
             var existedStage3 = DataTest.CreateStage(
                     nameFromat: $"stage_3",
                     keyFormat: $"stageKey_3",
                     enable: true,
-                    isDoneStage: true,
-                    index: 4);
+                    isDoneStage: true);
 
             var newStage = DataTest.CreateStage(
                     nameFromat: $"stage_4",
                     keyFormat: $"stageKey_4",
                     enable: true,
-                    isDoneStage: true,
-                    index: 3);
+                    isDoneStage: true);
 
             model.Stages.Add(stage1);
             model.Stages.Add(stage2);

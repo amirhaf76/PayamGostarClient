@@ -18,7 +18,7 @@ namespace Septa.PayamGostarClient.Initializer.Test
         }
 
         [Fact]
-        public async Task InitAsync_TicketmModel_InterviewTicket()
+        public async Task InitAsync_InterviewTicket_CreateModelSuccessfuly()
         {
             var config = CreatePayamGostarClientServiceConfig();
 
@@ -28,7 +28,7 @@ namespace Septa.PayamGostarClient.Initializer.Test
         }
 
         [Fact]
-        public async Task InitAsync_EmploymentRequestCrmFormModel()
+        public async Task InitAsync_EmploymentRequestCrmFormModel_CreateModelSuccessfuly()
         {
             var config = CreatePayamGostarClientServiceConfig();
 
@@ -38,7 +38,7 @@ namespace Septa.PayamGostarClient.Initializer.Test
         }
 
         [Fact]
-        public async Task InitAsync_EmploymentRequestAdModel()
+        public async Task InitAsync_EmploymentRequestAdModel_CreateModelSuccessfuly()
         {
             var config = CreatePayamGostarClientServiceConfig();
 
@@ -48,7 +48,7 @@ namespace Septa.PayamGostarClient.Initializer.Test
         }
 
         [Fact]
-        public async Task InitAsync_IdentityModel()
+        public async Task InitAsync_IdentityModel_CreateModelSuccessfuly()
         {
             var config = CreatePayamGostarClientServiceConfig();
 
@@ -93,6 +93,30 @@ namespace Septa.PayamGostarClient.Initializer.Test
 
 
             await crmModelService.InitAsync(numberingTemplate, identity);
+        }
+
+        [Fact]
+        public async Task InitAsync_InitAgainExistedInterviewTicket_DoNothing()
+        {
+            await InitAsync_InterviewTicket_CreateModelSuccessfuly();
+        }
+
+        [Fact]
+        public async Task InitAsync_InitAgainExistedEmploymentRequestCrmFormModel_DoNothing()
+        {
+            await InitAsync_EmploymentRequestCrmFormModel_CreateModelSuccessfuly();
+        }
+
+        [Fact]
+        public async Task InitAsync_InitAgainExistedEmploymentRequestAdModel_DoNothing()
+        {
+            await InitAsync_EmploymentRequestAdModel_CreateModelSuccessfuly();
+        }
+
+        [Fact]
+        public async Task InitAsync_InitAgainExistedIdentityModel_DoNothing()
+        {
+            await InitAsync_IdentityModel_CreateModelSuccessfuly();
         }
     }
 }

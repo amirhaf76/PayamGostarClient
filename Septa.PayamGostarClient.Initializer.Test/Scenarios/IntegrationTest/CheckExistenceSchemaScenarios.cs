@@ -1,7 +1,9 @@
 ﻿using FluentAssertions;
 using Septa.PayamGostarClient.Initializer.Core.CrmModels.CrmObjectTypeModels;
+using Septa.PayamGostarClient.Initializer.Core.Exceptions;
 using Septa.PayamGostarClient.Initializer.Test.Core.ScenarioCore;
 using Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTests;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -251,6 +253,53 @@ namespace Septa.PayamGostarClient.Initializer.Test.Scenarios.IntegrationTest
                     existedModel.Properties.FirstOrDefault()?.UserKey,
                 },
             });
+        }
+
+        
+
+        [Theory]
+        [MemberData(nameof(CheckExistenceSchemaDataTestCase.TwoSimpleFormsWithEquivalentStages), MemberType = typeof(CheckExistenceSchemaDataTestCase))]
+        public async Task CheckExistenceSchema_TwoSimpleFormsWithEquivalentStages_ReceiveTrue(CrmFormModel model, CrmFormModel existedModel)
+        {
+            // Arrangement.
+            var crmModelInitializer = CreateCrmObjectModelInitializer();
+
+            TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
+            TestOutput.WriteLine($"Code: {model.Code}");
+
+            // Model validation
+            model.Should().BeEquivalentTo(existedModel).And.NotBeSameAs(existedModel);
+
+            await crmModelInitializer.InitAsync(model);
+
+            // Action.
+            var modificationStatus = await crmModelInitializer.CheckExistenceSchemaAsync(existedModel);
+
+            // Assertion.
+            modificationStatus.Should().BeTrue();
+        }
+
+        [Theory]
+        [MemberData(nameof(CheckExistenceSchemaDataTestCase.TwoSimpleFormsWhichTheSecondOneHasOneMoreUnDoneStage), MemberType = typeof(CheckExistenceSchemaDataTestCase))]
+        [MemberData(nameof(CheckExistenceSchemaDataTestCase.TwoSimpleFormsWhichTheSecondOneHasOneMoreDoneStage), MemberType = typeof(CheckExistenceSchemaDataTestCase))]
+        public async Task CheckExistenceSchema_TwoSimpleFormsWhichTheSecondOneHasOneMore_ReceiveFalse(CrmFormModel model, CrmFormModel existedModel)
+        {
+            // Arrangement.
+            var crmModelInitializer = CreateCrmObjectModelInitializer();
+
+            TestOutput.WriteLine($"Name: {model.Name.FirstOrDefault()?.Value}");
+            TestOutput.WriteLine($"Code: {model.Code}");
+
+            // Model validation
+            existedModel.Stages.Should().HaveCount(c => c == model.Stages.Count + 1);
+
+            await crmModelInitializer.InitAsync(model);
+
+            // Action.
+            var modificationStatus = await crmModelInitializer.CheckExistenceSchemaAsync(existedModel);
+
+            // Assertion.
+            modificationStatus.Should().BeFalse();
         }
 
 

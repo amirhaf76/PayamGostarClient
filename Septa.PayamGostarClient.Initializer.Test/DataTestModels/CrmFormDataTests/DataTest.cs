@@ -52,7 +52,7 @@ namespace Septa.PayamGostarClient.Initializer.Test.DataTestModels.CrmFormDataTes
             };
         }
 
-        internal static Stage CreateStage(string nameFromat = "stage", string keyFormat = "stageKey", bool enable = false, bool isDoneStage = false, int index = 1)
+        internal static Stage CreateStage(string nameFromat = "stage", string keyFormat = "stageKey", bool enable = false, bool isDoneStage = false)
         {
             var guid = Guid.NewGuid();
 
