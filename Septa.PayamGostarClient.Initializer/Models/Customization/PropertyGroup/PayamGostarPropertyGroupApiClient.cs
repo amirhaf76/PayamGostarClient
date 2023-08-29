@@ -33,5 +33,10 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.PropertyGroup
             }
 
         }
+
+        public CrmObjectPropertyGroupCreationResultDto Create(CrmObjectPropertyGroupCreationRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(request));
+        }
     }
 }

@@ -169,6 +169,11 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.ExtendedPrope
 
                 return propertyCreationResult.Result.ToDto();
             }
+
+            public PropertyDefinitionCreationResultDto Create()
+            {
+                return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync());
+            }
         }
 
 

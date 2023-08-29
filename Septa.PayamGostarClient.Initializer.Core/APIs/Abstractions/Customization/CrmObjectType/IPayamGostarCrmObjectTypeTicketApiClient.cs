@@ -12,5 +12,10 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
         Task<CrmObjectTypeTicketGetResultDto> GetWithPriorityMatrixAsync(CrmObjectTypeGetRequestDto request);
 
         Task<CrmObjectTypeResultDto> CreateAsync(CrmObjectTypeTicketCreateRequestDto request);
+
+
+        CrmObjectTypeTicketGetResultDto GetWithPriorityMatrix(CrmObjectTypeGetRequestDto request);
+
+        CrmObjectTypeResultDto Create(CrmObjectTypeTicketCreateRequestDto request);
     }
 }

@@ -49,5 +49,15 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.CrmObjectType
             }
 
         }
+
+        public CrmObjectTypeFormGetResultDto Get(CrmObjectTypeGetRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => GetAsync(request));
+        }
+
+        public CrmObjectTypeResultDto Create(CrmObjectTypeFormCreateRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(request));
+        }
     }
 }

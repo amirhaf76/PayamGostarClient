@@ -23,6 +23,9 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
         IPayamGostarCrmObjectTypeReceiptApiClient ReceiptApi { get; }
         IPayamGostarCrmObjectTypePaymentApiClient PaymentApi { get; }
 
+
         Task<IEnumerable<CrmObjectTypeSearchResultDto>> SearchAsync(CrmObjectTypeSearchRequestDto request);
+
+        IEnumerable<CrmObjectTypeSearchResultDto> Search(CrmObjectTypeSearchRequestDto request);
     }
 }

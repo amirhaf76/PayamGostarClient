@@ -14,5 +14,12 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
         Task<IEnumerable<AdditionalCostsPlacementTypeGetResultDto>> GetAdditionalCostsPlacementTypeAsync();
 
         Task<IEnumerable<InvoiceAdditionalCostTypeGetResultDto>> GetAdditionalCostTypeAsync();
+
+
+        CrmObjectTypeResultDto Create(CrmObjectTypeInvoiceCreateRequestDto request);
+
+        IEnumerable<AdditionalCostsPlacementTypeGetResultDto> GetAdditionalCostsPlacementType();
+
+        IEnumerable<InvoiceAdditionalCostTypeGetResultDto> GetAdditionalCostType();
     }
 }

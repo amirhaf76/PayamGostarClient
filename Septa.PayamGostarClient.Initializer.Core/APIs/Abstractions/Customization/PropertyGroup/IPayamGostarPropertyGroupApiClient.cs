@@ -6,5 +6,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
     public interface IPayamGostarPropertyGroupApiClient
     {
         Task<CrmObjectPropertyGroupCreationResultDto> CreateAsync(CrmObjectPropertyGroupCreationRequestDto request);
+
+        CrmObjectPropertyGroupCreationResultDto Create(CrmObjectPropertyGroupCreationRequestDto request);
     }
 }

@@ -10,5 +10,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
         Task<CategoryCreationResultDto> CreateAsync(CategoryCreationRequestDto request);
         Task<IEnumerable<CategoryGetResultDto>> SearchAsync(CategorySearchRequestDto request);
 
+        CategoryCreationResultDto Create(CategoryCreationRequestDto request);
+        IEnumerable<CategoryGetResultDto> Search(CategorySearchRequestDto request);
     }
 }

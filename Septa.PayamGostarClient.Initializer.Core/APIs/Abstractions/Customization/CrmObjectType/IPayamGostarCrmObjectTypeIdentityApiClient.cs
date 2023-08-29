@@ -11,5 +11,10 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
         Task<CrmObjectTypeResultDto> CreateAsync(CrmObjectTypeIdentityCreationRequestDto request);
 
         Task<IEnumerable<ProfileTypeGetResultDto>> GetProfileTypeAsync();
+
+
+        CrmObjectTypeResultDto Create(CrmObjectTypeIdentityCreationRequestDto request);
+
+        IEnumerable<ProfileTypeGetResultDto> GetProfileType();
     }
 }

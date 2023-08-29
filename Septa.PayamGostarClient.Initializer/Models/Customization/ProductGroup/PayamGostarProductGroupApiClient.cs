@@ -52,5 +52,16 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.ProductGroup
                 throw e.CreateApiServiceException(Help.GetStringsFromProperties(request));
             }
         }
+
+        public ProductGroupCreationResponseDto Create(ProductGroupCreationRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(request));
+        }
+
+        public IEnumerable<ProductGroupSearchResponseDto> Search(ProductGroupSearchRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => SearchAsync(request));
+        }
+
     }
 }

@@ -11,5 +11,10 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
         Task<IEnumerable<ProductGroupSearchResponseDto>> SearchAsync(ProductGroupSearchRequestDto request);
 
         Task<ProductGroupCreationResponseDto> CreateAsync(ProductGroupCreationRequestDto request);
+
+
+        IEnumerable<ProductGroupSearchResponseDto> Search(ProductGroupSearchRequestDto request);
+
+        ProductGroupCreationResponseDto Create(ProductGroupCreationRequestDto request);
     }
 }

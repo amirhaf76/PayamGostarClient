@@ -24,9 +24,6 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.ExtendedPrope
         }
 
 
-
-
-        // Todo: change BaseExtendedPropertyDto to BaseExtendedPropertyCreationDto.
         public async Task<PropertyDefinitionCreationResultDto> CreateAsync(BaseExtendedPropertyDto baseProperty)
         {
             var extendedPropertyCreationService = _extendedFactory.Create(baseProperty);
@@ -34,7 +31,10 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.ExtendedPrope
             return await extendedPropertyCreationService.CreateAsync();
         }
 
-
+        public PropertyDefinitionCreationResultDto Create(BaseExtendedPropertyDto baseProperty)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(baseProperty));
+        }
     }
 
     public class ExtendedPropertyValueService : BaseApiClient

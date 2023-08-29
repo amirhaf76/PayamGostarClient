@@ -7,5 +7,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
     public interface IPayamGostarCrmObjectTypePurchaseQuoteApiClient
     {
         Task<CrmObjectTypeResultDto> CreateAsync(CrmObjectTypePurchaseQuoteCreateRequestDto request);
+
+        CrmObjectTypeResultDto Create(CrmObjectTypePurchaseQuoteCreateRequestDto request);
     }
 }

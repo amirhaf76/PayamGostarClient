@@ -11,5 +11,8 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
 
         Task<IEnumerable<NumberingTemplateSearchResultDto>> SearchAsync(NumberingTemplateSearchRequestDto request);
 
+        NumberingTemplateCreationResultDto Create(NumberingTemplateCreationRequestDto request);
+
+        IEnumerable<NumberingTemplateSearchResultDto> Search(NumberingTemplateSearchRequestDto request);
     }
 }

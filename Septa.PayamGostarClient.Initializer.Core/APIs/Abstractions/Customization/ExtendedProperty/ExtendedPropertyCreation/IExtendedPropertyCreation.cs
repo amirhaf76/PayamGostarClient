@@ -6,5 +6,7 @@ namespace Septa.PayamGostarClient.Initializer.Core.APIs.Abstractions.Customizati
     public interface IExtendedPropertyCreation
     {
         Task<PropertyDefinitionCreationResultDto> CreateAsync();
+
+        PropertyDefinitionCreationResultDto Create();
     }
 }

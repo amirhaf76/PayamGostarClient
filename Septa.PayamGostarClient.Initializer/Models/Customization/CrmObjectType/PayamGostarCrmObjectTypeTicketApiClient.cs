@@ -22,6 +22,7 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.CrmObjectType
             _crmObjectTypeTicketApiClient = ApiProviderFactory.CreateCrmObjectTypeTicketApiClient();
         }
 
+
         public async Task<CrmObjectTypeResultDto> CreateAsync(CrmObjectTypeTicketCreateRequestDto request)
         {
             try
@@ -59,6 +60,17 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.CrmObjectType
             {
                 throw e.CreateApiServiceException(Help.GetStringsFromProperties(request));
             }
+        }
+
+
+        public CrmObjectTypeResultDto Create(CrmObjectTypeTicketCreateRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(request));
+        }
+
+        public CrmObjectTypeTicketGetResultDto GetWithPriorityMatrix(CrmObjectTypeGetRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => GetWithPriorityMatrixAsync(request));
         }
     }
 

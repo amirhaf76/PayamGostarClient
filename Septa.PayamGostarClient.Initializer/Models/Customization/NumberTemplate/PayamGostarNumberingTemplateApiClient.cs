@@ -48,5 +48,16 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.NumberTemplat
                 throw e.CreateApiServiceException(Help.GetStringsFromProperties(request));
             }
         }
+
+        public NumberingTemplateCreationResultDto Create(NumberingTemplateCreationRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(request));
+        }
+
+        public IEnumerable<NumberingTemplateSearchResultDto> Search(NumberingTemplateSearchRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => SearchAsync(request));
+        }
+
     }
 }

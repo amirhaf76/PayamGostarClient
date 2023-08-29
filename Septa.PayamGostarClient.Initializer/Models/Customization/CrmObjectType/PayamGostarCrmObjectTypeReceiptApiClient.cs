@@ -19,6 +19,11 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.CrmObjectType
             _receiptApiClient = ApiProviderFactory.CreateCrmObjectTypeReceiptApiClient();
         }
 
+        public CrmObjectTypeResultDto Create(CrmObjectTypeReceiptCreateRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(request));
+        }
+
         public async Task<CrmObjectTypeResultDto> CreateAsync(CrmObjectTypeReceiptCreateRequestDto request)
         {
             try

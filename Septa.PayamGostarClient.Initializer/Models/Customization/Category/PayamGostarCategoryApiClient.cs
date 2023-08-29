@@ -21,18 +21,9 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.Category
             _categoryClient = ApiProviderFactory.CreateCategoryClient();
         }
 
-        public async Task<CategoryCreationResultDto> CreateAsync(CategoryCreationRequestDto request)
+        public CategoryCreationResultDto Create(CategoryCreationRequestDto request)
         {
-            try
-            {
-                var categoryCreationResult = await _categoryClient.PostApiV2CategoryCreateAsync(request.ToVM());
-
-                return categoryCreationResult.Result.ToDto();
-            }
-            catch (ApiException e)
-            {
-                throw e.CreateApiServiceException(Help.GetStringsFromProperties(request));
-            }
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => CreateAsync(request));
         }
 
         public async Task<IEnumerable<CategoryGetResultDto>> SearchAsync(CategorySearchRequestDto request)
@@ -47,6 +38,26 @@ namespace Septa.PayamGostarClient.Initializer.Models.Customization.Category
             {
                 throw e.CreateApiServiceException(Help.GetStringsFromProperties(request));
             }
+        }
+
+
+        public async Task<CategoryCreationResultDto> CreateAsync(CategoryCreationRequestDto request)
+        {
+            try
+            {
+                var categoryCreationResult = await _categoryClient.PostApiV2CategoryCreateAsync(request.ToVM());
+
+                return categoryCreationResult.Result.ToDto();
+            }
+            catch (ApiException e)
+            {
+                throw e.CreateApiServiceException(Help.GetStringsFromProperties(request));
+            }
+        }
+
+        public IEnumerable<CategoryGetResultDto> Search(CategorySearchRequestDto request)
+        {
+            return SeptaKit.Extensions.SeptaKitTaskExtensions.RunSync(() => SearchAsync(request));
         }
     }
 }
